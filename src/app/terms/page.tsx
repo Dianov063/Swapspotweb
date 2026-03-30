@@ -199,7 +199,7 @@ export default function TermsOfService() {
           <h3>10.3 Opt-Out</h3>
           <p>
             You may opt out of the arbitration and class action waiver provisions by sending written notice
-            to legal@swapspot.com within 30 days of first accepting these Terms. Your notice must include
+            to wtf073073@gmail.com within 30 days of first accepting these Terms. Your notice must include
             your name, address, email, and a clear statement that you wish to opt out. If you opt out,
             either party may pursue claims in court.
           </p>
@@ -239,7 +239,7 @@ export default function TermsOfService() {
           <p>If you have questions about these Terms, please contact us at:</p>
           <p>
             <strong>SwapSpot, Inc.</strong><br />
-            Email: <a href="mailto:legal@swapspot.com" className="text-forest hover:underline">legal@swapspot.com</a>
+            Email: <a href="mailto:wtf073073@gmail.com" className="text-forest hover:underline">wtf073073@gmail.com</a>
           </p>
         </div>
       </main>

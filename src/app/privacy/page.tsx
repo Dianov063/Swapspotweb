@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
           <ul>
             <li><strong>Access:</strong> You may request a copy of the personal information we hold about you.</li>
             <li><strong>Correction:</strong> You may update or correct your account information at any time through the app settings.</li>
-            <li><strong>Deletion:</strong> You may request deletion of your account and personal data by contacting us at privacy@swapspot.com or through the app settings.</li>
+            <li><strong>Deletion:</strong> You may request deletion of your account and personal data by contacting us at wtf073073@gmail.com or through the app settings.</li>
             <li><strong>Opt-Out of Marketing:</strong> You may opt out of marketing emails by clicking &quot;Unsubscribe&quot; in any marketing email or adjusting your notification preferences in the app.</li>
             <li><strong>Location:</strong> You may disable location services through your device settings. Note that this will limit your ability to find nearby helpers or be found by clients.</li>
           </ul>
@@ -116,7 +116,7 @@ export default function PrivacyPolicy() {
             <li>The right to opt out of the &quot;sale&quot; of your personal information. SwapSpot does not sell personal information in the traditional sense, but certain data sharing for targeted advertising may constitute a &quot;sale&quot; under CCPA. You may opt out by contacting us.</li>
             <li>The right to non-discrimination for exercising your CCPA rights.</li>
           </ul>
-          <p>To exercise your CCPA rights, contact us at privacy@swapspot.com or call us at the number listed on our website.</p>
+          <p>To exercise your CCPA rights, contact us at wtf073073@gmail.com or call us at the number listed on our website.</p>
 
           <h2>7. Security</h2>
           <p>
@@ -131,7 +131,7 @@ export default function PrivacyPolicy() {
             SwapSpot is intended for users who are 18 years of age or older. We do not knowingly collect
             personal information from anyone under 18. If we learn that we have collected personal information
             from a user under 18, we will delete that information promptly. If you believe a child under 18
-            has provided us with personal information, please contact us at privacy@swapspot.com.
+            has provided us with personal information, please contact us at wtf073073@gmail.com.
           </p>
 
           <h2>9. Changes to This Privacy Policy</h2>
@@ -146,7 +146,7 @@ export default function PrivacyPolicy() {
           <p>If you have questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
           <p>
             <strong>SwapSpot, Inc.</strong><br />
-            Email: <a href="mailto:privacy@swapspot.com" className="text-forest hover:underline">privacy@swapspot.com</a><br />
+            Email: <a href="mailto:wtf073073@gmail.com" className="text-forest hover:underline">wtf073073@gmail.com</a><br />
           </p>
         </div>
       </main>

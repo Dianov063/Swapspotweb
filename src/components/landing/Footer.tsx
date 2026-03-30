@@ -66,10 +66,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:contact@swapspot.com"
+                  href="mailto:wtf073073@gmail.com"
                   className="text-white/70 hover:text-white transition-colors text-sm"
                 >
-                  contact@swapspot.com
+                  wtf073073@gmail.com
                 </a>
               </li>
             </ul>
