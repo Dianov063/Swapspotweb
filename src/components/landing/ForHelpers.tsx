@@ -4,9 +4,9 @@ const benefits = [
   "Set your own prices, hours, and service area",
   "Get discovered by clients in your neighborhood",
   "Build your reputation with verified reviews",
-  "Get paid fast — direct deposit after each job",
+  "Get paid directly — cash, Venmo, or Zelle from clients",
   "Free background check badge to boost trust",
-  "No subscription fees — only pay when you earn",
+  "Just $5/month — no per-lead fees, no commissions",
 ];
 
 export default function ForHelpers() {
