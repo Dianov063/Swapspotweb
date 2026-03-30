@@ -64,14 +64,6 @@ export default function Footer() {
                   Blog
                 </a>
               </li>
-              <li>
-                <a
-                  href="mailto:wtf073073@gmail.com"
-                  className="text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  wtf073073@gmail.com
-                </a>
-              </li>
             </ul>
           </div>
 
