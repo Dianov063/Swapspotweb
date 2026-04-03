@@ -28,14 +28,14 @@ export default function HeroMap() {
         </clipPath>
 
         {/* Pin teardrop shape: center at 0,0, point at bottom */}
-        <symbol id="pinShape" viewBox="-14 -32 28 40" overflow="visible">
+        <symbol id="pinShape" viewBox="-18 -42 36 52" overflow="visible">
           <path
-            d="M0,-28 C-7.7,-28 -14,-21.7 -14,-14 C-14,-6.3 0,4 0,4 C0,4 14,-6.3 14,-14 C14,-21.7 7.7,-28 0,-28 Z"
+            d="M0,-36 C-10,-36 -18,-28 -18,-18 C-18,-8 0,6 0,6 C0,6 18,-8 18,-18 C18,-28 10,-36 0,-36 Z"
             fill="url(#pinGrad)"
             stroke="#145534"
             strokeWidth="0.5"
           />
-          <circle cx="0" cy="-14" r="9" fill="white" opacity="0.95" />
+          <circle cx="0" cy="-18" r="12" fill="white" opacity="0.95" />
         </symbol>
       </defs>
 
@@ -188,51 +188,51 @@ export default function HeroMap() {
         {/* === Layer 7: Helper Pins === */}
         {/* Pin 1: Cleaning — near residential cluster top-left */}
         <g className="pin-animate" style={{ animationDelay: "0s" }} filter="url(#pinShadow)">
-          <use href="#pinShape" x="90" y="90" width="28" height="40" />
-          <text x="90" y="78" textAnchor="middle" fontSize="13">🧹</text>
+          <use href="#pinShape" x="90" y="95" width="40" height="56" />
+          <text x="90" y="76" textAnchor="middle" fontSize="18">🧹</text>
           <g filter="url(#labelShadow)">
-            <rect x="64" y="100" width="52" height="16" rx="8" fill="white" opacity="0.92" />
-            <text x="90" y="112" textAnchor="middle" fill="#374151" fontSize="7" fontFamily="sans-serif" fontWeight="600">Cleaning</text>
+            <rect x="56" y="108" width="68" height="22" rx="11" fill="white" opacity="0.95" />
+            <text x="90" y="123" textAnchor="middle" fill="#374151" fontSize="10" fontFamily="sans-serif" fontWeight="600">Cleaning</text>
           </g>
         </g>
 
         {/* Pin 2: Handyman — center-right near buildings */}
         <g className="pin-animate" style={{ animationDelay: "0.2s" }} filter="url(#pinShadow)">
-          <use href="#pinShape" x="460" y="190" width="28" height="40" />
-          <text x="460" y="178" textAnchor="middle" fontSize="13">🔧</text>
+          <use href="#pinShape" x="460" y="195" width="40" height="56" />
+          <text x="460" y="176" textAnchor="middle" fontSize="18">🔧</text>
           <g filter="url(#labelShadow)">
-            <rect x="428" y="200" width="64" height="16" rx="8" fill="white" opacity="0.92" />
-            <text x="460" y="212" textAnchor="middle" fill="#374151" fontSize="7" fontFamily="sans-serif" fontWeight="600">Handyman</text>
+            <rect x="420" y="208" width="80" height="22" rx="11" fill="white" opacity="0.95" />
+            <text x="460" y="223" textAnchor="middle" fill="#374151" fontSize="10" fontFamily="sans-serif" fontWeight="600">Handyman</text>
           </g>
         </g>
 
         {/* Pin 3: Lawn — near park bottom-left */}
         <g className="pin-animate" style={{ animationDelay: "0.4s" }} filter="url(#pinShadow)">
-          <use href="#pinShape" x="110" y="285" width="28" height="40" />
-          <text x="110" y="273" textAnchor="middle" fontSize="13">🌿</text>
+          <use href="#pinShape" x="110" y="290" width="40" height="56" />
+          <text x="110" y="271" textAnchor="middle" fontSize="18">🌿</text>
           <g filter="url(#labelShadow)">
-            <rect x="87" y="295" width="46" height="16" rx="8" fill="white" opacity="0.92" />
-            <text x="110" y="307" textAnchor="middle" fill="#374151" fontSize="7" fontFamily="sans-serif" fontWeight="600">Lawn</text>
+            <rect x="80" y="303" width="60" height="22" rx="11" fill="white" opacity="0.95" />
+            <text x="110" y="318" textAnchor="middle" fill="#374151" fontSize="10" fontFamily="sans-serif" fontWeight="600">Lawn</text>
           </g>
         </g>
 
         {/* Pin 4: Beauty — along main road right */}
         <g className="pin-animate" style={{ animationDelay: "0.6s" }} filter="url(#pinShadow)">
-          <use href="#pinShape" x="490" y="115" width="28" height="40" />
-          <text x="490" y="103" textAnchor="middle" fontSize="13">💅</text>
+          <use href="#pinShape" x="490" y="120" width="40" height="56" />
+          <text x="490" y="101" textAnchor="middle" fontSize="18">💅</text>
           <g filter="url(#labelShadow)">
-            <rect x="466" y="125" width="48" height="16" rx="8" fill="white" opacity="0.92" />
-            <text x="490" y="137" textAnchor="middle" fill="#374151" fontSize="7" fontFamily="sans-serif" fontWeight="600">Beauty</text>
+            <rect x="458" y="133" width="64" height="22" rx="11" fill="white" opacity="0.95" />
+            <text x="490" y="148" textAnchor="middle" fill="#374151" fontSize="10" fontFamily="sans-serif" fontWeight="600">Beauty</text>
           </g>
         </g>
 
         {/* Pin 5: Moving — near highway */}
         <g className="pin-animate" style={{ animationDelay: "0.8s" }} filter="url(#pinShadow)">
-          <use href="#pinShape" x="340" y="390" width="28" height="40" />
-          <text x="340" y="378" textAnchor="middle" fontSize="13">🚚</text>
+          <use href="#pinShape" x="340" y="395" width="40" height="56" />
+          <text x="340" y="376" textAnchor="middle" fontSize="18">🚚</text>
           <g filter="url(#labelShadow)">
-            <rect x="314" y="400" width="52" height="16" rx="8" fill="white" opacity="0.92" />
-            <text x="340" y="412" textAnchor="middle" fill="#374151" fontSize="7" fontFamily="sans-serif" fontWeight="600">Moving</text>
+            <rect x="306" y="408" width="68" height="22" rx="11" fill="white" opacity="0.95" />
+            <text x="340" y="423" textAnchor="middle" fill="#374151" fontSize="10" fontFamily="sans-serif" fontWeight="600">Moving</text>
           </g>
         </g>
 
