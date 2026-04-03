@@ -1,5 +1,7 @@
 "use client";
 
+import HeroMap from "./HeroMap";
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-cream min-h-screen flex items-center">
@@ -54,75 +56,9 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Right: SVG Map */}
+        {/* Right: Google Maps-style SVG Map */}
         <div className="flex-1 relative w-full max-w-lg lg:max-w-none">
-          <svg
-            viewBox="0 0 500 400"
-            className="w-full h-auto"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Map background */}
-            <rect width="500" height="400" rx="20" fill="#E8E7E0" />
-
-            {/* Roads */}
-            <path d="M0 200 L500 200" stroke="#d4d3cc" strokeWidth="3" />
-            <path d="M250 0 L250 400" stroke="#d4d3cc" strokeWidth="3" />
-            <path d="M0 100 L500 100" stroke="#d4d3cc" strokeWidth="2" opacity="0.5" />
-            <path d="M0 300 L500 300" stroke="#d4d3cc" strokeWidth="2" opacity="0.5" />
-            <path d="M125 0 L125 400" stroke="#d4d3cc" strokeWidth="2" opacity="0.5" />
-            <path d="M375 0 L375 400" stroke="#d4d3cc" strokeWidth="2" opacity="0.5" />
-
-            {/* Green areas (parks) */}
-            <rect x="50" y="50" width="60" height="40" rx="8" fill="#1B6B45" opacity="0.2" />
-            <rect x="300" y="250" width="80" height="50" rx="8" fill="#1B6B45" opacity="0.2" />
-            <rect x="380" y="80" width="50" height="60" rx="8" fill="#1B6B45" opacity="0.2" />
-
-            {/* Buildings */}
-            <rect x="140" y="120" width="30" height="25" rx="4" fill="#c8c7c0" />
-            <rect x="200" y="50" width="35" height="30" rx="4" fill="#c8c7c0" />
-            <rect x="340" y="160" width="40" height="25" rx="4" fill="#c8c7c0" />
-            <rect x="70" y="260" width="30" height="30" rx="4" fill="#c8c7c0" />
-            <rect x="420" y="300" width="35" height="25" rx="4" fill="#c8c7c0" />
-
-            {/* Map pins with pulse animation */}
-            <g className="animate-bounce" style={{ animationDelay: "0s", animationDuration: "2s" }}>
-              <circle cx="120" cy="150" r="18" fill="#1B6B45" opacity="0.2" />
-              <circle cx="120" cy="150" r="10" fill="#1B6B45" />
-              <text x="120" y="154" textAnchor="middle" fill="white" fontSize="12">🧹</text>
-            </g>
-
-            <g className="animate-bounce" style={{ animationDelay: "0.3s", animationDuration: "2.2s" }}>
-              <circle cx="300" cy="120" r="18" fill="#1B6B45" opacity="0.2" />
-              <circle cx="300" cy="120" r="10" fill="#1B6B45" />
-              <text x="300" y="124" textAnchor="middle" fill="white" fontSize="12">🔧</text>
-            </g>
-
-            <g className="animate-bounce" style={{ animationDelay: "0.6s", animationDuration: "1.8s" }}>
-              <circle cx="200" cy="280" r="18" fill="#1B6B45" opacity="0.2" />
-              <circle cx="200" cy="280" r="10" fill="#1B6B45" />
-              <text x="200" y="284" textAnchor="middle" fill="white" fontSize="12">🌿</text>
-            </g>
-
-            <g className="animate-bounce" style={{ animationDelay: "0.9s", animationDuration: "2.4s" }}>
-              <circle cx="400" cy="220" r="18" fill="#1B6B45" opacity="0.2" />
-              <circle cx="400" cy="220" r="10" fill="#1B6B45" />
-              <text x="400" y="224" textAnchor="middle" fill="white" fontSize="12">💅</text>
-            </g>
-
-            <g className="animate-bounce" style={{ animationDelay: "1.2s", animationDuration: "2s" }}>
-              <circle cx="80" cy="340" r="18" fill="#1B6B45" opacity="0.2" />
-              <circle cx="80" cy="340" r="10" fill="#1B6B45" />
-              <text x="80" y="344" textAnchor="middle" fill="white" fontSize="12">🚚</text>
-            </g>
-
-            {/* "You are here" pin */}
-            <circle cx="250" cy="200" r="24" fill="#1B6B45" opacity="0.15">
-              <animate attributeName="r" values="24;32;24" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.15;0.05;0.15" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="250" cy="200" r="12" fill="#1B6B45" stroke="white" strokeWidth="3" />
-            <circle cx="250" cy="200" r="4" fill="white" />
-          </svg>
+          <HeroMap />
         </div>
       </div>
     </section>
