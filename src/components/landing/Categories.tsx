@@ -10,7 +10,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section className="py-20 bg-cream">
+    <section id="categories" className="py-20 bg-cream">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-16">
