@@ -39,6 +39,7 @@ export default function Footer({
         { href: "/blog", label: "Blog" },
         { href: "/contact", label: dictionary.footer.contact },
         { href: "/support", label: "Support" },
+        { href: "/account-deletion", label: "Account deletion" },
         { href: "/privacy", label: dictionary.footer.privacy },
         { href: "/terms", label: "Terms" },
       ],
