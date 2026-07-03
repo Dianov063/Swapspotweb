@@ -177,7 +177,7 @@ async function runGa4Report({
           : dimensions.includes("date")
             ? [{ dimension: { dimensionName: "date" } }]
             : undefined,
-        rowLimit,
+        limit: `${rowLimit}`,
       }),
       cache: "no-store",
     },
