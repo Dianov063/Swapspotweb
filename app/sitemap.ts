@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
 import { locales } from "@/lib/i18n";
 
-const base = "https://swapspot.app";
+const base = "https://www.swapspot.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

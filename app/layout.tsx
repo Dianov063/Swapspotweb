@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const siteUrl = "https://swapspot.app";
+const siteUrl = "https://www.swapspot.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

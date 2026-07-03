@@ -28,7 +28,7 @@ export default function HomePage({
             "@type": "Organization",
             name: "SwapSpot",
             description: dictionary.footer.tagline,
-            url: "https://swapspot.app",
+            url: "https://www.swapspot.org",
           }),
         }}
       />
