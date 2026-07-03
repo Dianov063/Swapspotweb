@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Apple, CheckCircle2, Hammer, Play } from "lucide-react";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
 
+const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.swapspotnyc.app&pcampaignid=web_share";
+
 export default function WaitlistCTA({
   locale,
   dictionary,
@@ -73,26 +76,36 @@ export default function WaitlistCTA({
               {dictionary.waitlist.storeCaption}
             </div>
             <div className="mt-3 flex flex-wrap justify-center gap-3">
-              {[
-                { Icon: Apple, main: "iOS · App Store" },
-                { Icon: Play, main: "Android · Google Play" },
-              ].map(({ Icon, main }) => (
-                <a
-                  key={main}
-                  href={localizedPath(locale, "/#waitlist")}
-                  className="inline-flex items-center gap-3 rounded-[14px] border border-white/15 bg-[#10231A] px-5 py-2.5 text-left text-white transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#0A1A12]"
-                >
-                  <Icon className="h-6 w-6 shrink-0" />
-                  <span>
-                    <span className="block text-[10.5px] font-semibold leading-[1.1] opacity-70">
-                      {dictionary.waitlist.comingSoon}
-                    </span>
-                    <span className="block text-[15px] font-extrabold leading-[1.15]">
-                      {main}
-                    </span>
+              <a
+                href={localizedPath(locale, "/#waitlist")}
+                className="inline-flex items-center gap-3 rounded-[14px] border border-white/15 bg-[#10231A] px-5 py-2.5 text-left text-white transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#0A1A12]"
+              >
+                <Apple className="h-6 w-6 shrink-0" />
+                <span>
+                  <span className="block text-[10.5px] font-semibold leading-[1.1] opacity-70">
+                    {dictionary.waitlist.comingSoon}
                   </span>
-                </a>
-              ))}
+                  <span className="block text-[15px] font-extrabold leading-[1.15]">
+                    iOS - App Store
+                  </span>
+                </span>
+              </a>
+              <a
+                href={GOOGLE_PLAY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-[14px] border border-white/15 bg-[#10231A] px-5 py-2.5 text-left text-white transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#0A1A12]"
+              >
+                <Play className="h-6 w-6 shrink-0" />
+                <span>
+                  <span className="block text-[10.5px] font-semibold leading-[1.1] opacity-70">
+                    Get it on
+                  </span>
+                  <span className="block text-[15px] font-extrabold leading-[1.15]">
+                    Android - Google Play
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
 

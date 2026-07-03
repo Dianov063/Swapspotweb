@@ -1,4 +1,4 @@
-import { Search, Hammer, Star, Check } from "lucide-react";
+import { Play, Hammer, Star, Check } from "lucide-react";
 import { Button } from "./ui";
 import PhoneMockup from "./PhoneMockup";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
@@ -9,6 +9,9 @@ const reviewers = [
   { initials: "AL", bg: "#EAEFF6", color: "#3A5A8C" },
   { initials: "JC", bg: "#F3E7EE", color: "#8C3A66" },
 ];
+
+const GOOGLE_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.swapspotnyc.app&pcampaignid=web_share";
 
 export default function Hero({
   locale,
@@ -43,8 +46,8 @@ export default function Hero({
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <Button href={localizedPath(locale, "/#waitlist")}>
-              <Search className="h-[19px] w-[19px]" />
+            <Button href={GOOGLE_PLAY_URL}>
+              <Play className="h-[19px] w-[19px]" />
               {copy.findHelp}
             </Button>
             <Button href={localizedPath(locale, "/#helpers")} variant="white">
