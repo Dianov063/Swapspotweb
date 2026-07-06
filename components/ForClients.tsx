@@ -161,7 +161,7 @@ export default function ForClients({ locale }: { locale: Locale }) {
             ))}
           </div>
 
-          <Button href={localizedPath(locale, "/#waitlist")} className="mt-7">
+          <Button href={localizedPath(locale, "/#download")} className="mt-7">
             {t.cta}
           </Button>
         </div>

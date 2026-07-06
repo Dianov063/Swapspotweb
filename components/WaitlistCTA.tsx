@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { Apple, CheckCircle2, Hammer, Play } from "lucide-react";
+import { Apple, Hammer, Play } from "lucide-react";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
 
 const GOOGLE_PLAY_URL =
@@ -13,10 +12,6 @@ const appCtaCopy = {
   title: "Download SwapSpot today",
   body:
     "Browse nearby helpers for free. Use a pass when you are ready to message, request quotes, or book.",
-  email: "Email address",
-  placeholder: "you@email.com",
-  join: "Get updates",
-  thanks: "Thanks - you are on the list!",
   storeCaption: "Available now on iOS and Android",
   noSpam: "Download the app, browse helpers, and start when you are ready.",
 };
@@ -28,17 +23,8 @@ export default function WaitlistCTA({
   locale: Locale;
   dictionary: Dictionary;
 }) {
-  const [email, setEmail] = useState("");
-  const [joined, setJoined] = useState(false);
-
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!email) return;
-    setJoined(true);
-  }
-
   return (
-    <section id="waitlist" className="mx-auto max-w-wrap px-6 pb-[clamp(56px,7vw,96px)]">
+    <section id="download" className="mx-auto max-w-wrap px-6 pb-[clamp(56px,7vw,96px)]">
       <div className="relative overflow-hidden rounded-card bg-green px-[clamp(28px,4vw,56px)] py-[clamp(40px,5.5vw,72px)] text-center text-surface shadow-card">
         <div className="pointer-events-none absolute -left-10 -top-20 h-[300px] w-[300px] rounded-full bg-white/[0.06]" />
         <div className="pointer-events-none absolute -bottom-[120px] -right-[30px] h-[320px] w-[320px] rounded-full bg-[rgba(198,132,30,.16)]" />
@@ -50,39 +36,6 @@ export default function WaitlistCTA({
           <p className="mt-4 text-[17px] leading-[1.5] text-white/80">
             {appCtaCopy.body}
           </p>
-
-          {joined ? (
-            <div className="mx-auto mt-7 inline-flex items-center gap-2.5 rounded-full bg-white/[0.14] px-6 py-3.5 text-[16px] font-bold">
-              <CheckCircle2 className="h-5 w-5" />
-              {appCtaCopy.thanks}
-            </div>
-          ) : (
-            <form
-              onSubmit={onSubmit}
-              className="mt-7 flex flex-wrap justify-center gap-2.5"
-              noValidate
-            >
-              <label htmlFor="waitlist-email" className="sr-only">
-                {appCtaCopy.email}
-              </label>
-              <input
-                id="waitlist-email"
-                type="email"
-                required
-                autoComplete="email"
-                placeholder={appCtaCopy.placeholder}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="max-w-[340px] flex-1 basis-[260px] rounded-full px-5 py-3.5 text-[16px] text-ink outline-none"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-white px-7 py-3.5 text-[16px] font-extrabold text-green-deep transition-transform duration-150 hover:-translate-y-0.5 hover:bg-gold-soft"
-              >
-                {appCtaCopy.join}
-              </button>
-            </form>
-          )}
 
           <div className="mt-6">
             <div className="text-[13px] font-bold tracking-[0.02em] text-white/70">

@@ -244,7 +244,7 @@ export default function ClientPricing({ locale }: { locale: Locale }) {
                   ))}
                 </div>
                 <Button
-                  href={localizedPath(locale, "/#waitlist")}
+                  href={localizedPath(locale, "/#download")}
                   variant={plan.best ? "green" : "white"}
                   className="mt-7 w-full justify-center"
                 >

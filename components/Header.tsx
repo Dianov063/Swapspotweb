@@ -14,9 +14,6 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
-const GOOGLE_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.swapspotnyc.app&pcampaignid=web_share";
-
 const clientNavLabels: Record<Locale, string> = {
   en: "For Clients",
   es: "Para clientes",
@@ -95,7 +92,7 @@ export default function Header({
             </select>
             <ChevronDown className="pointer-events-none absolute right-3 h-4 w-4 text-ink-soft" />
           </div>
-          <Button href={GOOGLE_PLAY_URL} size="sm" className="hidden sm:inline-flex">
+          <Button href={localizedPath(locale, "/#download")} size="sm" className="hidden sm:inline-flex">
             {dictionary.nav.getApp}
           </Button>
           <button
@@ -141,7 +138,7 @@ export default function Header({
           </select>
           <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" />
         </div>
-        <Button href={GOOGLE_PLAY_URL} className="mt-2">
+        <Button href={localizedPath(locale, "/#download")} className="mt-2">
           {dictionary.nav.getApp}
         </Button>
       </div>

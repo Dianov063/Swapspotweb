@@ -29,7 +29,7 @@ export default function Footer({
       heading: dictionary.nav.helpers,
       links: [
         { href: "/helpers", label: dictionary.hero.becomeHelper },
-        { href: localizedPath(locale, "/#waitlist"), label: dictionary.waitlist.join },
+        { href: localizedPath(locale, "/#download"), label: dictionary.nav.getApp },
         { href: "/helpers#pricing", label: "Pricing & payouts" },
       ],
     },

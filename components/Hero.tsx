@@ -10,9 +10,6 @@ const reviewers = [
   { initials: "JC", bg: "#F3E7EE", color: "#8C3A66" },
 ];
 
-const GOOGLE_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.swapspotnyc.app&pcampaignid=web_share";
-
 export default function Hero({
   locale,
   dictionary,
@@ -46,7 +43,7 @@ export default function Hero({
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <Button href={GOOGLE_PLAY_URL}>
+            <Button href={localizedPath(locale, "/#download")}>
               <Play className="h-[19px] w-[19px]" />
               {copy.findHelp}
             </Button>

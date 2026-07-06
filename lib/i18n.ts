@@ -110,7 +110,7 @@ export const dictionaries = {
       body: "Download SwapSpot to browse nearby helpers, message, request quotes, and book.",
       email: "Email address",
       placeholder: "you@email.com",
-      join: "Get updates",
+      join: "Download app",
       thanks: "Thanks — you're on the list!",
       storeCaption: "Available now on iOS and Android",
       comingSoon: "Available on",

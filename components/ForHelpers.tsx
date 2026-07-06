@@ -46,7 +46,7 @@ export default function ForHelpers({
               })}
             </div>
 
-            <Button href={localizedPath(locale, "/#waitlist")} variant="gold" className="mt-[30px]">
+            <Button href={localizedPath(locale, "/#download")} variant="gold" className="mt-[30px]">
               <ArrowRight className="h-[18px] w-[18px]" />
               {dictionary.helpers.start}
             </Button>
