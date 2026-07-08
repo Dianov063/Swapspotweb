@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import AppDownloadStrip from "@/components/AppDownloadStrip";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import ForClients from "@/components/ForClients";
@@ -33,6 +34,7 @@ export default function HomePage({
         }}
       />
       <Header locale={locale} dictionary={dictionary} />
+      <AppDownloadStrip />
       <main>
         <Hero locale={locale} dictionary={dictionary} />
         <HowItWorks dictionary={dictionary} />
