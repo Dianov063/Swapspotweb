@@ -145,3 +145,33 @@ Base styles target mobile; Tailwind breakpoints layer up (`sm` 640, `md` 768,
 - **Path alias:** `@/*` → project root (set in `tsconfig.json`).
 - **Tailwind v4?** Move the `theme.extend` values into an `@theme` block in
   `globals.css`; component classes stay identical.
+
+---
+
+## Admin analytics dashboard
+
+Admin page:
+
+```txt
+/admin/analytics
+```
+
+Required Vercel environment variables:
+
+```txt
+ANALYTICS_API_SECRET=...
+GOOGLE_CLIENT_EMAIL=...
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GA4_PROPERTY_ID=...
+SEARCH_CONSOLE_SITE_URL=https://www.swapspot.org/
+```
+
+For the "AI normalize services" admin action, also add:
+
+```txt
+SUPABASE_URL=https://hoohhuqgyaifjglfzanx.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+Do not expose `SUPABASE_SERVICE_ROLE_KEY` to the mobile app or browser. It is
+server-only and is used only by `/api/admin/services/normalize`.

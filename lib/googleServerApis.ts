@@ -27,6 +27,12 @@ type SearchConsoleRow = {
   position?: number;
 };
 
+type AnalyticsRow = Record<string, string | number>;
+
+function asNumber(row: AnalyticsRow, key: string) {
+  return Number(row[key] || 0);
+}
+
 function getGoogleEnv(): GoogleEnv {
   const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
   const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
@@ -264,6 +270,94 @@ function normalizeSearchRows(data: { rows?: SearchConsoleRow[] }, dimensions: st
   });
 }
 
+function buildSeoInsights({
+  ga4,
+  searchConsole,
+}: {
+  ga4: {
+    byCountry: AnalyticsRow[];
+    byCity: AnalyticsRow[];
+    byPage: AnalyticsRow[];
+    byDevice: AnalyticsRow[];
+    byLanguage: AnalyticsRow[];
+  };
+  searchConsole: {
+    queries: AnalyticsRow[];
+    pages: AnalyticsRow[];
+    countries: AnalyticsRow[];
+    devices: AnalyticsRow[];
+  };
+}) {
+  const quickWins = searchConsole.queries
+    .filter((row) => asNumber(row, "impressions") >= 20 && asNumber(row, "position") > 4 && asNumber(row, "position") <= 20)
+    .slice(0, 12)
+    .map((row) => ({
+      title: String(row.query || "Unknown query"),
+      metric: `${asNumber(row, "impressions").toLocaleString("en-US")} impressions, avg position ${asNumber(row, "position").toFixed(1)}`,
+      action: "Create or improve a focused landing page and tighten title/H1 around this query.",
+    }));
+
+  const lowCtrPages = searchConsole.pages
+    .filter((row) => asNumber(row, "impressions") >= 20 && asNumber(row, "ctr") < 0.02)
+    .slice(0, 10)
+    .map((row) => ({
+      title: String(row.page || "Unknown page"),
+      metric: `${asNumber(row, "impressions").toLocaleString("en-US")} impressions, ${(asNumber(row, "ctr") * 100).toFixed(2)}% CTR`,
+      action: "Rewrite title/meta description and make the first screen match the search intent.",
+    }));
+
+  const marketSignals = ga4.byCountry
+    .filter((row) => asNumber(row, "activeUsers") > 0)
+    .slice(0, 12)
+    .map((row) => {
+      const country = String(row.country || "Unknown");
+      const searchCountry = searchConsole.countries.find((item) => String(item.country || "").toLowerCase() === country.toLowerCase());
+      return {
+        title: country,
+        metric: `${asNumber(row, "activeUsers").toLocaleString("en-US")} users${searchCountry ? `, ${asNumber(searchCountry, "impressions").toLocaleString("en-US")} search impressions` : ""}`,
+        action: "Track signups/helpers by country before spending on paid traffic.",
+      };
+    });
+
+  const contentIdeas = searchConsole.queries
+    .filter((row) => asNumber(row, "impressions") >= 10)
+    .slice(0, 16)
+    .map((row) => ({
+      title: String(row.query || "Unknown query"),
+      metric: `${asNumber(row, "clicks").toLocaleString("en-US")} clicks / ${asNumber(row, "impressions").toLocaleString("en-US")} impressions`,
+      action: "Use this phrase in a city/category page, FAQ, or app store keyword test.",
+    }));
+
+  const deviceMix = ga4.byDevice.map((row) => ({
+    title: String(row.deviceCategory || "Unknown"),
+    metric: `${asNumber(row, "activeUsers").toLocaleString("en-US")} users`,
+    action: "Use this to prioritize mobile landing QA versus desktop SEO pages.",
+  }));
+
+  const languageSignals = ga4.byLanguage
+    .filter((row) => asNumber(row, "activeUsers") > 0)
+    .slice(0, 10)
+    .map((row) => ({
+      title: String(row.language || "Unknown"),
+      metric: `${asNumber(row, "activeUsers").toLocaleString("en-US")} users`,
+      action: "If this language repeats, add localized landing copy and app store metadata.",
+    }));
+
+  return {
+    quickWins,
+    lowCtrPages,
+    marketSignals,
+    contentIdeas,
+    deviceMix,
+    languageSignals,
+    summary: [
+      quickWins.length ? `${quickWins.length} query opportunities with position 5-20` : "No query quick wins above threshold yet",
+      lowCtrPages.length ? `${lowCtrPages.length} pages with low CTR` : "No low-CTR pages above threshold yet",
+      marketSignals.length ? `${marketSignals.length} country signals available` : "No country signal yet",
+    ],
+  };
+}
+
 export async function fetchSearchConsoleReport() {
   return runSearchConsoleReport({ dimensions: ["query"], rowLimit: 25 });
 }
@@ -320,27 +414,31 @@ export async function fetchAnalyticsOverview() {
     runSearchConsoleReport({ dimensions: ["date"], rowLimit: 60 }),
   ]);
 
+  const ga4 = {
+    totals: normalizeGa4Rows(gaTotals, [], gaMetrics)[0] || {},
+    byDate: normalizeGa4Rows(gaByDate, ["date"], gaMetrics),
+    byCountry: normalizeGa4Rows(gaByCountry, ["country"], gaMetrics),
+    byCity: normalizeGa4Rows(gaByCity, ["city"], gaMetrics),
+    bySource: normalizeGa4Rows(gaBySource, ["sessionSourceMedium"], gaMetrics),
+    byPage: normalizeGa4Rows(gaByPage, ["pagePath"], gaMetrics),
+    byDevice: normalizeGa4Rows(gaByDevice, ["deviceCategory"], gaMetrics),
+    byLanguage: normalizeGa4Rows(gaByLanguage, ["language"], gaMetrics),
+  };
+  const searchConsole = {
+    queries: normalizeSearchRows(searchQueries, ["query"]),
+    pages: normalizeSearchRows(searchPages, ["page"]),
+    countries: normalizeSearchRows(searchCountries, ["country"]),
+    devices: normalizeSearchRows(searchDevices, ["device"]),
+    byDate: normalizeSearchRows(searchDates, ["date"]),
+  };
+
   return {
     range: {
       ga4: "last 30 days",
       searchConsole: "last 30 days, ending 2 days ago",
     },
-    ga4: {
-      totals: normalizeGa4Rows(gaTotals, [], gaMetrics)[0] || {},
-      byDate: normalizeGa4Rows(gaByDate, ["date"], gaMetrics),
-      byCountry: normalizeGa4Rows(gaByCountry, ["country"], gaMetrics),
-      byCity: normalizeGa4Rows(gaByCity, ["city"], gaMetrics),
-      bySource: normalizeGa4Rows(gaBySource, ["sessionSourceMedium"], gaMetrics),
-      byPage: normalizeGa4Rows(gaByPage, ["pagePath"], gaMetrics),
-      byDevice: normalizeGa4Rows(gaByDevice, ["deviceCategory"], gaMetrics),
-      byLanguage: normalizeGa4Rows(gaByLanguage, ["language"], gaMetrics),
-    },
-    searchConsole: {
-      queries: normalizeSearchRows(searchQueries, ["query"]),
-      pages: normalizeSearchRows(searchPages, ["page"]),
-      countries: normalizeSearchRows(searchCountries, ["country"]),
-      devices: normalizeSearchRows(searchDevices, ["device"]),
-      byDate: normalizeSearchRows(searchDates, ["date"]),
-    },
+    ga4,
+    searchConsole,
+    insights: buildSeoInsights({ ga4, searchConsole }),
   };
 }

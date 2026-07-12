@@ -3,6 +3,11 @@
 import { useMemo, useState } from "react";
 
 type Row = Record<string, string | number>;
+type InsightItem = {
+  title: string;
+  metric: string;
+  action: string;
+};
 type Overview = {
   range: { ga4: string; searchConsole: string };
   ga4: {
@@ -21,6 +26,15 @@ type Overview = {
     countries: Row[];
     devices: Row[];
     byDate: Row[];
+  };
+  insights: {
+    summary: string[];
+    quickWins: InsightItem[];
+    lowCtrPages: InsightItem[];
+    marketSignals: InsightItem[];
+    contentIdeas: InsightItem[];
+    deviceMix: InsightItem[];
+    languageSignals: InsightItem[];
   };
 };
 
@@ -109,10 +123,44 @@ function DataTable({
   );
 }
 
+function InsightList({ title, rows }: { title: string; rows: InsightItem[] }) {
+  return (
+    <section className="rounded-card border border-line bg-surface p-5 shadow-card-sm">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h2 className="font-head text-[22px] font-bold text-ink">{title}</h2>
+        <span className="rounded-full bg-green-soft px-3 py-1 text-[12px] font-bold text-green-deep">
+          {rows.length} items
+        </span>
+      </div>
+      <div className="space-y-3">
+        {rows.length ? (
+          rows.slice(0, 8).map((row, index) => (
+            <div key={`${row.title}-${index}`} className="rounded-card-sm border border-line bg-cream p-4">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
+                  <div className="truncate text-[15px] font-extrabold text-ink">{row.title}</div>
+                  <div className="mt-1 text-[13px] font-bold text-green">{row.metric}</div>
+                </div>
+              </div>
+              <div className="mt-3 text-[14px] leading-[1.45] text-ink-soft">{row.action}</div>
+            </div>
+          ))
+        ) : (
+          <div className="rounded-card-sm border border-line bg-cream p-4 text-[14px] font-semibold text-ink-soft">
+            No signal yet.
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default function AnalyticsDashboard() {
   const [token, setToken] = useState("");
   const [data, setData] = useState<Overview | null>(null);
   const [loading, setLoading] = useState(false);
+  const [normalizing, setNormalizing] = useState(false);
+  const [normalizeResult, setNormalizeResult] = useState("");
   const [error, setError] = useState("");
 
   const totals = useMemo(() => data?.ga4.totals || {}, [data]);
@@ -144,6 +192,34 @@ export default function AnalyticsDashboard() {
       setError(caught instanceof Error ? caught.message : "Unknown error");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function normalizeServices() {
+    setNormalizing(true);
+    setNormalizeResult("");
+    setError("");
+    try {
+      const response = await fetch("/api/admin/services/normalize", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-analytics-token": token,
+        },
+        body: JSON.stringify({ limit: 25 }),
+        cache: "no-store",
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Service normalization failed");
+      }
+      setNormalizeResult(
+        `Scanned ${payload.scanned}, updated ${payload.updated}, failed ${payload.failed}.`,
+      );
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Unknown error");
+    } finally {
+      setNormalizing(false);
     }
   }
 
@@ -179,8 +255,22 @@ export default function AnalyticsDashboard() {
             >
               {loading ? "Loading..." : "Load data"}
             </button>
+            <button
+              type="button"
+              onClick={normalizeServices}
+              disabled={normalizing || !token}
+              className="h-12 rounded-full border border-green bg-surface px-6 text-[15px] font-extrabold text-green transition hover:bg-green-soft disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {normalizing ? "Normalizing..." : "AI normalize services"}
+            </button>
           </div>
         </div>
+
+        {normalizeResult ? (
+          <div className="mb-6 rounded-card-sm border border-[#B7DFC8] bg-green-soft p-4 font-semibold text-green-deep">
+            {normalizeResult}
+          </div>
+        ) : null}
 
         {error ? (
           <div className="mb-6 rounded-card-sm border border-[#F0B8B8] bg-[#FFF4F4] p-4 font-semibold text-[#9B1C1C]">
@@ -197,6 +287,33 @@ export default function AnalyticsDashboard() {
               <StatCard label="engagedSessions" value={totals.engagedSessions || 0} />
               <StatCard label="clicks" value={searchTotals.clicks} />
               <StatCard label="impressions" value={searchTotals.impressions} />
+            </div>
+
+            <section className="rounded-card border border-line bg-surface p-5 shadow-card-sm">
+              <div className="mb-4">
+                <p className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">
+                  Strategy signals
+                </p>
+                <h2 className="mt-1 font-head text-[28px] font-bold text-ink">
+                  What to work on next
+                </h2>
+              </div>
+              <div className="grid gap-3 md:grid-cols-3">
+                {data.insights.summary.map((item) => (
+                  <div key={item} className="rounded-card-sm border border-line bg-cream p-4 text-[15px] font-bold text-ink">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <div className="grid gap-6 xl:grid-cols-2">
+              <InsightList title="SEO Quick Wins" rows={data.insights.quickWins} />
+              <InsightList title="Low CTR Pages" rows={data.insights.lowCtrPages} />
+              <InsightList title="Market Signals" rows={data.insights.marketSignals} />
+              <InsightList title="Content Ideas" rows={data.insights.contentIdeas} />
+              <InsightList title="Language Signals" rows={data.insights.languageSignals} />
+              <InsightList title="Device Mix" rows={data.insights.deviceMix} />
             </div>
 
             <div className="grid gap-6 xl:grid-cols-2">
