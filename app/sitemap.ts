@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
 import { locales } from "@/lib/i18n";
+import { getDirectoryCategories, getDirectoryMarkets } from "@/lib/publicDirectory";
 
 const base = "https://www.swapspot.org";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/helpers",
@@ -37,6 +38,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const [directoryCategories, directoryMarkets] = await Promise.all([
+    getDirectoryCategories(),
+    getDirectoryMarkets(),
+  ]);
+
+  const serviceMarketRoutes = directoryCategories.flatMap((category) =>
+    directoryMarkets.map((market) => ({
+      url: `${base}/services/${category.slug}/${market.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "daily" as const,
+      priority: 0.72,
+    })),
+  );
+
   const localeRoutes = locales
     .filter((locale) => locale !== "en")
     .map((locale) => ({
@@ -46,5 +61,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     }));
 
-  return [...staticRoutes, ...localeRoutes, ...categoryRoutes, ...cityRoutes];
+  return [
+    ...staticRoutes,
+    ...localeRoutes,
+    ...categoryRoutes,
+    ...cityRoutes,
+    ...serviceMarketRoutes,
+  ];
 }
