@@ -27,6 +27,8 @@ export type PublicServiceListing = {
   avatar_url: string | null;
   helper_bio: string | null;
   service_area_zip: string | null;
+  service_area_label: string | null;
+  service_area_slug: string | null;
   country_code: string | null;
   radius_miles: string | number | null;
   distance_unit: "mi" | "km" | string | null;
@@ -47,6 +49,13 @@ export type DirectoryCategory = {
 export type DirectoryMarket = {
   slug: string;
   name: string;
+};
+
+export type DirectoryPair = {
+  categorySlug: string;
+  categoryName: string;
+  marketSlug: string;
+  marketName: string;
 };
 
 const categoryAliases: Record<string, string> = {
@@ -131,6 +140,30 @@ export async function getDirectoryMarkets(): Promise<DirectoryMarket[]> {
   return fallbackCities.map((city) => ({ slug: city.slug, name: city.name }));
 }
 
+export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
+  const rows = await fetchRest<{
+    category_name: string;
+    category_slug: string;
+    market_name: string;
+    market_slug: string;
+  }>(
+    "public_service_listings?select=category_name,category_slug,market_name,market_slug&order=category_name.asc,market_name.asc&limit=5000",
+  );
+  const byKey = new Map<string, DirectoryPair>();
+
+  for (const row of rows) {
+    if (!row.category_slug || !row.market_slug) continue;
+    byKey.set(`${row.category_slug}:${row.market_slug}`, {
+      categorySlug: row.category_slug,
+      categoryName: row.category_name,
+      marketSlug: row.market_slug,
+      marketName: row.market_name,
+    });
+  }
+
+  return [...byKey.values()];
+}
+
 export async function getDirectoryCategory(slug: string) {
   const categories = await getDirectoryCategories();
   const canonicalSlug = categoryAliases[slug] || slug;
@@ -181,8 +214,8 @@ export function formatServicePrice(listing: PublicServiceListing) {
 export function formatServiceArea(listing: PublicServiceListing) {
   const radius = Number(listing.radius_miles || 0);
   const unit = listing.distance_unit || "mi";
-  const zip = listing.service_area_zip ? `ZIP ${listing.service_area_zip}` : listing.market_name;
+  const area = listing.service_area_label || (listing.service_area_zip ? `ZIP ${listing.service_area_zip}` : listing.market_name);
 
-  if (!radius) return zip;
-  return `${zip} + ${radius} ${unit}`;
+  if (!radius) return area;
+  return `${area} + ${radius} ${unit}`;
 }

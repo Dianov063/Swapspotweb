@@ -14,22 +14,6 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
-const clientNavLabels: Record<Locale, string> = {
-  en: "For Clients",
-  es: "Para clientes",
-  zh: "给客户",
-  fr: "Pour clients",
-  ru: "Для клиентов",
-};
-
-const pricingNavLabels: Record<Locale, string> = {
-  en: "Pricing",
-  es: "Precios",
-  zh: "价格",
-  fr: "Tarifs",
-  ru: "Цены",
-};
-
 export default function Header({
   locale = defaultLocale,
   dictionary = dictionaries[defaultLocale],
@@ -40,8 +24,8 @@ export default function Header({
   const [open, setOpen] = useState(false);
   const navLinks = [
     { href: localizedPath(locale, "/#how"), label: dictionary.nav.how },
-    { href: localizedPath(locale, "/#clients"), label: clientNavLabels[locale] },
-    { href: localizedPath(locale, "/#pricing"), label: pricingNavLabels[locale] },
+    { href: localizedPath(locale, "/#clients"), label: dictionary.nav.clients },
+    { href: localizedPath(locale, "/#pricing"), label: dictionary.nav.pricing },
     { href: localizedPath(locale, "/#categories"), label: dictionary.nav.categories },
     { href: localizedPath(locale, "/#helpers"), label: dictionary.nav.helpers },
     { href: localizedPath(locale, "/#trust"), label: dictionary.nav.trust },

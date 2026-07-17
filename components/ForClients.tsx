@@ -9,9 +9,7 @@ import {
 import { Button, Eyebrow } from "./ui";
 import { localizedPath, type Locale } from "@/lib/i18n";
 
-const copy: Record<
-  Locale,
-  {
+type ForClientsCopy = {
     eyebrow: string;
     title: string;
     body: string;
@@ -25,8 +23,9 @@ const copy: Record<
     panelAction: string;
     panelTotal: string;
     panelSecure: string;
-  }
-> = {
+  };
+
+const copy: Partial<Record<Locale, ForClientsCopy>> & { en: ForClientsCopy } = {
   en: {
     eyebrow: "For Clients",
     title: "Get the job done without chasing people around",
@@ -136,7 +135,7 @@ const copy: Record<
 const icons = [SearchCheck, MapPinned, MessageCircle, ShieldCheck];
 
 export default function ForClients({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = copy[locale] ?? copy.en;
 
   return (
     <section id="clients" className="mx-auto max-w-wrap px-6 pb-[clamp(48px,6vw,86px)]">

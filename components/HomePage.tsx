@@ -34,7 +34,7 @@ export default function HomePage({
         }}
       />
       <Header locale={locale} dictionary={dictionary} />
-      <AppDownloadStrip />
+      <AppDownloadStrip locale={locale} dictionary={dictionary} />
       <main>
         <Hero locale={locale} dictionary={dictionary} />
         <HowItWorks dictionary={dictionary} />

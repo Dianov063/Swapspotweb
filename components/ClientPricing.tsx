@@ -2,9 +2,7 @@ import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-rea
 import { Button, Eyebrow } from "./ui";
 import { localizedPath, type Locale } from "@/lib/i18n";
 
-const copy: Record<
-  Locale,
-  {
+type ClientPricingCopy = {
     eyebrow: string;
     title: string;
     body: string;
@@ -20,8 +18,9 @@ const copy: Record<
       cta: string;
     }[];
     actions: string[];
-  }
-> = {
+  };
+
+const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy } = {
   en: {
     eyebrow: "Client Pricing",
     title: "Browse for free. Use a pass when you are ready to act.",
@@ -162,7 +161,7 @@ const copy: Record<
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
 export default function ClientPricing({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = copy[locale] ?? copy.en;
 
   return (
     <section id="pricing" className="border-y border-line bg-cream">

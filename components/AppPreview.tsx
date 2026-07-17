@@ -8,7 +8,7 @@ const miniMarks = [
   { initials: "AL", tag: "$28", bg: "#F3E7EE", color: "#8C3A66", left: "52%", top: "74%" },
 ];
 
-const copy: Record<Locale, {
+type AppPreviewCopy = {
   eyebrow: string;
   title: string;
   mapTitle: string;
@@ -27,7 +27,9 @@ const copy: Record<Locale, {
   messageB: string;
   quote: string;
   approve: string;
-}> = {
+};
+
+const copy: Partial<Record<Locale, AppPreviewCopy>> & { en: AppPreviewCopy } = {
   en: {
     eyebrow: "Inside the app",
     title: "A whole booking, start to finish",
@@ -131,7 +133,7 @@ const copy: Record<Locale, {
 };
 
 export default function AppPreview({ locale }: { locale: Locale }) {
-  const t = copy[locale];
+  const t = copy[locale] ?? copy.en;
 
   return (
     <section className="mx-auto max-w-wrap px-6 py-[clamp(48px,6vw,86px)]">

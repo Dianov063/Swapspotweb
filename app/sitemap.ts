@@ -1,9 +1,22 @@
 import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
 import { locales } from "@/lib/i18n";
-import { getDirectoryCategories, getDirectoryMarkets } from "@/lib/publicDirectory";
+import { getDirectoryPairs } from "@/lib/publicDirectory";
 
 const base = "https://www.swapspot.org";
+const localizedStaticPaths = [
+  "/helpers",
+  "/trust-safety",
+  "/contact",
+  "/support",
+  "/account-deletion",
+  "/delete-account",
+  "/privacy",
+  "/terms",
+];
+
+export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
@@ -38,19 +51,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const [directoryCategories, directoryMarkets] = await Promise.all([
-    getDirectoryCategories(),
-    getDirectoryMarkets(),
-  ]);
+  const directoryPairs = await getDirectoryPairs();
 
-  const serviceMarketRoutes = directoryCategories.flatMap((category) =>
-    directoryMarkets.map((market) => ({
-      url: `${base}/services/${category.slug}/${market.slug}`,
+  const serviceMarketRoutes = directoryPairs.map((pair) => ({
+      url: `${base}/services/${pair.categorySlug}/${pair.marketSlug}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.72,
-    })),
-  );
+  }));
 
   const localeRoutes = locales
     .filter((locale) => locale !== "en")
@@ -61,9 +69,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     }));
 
+  const localizedStaticRoutes = locales
+    .filter((locale) => locale !== "en")
+    .flatMap((locale) =>
+      localizedStaticPaths.map((path) => ({
+        url: `${base}/${locale}${path}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.55,
+      })),
+    );
+
   return [
     ...staticRoutes,
     ...localeRoutes,
+    ...localizedStaticRoutes,
     ...categoryRoutes,
     ...cityRoutes,
     ...serviceMarketRoutes,

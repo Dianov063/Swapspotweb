@@ -5,14 +5,6 @@ import { Hammer } from "lucide-react";
 import AppStoreButtons from "./AppStoreButtons";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
 
-const appCtaCopy = {
-  title: "Download SwapSpot today",
-  body:
-    "Browse nearby helpers for free. Use a pass when you are ready to message, request quotes, or book.",
-  storeCaption: "Available now on iOS and Android",
-  noSpam: "Download the app, browse helpers, and start when you are ready.",
-};
-
 export default function WaitlistCTA({
   locale,
   dictionary,
@@ -28,15 +20,15 @@ export default function WaitlistCTA({
 
         <div className="relative mx-auto max-w-[560px]">
           <h2 className="font-head text-[clamp(30px,4vw,48px)] font-bold leading-[1.06] tracking-[-0.02em]">
-            {appCtaCopy.title}
+            {dictionary.waitlist.title}
           </h2>
           <p className="mt-4 text-[17px] leading-[1.5] text-white/80">
-            {appCtaCopy.body}
+            {dictionary.waitlist.body}
           </p>
 
           <div className="mt-6">
             <div className="text-[13px] font-bold tracking-[0.02em] text-white/70">
-              {appCtaCopy.storeCaption}
+              {dictionary.waitlist.storeCaption}
             </div>
             <AppStoreButtons tone="light" className="mt-3 justify-center" />
           </div>
@@ -50,7 +42,7 @@ export default function WaitlistCTA({
               {dictionary.hero.becomeHelper}
             </Link>
             <span className="text-[14px] text-white/60">
-              {appCtaCopy.noSpam}
+              {dictionary.waitlist.noSpam}
             </span>
           </div>
         </div>

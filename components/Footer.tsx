@@ -20,7 +20,7 @@ export default function Footer({
       heading: dictionary.footer.product,
       links: [
         { href: localizedPath(locale, "/#how"), label: dictionary.nav.how },
-        { href: localizedPath(locale, "/#pricing"), label: "Pricing" },
+        { href: localizedPath(locale, "/#pricing"), label: dictionary.nav.pricing },
         { href: localizedPath(locale, "/#categories"), label: dictionary.nav.categories },
         { href: localizedPath(locale, "/#trust"), label: dictionary.nav.trust },
       ],
@@ -28,20 +28,20 @@ export default function Footer({
     {
       heading: dictionary.nav.helpers,
       links: [
-        { href: "/helpers", label: dictionary.hero.becomeHelper },
+        { href: localizedPath(locale, "/helpers"), label: dictionary.hero.becomeHelper },
         { href: localizedPath(locale, "/#download"), label: dictionary.nav.getApp },
-        { href: "/helpers#pricing", label: "Pricing & payouts" },
+        { href: localizedPath(locale, "/helpers#pricing"), label: dictionary.footer.pricingPayouts },
       ],
     },
     {
       heading: dictionary.footer.company,
       links: [
         { href: "/blog", label: "Blog" },
-        { href: "/contact", label: dictionary.footer.contact },
-        { href: "/support", label: "Support" },
-        { href: "/account-deletion", label: "Account deletion" },
-        { href: "/privacy", label: dictionary.footer.privacy },
-        { href: "/terms", label: "Terms" },
+        { href: localizedPath(locale, "/contact"), label: dictionary.footer.contact },
+        { href: localizedPath(locale, "/support"), label: dictionary.footer.support },
+        { href: localizedPath(locale, "/account-deletion"), label: dictionary.footer.accountDeletion },
+        { href: localizedPath(locale, "/privacy"), label: dictionary.footer.privacy },
+        { href: localizedPath(locale, "/terms"), label: dictionary.footer.terms },
       ],
     },
   ];
@@ -55,7 +55,7 @@ export default function Footer({
             {dictionary.footer.tagline}
           </p>
           <p className="mt-3 text-[12.5px] leading-[1.5] text-white/55">
-            Operating under USPROJECT LLC · EIN 83-3989558 · New York, USA
+            {dictionary.footer.companyLine}
           </p>
           <a
             href="mailto:hello@swapspot.org"

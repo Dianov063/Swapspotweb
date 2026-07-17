@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { locales, localizedPath } from "@/lib/i18n";
 import "./globals.css";
 
 const siteUrl = "https://www.swapspot.org";
+const localeAlternates = Object.fromEntries(
+  locales.map((locale) => [locale, localizedPath(locale, "/")]),
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,13 +27,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
-    languages: {
-      en: "/",
-      es: "/es",
-      zh: "/zh",
-      fr: "/fr",
-      ru: "/ru",
-    },
+    languages: localeAlternates,
   },
   openGraph: {
     type: "website",
