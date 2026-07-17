@@ -1,6 +1,6 @@
 import { BadgeCheck, Calendar, Lock, MapPin, Sparkles } from "lucide-react";
 import { SectionHead } from "./ui";
-import type { Locale } from "@/lib/i18n";
+import { dictionaries, type Locale } from "@/lib/i18n";
 
 const miniMarks = [
   { initials: "MR", tag: "$45", bg: "#E6F0E9", color: "#1B6B45", left: "28%", top: "48%", active: true },
@@ -133,7 +133,29 @@ const copy: Partial<Record<Locale, AppPreviewCopy>> & { en: AppPreviewCopy } = {
 };
 
 export default function AppPreview({ locale }: { locale: Locale }) {
-  const t = copy[locale] ?? copy.en;
+  const dictionary = dictionaries[locale];
+  const t =
+    copy[locale] ??
+    ({
+      eyebrow: dictionary.download.badge,
+      title: dictionary.download.title,
+      mapTitle: dictionary.steps[0][0],
+      mapBody: dictionary.steps[0][1],
+      chips: Object.values(dictionary.categories.names).slice(0, 3),
+      role: dictionary.helpers.title,
+      book: dictionary.hero.findHelp,
+      summary: dictionary.steps[2][0],
+      service: dictionary.categories.names.cleaning,
+      with: dictionary.download.pointA,
+      date: dictionary.waitlist.storeCaption,
+      total: dictionary.nav.pricing,
+      pay: dictionary.waitlist.join,
+      online: dictionary.download.badge,
+      messageA: dictionary.steps[1][0],
+      messageB: dictionary.steps[1][1],
+      quote: dictionary.steps[2][0],
+      approve: dictionary.hero.findHelp,
+    } satisfies AppPreviewCopy);
 
   return (
     <section className="mx-auto max-w-wrap px-6 py-[clamp(48px,6vw,86px)]">

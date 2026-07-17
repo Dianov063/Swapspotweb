@@ -1,6 +1,6 @@
 import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
-import { localizedPath, type Locale } from "@/lib/i18n";
+import { dictionaries, localizedPath, type Locale } from "@/lib/i18n";
 
 type ClientPricingCopy = {
     eyebrow: string;
@@ -161,7 +161,35 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
 export default function ClientPricing({ locale }: { locale: Locale }) {
-  const t = copy[locale] ?? copy.en;
+  const dictionary = dictionaries[locale];
+  const t =
+    copy[locale] ??
+    ({
+      eyebrow: dictionary.nav.pricing,
+      title: dictionary.waitlist.title,
+      body: dictionary.waitlist.body,
+      freeTitle: dictionary.download.pointB,
+      freeBody: dictionary.download.body,
+      unlock: dictionary.download.badge,
+      actions: [dictionary.download.pointA, dictionary.download.pointB, dictionary.waitlist.noSpam],
+      plans: [
+        {
+          name: "Day Pass",
+          price: "$5",
+          note: dictionary.waitlist.body,
+          features: [dictionary.download.pointB, dictionary.download.pointA, dictionary.waitlist.noSpam],
+          cta: dictionary.waitlist.join,
+        },
+        {
+          name: "Client Pro",
+          price: "$25",
+          note: dictionary.download.body,
+          best: dictionary.download.badge,
+          features: [dictionary.download.pointA, dictionary.download.pointB, dictionary.waitlist.noSpam],
+          cta: dictionary.waitlist.join,
+        },
+      ],
+    } satisfies ClientPricingCopy);
 
   return (
     <section id="pricing" className="border-y border-line bg-cream">

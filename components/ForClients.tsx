@@ -7,7 +7,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
-import { localizedPath, type Locale } from "@/lib/i18n";
+import { dictionaries, localizedPath, type Locale } from "@/lib/i18n";
 
 type ForClientsCopy = {
     eyebrow: string;
@@ -135,7 +135,24 @@ const copy: Partial<Record<Locale, ForClientsCopy>> & { en: ForClientsCopy } = {
 const icons = [SearchCheck, MapPinned, MessageCircle, ShieldCheck];
 
 export default function ForClients({ locale }: { locale: Locale }) {
-  const t = copy[locale] ?? copy.en;
+  const dictionary = dictionaries[locale];
+  const t =
+    copy[locale] ??
+    ({
+      eyebrow: dictionary.nav.clients,
+      title: dictionary.hero.highlight,
+      body: dictionary.download.body,
+      cta: dictionary.hero.findHelp,
+      statA: dictionary.steps[0][0],
+      statB: dictionary.steps[1][0],
+      statC: dictionary.steps[2][0],
+      cards: dictionary.steps.map(([title, text]) => [title, text]) as [string, string][],
+      panelTitle: dictionary.steps[2][0],
+      panelMeta: dictionary.download.pointA,
+      panelAction: dictionary.download.badge,
+      panelTotal: dictionary.nav.pricing,
+      panelSecure: dictionary.trust.eyebrow,
+    } satisfies ForClientsCopy);
 
   return (
     <section id="clients" className="mx-auto max-w-wrap px-6 pb-[clamp(48px,6vw,86px)]">
