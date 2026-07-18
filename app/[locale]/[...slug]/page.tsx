@@ -68,7 +68,7 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Контакты SwapSpot",
     "account-deletion": "Удаление аккаунта SwapSpot",
     "delete-account": "Удаление аккаунта SwapSpot",
-    helpers: "Стать Helper",
+    helpers: "Стать исполнителем",
     "trust-safety": "Доверие и безопасность",
   },
   ar: {

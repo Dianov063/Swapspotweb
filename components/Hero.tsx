@@ -82,7 +82,7 @@ export default function Hero({
         </div>
 
         <div className="relative order-1 flex min-h-[520px] items-center justify-center lg:order-2 lg:min-h-[560px]">
-          <PhoneMockup />
+          <PhoneMockup locale={locale} />
 
           <div className="absolute -left-1.5 top-[26px] z-10 w-[212px] animate-floaty rounded-[18px] border border-line bg-surface p-4 shadow-card max-[420px]:hidden">
             <div className="mb-[7px] flex items-center gap-1 text-gold">

@@ -132,34 +132,41 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
   },
   ru: {
     eyebrow: "Оплата для клиентов",
-    title: "Смотреть можно бесплатно. Pass нужен, когда вы готовы действовать.",
+    title: "Просмотр бесплатный. Платите, только когда готовы связаться.",
     body:
-      "Клиенты могут бесплатно смотреть категории и сравнивать helpers. Pass нужен, чтобы писать, запрашивать quote или бронировать исполнителя.",
+      "Смотрите категории и сравнивайте исполнителей бесплатно. Платный доступ нужен только для переписки, запроса стоимости и бронирования.",
     freeTitle: "Бесплатный просмотр",
-    freeBody: "До оплаты можно смотреть категории, превью helpers, районы работы и базовые сигналы доверия.",
-    unlock: "Pass открывает",
-    actions: ["Сообщения helpers", "Запрос quotes", "Бронирование задач"],
+    freeBody: "До оплаты можно смотреть категории, профили исполнителей, районы работы, отзывы и цены.",
+    unlock: "Платный доступ открывает",
+    actions: ["Переписку с исполнителями", "Запрос стоимости", "Бронирование услуг"],
     plans: [
       {
-        name: "Day Pass",
+        name: "Доступ на день",
         price: "$5/день",
-        note: "Для одной задачи, срочной помощи или теста SwapSpot.",
-        features: ["Пишите helpers в течение дня", "Запрашивайте quotes", "Бронируйте, когда готовы"],
-        cta: "Взять Day Pass",
+        note: "Для одной задачи, срочной помощи или знакомства со SwapSpot.",
+        features: ["Пишите исполнителям в течение дня", "Запрашивайте стоимость", "Бронируйте, когда готовы"],
+        cta: "Получить доступ",
       },
       {
         name: "Client Pro",
         price: "$25/месяц",
         note: "Для регулярных задач дома, семьи, аренды или бизнеса.",
-        best: "Выгоднее",
-        features: ["Доступ на месяц", "Сообщения и quotes в любое время", "Выгодно уже после 5 активных дней"],
-        cta: "Начать Pro",
+        best: "Лучшая цена",
+        features: ["Доступ на месяц", "Переписка и запросы стоимости без ограничений", "Выгодно уже после 5 активных дней"],
+        cta: "Подключить Pro",
       },
     ],
   },
 };
 
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
+
+const pricingFootnotes: Partial<Record<Locale, string>> = {
+  es: "El precio local final y los impuestos aparecen en App Store o Google Play antes de la compra.",
+  zh: "购买前，App Store 或 Google Play 会显示最终本地价格和税费。",
+  fr: "Le prix local final et les taxes sont affichés par l'App Store ou Google Play avant l'achat.",
+  ru: "Итоговую цену в вашей стране и налоги покажет App Store или Google Play перед покупкой.",
+};
 
 export default function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
   const dictionary = dictionaries[locale];
@@ -290,7 +297,8 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
           </div>
         </div>
         <p className="mt-5 text-center text-[13px] font-semibold text-ink-soft">
-          Final local price and taxes are shown by the App Store or Google Play before purchase.
+          {pricingFootnotes[locale] ??
+            "Final local price and taxes are shown by the App Store or Google Play before purchase."}
         </p>
       </div>
     </section>

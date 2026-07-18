@@ -114,21 +114,21 @@ const copy: Partial<Record<Locale, AppPreviewCopy>> & { en: AppPreviewCopy } = {
     eyebrow: "Внутри приложения",
     title: "Весь путь бронирования от начала до конца",
     mapTitle: "Карта",
-    mapBody: "12 helpers в радиусе 2 миль, в реальном времени.",
-    chips: ["Мебель", "Крепление TV", "Ремонт"],
-    role: "Handyman · 4.9 (124)",
+    mapBody: "12 исполнителей в радиусе 2 миль.",
+    chips: ["Сборка мебели", "Установка ТВ", "Мелкий ремонт"],
+    role: "Мастер на все руки · 4,9 (124)",
     book: "Бронь",
     summary: "Детали бронирования",
     service: "Глубокая уборка",
-    with: "с Maria R.",
-    date: "Сб, 27 июня · 9:00 AM",
+    with: "с Марией Р.",
+    date: "Сб, 27 июня · 9:00",
     total: "Итого",
     pay: "Подтвердить и оплатить",
     online: "Онлайн",
-    messageA: "Привет! Сможешь убрать 2-bedroom квартиру в субботу?",
-    messageB: "Да! Сейчас отправлю quote.",
-    quote: "Quote · Глубокая уборка",
-    approve: "Принять quote",
+    messageA: "Привет! Сможешь убрать двухкомнатную квартиру в субботу?",
+    messageB: "Да! Сейчас отправлю стоимость.",
+    quote: "Стоимость · Глубокая уборка",
+    approve: "Принять предложение",
   },
 };
 
@@ -225,7 +225,7 @@ export default function AppPreview({ locale }: { locale: Locale }) {
           </div>
           <div className="flex items-center justify-between border-t border-line pt-3.5">
             <div className="text-[18px] font-extrabold text-ink">
-              $50<span className="text-[12px] font-semibold text-ink-soft">/hr</span>
+              $50<span className="text-[12px] font-semibold text-ink-soft">{locale === "ru" ? "/ч" : "/hr"}</span>
             </div>
             <button type="button" className="rounded-[11px] bg-green px-[18px] py-2.5 text-[13.5px] font-extrabold text-white">
               {t.book}
