@@ -195,10 +195,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isLocale(locale) || slug.length !== 1 || !isSupportedPage(slug[0])) return {};
 
   const title = localizedTitles[locale][slug[0]];
+  const canonicalPage =
+    slug[0] === "delete-account" ? "account-deletion" : slug[0];
   return {
     title,
     description: localizedIntros[locale],
-    alternates: { canonical: localizedPath(locale, `/${slug[0]}`) },
+    alternates: { canonical: localizedPath(locale, `/${canonicalPage}`) },
   };
 }
 

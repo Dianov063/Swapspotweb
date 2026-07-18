@@ -10,7 +10,6 @@ const localizedStaticPaths = [
   "/contact",
   "/support",
   "/account-deletion",
-  "/delete-account",
   "/privacy",
   "/terms",
 ];
@@ -27,7 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/support",
     "/account-deletion",
-    "/delete-account",
     "/privacy",
     "/terms",
   ].map((path) => ({
