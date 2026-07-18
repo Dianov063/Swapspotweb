@@ -1,3 +1,5 @@
+import localeComplements from "./i18n-complements.json";
+
 export const locales = [
   "en",
   "es",
@@ -320,12 +322,34 @@ export const dictionaries: Record<Locale, DictionaryShape> = {
   }),
   te: mergeDictionary({
     metaTitle: "SwapSpot - మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి",
-    nav: { how: "ఎలా పనిచేస్తుంది", clients: "క్లయింట్ల కోసం", pricing: "ధరలు", categories: "వర్గాలు", helpers: "Helpers కోసం", trust: "భద్రత", getApp: "యాప్ పొందండి" },
-    hero: { before: "కనుగొనండి", highlight: "నమ్మదగిన స్థానిక సహాయం", after: "మీ దగ్గర", body: "క్లీనింగ్, రిపేర్, బ్యూటీ, గార్డెన్, మూవింగ్, పెట్ కేర్ మరియు మరిన్ని బుక్ చేయండి.", findHelp: "సహాయం కనుగొనండి", becomeHelper: "Helper అవ్వండి" },
+    metaDescription: "క్లీనింగ్, మరమ్మతులు, బ్యూటీ, తోటపని, మూవింగ్, పెట్ కేర్, సీనియర్ కేర్, ట్యూటరింగ్ మరియు మరిన్ని సేవల కోసం నమ్మదగిన స్థానిక హెల్పర్లను బుక్ చేయండి.",
+    nav: { how: "ఎలా పనిచేస్తుంది", clients: "క్లయింట్ల కోసం", pricing: "ధరలు", categories: "వర్గాలు", helpers: "సహాయకుల కోసం", trust: "భద్రత", getApp: "యాప్ పొందండి" },
+    hero: { badge: "ఇప్పుడు మీ పరిసరాల్లో ప్రారంభమవుతోంది", before: "కనుగొనండి", highlight: "నమ్మదగిన స్థానిక సహాయం", after: "మీ దగ్గర", body: "క్లీనింగ్, రిపేర్, బ్యూటీ, గార్డెన్, మూవింగ్, పెట్ కేర్ మరియు మరిన్ని బుక్ చేయండి.", findHelp: "సహాయం కనుగొనండి", becomeHelper: "హెల్పర్ అవ్వండి", rating: "2,300+ పొరుగువారి నుంచి · సమీపంలో 1,200 హెల్పర్లు", review: "పది నిమిషాల్లోనే దగ్గరలో ఉన్న హ్యాండీమ్యాన్‌ను బుక్ చేశాను.", reviewer: "డేవిడ్ · 1 మైలు దూరంలో", bookingConfirmed: "బుకింగ్ నిర్ధారించబడింది", bookingMeta: "లాన్ కేర్ · శని ఉదయం 9:00" },
     how: { eyebrow: "ఎలా పనిచేస్తుంది", title: "మూడు ట్యాప్‌లలో సహాయం", body: "వెతకండి, పోల్చండి, యాప్‌లో బుక్ చేయండి." },
-    download: { badge: "ఇప్పుడు అందుబాటులో", title: "iOS లేదా Android కోసం SwapSpot డౌన్‌లోడ్ చేయండి", body: "Helpers ని ఉచితంగా చూడండి. మెసేజ్ లేదా బుకింగ్‌కు pass వాడండి.", pointA: "Clients మరియు helpers కు స్వాగతం", pointB: "కాంటాక్ట్ ముందు ఉచిత browsing" },
-    waitlist: { title: "ఈరోజే SwapSpot డౌన్‌లోడ్ చేయండి", body: "Helpers ని ఉచితంగా చూడండి. మెసేజ్ లేదా బుకింగ్‌కు pass వాడండి.", join: "యాప్ డౌన్‌లోడ్", storeCaption: "iOS మరియు Android లో అందుబాటులో" },
-    footer: { product: "ప్రోడక్ట్", company: "కంపెనీ", contact: "సంప్రదించండి", privacy: "గోప్యత", support: "సహాయం", terms: "నిబంధనలు", bottom: "మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి." },
+    steps: [
+      ["సమీపంలోని హెల్పర్లను వెతకండి", "దూరం మరియు రేటింగ్ ఆధారంగా అమర్చిన నమ్మదగిన స్థానిక హెల్పర్లను లైవ్ మ్యాప్‌లో చూడండి."],
+      ["సేవలు మరియు ధరలను పోల్చండి", "బుక్ చేసే ముందు ప్రొఫైళ్లు, సేవలు మరియు స్పష్టమైన ధరలను చూడండి."],
+      ["బుక్ చేయండి, చాట్ చేయండి, సురక్షితంగా చెల్లించండి", "యాప్‌లోనే మెసేజ్ పంపండి, కోట్ పొందండి మరియు సురక్షితంగా చెల్లించండి."],
+    ],
+    helpers: { eyebrow: "హెల్పర్ల కోసం", title: "మీ నైపుణ్యాలను స్థానిక ఆదాయంగా మార్చుకోండి", body: "ఒక్కసారి ప్రొఫైల్ సెటప్ చేసి, మీ సేవలు అవసరమైన సమీపంలోని కస్టమర్ల నుంచి బుకింగ్‌లు పొందండి.", start: "హెల్పర్‌గా ప్రారంభించండి", earnings: "ఈ వారం ఆదాయం", bookings: "3 కొత్త బుకింగ్‌లు", quotes: "సమాధానం కోసం 2 కోట్లు" },
+    perks: [
+      ["మీ సేవా ప్రొఫైల్‌ను సృష్టించండి", "మీ నైపుణ్యాలు, ఫోటోలు మరియు పని ప్రాంతాన్ని నిమిషాల్లో జోడించండి."],
+      ["ధరలు మరియు అందుబాటును నిర్ణయించండి", "మీ రేట్లు, సేవా పరిధి మరియు షెడ్యూల్‌పై మీకే నియంత్రణ."],
+      ["బుకింగ్‌లు పొందండి మరియు కోట్లు పంపండి", "సమీపంలోని అభ్యర్థనలకు మీ స్వంత కోట్‌తో స్పందించండి."],
+      ["రివ్యూలు మరియు రెగ్యులర్ క్లయింట్లను పెంచుకోండి", "మొదటి పనులను మళ్లీ వచ్చే కస్టమర్లుగా మార్చే రేటింగ్‌లు పొందండి."],
+    ],
+    categories: { eyebrow: "వర్గాలు", title: "ఏ పని అయినా, దానికి ఒక హెల్పర్ ఉన్నారు", body: "ప్రతి మార్కెట్ పెరుగుతున్న కొద్దీ మరిన్ని సేవలు జోడించబడే ప్రధాన స్థానిక సేవా వర్గాలు.", nearby: "సమీపంలో", names: { cleaning: "క్లీనింగ్", handyman: "హ్యాండీమ్యాన్", plumbing: "ప్లంబింగ్", electrical: "ఎలక్ట్రికల్", "lawn-garden": "లాన్ & గార్డెన్", "nails-beauty": "నెయిల్స్ & బ్యూటీ", moving: "మూవింగ్", "pet-care": "పెట్ కేర్", "senior-care": "సీనియర్ కేర్", tutoring: "ట్యూటరింగ్" } },
+    trust: { eyebrow: "నమ్మకం & భద్రత", title: "ఇరువురికీ సురక్షితంగా అనిపించేలా రూపొందించబడింది", body: "నిజమైన రివ్యూలు, ప్రైవేట్ మెసేజింగ్ మరియు ప్రతి ఒక్కరూ తమ డేటాపై నియంత్రణలో ఉండే సాధనాలు." },
+    trustItems: [
+      ["ధృవీకరించిన రివ్యూలు", "ప్రతి పని తర్వాత నిజమైన పొరుగువారి నుంచి నిజమైన రేటింగ్‌లు."],
+      ["యాప్‌లో చాట్", "సంభాషణలు మరియు కోట్లను ఒకే చోట ఉంచండి."],
+      ["రిపోర్ట్ చేసి బ్లాక్ చేయండి", "ఏ వినియోగదారునైనా ఎప్పుడైనా రిపోర్ట్ చేయండి లేదా బ్లాక్ చేయండి."],
+      ["ఖాతా తొలగింపు", "మీకు కావాలనుకున్నప్పుడు మీ ఖాతా మరియు డేటాను తొలగించండి."],
+      ["లొకేషన్ గోప్యత", "తమ లొకేషన్ ఎలా కనిపించాలో హెల్పర్లు నియంత్రిస్తారు."],
+    ],
+    download: { badge: "ఇప్పుడు అందుబాటులో", title: "iOS లేదా Android కోసం SwapSpot డౌన్‌లోడ్ చేయండి", body: "సహాయకులను ఉచితంగా చూడండి. మెసేజ్, కోట్ లేదా బుకింగ్ కోసం పాస్ ఉపయోగించండి.", pointA: "క్లయింట్లు మరియు సహాయకులకు స్వాగతం", pointB: "సంప్రదించే ముందు ఉచితంగా చూడండి" },
+    waitlist: { title: "ఈరోజే SwapSpot డౌన్‌లోడ్ చేయండి", body: "హెల్పర్లను ఉచితంగా చూడండి. మెసేజ్, కోట్ లేదా బుకింగ్‌కు పాస్ వాడండి.", email: "ఇమెయిల్ చిరునామా", placeholder: "you@email.com", join: "యాప్ డౌన్‌లోడ్", thanks: "ధన్యవాదాలు.", storeCaption: "iOS మరియు Android లో అందుబాటులో", comingSoon: "ఇక్కడ అందుబాటులో", noSpam: "యాప్‌ను డౌన్‌లోడ్ చేసి, హెల్పర్లను చూడండి, సిద్ధమైనప్పుడు ప్రారంభించండి." },
+    footer: { tagline: "నమ్మదగిన స్థానిక సహాయం కోసం పొరుగువారి మార్కెట్‌ప్లేస్.", product: "ప్రోడక్ట్", company: "కంపెనీ", contact: "సంప్రదించండి", about: "మా గురించి", privacy: "గోప్యత", support: "సహాయం", terms: "నిబంధనలు", accountDeletion: "ఖాతా తొలగింపు", pricingPayouts: "ధరలు & చెల్లింపులు", rights: "© 2026 SwapSpot. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.", companyLine: "USPROJECT LLC ఆధ్వర్యంలో · EIN 83-3989558 · న్యూయార్క్, USA", bottom: "మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి." },
   }),
   ta: mergeDictionary({
     metaTitle: "SwapSpot - உங்கள் அருகில் நம்பகமான உள்ளூர் உதவி கண்டுபிடிக்கவும்",
@@ -337,5 +361,38 @@ export const dictionaries: Record<Locale, DictionaryShape> = {
     footer: { product: "தயாரிப்பு", company: "நிறுவனம்", contact: "தொடர்பு", privacy: "தனியுரிமை", support: "உதவி", terms: "விதிமுறைகள்", bottom: "உங்கள் அருகில் நம்பகமான உள்ளூர் உதவி கண்டுபிடிக்கவும்." },
   }),
 };
+
+function mergeLocalizedValues<T>(base: T, override: unknown): T {
+  if (override === undefined || override === null) return base;
+
+  if (Array.isArray(base) && Array.isArray(override)) {
+    return base.map((value, index) =>
+      override[index] === undefined || override[index] === null
+        ? value
+        : mergeLocalizedValues(value, override[index]),
+    ) as T;
+  }
+
+  if (
+    base &&
+    override &&
+    typeof base === "object" &&
+    typeof override === "object" &&
+    !Array.isArray(base)
+  ) {
+    const merged = { ...(base as Record<string, unknown>) };
+    for (const [key, value] of Object.entries(override as Record<string, unknown>)) {
+      merged[key] = mergeLocalizedValues(merged[key], value);
+    }
+    return merged as T;
+  }
+
+  return override as T;
+}
+
+for (const [locale, overrides] of Object.entries(localeComplements)) {
+  const localeKey = locale as Locale;
+  dictionaries[localeKey] = mergeLocalizedValues(dictionaries[localeKey], overrides);
+}
 
 export type Dictionary = DictionaryShape;

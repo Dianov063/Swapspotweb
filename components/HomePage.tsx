@@ -20,7 +20,11 @@ export default function HomePage({
   dictionary: Dictionary;
 }) {
   return (
-    <>
+    <div
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="min-w-0 overflow-x-clip [&_*]:min-w-0"
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -47,6 +51,6 @@ export default function HomePage({
         <WaitlistCTA locale={locale} dictionary={dictionary} />
       </main>
       <Footer locale={locale} dictionary={dictionary} />
-    </>
+    </div>
   );
 }

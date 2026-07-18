@@ -1,0 +1,1131 @@
+{
+  "es": {
+    "hero": {
+      "rating": "de más de 2300 vecinos · 1200 ayudantes cercanos",
+      "review": "Reservé a un personal de mantenimiento en la calle en 10 minutos.",
+      "reviewer": "David · 1 milla de distancia",
+      "bookingMeta": "Cuidado del césped · Sáb 9:00 a.m."
+    },
+    "categories": {
+      "names": {
+        "handyman": "manitas"
+      }
+    },
+    "waitlist": {
+      "email": "Dirección de correo electrónico",
+      "thanks": "Gracias, estás en la lista.",
+      "comingSoon": "Disponible en"
+    },
+    "footer": {
+      "tagline": "El mercado vecinal para obtener ayuda local confiable. Hecho para comunidades de todo Estados Unidos.",
+      "about": "Acerca de",
+      "rights": "© 2026 SwapSpot. Reservados todos los derechos.",
+      "companyLine": "Operando bajo USPROJECT LLC · EIN 83-3989558 · Nueva York, EE. UU."
+    }
+  },
+  "zh": {
+    "hero": {
+      "rating": "来自 2,300 多名邻居 · 附近 1,200 名助手",
+      "review": "10 分钟内就预订了街上的杂工。",
+      "reviewer": "大卫 · 距离 1 英里",
+      "bookingMeta": "草坪护理 · 周六 9:00 AM"
+    },
+    "helpers": {
+      "earnings": "本周收益",
+      "bookings": "3个新预订",
+      "quotes": "2 报价待回复"
+    },
+    "perks": [
+      [
+        "创建您的服务资料",
+        "在几分钟内列出您的技能、照片和工作领域。"
+      ],
+      [
+        "设置您的价格和供应情况",
+        "您可以控制您的费率、半径和时间表。"
+      ],
+      [
+        "接收预订并发送报价",
+        "获取附近的请求并回复自定义报价。"
+      ],
+      [
+        "建立评论和回头客",
+        "获得评级，将第一份工作变成常客。"
+      ]
+    ],
+    "categories": {
+      "eyebrow": "类别",
+      "body": "推出核心本地服务类别，并随着每个市场的增长而增加更多类别。"
+    },
+    "trustItems": [
+      [
+        "经过验证的评论",
+        "每次工作后来自真实邻居的真实评分。"
+      ],
+      [
+        "应用内聊天",
+        "将对话和引言保留在一处。"
+      ],
+      [
+        "举报并屏蔽",
+        "随时标记或阻止任何用户。"
+      ],
+      [
+        "帐户删除",
+        "您可以随时删除您的帐户和数据。"
+      ],
+      [
+        "位置隐私",
+        "助手控制其位置的显示方式。"
+      ]
+    ],
+    "waitlist": {
+      "email": "电子邮件地址",
+      "thanks": "谢谢，你在名单上。",
+      "comingSoon": "可用于",
+      "noSpam": "下载应用程序，浏览帮助程序，然后在准备好后开始。"
+    },
+    "footer": {
+      "tagline": "提供值得信赖的本地帮助的邻里市场。专为美国各地的社区打造。",
+      "about": "关于",
+      "pricingPayouts": "定价和付款",
+      "rights": "© 2026 SwapSpot。版权所有。",
+      "companyLine": "在 USPROJECT LLC 下运营 · EIN 83-3989558 · 美国纽约"
+    }
+  },
+  "fr": {
+    "hero": {
+      "rating": "de plus de 2 300 voisins · 1 200 assistants à proximité",
+      "review": "J'ai réservé un bricoleur dans la rue en 10 minutes.",
+      "reviewer": "David · À 1,6 km",
+      "bookingMeta": "Entretien de la pelouse · sam. 9h00"
+    },
+    "helpers": {
+      "earnings": "Gains cette semaine",
+      "bookings": "3 nouvelles réservations",
+      "quotes": "2 devis en attente de réponse"
+    },
+    "perks": [
+      [
+        "Créez votre profil de service",
+        "Répertoriez vos compétences, vos photos et votre espace de travail en quelques minutes."
+      ],
+      [
+        "Fixez vos prix et disponibilités",
+        "Vous contrôlez vos tarifs, votre rayon et vos horaires."
+      ],
+      [
+        "Recevoir des réservations et envoyer des devis",
+        "Recevez des demandes à proximité et répondez avec des devis personnalisés."
+      ],
+      [
+        "Créez des avis et fidélisez vos clients",
+        "Gagnez des notes qui transforment les premiers emplois en habitués."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Catégories",
+      "body": "Catégories de services locaux de base au lancement, et d'autres seront ajoutées à mesure que chaque marché se développe.",
+      "names": {
+        "handyman": "Bricoleur"
+      }
+    },
+    "trustItems": [
+      [
+        "Avis vérifiés",
+        "De vraies notes de vrais voisins après chaque travail."
+      ],
+      [
+        "Chat dans l'application",
+        "Conservez les conversations et les citations au même endroit."
+      ],
+      [
+        "Signaler et bloquer",
+        "Signalez ou bloquez n’importe quel utilisateur à tout moment."
+      ],
+      [
+        "Suppression de compte",
+        "Supprimez votre compte et vos données quand vous le souhaitez."
+      ],
+      [
+        "Confidentialité de la localisation",
+        "Les assistants contrôlent la manière dont leur emplacement est affiché."
+      ]
+    ],
+    "waitlist": {
+      "email": "Adresse e-mail",
+      "thanks": "Merci, vous êtes sur la liste.",
+      "comingSoon": "Disponible sur",
+      "noSpam": "Téléchargez l'application, parcourez les aides et commencez lorsque vous êtes prêt."
+    },
+    "footer": {
+      "tagline": "Le marché de quartier pour une aide locale de confiance. Conçu pour les communautés à travers les États-Unis.",
+      "about": "À propos",
+      "contact": "Contacter",
+      "support": "Assistance",
+      "pricingPayouts": "Tarifs et paiements",
+      "rights": "© 2026 SwapSpot. Tous droits réservés.",
+      "companyLine": "Opérant sous USPROJECT LLC · EIN 83-3989558 · New York, États-Unis"
+    }
+  },
+  "ru": {
+    "hero": {
+      "rating": "от 2300+ соседей · 1200 помощников рядом",
+      "review": "Вызвали мастера на улице за 10 минут.",
+      "reviewer": "Дэвид · В 1,6 км",
+      "bookingMeta": "Уход за газоном · Сб 9:00"
+    },
+    "perks": [
+      [
+        "Создайте свой профиль услуги",
+        "Перечислите свои навыки, фотографии и рабочую область за считанные минуты."
+      ],
+      [
+        "Установите свои цены и наличие",
+        "Вы сами контролируете свои тарифы, радиус и расписание."
+      ],
+      [
+        "Получайте заказы и отправляйте предложения",
+        "Получайте запросы поблизости и отвечайте персонализированными предложениями."
+      ],
+      [
+        "Создавайте отзывы и получайте постоянных клиентов",
+        "Зарабатывайте рейтинги, которые превращают первые вакансии в постоянные."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Категории",
+      "body": "Основные категории местных услуг при запуске, и по мере роста каждого рынка добавляются новые.",
+      "names": {
+        "handyman": "Разнорабочий"
+      }
+    },
+    "trustItems": [
+      [
+        "Проверенные отзывы",
+        "Реальные оценки от реальных соседей после каждой работы."
+      ],
+      [
+        "Чат в приложении",
+        "Храните разговоры и цитаты в одном месте."
+      ],
+      [
+        "Пожаловаться и заблокировать",
+        "Отметьте или заблокируйте любого пользователя в любое время."
+      ],
+      [
+        "Удаление аккаунта",
+        "Удалите свою учетную запись и данные, когда захотите."
+      ],
+      [
+        "Конфиденциальность местоположения",
+        "Помощники контролируют, как отображается их местоположение."
+      ]
+    ],
+    "waitlist": {
+      "email": "Адрес электронной почты",
+      "thanks": "Спасибо, вы в списке.",
+      "comingSoon": "Доступно на",
+      "noSpam": "Загрузите приложение, просмотрите помощников и начните, когда будете готовы."
+    },
+    "footer": {
+      "tagline": "Районный рынок для проверенной местной помощи. Сделано для сообществ по всей территории США.",
+      "about": "О",
+      "rights": "© 2026 СвапСпот. Все права защищены.",
+      "companyLine": "Работает под именем USPROJECT LLC · EIN 83-3989558 · Нью-Йорк, США"
+    }
+  },
+  "ar": {
+    "metaDescription": "احجز مساعدين محليين موثوقين للتنظيف والإصلاحات والتجميل والعناية بالعشب والنقل ورعاية الحيوانات الأليفة ورعاية كبار السن والدروس الخصوصية والمزيد.",
+    "hero": {
+      "badge": "الآن إطلاق في منطقتك",
+      "rating": "من أكثر من 2300 جار · 1200 مساعد قريب",
+      "review": "حجزت عاملاً بارعًا في الشارع خلال 10 دقائق.",
+      "reviewer": "ديفيد · على بعد ميل واحد",
+      "bookingConfirmed": "تم تأكيد الحجز",
+      "bookingMeta": "العناية بالعشب · السبت 9:00 صباحًا"
+    },
+    "steps": [
+      [
+        "ابحث عن المساعدين القريبين",
+        "شاهد المساعدين المحليين الموثوق بهم على خريطة حية، مرتبة حسب المسافة والتقييم."
+      ],
+      [
+        "قارن الخدمات والأسعار",
+        "تصفح الملفات الشخصية والخدمات والأسعار الشفافة قبل الالتزام."
+      ],
+      [
+        "احجز ودردش وادفع بأمان",
+        "أرسل رسالة واحصل على عرض أسعار وادفع بشكل آمن داخل التطبيق."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "للمساعدين",
+      "title": "حول مهاراتك إلى دخل محلي",
+      "body": "قم بالإعداد مرة واحدة وابدأ في الحجز من قبل الجيران الذين يحتاجون بالفعل إلى ما تفعله بالضبط.",
+      "start": "ابدأ كمساعد",
+      "earnings": "الأرباح هذا الأسبوع",
+      "bookings": "3 حجوزات جديدة",
+      "quotes": "2 اقتباسات في انتظار الرد"
+    },
+    "perks": [
+      [
+        "قم بإنشاء ملف تعريف الخدمة الخاص بك",
+        "قم بإدراج مهاراتك وصورك ومنطقة العمل في دقائق."
+      ],
+      [
+        "تحديد الأسعار الخاصة بك والتوافر",
+        "يمكنك التحكم في الأسعار، ونصف القطر، والجدول الزمني."
+      ],
+      [
+        "تلقي الحجوزات وإرسال عروض الأسعار",
+        "احصل على الطلبات القريبة وقم بالرد عليها باستخدام علامات الاقتباس المخصصة."
+      ],
+      [
+        "بناء المراجعات وتكرار العملاء",
+        "احصل على تقييمات تحول الوظائف الأولى إلى وظائف عادية."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "الفئات",
+      "title": "مهما كانت الوظيفة، هناك مساعد",
+      "body": "فئات الخدمة المحلية الأساسية عند الإطلاق، مع إضافة المزيد مع نمو كل سوق.",
+      "nearby": "قريب",
+      "names": {
+        "cleaning": "التنظيف",
+        "handyman": "بارع",
+        "plumbing": "السباكة",
+        "electrical": "الكهربائية",
+        "lawn-garden": "الحديقة والحديقة",
+        "nails-beauty": "الأظافر والجمال",
+        "moving": "تتحرك",
+        "pet-care": "رعاية الحيوانات الأليفة",
+        "senior-care": "رعاية كبار السن",
+        "tutoring": "التدريس"
+      }
+    },
+    "trust": {
+      "eyebrow": "الثقة والسلامة",
+      "title": "مصممة لتشعر بالأمان على كلا الجانبين",
+      "body": "مراجعات حقيقية ورسائل خاصة وعناصر تحكم تجعل الجيران مسؤولين عن بياناتهم الخاصة."
+    },
+    "trustItems": [
+      [
+        "مراجعات تم التحقق منها",
+        "تقييمات حقيقية من الجيران الحقيقيين بعد كل وظيفة."
+      ],
+      [
+        "الدردشة داخل التطبيق",
+        "احتفظ بالمحادثات والاقتباسات في مكان واحد."
+      ],
+      [
+        "الإبلاغ والحظر",
+        "قم بالإبلاغ عن أي مستخدم أو حظره في أي وقت."
+      ],
+      [
+        "حذف الحساب",
+        "احذف حسابك وبياناتك وقتما تشاء."
+      ],
+      [
+        "خصوصية الموقع",
+        "يتحكم المساعدون في كيفية إظهار موقعهم."
+      ]
+    ],
+    "waitlist": {
+      "email": "عنوان البريد الإلكتروني",
+      "thanks": "شكرا، أنت على القائمة.",
+      "comingSoon": "متاح على",
+      "noSpam": "قم بتنزيل التطبيق، وتصفح المساعدين، وابدأ عندما تكون جاهزًا."
+    },
+    "footer": {
+      "tagline": "سوق الحي للحصول على مساعدة محلية موثوقة. صُنع للمجتمعات في جميع أنحاء الولايات المتحدة.",
+      "about": "حول",
+      "accountDeletion": "حذف الحساب",
+      "pricingPayouts": "التسعير والدفعات",
+      "rights": "© 2026 سواب سبوت. جميع الحقوق محفوظة.",
+      "companyLine": "تعمل تحت USPROJECT LLC · رقم EIN 83-3989558 · نيويورك، الولايات المتحدة الأمريكية"
+    }
+  },
+  "pt": {
+    "metaDescription": "Reserve ajudantes locais de confiança para limpeza, reparos, beleza, cuidados com o gramado, mudanças, cuidados com animais de estimação, cuidados com idosos, aulas particulares e muito mais.",
+    "hero": {
+      "badge": "Agora lançando no seu bairro",
+      "rating": "de mais de 2.300 vizinhos · 1.200 ajudantes próximos",
+      "review": "Reservei um faz-tudo na rua em 10 minutos.",
+      "reviewer": "Davi · a 1,6 km de distância",
+      "bookingConfirmed": "Reserva confirmada",
+      "bookingMeta": "Cuidados com o gramado · Sábado, 9h"
+    },
+    "steps": [
+      [
+        "Pesquise ajudantes próximos",
+        "Veja ajudantes locais confiáveis em um mapa ao vivo, classificados por distância e classificação."
+      ],
+      [
+        "Compare serviços e preços",
+        "Procure perfis, serviços e preços transparentes antes de se comprometer."
+      ],
+      [
+        "Reserve, converse e pague com segurança",
+        "Envie mensagens, faça um orçamento e pague com segurança dentro do aplicativo."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "Para ajudantes",
+      "title": "Transforme suas habilidades em renda local",
+      "body": "Configure uma vez e comece a receber reservas de vizinhos que já precisam exatamente do que você faz.",
+      "start": "Comece como ajudante",
+      "earnings": "Ganhos esta semana",
+      "bookings": "3 novas reservas",
+      "quotes": "2 citações aguardando resposta"
+    },
+    "perks": [
+      [
+        "Crie seu perfil de serviço",
+        "Liste suas habilidades, fotos e área de trabalho em minutos."
+      ],
+      [
+        "Defina seus preços e disponibilidade",
+        "Você controla suas taxas, raio e programação."
+      ],
+      [
+        "Receba reservas e envie orçamentos",
+        "Receba solicitações próximas e responda com orçamentos personalizados."
+      ],
+      [
+        "Crie avaliações e repita clientes",
+        "Ganhe classificações que transformam os primeiros empregos em regulares."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Categorias",
+      "title": "Seja qual for o trabalho, há um ajudante",
+      "body": "Principais categorias de serviços locais no lançamento, com mais acréscimos à medida que cada mercado cresce.",
+      "nearby": "nas proximidades",
+      "names": {
+        "cleaning": "Limpeza",
+        "handyman": "Faz-tudo",
+        "plumbing": "Encanamento",
+        "electrical": "Elétrica",
+        "lawn-garden": "Gramado e jardim",
+        "nails-beauty": "Unhas e beleza",
+        "moving": "Movendo-se",
+        "pet-care": "Cuidados com animais de estimação",
+        "senior-care": "Cuidados Idosos",
+        "tutoring": "Tutoria"
+      }
+    },
+    "trust": {
+      "eyebrow": "Confiança e Segurança",
+      "title": "Construído para se sentir seguro em ambos os lados",
+      "body": "Avaliações reais, mensagens privadas e controles que mantêm os vizinhos no controle de seus próprios dados."
+    },
+    "trustItems": [
+      [
+        "Avaliações verificadas",
+        "Avaliações reais de vizinhos reais após cada trabalho."
+      ],
+      [
+        "Bate-papo no aplicativo",
+        "Mantenha conversas e citações em um só lugar."
+      ],
+      [
+        "Denunciar e bloquear",
+        "Sinalize ou bloqueie qualquer usuário a qualquer momento."
+      ],
+      [
+        "Exclusão de conta",
+        "Exclua sua conta e dados sempre que desejar."
+      ],
+      [
+        "Privacidade de localização",
+        "Os ajudantes controlam como sua localização é mostrada."
+      ]
+    ],
+    "waitlist": {
+      "email": "Endereço de e-mail",
+      "thanks": "Obrigado, você está na lista.",
+      "comingSoon": "Disponível em",
+      "noSpam": "Baixe o aplicativo, procure ajudantes e comece quando estiver pronto."
+    },
+    "footer": {
+      "tagline": "O mercado de bairro para ajuda local confiável. Feito para comunidades nos EUA.",
+      "about": "Sobre",
+      "accountDeletion": "Exclusão de conta",
+      "pricingPayouts": "Preços e pagamentos",
+      "rights": "© 2026 SwapSpot. Todos os direitos reservados.",
+      "companyLine": "Operando sob USPROJECT LLC · EIN 83-3989558 · Nova York, EUA"
+    }
+  },
+  "ht": {
+    "metaDescription": "Liv asistan lokal ou fè konfyans pou netwaye, reparasyon, bote, swen gazon, demenaje, swen bèt kay, swen granmoun aje, leson patikilye, ak plis ankò.",
+    "hero": {
+      "badge": "Kounye a lanse nan katye w la",
+      "rating": "soti nan 2,300+ vwazen · 1,200 èd ki tou pre",
+      "review": "Li te rezerve yon handyman nan lari a nan 10 minit.",
+      "reviewer": "David · 1 mi lwen",
+      "bookingConfirmed": "Anrjistreman konfime",
+      "bookingMeta": "Swen gazon · Sam 9:00 AM"
+    },
+    "steps": [
+      [
+        "Chèche èd ki tou pre",
+        "Gade asistan lokal ou fè konfyans yo sou yon kat jeyografik, klase pa distans ak evalyasyon."
+      ],
+      [
+        "Konpare sèvis ak pri",
+        "Browse pwofil, sèvis, ak pri transparan anvan ou komèt."
+      ],
+      [
+        "Liv, chat epi peye san danje",
+        "Mesaj, jwenn yon quote, epi peye an sekirite andedan app a."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "Pou Èd",
+      "title": "Vire konpetans ou nan revni lokal yo",
+      "body": "Mete kanpe yon fwa epi kòmanse jwenn rezerve pa vwazen ki deja bezwen egzakteman sa ou fè.",
+      "start": "Kòmanse kòm yon Èd",
+      "earnings": "Salè semèn sa a",
+      "bookings": "3 nouvo rezèrvasyon",
+      "quotes": "2 quotes ap tann repons"
+    },
+    "perks": [
+      [
+        "Kreye pwofil sèvis ou",
+        "Lis konpetans ou, foto, ak zòn travay ou nan minit."
+      ],
+      [
+        "Mete pri ou ak disponiblite",
+        "Ou kontwole tarif ou, reyon, ak orè."
+      ],
+      [
+        "Resevwa rezèrvasyon epi voye quotes",
+        "Jwenn demann ki tou pre epi reponn ak sitasyon koutim."
+      ],
+      [
+        "Bati revizyon ak kliyan repete",
+        "Touche evalyasyon ki fè premye djòb yo vin regilye."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Kategori",
+      "title": "Kèlkeswa travay la, gen yon asistan",
+      "body": "Kategori sèvis lokal debaz yo nan lansman, ak plis ajoute pandan chak mache ap grandi.",
+      "nearby": "tou pre",
+      "names": {
+        "cleaning": "Netwayaj",
+        "handyman": "Moun pou ti reparasyon",
+        "plumbing": "Plonbri",
+        "electrical": "Elektrik",
+        "lawn-garden": "Gazon & Jaden",
+        "nails-beauty": "Klou & Bote",
+        "moving": "K ap deplase",
+        "pet-care": "Swen bèt kay",
+        "senior-care": "Swen granmoun aje",
+        "tutoring": "Leson patikilye"
+      }
+    },
+    "trust": {
+      "eyebrow": "Trust & Sekirite",
+      "title": "Bati pou santi w an sekirite sou tou de bò",
+      "body": "Revizyon reyèl, mesaj prive, ak kontwòl ki kenbe vwazen an chaj nan pwòp done yo."
+    },
+    "trustItems": [
+      [
+        "Revi verifye",
+        "Evalyasyon reyèl soti nan vwazen reyèl apre chak travay."
+      ],
+      [
+        "Chat nan aplikasyon an",
+        "Kenbe konvèsasyon ak quotes nan yon sèl kote."
+      ],
+      [
+        "Rapòte ak bloke",
+        "Flag oswa bloke nenpòt itilizatè nenpòt lè."
+      ],
+      [
+        "Efase kont",
+        "Efase kont ou ak done ou chak fwa ou chwazi."
+      ],
+      [
+        "Kote konfidansyalite",
+        "Èd yo kontwole fason yo montre kote yo."
+      ]
+    ],
+    "waitlist": {
+      "email": "Adrès imel",
+      "thanks": "Mèsi, ou sou lis la.",
+      "comingSoon": "Disponib sou",
+      "noSpam": "Telechaje aplikasyon an, browse moun k ap ede yo, epi kòmanse lè w pare."
+    },
+    "footer": {
+      "tagline": "Mache katye a pou èd lokal ou fè konfyans. Te fè pou kominote atravè peyi Etazini.",
+      "about": "Konsènan",
+      "accountDeletion": "Efase kont",
+      "pricingPayouts": "Pri ak peman",
+      "rights": "© 2026 SwapSpot. Tout dwa rezève.",
+      "companyLine": "Opere anba USPROJECT LLC · EIN 83-3989558 · New York, USA"
+    }
+  },
+  "de": {
+    "metaDescription": "Buchen Sie vertrauenswürdige lokale Helfer für Reinigung, Reparaturen, Schönheitspflege, Rasenpflege, Umzug, Haustierpflege, Seniorenbetreuung, Nachhilfe und mehr.",
+    "hero": {
+      "badge": "Jetzt in Ihrer Nähe erhältlich",
+      "rating": "von über 2.300 Nachbarn · 1.200 Helfer in der Nähe",
+      "review": "Ich habe in 10 Minuten einen Handwerker auf der anderen Straßenseite gebucht.",
+      "reviewer": "David · 1,6 km entfernt",
+      "bookingConfirmed": "Buchung bestätigt",
+      "bookingMeta": "Rasenpflege · Sa 9:00 Uhr"
+    },
+    "steps": [
+      [
+        "Suchen Sie nach Helfern in der Nähe",
+        "Sehen Sie vertrauenswürdige Helfer vor Ort auf einer Live-Karte, sortiert nach Entfernung und Bewertung."
+      ],
+      [
+        "Vergleichen Sie Leistungen und Preise",
+        "Durchsuchen Sie Profile, Dienste und transparente Preise, bevor Sie sich verpflichten."
+      ],
+      [
+        "Sicher buchen, chatten und bezahlen",
+        "Senden Sie eine Nachricht, holen Sie sich ein Angebot und zahlen Sie sicher in der App."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "Für Helfer",
+      "title": "Verwandeln Sie Ihre Fähigkeiten in lokales Einkommen",
+      "body": "Richten Sie es einmal ein und beginnen Sie, von Nachbarn gebucht zu werden, die bereits genau das benötigen, was Sie tun.",
+      "start": "Beginnen Sie als Helfer",
+      "earnings": "Ergebnis dieser Woche",
+      "bookings": "3 neue Buchungen",
+      "quotes": "2 Zitate warten auf Antwort"
+    },
+    "perks": [
+      [
+        "Erstellen Sie Ihr Serviceprofil",
+        "Listen Sie Ihre Fähigkeiten, Fotos und Ihren Arbeitsbereich in wenigen Minuten auf."
+      ],
+      [
+        "Legen Sie Ihre Preise und Verfügbarkeit fest",
+        "Sie kontrollieren Ihre Tarife, Ihren Radius und Ihren Zeitplan."
+      ],
+      [
+        "Erhalten Sie Buchungen und senden Sie Angebote",
+        "Erhalten Sie Anfragen in der Nähe und antworten Sie mit individuellen Angeboten."
+      ],
+      [
+        "Erstellen Sie Bewertungen und Stammkunden",
+        "Verdienen Sie Bewertungen, die aus Erstjobs Stammjobs machen."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Kategorien",
+      "title": "Was auch immer die Aufgabe ist, es gibt einen Helfer",
+      "body": "Lokale Kerndienstkategorien bei der Einführung, weitere werden mit dem Wachstum jedes Marktes hinzugefügt.",
+      "nearby": "in der Nähe",
+      "names": {
+        "cleaning": "Reinigung",
+        "handyman": "Handwerker",
+        "plumbing": "Sanitär",
+        "electrical": "Elektrisch",
+        "lawn-garden": "Rasen & Garten",
+        "nails-beauty": "Nägel & Schönheit",
+        "moving": "Umzug",
+        "pet-care": "Haustierpflege",
+        "senior-care": "Seniorenbetreuung",
+        "tutoring": "Nachhilfe"
+      }
+    },
+    "trust": {
+      "eyebrow": "Vertrauen und Sicherheit",
+      "title": "Gebaut, um sich auf beiden Seiten sicher zu fühlen",
+      "body": "Echte Bewertungen, private Nachrichten und Kontrollen, die den Nachbarn die Kontrolle über ihre eigenen Daten geben."
+    },
+    "trustItems": [
+      [
+        "Verifizierte Bewertungen",
+        "Echte Bewertungen von echten Nachbarn nach jedem Auftrag."
+      ],
+      [
+        "In-App-Chat",
+        "Halten Sie Gespräche und Zitate an einem Ort."
+      ],
+      [
+        "Melden und blockieren",
+        "Markieren oder blockieren Sie jeden Benutzer jederzeit."
+      ],
+      [
+        "Kontolöschung",
+        "Löschen Sie Ihr Konto und Ihre Daten, wann immer Sie möchten."
+      ],
+      [
+        "Privatsphäre am Standort",
+        "Helfer steuern, wie ihr Standort angezeigt wird."
+      ]
+    ],
+    "waitlist": {
+      "email": "E-Mail-Adresse",
+      "thanks": "Danke, Sie sind auf der Liste.",
+      "comingSoon": "Verfügbar am",
+      "noSpam": "Laden Sie die App herunter, durchsuchen Sie die Hilfsprogramme und beginnen Sie, wenn Sie bereit sind."
+    },
+    "footer": {
+      "tagline": "Der Nachbarschaftsmarktplatz für vertrauenswürdige Hilfe vor Ort. Hergestellt für Gemeinden in den gesamten USA.",
+      "about": "Über",
+      "support": "Unterstützung",
+      "accountDeletion": "Kontolöschung",
+      "pricingPayouts": "Preise und Auszahlungen",
+      "rights": "© 2026 SwapSpot. Alle Rechte vorbehalten.",
+      "companyLine": "Betrieb unter USPROJECT LLC · EIN 83-3989558 · New York, USA"
+    }
+  },
+  "fil": {
+    "metaDescription": "Mag-book ng mga pinagkakatiwalaang lokal na katulong para sa paglilinis, pagkukumpuni, pagpapaganda, pag-aalaga ng damuhan, paglipat, pag-aalaga ng alagang hayop, pangangalaga sa nakatatanda, pagtuturo, at higit pa.",
+    "nav": {
+      "trust": "Tiwala at Kaligtasan"
+    },
+    "hero": {
+      "badge": "Ilulunsad na ngayon sa iyong kapitbahayan",
+      "rating": "mula sa 2,300+ kapitbahay · 1,200 katulong sa malapit",
+      "review": "Nag-book ng isang handyman sa kalye sa loob ng 10 minuto.",
+      "reviewer": "David · 1 milya ang layo",
+      "bookingConfirmed": "Nakumpirma ang booking",
+      "bookingMeta": "Pangangalaga sa damuhan · Sab 9:00 AM"
+    },
+    "steps": [
+      [
+        "Maghanap ng mga kalapit na katulong",
+        "Tingnan ang mga pinagkakatiwalaang lokal na katulong sa isang live na mapa, pinagsunod-sunod ayon sa distansya at rating."
+      ],
+      [
+        "Paghambingin ang mga serbisyo at presyo",
+        "Mag-browse ng mga profile, serbisyo, at transparent na pagpepresyo bago ka mag-commit."
+      ],
+      [
+        "Mag-book, makipag-chat at magbayad nang ligtas",
+        "Magmensahe, kumuha ng quote, at magbayad nang secure sa loob ng app."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "Para sa mga Katulong",
+      "title": "Gawing lokal na kita ang iyong mga kakayahan",
+      "body": "Mag-set up nang isang beses at magsimulang ma-book ng mga kapitbahay na nangangailangan na ng eksaktong ginagawa mo.",
+      "start": "Magsimula bilang isang Katulong",
+      "earnings": "Mga kita ngayong linggo",
+      "bookings": "3 bagong booking",
+      "quotes": "2 quotes na naghihintay ng sagot"
+    },
+    "perks": [
+      [
+        "Lumikha ng iyong profile ng serbisyo",
+        "Ilista ang iyong mga kasanayan, larawan, at lugar ng trabaho sa ilang minuto."
+      ],
+      [
+        "Itakda ang iyong mga presyo at availability",
+        "Kinokontrol mo ang iyong mga rate, radius, at iskedyul."
+      ],
+      [
+        "Tumanggap ng mga booking at magpadala ng mga quote",
+        "Kumuha ng mga malapit na kahilingan at tumugon gamit ang mga custom na quote."
+      ],
+      [
+        "Bumuo ng mga review at ulitin ang mga kliyente",
+        "Makakuha ng mga rating na ginagawang regular ang mga unang trabaho."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "Mga kategorya",
+      "title": "Kahit anong trabaho, may katulong",
+      "body": "Mga pangunahing kategorya ng lokal na serbisyo sa paglulunsad, na may higit pang idinagdag habang lumalaki ang bawat merkado.",
+      "nearby": "malapit",
+      "names": {
+        "cleaning": "Paglilinis",
+        "handyman": "Tagapag-ayos",
+        "plumbing": "Pagtutubero",
+        "electrical": "Elektrikal",
+        "lawn-garden": "Lawn at Hardin",
+        "nails-beauty": "Kuko at Kagandahan",
+        "moving": "Gumagalaw",
+        "pet-care": "Pangangalaga sa Alagang Hayop",
+        "senior-care": "Pangangalaga sa Senior",
+        "tutoring": "Nagtuturo"
+      }
+    },
+    "trust": {
+      "eyebrow": "Tiwala at Kaligtasan",
+      "title": "Binuo upang maging ligtas sa magkabilang panig",
+      "body": "Mga totoong review, pribadong pagmemensahe, at mga kontrol na nagpapanatili sa mga kapitbahay na namamahala sa kanilang sariling data."
+    },
+    "trustItems": [
+      [
+        "Mga na-verify na review",
+        "Mga totoong rating mula sa mga tunay na kapitbahay pagkatapos ng bawat trabaho."
+      ],
+      [
+        "In-app na chat",
+        "Panatilihin ang mga pag-uusap at quote sa isang lugar."
+      ],
+      [
+        "Iulat at i-block",
+        "I-flag o i-block ang sinumang user anumang oras."
+      ],
+      [
+        "Pagtanggal ng account",
+        "Tanggalin ang iyong account at data sa tuwing pipiliin mo."
+      ],
+      [
+        "Pagkapribado ng lokasyon",
+        "Kinokontrol ng mga katulong kung paano ipinapakita ang kanilang lokasyon."
+      ]
+    ],
+    "waitlist": {
+      "email": "Address ng email",
+      "thanks": "Salamat, ikaw ay nasa listahan.",
+      "comingSoon": "Available sa",
+      "noSpam": "I-download ang app, mag-browse ng mga katulong, at magsimula kapag handa ka na."
+    },
+    "footer": {
+      "tagline": "Ang marketplace ng kapitbahayan para sa pinagkakatiwalaang lokal na tulong. Ginawa para sa mga komunidad sa buong US.",
+      "about": "Tungkol sa",
+      "privacy": "Pagkapribado",
+      "accountDeletion": "Pagtanggal ng account",
+      "pricingPayouts": "Pagpepresyo at mga payout",
+      "rights": "© 2026 SwapSpot. Lahat ng karapatan ay nakalaan.",
+      "companyLine": "Pinapatakbo sa ilalim ng USPROJECT LLC · EIN 83-3989558 · New York, USA"
+    }
+  },
+  "hi": {
+    "metaDescription": "सफाई, मरम्मत, सौंदर्य, लॉन की देखभाल, स्थानांतरण, पालतू जानवरों की देखभाल, वरिष्ठ देखभाल, ट्यूशन आदि के लिए विश्वसनीय स्थानीय सहायकों को बुक करें।",
+    "hero": {
+      "badge": "अब आपके पड़ोस में लॉन्च हो रहा है",
+      "rating": "2,300+ पड़ोसियों से · आस-पास के 1,200 मददगार",
+      "review": "10 मिनट में सड़क पर एक नौकर बुक किया।",
+      "reviewer": "डेविड · 1 मील दूर",
+      "bookingConfirmed": "बुकिंग पक्की",
+      "bookingMeta": "लॉन की देखभाल · शनिवार सुबह 9:00 बजे"
+    },
+    "steps": [
+      [
+        "आस-पास के सहायकों को खोजें",
+        "दूरी और रेटिंग के आधार पर क्रमबद्ध, लाइव मानचित्र पर विश्वसनीय स्थानीय सहायक देखें।"
+      ],
+      [
+        "सेवाओं और कीमतों की तुलना करें",
+        "प्रतिबद्ध होने से पहले प्रोफ़ाइल, सेवाएँ और पारदर्शी मूल्य निर्धारण ब्राउज़ करें।"
+      ],
+      [
+        "बुक करें, चैट करें और सुरक्षित रूप से भुगतान करें",
+        "संदेश भेजें, कोटेशन प्राप्त करें और ऐप के अंदर सुरक्षित रूप से भुगतान करें।"
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "मददगारों के लिए",
+      "title": "अपने कौशल को स्थानीय आय में बदलें",
+      "body": "एक बार सेट अप करें और उन पड़ोसियों द्वारा बुक करना शुरू करें जिन्हें पहले से ही आपकी ज़रूरत है।",
+      "start": "एक सहायक के रूप में शुरुआत करें",
+      "earnings": "इस हफ्ते की कमाई",
+      "bookings": "3 नई बुकिंग",
+      "quotes": "उत्तर की प्रतीक्षा में 2 उद्धरण"
+    },
+    "perks": [
+      [
+        "अपनी सेवा प्रोफ़ाइल बनाएं",
+        "मिनटों में अपने कौशल, फ़ोटो और कार्य क्षेत्र की सूची बनाएं।"
+      ],
+      [
+        "अपनी कीमतें और उपलब्धता निर्धारित करें",
+        "आप अपनी दरों, दायरे और शेड्यूल को नियंत्रित करते हैं।"
+      ],
+      [
+        "बुकिंग प्राप्त करें और कोटेशन भेजें",
+        "आस-पास के अनुरोध प्राप्त करें और कस्टम उद्धरण के साथ उत्तर दें।"
+      ],
+      [
+        "समीक्षाएँ बनाएँ और ग्राहकों को दोहराएँ",
+        "ऐसी रेटिंग अर्जित करें जो पहली नौकरियों को नियमित नौकरियों में बदल दे।"
+      ]
+    ],
+    "categories": {
+      "eyebrow": "श्रेणियाँ",
+      "title": "काम कोई भी हो, एक मददगार तो होता ही है",
+      "body": "लॉन्च के समय मुख्य स्थानीय सेवा श्रेणियां, जैसे-जैसे प्रत्येक बाज़ार बढ़ता है, और अधिक श्रेणियां जोड़ी जाती हैं।",
+      "nearby": "पास में",
+      "names": {
+        "cleaning": "सफ़ाई",
+        "handyman": "नौकर",
+        "plumbing": "नलसाजी",
+        "electrical": "विद्युत",
+        "lawn-garden": "लॉन और बगीचा",
+        "nails-beauty": "नाखून और सौंदर्य",
+        "moving": "चल रहा है",
+        "pet-care": "पालतू जानवरों की देखभाल",
+        "senior-care": "वरिष्ठ देखभाल",
+        "tutoring": "ट्यूशन"
+      }
+    },
+    "trust": {
+      "eyebrow": "भरोसा और सुरक्षा",
+      "title": "दोनों तरफ सुरक्षित महसूस करने के लिए बनाया गया",
+      "body": "वास्तविक समीक्षाएँ, निजी संदेश सेवा और नियंत्रण जो पड़ोसियों को अपने डेटा का प्रभारी रखते हैं।"
+    },
+    "trustItems": [
+      [
+        "सत्यापित समीक्षाएँ",
+        "प्रत्येक कार्य के बाद वास्तविक पड़ोसियों से वास्तविक रेटिंग।"
+      ],
+      [
+        "इन-ऐप चैट",
+        "बातचीत और उद्धरण एक ही स्थान पर रखें."
+      ],
+      [
+        "रिपोर्ट करें और ब्लॉक करें",
+        "किसी भी उपयोगकर्ता को कभी भी फ़्लैग या ब्लॉक करें।"
+      ],
+      [
+        "खाता हटाना",
+        "जब भी आप चाहें अपना खाता और डेटा हटा दें।"
+      ],
+      [
+        "स्थान गोपनीयता",
+        "सहायक यह नियंत्रित करते हैं कि उनका स्थान कैसे दिखाया जाए।"
+      ]
+    ],
+    "waitlist": {
+      "email": "ईमेल पता",
+      "thanks": "धन्यवाद, आप सूची में हैं।",
+      "comingSoon": "पर उपलब्ध है",
+      "noSpam": "ऐप डाउनलोड करें, सहायक ब्राउज़ करें और जब आप तैयार हों तो शुरू करें।"
+    },
+    "footer": {
+      "tagline": "विश्वसनीय स्थानीय सहायता के लिए पड़ोस का बाज़ार। अमेरिका भर के समुदायों के लिए बनाया गया।",
+      "about": "के बारे में",
+      "accountDeletion": "खाता हटाना",
+      "pricingPayouts": "मूल्य निर्धारण और भुगतान",
+      "rights": "© 2026 स्वैपस्पॉट। सर्वाधिकार सुरक्षित।",
+      "companyLine": "यूएसप्रोजेक्ट एलएलसी के तहत परिचालन · ईआईएन 83-3989558 · न्यूयॉर्क, यूएसए"
+    }
+  },
+  "bn": {
+    "metaDescription": "পরিষ্কার, মেরামত, সৌন্দর্য, লনের যত্ন, চলাফেরা, পোষা প্রাণীর যত্ন, সিনিয়র যত্ন, টিউটরিং এবং আরও অনেক কিছুর জন্য বিশ্বস্ত স্থানীয় সাহায্যকারীদের বুক করুন।",
+    "hero": {
+      "badge": "এখন আপনার আশেপাশে চালু হচ্ছে",
+      "rating": "2,300+ প্রতিবেশীর কাছ থেকে · কাছাকাছি 1,200 জন সাহায্যকারী",
+      "review": "10 মিনিটের মধ্যে রাস্তায় একজন হ্যান্ডম্যান বুক করেছেন।",
+      "reviewer": "ডেভিড · ১ মাইল দূরে",
+      "bookingConfirmed": "বুকিং নিশ্চিত করা হয়েছে",
+      "bookingMeta": "লনের যত্ন · শনি 9:00 AM"
+    },
+    "steps": [
+      [
+        "কাছাকাছি সাহায্যকারী খুঁজুন",
+        "একটি লাইভ মানচিত্রে বিশ্বস্ত স্থানীয় সাহায্যকারীদের দেখুন, দূরত্ব এবং রেটিং অনুসারে সাজানো।"
+      ],
+      [
+        "পরিষেবা এবং দামের তুলনা করুন",
+        "প্রতিশ্রুতি দেওয়ার আগে প্রোফাইল, পরিষেবা এবং স্বচ্ছ মূল্য ব্রাউজ করুন।"
+      ],
+      [
+        "বুক করুন, চ্যাট করুন এবং নিরাপদে অর্থ প্রদান করুন",
+        "বার্তা পাঠান, একটি উদ্ধৃতি পান এবং অ্যাপের মধ্যে নিরাপদে অর্থ প্রদান করুন।"
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "সাহায্যকারীদের জন্য",
+      "title": "আপনার দক্ষতাকে স্থানীয় আয়ে পরিণত করুন",
+      "body": "একবার সেট আপ করুন এবং প্রতিবেশীদের দ্বারা বুক করা শুরু করুন যাদের ইতিমধ্যেই আপনি যা করছেন তা প্রয়োজন৷",
+      "start": "একজন সাহায্যকারী হিসাবে শুরু করুন",
+      "earnings": "এই সপ্তাহে আয়",
+      "bookings": "3টি নতুন বুকিং",
+      "quotes": "2টি উদ্ধৃতি উত্তরের জন্য অপেক্ষা করছে"
+    },
+    "perks": [
+      [
+        "আপনার পরিষেবা প্রোফাইল তৈরি করুন",
+        "মিনিটের মধ্যে আপনার দক্ষতা, ফটো এবং কাজের এলাকা তালিকাভুক্ত করুন।"
+      ],
+      [
+        "আপনার দাম এবং প্রাপ্যতা সেট করুন",
+        "আপনি আপনার হার, ব্যাসার্ধ এবং সময়সূচী নিয়ন্ত্রণ করেন।"
+      ],
+      [
+        "বুকিং গ্রহণ করুন এবং উদ্ধৃতি পাঠান",
+        "কাছাকাছি অনুরোধ পান এবং কাস্টম উদ্ধৃতি সঙ্গে উত্তর."
+      ],
+      [
+        "পর্যালোচনা তৈরি করুন এবং ক্লায়েন্টদের পুনরাবৃত্তি করুন",
+        "রেটিং অর্জন করুন যা প্রথম কাজকে নিয়মিত করে তোলে।"
+      ]
+    ],
+    "categories": {
+      "eyebrow": "ক্যাটাগরি",
+      "title": "চাকরি যাই হোক না কেন, একজন হেলপার আছে",
+      "body": "লঞ্চের সময় মূল স্থানীয় পরিষেবা বিভাগগুলি, প্রতিটি বাজার বৃদ্ধির সাথে সাথে আরও যোগ করা হয়৷",
+      "nearby": "কাছাকাছি",
+      "names": {
+        "cleaning": "ক্লিনিং",
+        "handyman": "হ্যান্ডিম্যান",
+        "plumbing": "প্লাম্বিং",
+        "electrical": "বৈদ্যুতিক",
+        "lawn-garden": "লন ও বাগান",
+        "nails-beauty": "নখ এবং সৌন্দর্য",
+        "moving": "চলন্ত",
+        "pet-care": "পোষা প্রাণীর যত্ন",
+        "senior-care": "সিনিয়র কেয়ার",
+        "tutoring": "টিউটরিং"
+      }
+    },
+    "trust": {
+      "eyebrow": "আস্থা ও নিরাপত্তা",
+      "title": "উভয় দিকে নিরাপদ বোধ করার জন্য নির্মিত",
+      "body": "বাস্তব পর্যালোচনা, ব্যক্তিগত মেসেজিং এবং নিয়ন্ত্রণ যা প্রতিবেশীদের তাদের নিজস্ব ডেটার দায়িত্বে রাখে।"
+    },
+    "trustItems": [
+      [
+        "যাচাই করা পর্যালোচনা",
+        "প্রতিটি কাজের পরে প্রকৃত প্রতিবেশীদের কাছ থেকে প্রকৃত রেটিং।"
+      ],
+      [
+        "ইন-অ্যাপ চ্যাট",
+        "কথোপকথন এবং উদ্ধৃতি এক জায়গায় রাখুন।"
+      ],
+      [
+        "রিপোর্ট করুন এবং ব্লক করুন",
+        "যেকোনো সময় যে কোনো ব্যবহারকারীকে ফ্ল্যাগ বা ব্লক করুন।"
+      ],
+      [
+        "অ্যাকাউন্ট মুছে ফেলা",
+        "আপনি যখনই বেছে নিন আপনার অ্যাকাউন্ট এবং ডেটা মুছুন।"
+      ],
+      [
+        "অবস্থান গোপনীয়তা",
+        "সাহায্যকারীরা তাদের অবস্থান কীভাবে দেখানো হবে তা নিয়ন্ত্রণ করে।"
+      ]
+    ],
+    "waitlist": {
+      "email": "ইমেইল ঠিকানা",
+      "thanks": "ধন্যবাদ, আপনি তালিকায় আছেন.",
+      "comingSoon": "এ উপলব্ধ",
+      "noSpam": "অ্যাপটি ডাউনলোড করুন, সাহায্যকারীদের ব্রাউজ করুন এবং আপনি প্রস্তুত হলে শুরু করুন।"
+    },
+    "footer": {
+      "tagline": "বিশ্বস্ত স্থানীয় সাহায্যের জন্য আশেপাশের বাজার। মার্কিন যুক্তরাষ্ট্র জুড়ে সম্প্রদায়ের জন্য তৈরি.",
+      "about": "সম্পর্কে",
+      "accountDeletion": "অ্যাকাউন্ট মুছে ফেলা",
+      "pricingPayouts": "মূল্য এবং অর্থ প্রদান",
+      "rights": "© 2026 SwapSpot. সর্বস্বত্ব সংরক্ষিত",
+      "companyLine": "USPROJECT LLC এর অধীনে কাজ করছে · EIN 83-3989558 · New York, USA"
+    }
+  },
+  "ta": {
+    "metaDescription": "சுத்தம் செய்தல், பழுது பார்த்தல், அழகு, புல்வெளி பராமரிப்பு, நகரும், செல்லப்பிராணி பராமரிப்பு, மூத்த பராமரிப்பு, பயிற்சி மற்றும் பலவற்றிற்கு நம்பகமான உள்ளூர் உதவியாளர்களை பதிவு செய்யவும்.",
+    "hero": {
+      "badge": "இப்போது உங்கள் அருகில் தொடங்கப்படுகிறது",
+      "rating": "2,300+ அண்டை வீட்டாரிடமிருந்து · அருகில் 1,200 உதவியாளர்கள்",
+      "review": "10 நிமிடங்களில் தெருவில் ஒரு கைவினைஞர் பதிவு செய்தார்.",
+      "reviewer": "டேவிட் · 1 மைல் தொலைவில்",
+      "bookingConfirmed": "முன்பதிவு உறுதி செய்யப்பட்டது",
+      "bookingMeta": "புல்வெளி பராமரிப்பு · சனி 9:00 AM"
+    },
+    "steps": [
+      [
+        "அருகிலுள்ள உதவியாளர்களைத் தேடுங்கள்",
+        "தொலைவு மற்றும் மதிப்பீட்டின் அடிப்படையில் வரிசைப்படுத்தப்பட்ட நேரடி வரைபடத்தில் நம்பகமான உள்ளூர் உதவியாளர்களைப் பார்க்கவும்."
+      ],
+      [
+        "சேவைகள் மற்றும் விலைகளை ஒப்பிடுக",
+        "நீங்கள் உறுதியளிக்கும் முன் சுயவிவரங்கள், சேவைகள் மற்றும் வெளிப்படையான விலையை உலாவவும்."
+      ],
+      [
+        "பதிவு செய்து, அரட்டையடித்து, பாதுகாப்பாக பணம் செலுத்துங்கள்",
+        "பயன்பாட்டில் செய்தி அனுப்பவும், மேற்கோளைப் பெறவும் மற்றும் பாதுகாப்பாக பணம் செலுத்தவும்."
+      ]
+    ],
+    "helpers": {
+      "eyebrow": "உதவியாளர்களுக்கு",
+      "title": "உங்கள் திறமைகளை உள்ளூர் வருமானமாக மாற்றவும்",
+      "body": "ஒருமுறை அமைத்து, நீங்கள் செய்ய வேண்டியதை ஏற்கனவே தேவைப்படும் அண்டை வீட்டாரால் முன்பதிவு செய்யத் தொடங்குங்கள்.",
+      "start": "உதவியாளராகத் தொடங்குங்கள்",
+      "earnings": "இந்த வார வருமானம்",
+      "bookings": "3 புதிய முன்பதிவுகள்",
+      "quotes": "2 மேற்கோள்கள் பதிலுக்காக காத்திருக்கின்றன"
+    },
+    "perks": [
+      [
+        "உங்கள் சேவை சுயவிவரத்தை உருவாக்கவும்",
+        "உங்கள் திறமைகள், புகைப்படங்கள் மற்றும் பணியிடத்தை நிமிடங்களில் பட்டியலிடுங்கள்."
+      ],
+      [
+        "உங்கள் விலை மற்றும் கிடைக்கும் தன்மையை அமைக்கவும்",
+        "உங்கள் கட்டணங்கள், ஆரம் மற்றும் அட்டவணையை நீங்கள் கட்டுப்படுத்துகிறீர்கள்."
+      ],
+      [
+        "முன்பதிவுகளைப் பெற்று மேற்கோள்களை அனுப்பவும்",
+        "அருகிலுள்ள கோரிக்கைகளைப் பெற்று தனிப்பயன் மேற்கோள்களுடன் பதிலளிக்கவும்."
+      ],
+      [
+        "மதிப்புரைகளை உருவாக்கி வாடிக்கையாளர்களை மீண்டும் செய்யவும்",
+        "முதல் வேலைகளை வழக்கமான பணிகளாக மாற்றும் மதிப்பீடுகளைப் பெறுங்கள்."
+      ]
+    ],
+    "categories": {
+      "eyebrow": "வகைகள்",
+      "title": "எந்த வேலையாக இருந்தாலும் ஒரு உதவியாளர் இருக்கிறார்",
+      "body": "தொடக்கத்தில் உள்ள முக்கிய உள்ளூர் சேவை வகைகள், ஒவ்வொரு சந்தையும் வளரும்போது மேலும் சேர்க்கப்படும்.",
+      "nearby": "அருகில்",
+      "names": {
+        "cleaning": "சுத்தம் செய்தல்",
+        "handyman": "கைவினைஞர்",
+        "plumbing": "பிளம்பிங்",
+        "electrical": "மின்சாரம்",
+        "lawn-garden": "புல்வெளி & தோட்டம்",
+        "nails-beauty": "நகங்கள் மற்றும் அழகு",
+        "moving": "நகரும்",
+        "pet-care": "செல்லப்பிராணி பராமரிப்பு",
+        "senior-care": "மூத்த பராமரிப்பு",
+        "tutoring": "பயிற்சி"
+      }
+    },
+    "trust": {
+      "eyebrow": "நம்பிக்கை மற்றும் பாதுகாப்பு",
+      "title": "இருபுறமும் பாதுகாப்பாக உணரும் வகையில் கட்டப்பட்டுள்ளது",
+      "body": "உண்மையான மதிப்புரைகள், தனிப்பட்ட செய்தி அனுப்புதல் மற்றும் அண்டை வீட்டாரைத் தங்கள் சொந்தத் தரவின் பொறுப்பில் வைத்திருக்கும் கட்டுப்பாடுகள்."
+    },
+    "trustItems": [
+      [
+        "சரிபார்க்கப்பட்ட மதிப்புரைகள்",
+        "ஒவ்வொரு வேலைக்குப் பிறகும் உண்மையான அயலவர்களிடமிருந்து உண்மையான மதிப்பீடுகள்."
+      ],
+      [
+        "பயன்பாட்டில் அரட்டை",
+        "உரையாடல்களையும் மேற்கோள்களையும் ஒரே இடத்தில் வைத்திருங்கள்."
+      ],
+      [
+        "புகாரளித்து தடுக்கவும்",
+        "எந்தவொரு பயனரையும் எந்த நேரத்திலும் கொடியிடவும் அல்லது தடுக்கவும்."
+      ],
+      [
+        "கணக்கு நீக்கம்",
+        "நீங்கள் தேர்வு செய்யும் போதெல்லாம் உங்கள் கணக்கையும் தரவையும் நீக்கவும்."
+      ],
+      [
+        "இருப்பிட தனியுரிமை",
+        "உதவியாளர்கள் தங்கள் இருப்பிடம் எவ்வாறு காட்டப்பட வேண்டும் என்பதைக் கட்டுப்படுத்துகின்றனர்."
+      ]
+    ],
+    "waitlist": {
+      "email": "மின்னஞ்சல் முகவரி",
+      "thanks": "நன்றி, நீங்கள் பட்டியலில் உள்ளீர்கள்.",
+      "comingSoon": "அன்று கிடைக்கும்",
+      "noSpam": "பயன்பாட்டைப் பதிவிறக்கவும், உதவியாளர்களை உலாவவும், நீங்கள் தயாராக இருக்கும்போது தொடங்கவும்."
+    },
+    "footer": {
+      "tagline": "நம்பகமான உள்ளூர் உதவிக்கான அண்டை சந்தை. அமெரிக்கா முழுவதும் உள்ள சமூகங்களுக்காக உருவாக்கப்பட்டது.",
+      "about": "பற்றி",
+      "accountDeletion": "கணக்கு நீக்கம்",
+      "pricingPayouts": "விலை மற்றும் கொடுப்பனவுகள்",
+      "rights": "© 2026 SwapSpot. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+      "companyLine": "USPROJECT LLC கீழ் இயங்குகிறது · EIN 83-3989558 · நியூயார்க், அமெரிக்கா"
+    }
+  }
+}
