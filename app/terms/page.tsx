@@ -33,7 +33,7 @@ const sections = [
     title: "4. Client passes and access",
     body: [
       "Clients may browse categories, view helper previews, and explore the service for free. A paid pass is required to message helpers, request quotes, or book services.",
-      "Current client access options may include a Day Pass for $5 per day and Client Pro for $25 per month. Prices, features, and availability may change over time.",
+      "Current client access options may include a Day Pass and a monthly Client Pro subscription. Prices may vary by storefront, country, currency, taxes, and local market. The final price and billing period are shown by Apple App Store or Google Play before purchase.",
       "Access is considered delivered when the paid pass is activated and the client receives full access to the covered app features for the applicable period.",
     ],
   },

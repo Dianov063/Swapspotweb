@@ -1,6 +1,7 @@
 import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
 import { dictionaries, localizedPath, type Locale } from "@/lib/i18n";
+import { pricingForCountry } from "@/lib/market";
 
 type ClientPricingCopy = {
     eyebrow: string;
@@ -160,7 +161,7 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
 
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
-export default function ClientPricing({ locale }: { locale: Locale }) {
+export default function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
   const dictionary = dictionaries[locale];
   const t =
     copy[locale] ??
@@ -190,6 +191,12 @@ export default function ClientPricing({ locale }: { locale: Locale }) {
         },
       ],
     } satisfies ClientPricingCopy);
+
+  const pricing = pricingForCountry(marketCountry);
+  const localizedPlans = t.plans.map((plan, index) => ({
+    ...plan,
+    price: index === 0 ? pricing.dayPass : pricing.monthlyPass,
+  }));
 
   return (
     <section id="pricing" className="border-y border-line bg-cream">
@@ -239,7 +246,7 @@ export default function ClientPricing({ locale }: { locale: Locale }) {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {t.plans.map((plan) => (
+            {localizedPlans.map((plan) => (
               <article
                 key={plan.name}
                 className={`relative rounded-card border p-6 shadow-card-sm ${
@@ -282,6 +289,9 @@ export default function ClientPricing({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
+        <p className="mt-5 text-center text-[13px] font-semibold text-ink-soft">
+          Final local price and taxes are shown by the App Store or Google Play before purchase.
+        </p>
       </div>
     </section>
   );

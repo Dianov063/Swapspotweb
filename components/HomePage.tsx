@@ -15,9 +15,11 @@ import type { Dictionary, Locale } from "@/lib/i18n";
 export default function HomePage({
   locale,
   dictionary,
+  marketCountry,
 }: {
   locale: Locale;
   dictionary: Dictionary;
+  marketCountry?: string | null;
 }) {
   return (
     <div
@@ -43,7 +45,7 @@ export default function HomePage({
         <Hero locale={locale} dictionary={dictionary} />
         <HowItWorks dictionary={dictionary} />
         <ForClients locale={locale} />
-        <ClientPricing locale={locale} />
+        <ClientPricing locale={locale} marketCountry={marketCountry} />
         <ForHelpers locale={locale} dictionary={dictionary} />
         <Categories locale={locale} dictionary={dictionary} />
         <TrustSafety dictionary={dictionary} />
