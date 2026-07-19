@@ -15,6 +15,8 @@ export const locales = [
   "bn",
   "te",
   "ta",
+  "vi",
+  "th",
 ] as const;
 
 export type Locale = (typeof locales)[number];
@@ -34,6 +36,8 @@ export const localeNames: Record<Locale, string> = {
   bn: "বাংলা",
   te: "తెలుగు",
   ta: "தமிழ்",
+  vi: "Tiếng Việt",
+  th: "ไทย",
 };
 
 export const defaultLocale: Locale = "en";
@@ -359,6 +363,68 @@ export const dictionaries: Record<Locale, DictionaryShape> = {
     download: { badge: "இப்போது கிடைக்கிறது", title: "iOS அல்லது Android க்கு SwapSpot பதிவிறக்கவும்", body: "Helpers ஐ இலவசமாக பாருங்கள். Message அல்லது booking க்கு pass பயன்படுத்துங்கள்.", pointA: "Clients மற்றும் helpers வரவேற்கப்படுகிறார்கள்", pointB: "தொடர்புக்கு முன் இலவச browsing" },
     waitlist: { title: "இன்றே SwapSpot பதிவிறக்கவும்", body: "Helpers ஐ இலவசமாக பாருங்கள். Message அல்லது booking க்கு pass பயன்படுத்துங்கள்.", join: "ஆப் பதிவிறக்கவும்", storeCaption: "iOS மற்றும் Android இல் கிடைக்கிறது" },
     footer: { product: "தயாரிப்பு", company: "நிறுவனம்", contact: "தொடர்பு", privacy: "தனியுரிமை", support: "உதவி", terms: "விதிமுறைகள்", bottom: "உங்கள் அருகில் நம்பகமான உள்ளூர் உதவி கண்டுபிடிக்கவும்." },
+  }),
+  vi: mergeDictionary({
+    metaTitle: "SwapSpot - Tìm người trợ giúp địa phương đáng tin cậy gần bạn",
+    metaDescription: "Đặt người trợ giúp địa phương cho dọn dẹp, sửa chữa, làm đẹp, chăm sóc sân vườn, chuyển nhà, chăm sóc thú cưng, người cao tuổi, gia sư và nhiều hơn nữa.",
+    nav: { how: "Cách hoạt động", clients: "Dành cho khách hàng", pricing: "Bảng giá", categories: "Danh mục", helpers: "Dành cho người trợ giúp", trust: "Tin cậy & An toàn", getApp: "Tải ứng dụng" },
+    hero: { badge: "Hiện đã có mặt tại khu vực của bạn", before: "Tìm", highlight: "sự trợ giúp địa phương đáng tin cậy", after: "gần bạn", body: "Đặt dịch vụ dọn dẹp, sửa chữa, làm đẹp, chăm sóc sân vườn, chuyển nhà, thú cưng và nhiều hơn nữa trong một ứng dụng.", findHelp: "Tìm trợ giúp", becomeHelper: "Trở thành người trợ giúp", rating: "từ hơn 2.300 hàng xóm · 1.200 người trợ giúp gần đây", review: "Tôi đã đặt thợ sửa chữa gần nhà chỉ trong 10 phút.", reviewer: "David · cách 1 dặm", bookingConfirmed: "Đặt lịch thành công", bookingMeta: "Chăm sóc sân vườn · Thứ Bảy 9:00" },
+    how: { eyebrow: "Cách hoạt động", title: "Nhận trợ giúp chỉ trong ba bước", body: "Tìm kiếm, so sánh và đặt lịch mà không cần gọi điện nhiều lần hay đoán giá." },
+    steps: [
+      ["Tìm người trợ giúp gần bạn", "Xem người trợ giúp đáng tin cậy trên bản đồ, được sắp xếp theo khoảng cách và đánh giá."],
+      ["So sánh dịch vụ và giá", "Xem hồ sơ, dịch vụ và mức giá rõ ràng trước khi quyết định."],
+      ["Đặt lịch, nhắn tin và thanh toán an toàn", "Nhắn tin, nhận báo giá và thanh toán an toàn trong ứng dụng."],
+    ],
+    helpers: { eyebrow: "Dành cho người trợ giúp", title: "Biến kỹ năng của bạn thành thu nhập tại địa phương", body: "Tạo hồ sơ một lần và bắt đầu nhận việc từ những người hàng xóm đang cần đúng dịch vụ của bạn.", start: "Bắt đầu làm người trợ giúp", earnings: "Thu nhập tuần này", bookings: "3 lịch đặt mới", quotes: "2 báo giá đang chờ trả lời" },
+    perks: [
+      ["Tạo hồ sơ dịch vụ", "Thêm kỹ năng, ảnh và khu vực làm việc chỉ trong vài phút."],
+      ["Đặt giá và lịch làm việc", "Bạn kiểm soát mức giá, bán kính và thời gian làm việc."],
+      ["Nhận lịch đặt và gửi báo giá", "Nhận yêu cầu gần bạn và trả lời bằng báo giá riêng."],
+      ["Xây dựng đánh giá và khách hàng thường xuyên", "Nhận đánh giá để biến công việc đầu tiên thành khách hàng lâu dài."],
+    ],
+    categories: { eyebrow: "Danh mục", title: "Mọi công việc đều có người trợ giúp phù hợp", body: "Các nhóm dịch vụ địa phương chính, với nhiều dịch vụ mới được thêm khi thị trường phát triển.", nearby: "gần đây", names: { cleaning: "Dọn dẹp", handyman: "Sửa chữa nhà", plumbing: "Sửa ống nước", electrical: "Điện", "lawn-garden": "Sân vườn", "nails-beauty": "Làm đẹp", moving: "Chuyển nhà", "pet-care": "Chăm sóc thú cưng", "senior-care": "Chăm sóc người cao tuổi", tutoring: "Gia sư" } },
+    trust: { eyebrow: "Tin cậy & An toàn", title: "An tâm cho cả hai phía", body: "Đánh giá thật, tin nhắn riêng tư và các công cụ giúp mọi người kiểm soát dữ liệu của mình." },
+    trustItems: [
+      ["Đánh giá đã xác minh", "Đánh giá thật từ khách hàng thật sau mỗi công việc."],
+      ["Nhắn tin trong ứng dụng", "Giữ cuộc trò chuyện và báo giá ở cùng một nơi."],
+      ["Báo cáo và chặn", "Báo cáo hoặc chặn bất kỳ người dùng nào bất cứ lúc nào."],
+      ["Xóa tài khoản", "Xóa tài khoản và dữ liệu khi bạn muốn."],
+      ["Quyền riêng tư vị trí", "Người trợ giúp kiểm soát cách vị trí của họ được hiển thị."],
+    ],
+    download: { badge: "Đã có sẵn", title: "Tải SwapSpot cho iOS hoặc Android", body: "Xem người trợ giúp gần bạn miễn phí. Dùng pass khi bạn muốn nhắn tin, yêu cầu báo giá hoặc đặt lịch.", pointA: "Dành cho cả khách hàng và người trợ giúp", pointB: "Xem miễn phí trước khi liên hệ" },
+    waitlist: { title: "Tải SwapSpot ngay hôm nay", body: "Xem người trợ giúp gần bạn miễn phí. Dùng pass khi bạn muốn nhắn tin, yêu cầu báo giá hoặc đặt lịch.", email: "Địa chỉ email", placeholder: "you@email.com", join: "Tải ứng dụng", thanks: "Cảm ơn bạn.", storeCaption: "Đã có trên iOS và Android", comingSoon: "Có sẵn trên", noSpam: "Tải ứng dụng, xem người trợ giúp và bắt đầu khi bạn sẵn sàng." },
+    footer: { tagline: "Nền tảng cộng đồng để tìm sự trợ giúp địa phương đáng tin cậy.", product: "Sản phẩm", company: "Công ty", about: "Giới thiệu", contact: "Liên hệ", privacy: "Quyền riêng tư", support: "Hỗ trợ", accountDeletion: "Xóa tài khoản", terms: "Điều khoản", pricingPayouts: "Giá & thanh toán", bottom: "Tìm sự trợ giúp địa phương đáng tin cậy gần bạn." },
+  }),
+  th: mergeDictionary({
+    metaTitle: "SwapSpot - ค้นหาผู้ช่วยในพื้นที่ที่ไว้ใจได้ใกล้คุณ",
+    metaDescription: "จองผู้ช่วยในพื้นที่สำหรับทำความสะอาด ซ่อมแซม ความงาม ดูแลสวน ย้ายบ้าน ดูแลสัตว์เลี้ยง ดูแลผู้สูงอายุ ติวเตอร์ และอื่น ๆ",
+    nav: { how: "วิธีใช้งาน", clients: "สำหรับลูกค้า", pricing: "ราคา", categories: "หมวดหมู่", helpers: "สำหรับผู้ช่วย", trust: "ความไว้วางใจและความปลอดภัย", getApp: "ดาวน์โหลดแอป" },
+    hero: { badge: "เปิดให้บริการในพื้นที่ของคุณแล้ว", before: "ค้นหา", highlight: "ความช่วยเหลือในพื้นที่ที่ไว้ใจได้", after: "ใกล้คุณ", body: "จองบริการทำความสะอาด ซ่อมแซม ความงาม ดูแลสวน ย้ายบ้าน ดูแลสัตว์เลี้ยง และอื่น ๆ ในแอปเดียว", findHelp: "ค้นหาความช่วยเหลือ", becomeHelper: "สมัครเป็นผู้ช่วย", rating: "จากเพื่อนบ้านกว่า 2,300 คน · ผู้ช่วย 1,200 คนใกล้คุณ", review: "จองช่างซ่อมใกล้บ้านได้ใน 10 นาที", reviewer: "David · ห่าง 1 ไมล์", bookingConfirmed: "ยืนยันการจองแล้ว", bookingMeta: "ดูแลสวน · เสาร์ 9:00 น." },
+    how: { eyebrow: "วิธีใช้งาน", title: "รับความช่วยเหลือได้ในสามขั้นตอน", body: "ค้นหา เปรียบเทียบ และจองโดยไม่ต้องโทรหลายครั้งหรือเดาราคา" },
+    steps: [
+      ["ค้นหาผู้ช่วยใกล้คุณ", "ดูผู้ช่วยที่ไว้ใจได้บนแผนที่ เรียงตามระยะทางและคะแนน"],
+      ["เปรียบเทียบบริการและราคา", "ดูโปรไฟล์ บริการ และราคาที่ชัดเจนก่อนตัดสินใจ"],
+      ["จอง แชต และชำระเงินอย่างปลอดภัย", "ส่งข้อความ ขอใบเสนอราคา และชำระเงินอย่างปลอดภัยในแอป"],
+    ],
+    helpers: { eyebrow: "สำหรับผู้ช่วย", title: "เปลี่ยนทักษะของคุณให้เป็นรายได้ในพื้นที่", body: "สร้างโปรไฟล์ครั้งเดียว แล้วเริ่มรับงานจากเพื่อนบ้านที่กำลังต้องการบริการของคุณ", start: "เริ่มเป็นผู้ช่วย", earnings: "รายได้สัปดาห์นี้", bookings: "การจองใหม่ 3 รายการ", quotes: "ใบเสนอราคา 2 รายการรอตอบกลับ" },
+    perks: [
+      ["สร้างโปรไฟล์บริการ", "เพิ่มทักษะ รูปภาพ และพื้นที่ทำงานได้ในไม่กี่นาที"],
+      ["กำหนดราคาและเวลาว่าง", "คุณควบคุมราคา รัศมี และตารางงานของคุณเอง"],
+      ["รับการจองและส่งใบเสนอราคา", "รับคำขอใกล้คุณและตอบกลับด้วยราคาที่กำหนดเอง"],
+      ["สร้างรีวิวและลูกค้าประจำ", "รับคะแนนที่ช่วยเปลี่ยนงานแรกให้เป็นลูกค้าประจำ"],
+    ],
+    categories: { eyebrow: "หมวดหมู่", title: "ไม่ว่างานอะไร ก็มีผู้ช่วยที่เหมาะสม", body: "หมวดหมู่บริการหลักในพื้นที่ พร้อมเพิ่มบริการใหม่เมื่อแต่ละตลาดเติบโต", nearby: "ใกล้คุณ", names: { cleaning: "ทำความสะอาด", handyman: "ช่างซ่อมบ้าน", plumbing: "ประปา", electrical: "ไฟฟ้า", "lawn-garden": "สนามและสวน", "nails-beauty": "เล็บและความงาม", moving: "ย้ายบ้าน", "pet-care": "ดูแลสัตว์เลี้ยง", "senior-care": "ดูแลผู้สูงอายุ", tutoring: "ติวเตอร์" } },
+    trust: { eyebrow: "ความไว้วางใจและความปลอดภัย", title: "ออกแบบมาให้ทั้งสองฝ่ายรู้สึกปลอดภัย", body: "รีวิวจริง ข้อความส่วนตัว และเครื่องมือที่ให้ทุกคนควบคุมข้อมูลของตนเอง" },
+    trustItems: [
+      ["รีวิวที่ยืนยันแล้ว", "คะแนนจริงจากลูกค้าจริงหลังจบทุกงาน"],
+      ["แชตในแอป", "เก็บบทสนทนาและใบเสนอราคาไว้ในที่เดียว"],
+      ["รายงานและบล็อก", "รายงานหรือบล็อกผู้ใช้ได้ทุกเมื่อ"],
+      ["ลบบัญชี", "ลบบัญชีและข้อมูลของคุณได้เมื่อคุณต้องการ"],
+      ["ความเป็นส่วนตัวของตำแหน่ง", "ผู้ช่วยควบคุมวิธีแสดงตำแหน่งของตนเอง"],
+    ],
+    download: { badge: "พร้อมให้ดาวน์โหลด", title: "ดาวน์โหลด SwapSpot สำหรับ iOS หรือ Android", body: "ดูผู้ช่วยใกล้คุณได้ฟรี ใช้ pass เมื่อพร้อมส่งข้อความ ขอใบเสนอราคา หรือจอง", pointA: "ยินดีต้อนรับทั้งลูกค้าและผู้ช่วย", pointB: "ดูก่อนได้ฟรีก่อนติดต่อผู้ช่วย" },
+    waitlist: { title: "ดาวน์โหลด SwapSpot วันนี้", body: "ดูผู้ช่วยใกล้คุณได้ฟรี ใช้ pass เมื่อพร้อมส่งข้อความ ขอใบเสนอราคา หรือจอง", email: "อีเมล", placeholder: "you@email.com", join: "ดาวน์โหลดแอป", thanks: "ขอบคุณ", storeCaption: "พร้อมใช้งานบน iOS และ Android", comingSoon: "พร้อมใช้งานบน", noSpam: "ดาวน์โหลดแอป ดูผู้ช่วย และเริ่มเมื่อคุณพร้อม" },
+    footer: { tagline: "ตลาดชุมชนสำหรับความช่วยเหลือในพื้นที่ที่ไว้ใจได้", product: "ผลิตภัณฑ์", company: "บริษัท", about: "เกี่ยวกับเรา", contact: "ติดต่อ", privacy: "ความเป็นส่วนตัว", support: "ช่วยเหลือ", accountDeletion: "ลบบัญชี", terms: "ข้อกำหนด", pricingPayouts: "ราคาและการจ่ายเงิน", bottom: "ค้นหาความช่วยเหลือในพื้นที่ที่ไว้ใจได้ใกล้คุณ" },
   }),
 };
 

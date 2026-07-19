@@ -157,6 +157,32 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
       },
     ],
   },
+  vi: {
+    eyebrow: "Bảng giá cho khách hàng",
+    title: "Xem miễn phí. Dùng pass khi bạn sẵn sàng hành động.",
+    body: "Khách hàng có thể xem danh mục và so sánh người trợ giúp miễn phí. Bạn cần pass để nhắn tin, yêu cầu báo giá hoặc đặt lịch.",
+    freeTitle: "Xem miễn phí",
+    freeBody: "Xem danh mục, hồ sơ người trợ giúp, khu vực phục vụ và thông tin tin cậy cơ bản trước khi chọn pass.",
+    unlock: "Pass mở khóa",
+    actions: ["Nhắn tin cho người trợ giúp", "Yêu cầu báo giá", "Đặt công việc"],
+    plans: [
+      { name: "Pass một ngày", price: "$5/ngày", note: "Phù hợp cho một công việc, nhu cầu gấp hoặc dùng thử SwapSpot.", features: ["Nhắn tin trong ngày", "Yêu cầu báo giá", "Đặt lịch khi sẵn sàng"], cta: "Mua pass một ngày" },
+      { name: "Client Pro", price: "$25/tháng", note: "Phù hợp cho nhu cầu thường xuyên của gia đình, nhà cho thuê hoặc doanh nghiệp.", best: "Giá trị tốt nhất", features: ["Truy cập hàng tháng", "Nhắn tin và yêu cầu báo giá bất cứ lúc nào", "Tiết kiệm hơn sau 5 ngày sử dụng"], cta: "Bắt đầu Pro" },
+    ],
+  },
+  th: {
+    eyebrow: "ราคาสำหรับลูกค้า",
+    title: "ดูได้ฟรี ใช้ pass เมื่อคุณพร้อมดำเนินการ",
+    body: "ลูกค้าดูหมวดหมู่และเปรียบเทียบผู้ช่วยได้ฟรี ต้องมี pass เพื่อส่งข้อความ ขอใบเสนอราคา หรือจอง",
+    freeTitle: "ดูได้ฟรี",
+    freeBody: "ดูหมวดหมู่ โปรไฟล์ผู้ช่วย พื้นที่ให้บริการ และข้อมูลความน่าเชื่อถือก่อนเลือก pass",
+    unlock: "Pass ช่วยให้คุณ",
+    actions: ["ส่งข้อความหาผู้ช่วย", "ขอใบเสนอราคา", "จองงาน"],
+    plans: [
+      { name: "Pass หนึ่งวัน", price: "$5/วัน", note: "เหมาะสำหรับงานเดียว งานเร่งด่วน หรือทดลองใช้ SwapSpot", features: ["ส่งข้อความได้ตลอดวัน", "ขอใบเสนอราคา", "จองเมื่อคุณพร้อม"], cta: "รับ pass หนึ่งวัน" },
+      { name: "Client Pro", price: "$25/เดือน", note: "เหมาะสำหรับความต้องการประจำของบ้าน ครอบครัว ที่เช่า หรือธุรกิจ", best: "คุ้มค่าที่สุด", features: ["ใช้งานรายเดือน", "ส่งข้อความและขอราคาได้ทุกเมื่อ", "คุ้มขึ้นหลังใช้งาน 5 วัน"], cta: "เริ่ม Pro" },
+    ],
+  },
 };
 
 const actionIcons = [MessageSquareText, Search, LockKeyhole];

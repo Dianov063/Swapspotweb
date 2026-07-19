@@ -33,6 +33,7 @@ export default function Header({
 
   function changeLanguage(value: string) {
     if (!locales.includes(value as Locale)) return;
+    window.sessionStorage.setItem("swapspot-locale-detected", "1");
     window.location.href = localizedPath(value as Locale, "/");
   }
 

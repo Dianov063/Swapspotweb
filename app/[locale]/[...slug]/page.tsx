@@ -161,6 +161,26 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     helpers: "Helper ஆகுங்கள்",
     "trust-safety": "நம்பிக்கை மற்றும் பாதுகாப்பு",
   },
+  vi: {
+    privacy: "Chính sách quyền riêng tư",
+    terms: "Điều khoản dịch vụ",
+    support: "Hỗ trợ SwapSpot",
+    contact: "Liên hệ SwapSpot",
+    "account-deletion": "Xóa tài khoản SwapSpot của bạn",
+    "delete-account": "Xóa tài khoản SwapSpot của bạn",
+    helpers: "Trở thành người trợ giúp",
+    "trust-safety": "Tin cậy & An toàn",
+  },
+  th: {
+    privacy: "นโยบายความเป็นส่วนตัว",
+    terms: "ข้อกำหนดการให้บริการ",
+    support: "ฝ่ายช่วยเหลือ SwapSpot",
+    contact: "ติดต่อ SwapSpot",
+    "account-deletion": "ลบบัญชี SwapSpot ของคุณ",
+    "delete-account": "ลบบัญชี SwapSpot ของคุณ",
+    helpers: "สมัครเป็นผู้ช่วย",
+    "trust-safety": "ความไว้วางใจและความปลอดภัย",
+  },
 };
 
 const localizedIntros: Record<Locale, string> = {
@@ -178,6 +198,8 @@ const localizedIntros: Record<Locale, string> = {
   bn: "এই পেজটি আপনার নির্বাচিত ভাষায় উপলব্ধ। আইনি বা অ্যাকাউন্ট সম্পর্কিত প্রশ্নের জন্য hello@swapspot.org এ যোগাযোগ করুন।",
   te: "ఈ పేజీ మీరు ఎంచుకున్న భాషలో అందుబాటులో ఉంది. చట్టపరమైన లేదా ఖాతా ప్రశ్నలకు hello@swapspot.org కు రాయండి.",
   ta: "இந்த பக்கம் நீங்கள் தேர்ந்தெடுத்த மொழியில் கிடைக்கிறது. சட்ட அல்லது கணக்கு கேள்விகளுக்கு hello@swapspot.org-க்கு எழுதுங்கள்.",
+  vi: "Trang này có sẵn bằng ngôn ngữ bạn đã chọn. Nếu có câu hỏi pháp lý hoặc về tài khoản, hãy liên hệ hello@swapspot.org.",
+  th: "หน้านี้แสดงเป็นภาษาที่คุณเลือก สำหรับคำถามด้านกฎหมายหรือบัญชี โปรดติดต่อ hello@swapspot.org",
 };
 
 function isSupportedPage(value: string): value is SupportedPage {

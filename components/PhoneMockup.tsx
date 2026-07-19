@@ -25,6 +25,8 @@ const phoneCopy: Record<Locale, PhoneCopy> = {
   bn: { search: "Oak Street-এর কাছাকাছি সেবা", nearby: "কাছাকাছি ১২ জন সেবাদাতা", service: "মারিয়ার পরিচ্ছন্নতা", distance: "০.৬ মাইল", hour: "/ঘণ্টা", book: "বুক করুন" },
   te: { search: "Oak Street సమీపంలోని సేవలు", nearby: "సమీపంలో 12 మంది సేవాదారులు", service: "మారియా క్లీనింగ్", distance: "0.6 మై.", hour: "/గం.", book: "బుక్ చేయండి" },
   ta: { search: "Oak Street அருகிலுள்ள சேவைகள்", nearby: "அருகில் 12 சேவை வழங்குநர்கள்", service: "மரியாவின் சுத்தம்", distance: "0.6 மைல்", hour: "/மணி", book: "பதிவு செய்க" },
+  vi: { search: "Dịch vụ gần Oak Street", nearby: "12 người trợ giúp gần đây", service: "Dịch vụ dọn dẹp của Maria", distance: "0,6 dặm", hour: "/giờ", book: "Đặt ngay" },
+  th: { search: "บริการใกล้ Oak Street", nearby: "ผู้ช่วย 12 คนใกล้คุณ", service: "บริการทำความสะอาดของ Maria", distance: "0.6 ไมล์", hour: "/ชม.", book: "จองเลย" },
 };
 
 const helpers = [
