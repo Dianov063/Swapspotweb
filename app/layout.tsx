@@ -1,10 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import CookieConsent from "@/components/CookieConsent";
 import { locales, localizedPath } from "@/lib/i18n";
 import "./globals.css";
 
 const siteUrl = "https://www.swapspot.org";
 const googleAnalyticsId = "G-7Q90DY0VEK";
+const consentRegions = [
+  "AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI",
+  "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU",
+  "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK",
+];
 const localeAlternates = Object.fromEntries(
   locales.map((locale) => [locale, localizedPath(locale, "/")]),
 );
@@ -63,20 +69,55 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script id="google-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            window.gtag = gtag;
+
+            gtag('consent', 'default', {
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+              analytics_storage: 'granted'
+            });
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500,
+              region: ${JSON.stringify(consentRegions)}
+            });
+            try {
+              var savedConsent = localStorage.getItem('swapspot-consent-v1');
+              if (savedConsent === 'granted' || savedConsent === 'denied') {
+                gtag('consent', 'update', {
+                  ad_storage: savedConsent,
+                  ad_user_data: savedConsent,
+                  ad_personalization: savedConsent,
+                  analytics_storage: savedConsent
+                });
+              }
+            } catch (error) {}
+            gtag('set', 'ads_data_redaction', true);
+          `}
+        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${googleAnalyticsId}');
           `}
         </Script>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }
