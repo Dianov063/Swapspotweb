@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { locales, localizedPath } from "@/lib/i18n";
 import "./globals.css";
 
 const siteUrl = "https://www.swapspot.org";
+const googleAnalyticsId = "G-7Q90DY0VEK";
 const localeAlternates = Object.fromEntries(
   locales.map((locale) => [locale, localizedPath(locale, "/")]),
 );
@@ -60,6 +62,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAnalyticsId}');
+          `}
+        </Script>
+      </head>
       <body>{children}</body>
     </html>
   );
