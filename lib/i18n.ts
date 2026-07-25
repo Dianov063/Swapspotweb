@@ -95,6 +95,9 @@ const en = {
     eyebrow: "For Helpers",
     title: "Turn your skills into local income",
     body: "Set up once and start getting booked by neighbors who already need exactly what you do.",
+    freeTitle: "Always free for helpers",
+    freeBody:
+      "Keep 100% of what you earn. SwapSpot takes no commission, no percentage, and no lead fee.",
     start: "Start as a Helper",
     earnings: "Earnings this week",
     bookings: "3 new bookings",

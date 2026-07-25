@@ -28,6 +28,20 @@ export default function ForHelpers({
               {dictionary.helpers.body}
             </p>
 
+            <div className="mt-5 flex max-w-[520px] items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.12] px-4 py-3.5 shadow-[0_18px_36px_-24px_rgba(0,0,0,.45)] backdrop-blur">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold text-[15px] font-black text-green">
+                0%
+              </span>
+              <div>
+                <div className="text-[16px] font-extrabold leading-tight text-white">
+                  {dictionary.helpers.freeTitle}
+                </div>
+                <div className="mt-1 text-[13.5px] font-medium leading-[1.45] text-white/75">
+                  {dictionary.helpers.freeBody}
+                </div>
+              </div>
+            </div>
+
             <div className="mt-7 grid gap-3.5">
               {perks.map((p, index) => {
                 const Icon = p.icon;
