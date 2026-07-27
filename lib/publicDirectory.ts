@@ -56,6 +56,8 @@ export type DirectoryPair = {
   categoryName: string;
   marketSlug: string;
   marketName: string;
+  countryCode: string | null;
+  listingCount: number;
 };
 
 const categoryAliases: Record<string, string> = {
@@ -146,22 +148,44 @@ export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
     category_slug: string;
     market_name: string;
     market_slug: string;
+    country_code: string | null;
   }>(
-    "public_service_listings?select=category_name,category_slug,market_name,market_slug&order=category_name.asc,market_name.asc&limit=5000",
+    "public_service_listings?select=category_name,category_slug,market_name,market_slug,country_code&order=category_name.asc,market_name.asc&limit=10000",
   );
   const byKey = new Map<string, DirectoryPair>();
 
   for (const row of rows) {
     if (!row.category_slug || !row.market_slug) continue;
-    byKey.set(`${row.category_slug}:${row.market_slug}`, {
-      categorySlug: row.category_slug,
-      categoryName: row.category_name,
-      marketSlug: row.market_slug,
-      marketName: row.market_name,
-    });
+    const key = `${row.category_slug}:${row.market_slug}`;
+    const existing = byKey.get(key);
+
+    if (existing) {
+      existing.listingCount += 1;
+    } else {
+      byKey.set(key, {
+        categorySlug: row.category_slug,
+        categoryName: row.category_name,
+        marketSlug: row.market_slug,
+        marketName: row.market_name,
+        countryCode: row.country_code,
+        listingCount: 1,
+      });
+    }
   }
 
   return [...byKey.values()];
+}
+
+export async function getDirectoryPair(categorySlug: string, marketSlug: string) {
+  const canonicalCategorySlug = categoryAliases[categorySlug] || categorySlug;
+  const pairs = await getDirectoryPairs();
+
+  return (
+    pairs.find(
+      (pair) =>
+        pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
+    ) || null
+  );
 }
 
 export async function getDirectoryCategory(slug: string) {

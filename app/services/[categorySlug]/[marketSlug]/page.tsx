@@ -4,8 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PublicServiceCards from "@/components/PublicServiceCards";
 import {
-  getDirectoryCategory,
-  getDirectoryMarket,
+  getDirectoryPair,
   getPublicServiceListings,
 } from "@/lib/publicDirectory";
 
@@ -20,23 +19,20 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { categorySlug, marketSlug } = await params;
-  const [category, market] = await Promise.all([
-    getDirectoryCategory(categorySlug),
-    getDirectoryMarket(marketSlug),
-  ]);
+  const pair = await getDirectoryPair(categorySlug, marketSlug);
 
-  if (!category || !market) return {};
+  if (!pair) return {};
 
   return {
-    title: `${category.name} Helpers in ${market.name} - SwapSpot`,
-    description: `Find ${category.name.toLowerCase()} helpers in ${market.name}. Compare public service previews, ZIP-based service areas, pricing, languages, and ratings before opening SwapSpot.`,
+    title: `${pair.categoryName} Helpers in ${pair.marketName} - SwapSpot`,
+    description: `Find ${pair.categoryName.toLowerCase()} helpers in ${pair.marketName}. Compare public service previews, ZIP-based service areas, pricing, languages, and ratings before opening SwapSpot.`,
     alternates: {
-      canonical: `/services/${category.slug}/${market.slug}`,
+      canonical: `/services/${pair.categorySlug}/${pair.marketSlug}`,
     },
     openGraph: {
-      title: `${category.name} Helpers in ${market.name}`,
-      description: `Browse local ${category.name.toLowerCase()} services near ${market.name} and continue in the SwapSpot app.`,
-      url: `https://www.swapspot.org/services/${category.slug}/${market.slug}`,
+      title: `${pair.categoryName} Helpers in ${pair.marketName}`,
+      description: `Browse local ${pair.categoryName.toLowerCase()} services near ${pair.marketName} and continue in the SwapSpot app.`,
+      url: `https://www.swapspot.org/services/${pair.categorySlug}/${pair.marketSlug}`,
       type: "website",
     },
   };
@@ -44,24 +40,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ServiceMarketPage({ params }: Props) {
   const { categorySlug, marketSlug } = await params;
-  const [category, market] = await Promise.all([
-    getDirectoryCategory(categorySlug),
-    getDirectoryMarket(marketSlug),
-  ]);
+  const pair = await getDirectoryPair(categorySlug, marketSlug);
 
-  if (!category || !market) notFound();
+  if (!pair) notFound();
 
   const listings = await getPublicServiceListings({
-    categorySlug: category.slug,
-    marketSlug: market.slug,
+    categorySlug: pair.categorySlug,
+    marketSlug: pair.marketSlug,
     limit: 30,
   });
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${category.name} helpers in ${market.name}`,
-    description: `Public previews of ${category.name.toLowerCase()} services available through SwapSpot in ${market.name}.`,
+    name: `${pair.categoryName} helpers in ${pair.marketName}`,
+    description: `Public previews of ${pair.categoryName.toLowerCase()} services available through SwapSpot in ${pair.marketName}.`,
     itemListElement: listings.slice(0, 12).map((listing, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -111,7 +104,7 @@ export default async function ServiceMarketPage({ params }: Props) {
           Local service directory
         </p>
         <h1 className="mt-3 max-w-[860px] font-head text-[clamp(34px,5vw,58px)] font-bold leading-[1.05] tracking-[-0.02em] text-ink">
-          {category.name} helpers in {market.name}
+          {pair.categoryName} helpers in {pair.marketName}
         </h1>
         <p className="mt-5 max-w-[760px] text-[18px] leading-[1.6] text-ink-soft">
           Browse public previews from nearby SwapSpot helpers. We show only
@@ -122,8 +115,8 @@ export default async function ServiceMarketPage({ params }: Props) {
 
         <PublicServiceCards
           listings={listings}
-          categoryName={category.name}
-          marketName={market.name}
+          categoryName={pair.categoryName}
+          marketName={pair.marketName}
         />
       </main>
       <Footer />
