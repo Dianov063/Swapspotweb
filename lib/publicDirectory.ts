@@ -243,3 +243,19 @@ export function formatServiceArea(listing: PublicServiceListing) {
   if (!radius) return area;
   return `${area} + ${radius} ${unit}`;
 }
+
+export function getListingLanguages(listing: PublicServiceListing) {
+  if (!Array.isArray(listing.languages)) return [];
+
+  return listing.languages
+    .map((language) => String(language).trim())
+    .filter(Boolean);
+}
+
+export function getServiceTitle(listing: PublicServiceListing) {
+  return listing.search_title_en || listing.service_name;
+}
+
+export function getHelperName(listing: PublicServiceListing) {
+  return listing.helper_display_name || "Local helper";
+}
