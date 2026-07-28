@@ -1,8 +1,10 @@
 import { CheckCircle2, Languages, MapPin, ShieldCheck, Star } from "lucide-react";
+import Link from "next/link";
 import AppStoreButtons from "@/components/AppStoreButtons";
 import {
   formatServiceArea,
   formatServicePrice,
+  getHelperSlug,
   getHelperName,
   getListingLanguages,
   getServiceTitle,
@@ -56,6 +58,7 @@ export default function PublicServiceCards({
         {listings.map((listing) => {
           const languages = getListingLanguages(listing);
           const helperName = getHelperName(listing);
+          const helperHref = `/helpers/${getHelperSlug(listing)}`;
           const ratingCount = Number(listing.rating_count || 0);
 
           return (
@@ -81,9 +84,12 @@ export default function PublicServiceCards({
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-[15px] font-extrabold text-ink">
+                  <Link
+                    href={helperHref}
+                    className="block truncate text-[15px] font-extrabold text-ink underline-offset-4 hover:text-green hover:underline"
+                  >
                     {helperName}
-                  </p>
+                  </Link>
                   <p className="mt-1 text-[13px] font-extrabold uppercase tracking-[0.1em] text-green">
                     {listing.category_name}
                   </p>
@@ -133,13 +139,13 @@ export default function PublicServiceCards({
               </div>
 
               <div className="mt-auto pt-5">
-                <a
-                  href="/#download"
+                <Link
+                  href={helperHref}
                   className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-green px-4 py-2.5 text-[15px] font-extrabold text-surface transition hover:bg-green-deep"
                 >
-                  Open in SwapSpot
+                  View helper profile
                   <CheckCircle2 className="h-4 w-4" />
-                </a>
+                </Link>
               </div>
             </article>
           );

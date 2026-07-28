@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
 import { locales } from "@/lib/i18n";
-import { getDirectoryPairs } from "@/lib/publicDirectory";
+import { getDirectoryPairs, getPublicHelperProfiles } from "@/lib/publicDirectory";
 
 const base = "https://www.swapspot.org";
 const localizedStaticPaths = [
@@ -51,12 +51,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const directoryPairs = await getDirectoryPairs();
+  const helperProfiles = await getPublicHelperProfiles({ limit: 1000 });
 
   const serviceMarketRoutes = directoryPairs.map((pair) => ({
       url: `${base}/services/${pair.categorySlug}/${pair.marketSlug}`,
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.72,
+  }));
+
+  const helperProfileRoutes = helperProfiles.slice(0, 500).map((profile) => ({
+    url: `${base}/helpers/${profile.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.62,
   }));
 
   const localeRoutes = locales
@@ -86,5 +94,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categoryRoutes,
     ...cityRoutes,
     ...serviceMarketRoutes,
+    ...helperProfileRoutes,
   ];
 }

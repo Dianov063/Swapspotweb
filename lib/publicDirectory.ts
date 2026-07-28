@@ -60,6 +60,22 @@ export type DirectoryPair = {
   listingCount: number;
 };
 
+export type PublicHelperProfile = {
+  helperId: string;
+  slug: string;
+  displayName: string;
+  avatarUrl: string | null;
+  bio: string | null;
+  languages: string[];
+  ratingAvg: number;
+  ratingCount: number;
+  jobsCompleted: number;
+  listings: PublicServiceListing[];
+  categories: DirectoryCategory[];
+  markets: DirectoryMarket[];
+  countryCodes: string[];
+};
+
 const categoryAliases: Record<string, string> = {
   handyman: "home-repair-and-maintenance",
   plumbing: "home-repair-and-maintenance",
@@ -217,6 +233,116 @@ export async function getPublicServiceListings({
   if (marketSlug) params.set("market_slug", `eq.${marketSlug}`);
 
   return fetchRest<PublicServiceListing>(`public_service_listings?${params}`);
+}
+
+function sortListings(listings: PublicServiceListing[]) {
+  return [...listings].sort((a, b) => {
+    const marketCompare = (a.market_name || "").localeCompare(b.market_name || "");
+    if (marketCompare) return marketCompare;
+
+    const categoryCompare = (a.category_name || "").localeCompare(b.category_name || "");
+    if (categoryCompare) return categoryCompare;
+
+    return getServiceTitle(a).localeCompare(getServiceTitle(b));
+  });
+}
+
+export function getHelperSlug(listingOrProfile: PublicServiceListing | PublicHelperProfile) {
+  const helperId =
+    "helperId" in listingOrProfile ? listingOrProfile.helperId : listingOrProfile.helper_id;
+  const helperName =
+    "displayName" in listingOrProfile
+      ? listingOrProfile.displayName
+      : getHelperName(listingOrProfile);
+
+  const idTail = helperId.replace(/[^a-zA-Z0-9]/g, "").slice(0, 10).toLowerCase();
+  return `${slugify(helperName || "local-helper")}-${idTail}`;
+}
+
+export function buildPublicHelperProfile(
+  helperId: string,
+  listings: PublicServiceListing[],
+): PublicHelperProfile | null {
+  const helperListings = sortListings(listings.filter((listing) => listing.helper_id === helperId));
+  const first = helperListings[0];
+  if (!first) return null;
+
+  const categories = new Map<string, DirectoryCategory>();
+  const markets = new Map<string, DirectoryMarket>();
+  const languages = new Set<string>();
+  const countryCodes = new Set<string>();
+
+  for (const listing of helperListings) {
+    if (listing.category_slug && listing.category_name) {
+      categories.set(listing.category_slug, {
+        slug: listing.category_slug,
+        name: listing.category_name,
+      });
+    }
+
+    if (listing.market_slug && listing.market_name) {
+      markets.set(listing.market_slug, {
+        slug: listing.market_slug,
+        name: listing.market_name,
+      });
+    }
+
+    for (const language of getListingLanguages(listing)) languages.add(language);
+    if (listing.country_code) countryCodes.add(listing.country_code);
+  }
+
+  const ratingAvg =
+    helperListings.reduce((sum, listing) => sum + Number(listing.rating_avg || 0), 0) /
+    helperListings.length;
+  const ratingCount = helperListings.reduce(
+    (sum, listing) => sum + Number(listing.rating_count || 0),
+    0,
+  );
+  const jobsCompleted = Math.max(
+    ...helperListings.map((listing) => Number(listing.jobs_completed || 0)),
+    0,
+  );
+
+  const profile: PublicHelperProfile = {
+    helperId,
+    slug: "",
+    displayName: getHelperName(first),
+    avatarUrl: first.avatar_url,
+    bio: first.helper_bio,
+    languages: [...languages].sort((a, b) => a.localeCompare(b)),
+    ratingAvg: Number.isFinite(ratingAvg) ? ratingAvg : 0,
+    ratingCount,
+    jobsCompleted,
+    listings: helperListings,
+    categories: [...categories.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    markets: [...markets.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    countryCodes: [...countryCodes.values()].sort((a, b) => a.localeCompare(b)),
+  };
+
+  profile.slug = getHelperSlug(profile);
+  return profile;
+}
+
+export async function getPublicHelperProfiles({ limit = 1000 }: { limit?: number } = {}) {
+  const listings = await getPublicServiceListings({ limit });
+  const helperIds = new Set(listings.map((listing) => listing.helper_id).filter(Boolean));
+  const profiles: PublicHelperProfile[] = [];
+
+  for (const helperId of helperIds) {
+    const profile = buildPublicHelperProfile(helperId, listings);
+    if (profile) profiles.push(profile);
+  }
+
+  return profiles.sort((a, b) => {
+    const ratingCompare = b.ratingAvg - a.ratingAvg;
+    if (ratingCompare) return ratingCompare;
+    return a.displayName.localeCompare(b.displayName);
+  });
+}
+
+export async function getPublicHelperProfileBySlug(helperSlug: string) {
+  const profiles = await getPublicHelperProfiles();
+  return profiles.find((profile) => profile.slug === helperSlug) || null;
 }
 
 export function formatServicePrice(listing: PublicServiceListing) {
