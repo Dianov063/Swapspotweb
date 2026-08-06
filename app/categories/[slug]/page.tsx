@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: Props) {
           {cat.name} helpers near you
         </h1>
         <p className="mt-4 text-[18px] text-ink-soft">
-          {cat.count} verified {cat.name.toLowerCase()} helpers in your area.
+          Explore {cat.name.toLowerCase()} services from local helpers in your area.
         </p>
       </main>
       <Footer />

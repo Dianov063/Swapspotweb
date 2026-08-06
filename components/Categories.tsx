@@ -43,9 +43,6 @@ export default function Categories({
                 <div className="font-head text-[17px] font-bold text-ink">
                   {name}
                 </div>
-                <div className="mt-0.5 text-[13px] font-semibold text-ink-soft">
-                  {c.count} {dictionary.categories.nearby}
-                </div>
               </div>
             </Link>
           );

@@ -86,20 +86,23 @@ export type Category = {
   slug: string;
   icon: LucideIcon;
   name: string;
-  count: number;
 };
 
 export const categories: Category[] = [
-  { slug: "cleaning", icon: Sparkles, name: "Cleaning", count: 42 },
-  { slug: "handyman", icon: Hammer, name: "Handyman", count: 38 },
-  { slug: "plumbing", icon: Wrench, name: "Plumbing", count: 21 },
-  { slug: "electrical", icon: Zap, name: "Electrical", count: 17 },
-  { slug: "lawn-garden", icon: Sprout, name: "Lawn & Garden", count: 29 },
-  { slug: "nails-beauty", icon: Scissors, name: "Nails & Beauty", count: 24 },
-  { slug: "moving", icon: Truck, name: "Moving", count: 19 },
-  { slug: "pet-care", icon: Dog, name: "Pet Care", count: 33 },
-  { slug: "senior-care", icon: HeartHandshake, name: "Senior Care", count: 14 },
-  { slug: "tutoring", icon: GraduationCap, name: "Tutoring", count: 26 },
+  { slug: "home-repair-maintenance", icon: Hammer, name: "Home Repair & Maintenance" },
+  { slug: "construction-remodeling", icon: Wrench, name: "Construction & Remodeling" },
+  { slug: "cleaning", icon: Sparkles, name: "Cleaning" },
+  { slug: "lawn-outdoor", icon: Sprout, name: "Lawn & Outdoor" },
+  { slug: "moving-delivery", icon: Truck, name: "Moving & Delivery" },
+  { slug: "tech-smart-home", icon: Zap, name: "Tech & Smart Home" },
+  { slug: "tutoring-lessons", icon: GraduationCap, name: "Tutoring & Lessons" },
+  { slug: "beauty-wellness", icon: Scissors, name: "Beauty & Wellness" },
+  { slug: "care-assistance", icon: HeartHandshake, name: "Care & Assistance" },
+  { slug: "events-entertainment", icon: CalendarClock, name: "Events & Entertainment" },
+  { slug: "professional-services", icon: BadgeDollarSign, name: "Professional Services" },
+  { slug: "pet-services", icon: Dog, name: "Pet Services" },
+  { slug: "design-creative", icon: Sparkles, name: "Design & Creative" },
+  { slug: "specialty-seasonal", icon: Star, name: "Specialty & Seasonal" },
 ];
 
 export const cities = [
