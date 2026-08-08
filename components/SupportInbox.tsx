@@ -41,8 +41,16 @@ function profileLabel(thread: SupportThread) {
   return thread.profiles?.full_name || thread.profiles?.email || thread.user_id;
 }
 
-export default function SupportInbox() {
-  const [token, setToken] = useState("");
+type SupportInboxProps = {
+  embedded?: boolean;
+  token?: string;
+  onTokenChange?: (value: string) => void;
+};
+
+export default function SupportInbox({ embedded = false, token: providedToken, onTokenChange }: SupportInboxProps) {
+  const [localToken, setLocalToken] = useState("");
+  const token = providedToken ?? localToken;
+  const setToken = onTokenChange ?? setLocalToken;
   const [threads, setThreads] = useState<SupportThread[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [messages, setMessages] = useState<SupportMessage[]>([]);
@@ -51,6 +59,7 @@ export default function SupportInbox() {
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+  const Container = embedded ? "section" : "main";
 
   const selectedThread = useMemo(
     () => threads.find((thread) => thread.id === selectedId) || null,
@@ -124,7 +133,7 @@ export default function SupportInbox() {
   }
 
   return (
-    <main className="min-h-screen bg-sand px-5 py-8">
+    <Container className="min-h-screen bg-sand px-5 py-8">
       <div className="mx-auto max-w-[1320px]">
         <section className="mb-6 rounded-card border border-line bg-surface p-6 shadow-card-sm">
           <p className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">
@@ -140,13 +149,13 @@ export default function SupportInbox() {
               </p>
             </div>
             <div className="flex w-full flex-col gap-2 sm:flex-row lg:w-auto">
-              <input
+              {!embedded ? <input
                 type="password"
                 value={token}
                 onChange={(event) => setToken(event.target.value)}
                 placeholder="Admin API secret"
                 className="h-12 min-w-[280px] rounded-full border border-line bg-cream px-4 text-[15px] font-semibold text-ink outline-none focus:border-green"
-              />
+              /> : null}
               <button
                 type="button"
                 onClick={loadThreads}
@@ -285,6 +294,6 @@ export default function SupportInbox() {
           </section>
         </div>
       </div>
-    </main>
+    </Container>
   );
 }

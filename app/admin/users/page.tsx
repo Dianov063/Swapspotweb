@@ -1,4 +1,4 @@
-import UserDirectory from "@/components/UserDirectory";
+import AdminConsole from "@/components/AdminConsole";
 
 export const metadata = {
   title: "User Directory | SwapSpot",
@@ -9,5 +9,5 @@ export const metadata = {
 };
 
 export default function AdminUsersPage() {
-  return <UserDirectory />;
+  return <AdminConsole initialTab="users" />;
 }

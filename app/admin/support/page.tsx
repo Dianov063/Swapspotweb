@@ -1,4 +1,4 @@
-import SupportInbox from "@/components/SupportInbox";
+import AdminConsole from "@/components/AdminConsole";
 
 export const metadata = {
   title: "Support Inbox | SwapSpot",
@@ -9,5 +9,5 @@ export const metadata = {
 };
 
 export default function AdminSupportPage() {
-  return <SupportInbox />;
+  return <AdminConsole initialTab="support" />;
 }

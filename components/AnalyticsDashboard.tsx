@@ -155,13 +155,22 @@ function InsightList({ title, rows }: { title: string; rows: InsightItem[] }) {
   );
 }
 
-export default function AnalyticsDashboard() {
-  const [token, setToken] = useState("");
+type AnalyticsDashboardProps = {
+  embedded?: boolean;
+  token?: string;
+  onTokenChange?: (value: string) => void;
+};
+
+export default function AnalyticsDashboard({ embedded = false, token: providedToken, onTokenChange }: AnalyticsDashboardProps) {
+  const [localToken, setLocalToken] = useState("");
+  const token = providedToken ?? localToken;
+  const setToken = onTokenChange ?? setLocalToken;
   const [data, setData] = useState<Overview | null>(null);
   const [loading, setLoading] = useState(false);
   const [normalizing, setNormalizing] = useState(false);
   const [normalizeResult, setNormalizeResult] = useState("");
   const [error, setError] = useState("");
+  const Container = embedded ? "section" : "main";
 
   const totals = useMemo(() => data?.ga4.totals || {}, [data]);
   const searchTotals = useMemo(() => {
@@ -224,7 +233,7 @@ export default function AnalyticsDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-sand px-5 py-8">
+    <Container className="min-h-screen bg-sand px-5 py-8">
       <div className="mx-auto max-w-[1320px]">
         <div className="mb-7 flex flex-col gap-4 rounded-card border border-line bg-surface p-6 shadow-card-sm lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -240,13 +249,13 @@ export default function AnalyticsDashboard() {
             </p>
           </div>
           <div className="flex w-full flex-col gap-2 sm:flex-row lg:w-auto">
-            <input
+            {!embedded ? <input
               type="password"
               value={token}
               onChange={(event) => setToken(event.target.value)}
               placeholder="Analytics API secret"
               className="h-12 min-w-[280px] rounded-full border border-line bg-cream px-4 text-[15px] font-semibold text-ink outline-none focus:border-green"
-            />
+            /> : null}
             <button
               type="button"
               onClick={loadData}
@@ -429,6 +438,6 @@ export default function AnalyticsDashboard() {
           </div>
         )}
       </div>
-    </main>
+    </Container>
   );
 }

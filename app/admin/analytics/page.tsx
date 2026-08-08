@@ -1,4 +1,4 @@
-import AnalyticsDashboard from "@/components/AnalyticsDashboard";
+import AdminConsole from "@/components/AdminConsole";
 
 export const metadata = {
   title: "SEO Analytics Dashboard | SwapSpot",
@@ -9,5 +9,5 @@ export const metadata = {
 };
 
 export default function AdminAnalyticsPage() {
-  return <AnalyticsDashboard />;
+  return <AdminConsole initialTab="analytics" />;
 }
