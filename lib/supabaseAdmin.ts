@@ -33,3 +33,17 @@ export async function supabaseAdminFetch(path: string, init: RequestInit = {}) {
     cache: "no-store",
   });
 }
+
+export async function invokeSupabaseAdminFunction(name: string, payload: unknown) {
+  const { supabaseUrl, serviceRoleKey } = getSupabaseAdminEnv();
+  return fetch(`${supabaseUrl}/functions/v1/${name}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: serviceRoleKey,
+      Authorization: `Bearer ${serviceRoleKey}`,
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+}

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAnalyticsAccess } from "@/lib/googleServerApis";
-import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
+import { invokeSupabaseAdminFunction, supabaseAdminFetch } from "@/lib/supabaseAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +25,15 @@ export async function POST(request: Request) {
     }
 
     const result = Array.isArray(data) ? data[0] : data;
+    const pushResponse = await invokeSupabaseAdminFunction("push-notification", {
+      type: "INSERT",
+      table: "support_broadcast",
+      record: { content },
+    }).catch(() => null);
+    if (pushResponse && !pushResponse.ok) {
+      console.warn("Broadcast push delivery could not be queued", await pushResponse.text());
+    }
+
     return NextResponse.json({ ok: true, broadcast: result });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";

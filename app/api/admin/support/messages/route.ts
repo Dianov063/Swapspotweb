@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAnalyticsAccess } from "@/lib/googleServerApis";
-import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
+import { invokeSupabaseAdminFunction, supabaseAdminFetch } from "@/lib/supabaseAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -72,7 +72,17 @@ export async function POST(request: Request) {
       throw new Error(data?.message || "Could not send support reply");
     }
 
-    return NextResponse.json({ ok: true, message: Array.isArray(data) ? data[0] : data });
+    const message = Array.isArray(data) ? data[0] : data;
+    const pushResponse = await invokeSupabaseAdminFunction("push-notification", {
+      type: "INSERT",
+      table: "support_messages",
+      record: message,
+    }).catch(() => null);
+    if (pushResponse && !pushResponse.ok) {
+      console.warn("Support push delivery could not be queued", await pushResponse.text());
+    }
+
+    return NextResponse.json({ ok: true, message });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     const status =
