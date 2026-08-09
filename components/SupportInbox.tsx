@@ -55,9 +55,11 @@ export default function SupportInbox({ embedded = false, token: providedToken, o
   const [selectedId, setSelectedId] = useState("");
   const [messages, setMessages] = useState<SupportMessage[]>([]);
   const [reply, setReply] = useState("");
+  const [announcement, setAnnouncement] = useState("");
   const [loadingThreads, setLoadingThreads] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [sending, setSending] = useState(false);
+  const [sendingAnnouncement, setSendingAnnouncement] = useState(false);
   const [error, setError] = useState("");
   const Container = embedded ? "section" : "main";
 
@@ -132,6 +134,33 @@ export default function SupportInbox({ embedded = false, token: providedToken, o
     }
   }
 
+  async function sendAnnouncement() {
+    const content = announcement.trim();
+    if (!content || sendingAnnouncement) return;
+    if (!window.confirm("Send this message to every registered SwapSpot account? This cannot be undone.")) return;
+
+    setSendingAnnouncement(true);
+    setError("");
+    try {
+      const response = await fetch("/api/admin/support/broadcast", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-analytics-token": token,
+        },
+        body: JSON.stringify({ content }),
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) throw new Error(payload.error || "Could not send announcement");
+      setAnnouncement("");
+      await loadThreads();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Unknown error");
+    } finally {
+      setSendingAnnouncement(false);
+    }
+  }
+
   return (
     <Container className="min-h-screen bg-sand px-5 py-8">
       <div className="mx-auto max-w-[1320px]">
@@ -165,6 +194,38 @@ export default function SupportInbox({ embedded = false, token: providedToken, o
                 {loadingThreads ? "Loading..." : "Load inbox"}
               </button>
             </div>
+          </div>
+        </section>
+
+        <section className="mb-6 rounded-card border border-line bg-surface p-6 shadow-card-sm">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">Administration</p>
+              <h2 className="mt-1 font-head text-[26px] font-bold text-ink">Message every user</h2>
+              <p className="mt-1 max-w-[760px] text-[14px] leading-[1.5] text-ink-soft">
+                Sends one private SwapSpot Support message to every registered account on web, Android, and iOS.
+              </p>
+            </div>
+            <span className="rounded-full bg-green-soft px-3 py-1 text-[12px] font-bold text-green-deep">Admin only</span>
+          </div>
+          <textarea
+            value={announcement}
+            onChange={(event) => setAnnouncement(event.target.value)}
+            disabled={!token || sendingAnnouncement}
+            maxLength={2000}
+            placeholder="Welcome to SwapSpot! …"
+            className="mt-4 min-h-[112px] w-full resize-none rounded-card-sm border border-line bg-cream p-4 text-[15px] font-semibold leading-[1.45] text-ink outline-none focus:border-green disabled:cursor-not-allowed disabled:opacity-60"
+          />
+          <div className="mt-3 flex items-center justify-between gap-3">
+            <span className="text-[12px] font-bold text-ink-soft">{announcement.length}/2000</span>
+            <button
+              type="button"
+              onClick={sendAnnouncement}
+              disabled={!token || !announcement.trim() || sendingAnnouncement}
+              className="h-11 rounded-full bg-green px-6 text-[14px] font-extrabold text-surface transition hover:bg-green-deep disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {sendingAnnouncement ? "Sending to all users..." : "Send to all users"}
+            </button>
           </div>
         </section>
 
