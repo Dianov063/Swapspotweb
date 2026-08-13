@@ -1,4 +1,5 @@
 import { createSign } from "crypto";
+import { hasAdminSession } from "@/lib/adminSession";
 
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GA4_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
@@ -100,11 +101,7 @@ export function requireAnalyticsAccess(request: Request) {
     return;
   }
 
-  const auth = request.headers.get("authorization");
-  const token = request.headers.get("x-analytics-token");
-  const bearer = auth?.startsWith("Bearer ") ? auth.slice("Bearer ".length) : undefined;
-
-  if (bearer !== secret && token !== secret) {
+  if (!hasAdminSession(request)) {
     throw new Error("Unauthorized");
   }
 }
