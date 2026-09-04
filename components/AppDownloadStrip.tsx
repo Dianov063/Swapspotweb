@@ -1,4 +1,4 @@
-import { ShieldCheck, Sparkles } from "lucide-react";
+import { Instagram, Music2, ShieldCheck, Sparkles } from "lucide-react";
 import AppStoreButtons from "./AppStoreButtons";
 import { dictionaries, defaultLocale, type Dictionary, type Locale } from "@/lib/i18n";
 
@@ -36,7 +36,22 @@ export default function AppDownloadStrip({
           </div>
         </div>
 
-        <AppStoreButtons className="justify-start lg:justify-end" />
+        <div className="flex flex-col items-start gap-3 lg:items-end">
+          <AppStoreButtons className="justify-start lg:justify-end" />
+          <div
+            aria-label="SwapSpot social links coming soon"
+            className="flex flex-wrap items-center gap-2"
+          >
+            <span className="inline-flex h-10 items-center gap-2 rounded-full border border-green/15 bg-surface/80 px-4 text-[13px] font-extrabold text-green-deep shadow-card-sm">
+              <Instagram className="h-4 w-4" />
+              Instagram
+            </span>
+            <span className="inline-flex h-10 items-center gap-2 rounded-full border border-green/15 bg-surface/80 px-4 text-[13px] font-extrabold text-green-deep shadow-card-sm">
+              <Music2 className="h-4 w-4" />
+              TikTok
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );
