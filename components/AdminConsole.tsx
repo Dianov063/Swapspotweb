@@ -4,11 +4,13 @@ import { FormEvent, useEffect, useState } from "react";
 import AnalyticsDashboard from "@/components/AnalyticsDashboard";
 import SupportInbox from "@/components/SupportInbox";
 import UserDirectory from "@/components/UserDirectory";
+import SeedDirectory from "@/components/SeedDirectory";
 
-export type AdminTab = "users" | "support" | "analytics";
+export type AdminTab = "users" | "support" | "analytics" | "seeds";
 
 const tabs: { id: AdminTab; label: string; description: string }[] = [
   { id: "users", label: "Users", description: "Directory, platform, city, and state" },
+  { id: "seeds", label: "Сиды", description: "Страны, профили, услуги и цены" },
   { id: "support", label: "Support", description: "Read and reply to app questions" },
   { id: "analytics", label: "Analytics", description: "Traffic, SEO, and service cleanup" },
 ];
@@ -115,6 +117,7 @@ export default function AdminConsole({ initialTab = "users" }: { initialTab?: Ad
       </header>
 
       {activeTab === "users" ? <UserDirectory embedded token={sessionToken} /> : null}
+      {activeTab === "seeds" ? <SeedDirectory /> : null}
       {activeTab === "support" ? <SupportInbox embedded token={sessionToken} /> : null}
       {activeTab === "analytics" ? <AnalyticsDashboard embedded token={sessionToken} /> : null}
     </main>
