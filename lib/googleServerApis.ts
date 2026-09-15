@@ -150,11 +150,13 @@ async function runGa4Report({
   metrics,
   rowLimit = 25,
   orderByMetric,
+  dateRanges = [{ startDate: "30daysAgo", endDate: "today" }],
 }: {
   dimensions: string[];
   metrics: string[];
   rowLimit?: number;
   orderByMetric?: string;
+  dateRanges?: { startDate: string; endDate: string }[];
 }) {
   const propertyId = process.env.GA4_PROPERTY_ID;
 
@@ -172,7 +174,7 @@ async function runGa4Report({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+        dateRanges,
         dimensions: dimensions.map((name) => ({ name })),
         metrics: metrics.map((name) => ({ name })),
         orderBys: orderByMetric
@@ -212,9 +214,13 @@ function normalizeGa4Rows(data: { rows?: Ga4Row[] }, dimensions: string[], metri
 async function runSearchConsoleReport({
   dimensions,
   rowLimit = 25,
+  startDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString().slice(0, 10),
+  endDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString().slice(0, 10),
 }: {
   dimensions: string[];
   rowLimit?: number;
+  startDate?: string;
+  endDate?: string;
 }) {
   const siteUrl = process.env.SEARCH_CONSOLE_SITE_URL;
 
@@ -232,8 +238,8 @@ async function runSearchConsoleReport({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString().slice(0, 10),
-        endDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString().slice(0, 10),
+        startDate,
+        endDate,
         dimensions,
         rowLimit,
         startRow: 0,
@@ -357,6 +363,48 @@ function buildSeoInsights({
 
 export async function fetchSearchConsoleReport() {
   return runSearchConsoleReport({ dimensions: ["query"], rowLimit: 25 });
+}
+
+export async function fetchDailyGoogleReport({
+  analyticsDate,
+  searchStartDate,
+  searchEndDate,
+}: {
+  analyticsDate: string;
+  searchStartDate: string;
+  searchEndDate: string;
+}) {
+  const gaMetrics = ["activeUsers", "sessions", "screenPageViews", "engagedSessions"];
+  const dateRanges = [{ startDate: analyticsDate, endDate: analyticsDate }];
+  const searchDates = { startDate: searchStartDate, endDate: searchEndDate };
+  const [gaTotals, gaLocations, gaSources, gaPages, searchQueries, searchPages, searchCountries, searchByDate] = await Promise.all([
+    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }),
+    runGa4Report({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }),
+    runGa4Report({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }),
+    runGa4Report({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }),
+    runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }),
+    runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }),
+    runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }),
+    runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }),
+  ]);
+
+  return {
+    analyticsDate,
+    searchStartDate,
+    searchEndDate,
+    ga4: {
+      totals: normalizeGa4Rows(gaTotals, [], gaMetrics)[0] || {},
+      locations: normalizeGa4Rows(gaLocations, ["country", "city"], gaMetrics),
+      sources: normalizeGa4Rows(gaSources, ["sessionSourceMedium"], gaMetrics),
+      pages: normalizeGa4Rows(gaPages, ["pagePath"], gaMetrics),
+    },
+    searchConsole: {
+      queries: normalizeSearchRows(searchQueries, ["query"]),
+      pages: normalizeSearchRows(searchPages, ["page"]),
+      countries: normalizeSearchRows(searchCountries, ["country"]),
+      byDate: normalizeSearchRows(searchByDate, ["date"]),
+    },
+  };
 }
 
 export async function fetchAnalyticsOverview() {

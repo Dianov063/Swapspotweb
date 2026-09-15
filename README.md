@@ -175,3 +175,25 @@ SUPABASE_SERVICE_ROLE_KEY=...
 
 Do not expose `SUPABASE_SERVICE_ROLE_KEY` to the mobile app or browser. It is
 server-only and is used only by `/api/admin/services/normalize`.
+
+## Daily owner report
+
+`/api/cron/daily-report` sends one Russian-language owner report at 11:00
+`America/New_York`. Two UTC cron entries cover daylight-saving changes; the
+route checks New York local time and Resend idempotency prevents duplicates.
+
+The report includes GA4 traffic by country and city, Search Console queries,
+new real registrations by country/city, and newly added helper services. Test
+accounts using the reserved `@example.com` domain are excluded. Bing Webmaster
+is included when its API key is configured.
+
+Required production environment variables:
+
+```txt
+CRON_SECRET=...
+RESEND_API_KEY=...
+DAILY_REPORT_RECIPIENT=dianov063@gmail.com
+DAILY_REPORT_FROM=SwapSpot Reports <hello@swapspot.org>
+BING_WEBMASTER_API_KEY=... # optional until Bing API access is enabled
+BING_SITE_URL=https://www.swapspot.org/
+```
