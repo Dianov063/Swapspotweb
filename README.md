@@ -180,7 +180,7 @@ server-only and is used only by `/api/admin/services/normalize`.
 
 `/api/cron/daily-report` sends one Russian-language owner report at 11:00
 `America/New_York`. Two UTC cron entries cover daylight-saving changes; the
-route checks New York local time and Resend idempotency prevents duplicates.
+route checks New York local time and MailHub idempotency prevents duplicates.
 
 The report includes GA4 traffic by country and city, Search Console queries,
 new real registrations by country/city, and newly added helper services. Test
@@ -191,9 +191,12 @@ Required production environment variables:
 
 ```txt
 CRON_SECRET=...
-RESEND_API_KEY=...
 DAILY_REPORT_RECIPIENT=dianov063@gmail.com
-DAILY_REPORT_FROM=SwapSpot Reports <hello@swapspot.org>
 BING_WEBMASTER_API_KEY=... # optional until Bing API access is enabled
 BING_SITE_URL=https://www.swapspot.org/
 ```
+
+Email delivery is MailHub-only. Vercel invokes the protected Supabase
+`admin-report-email` Edge Function with its service-role credential; that
+function owns the MailHub API call and uses the existing `MAILHUB_API_KEY`
+Supabase secret. No MailHub credential is exposed to Vercel or the browser.

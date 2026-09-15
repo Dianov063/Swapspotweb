@@ -1,4 +1,5 @@
 import { fetchDailyGoogleReport } from "@/lib/googleServerApis";
+import { invokeSupabaseAdminFunction } from "@/lib/supabaseAdmin";
 import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
 
 const REPORT_TIME_ZONE = "America/New_York";
@@ -312,21 +313,23 @@ export async function buildDailyReport(window: DailyReportWindow) {
 }
 
 export async function sendDailyReport(report: Awaited<ReturnType<typeof buildDailyReport>>, reportDate: string) {
-  const apiKey = process.env.RESEND_API_KEY;
   const recipient = process.env.DAILY_REPORT_RECIPIENT;
-  const from = process.env.DAILY_REPORT_FROM || "SwapSpot Reports <hello@swapspot.org>";
-  if (!apiKey) throw new Error("RESEND_API_KEY is not configured");
   if (!recipient) throw new Error("DAILY_REPORT_RECIPIENT is not configured");
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Idempotency-Key": `swapspot-daily-report-${reportDate}`,
-    },
-    body: JSON.stringify({ from, to: [recipient], subject: report.subject, html: report.html, text: report.text }),
+  const response = await invokeSupabaseAdminFunction("admin-report-email", {
+    recipientEmail: recipient,
+    recipientName: "Dmitry",
+    subject: report.subject,
+    html: report.html,
+    text: report.text,
+    reportDate,
   });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data?.message || `Resend rejected report (${response.status})`);
-  return { id: String(data?.id || "") };
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data?.details || data?.error || `MailHub rejected report (${response.status})`);
+  }
+  return {
+    provider: "mailhub",
+    id: String(data?.id || ""),
+    status: String(data?.status || "QUEUED"),
+  };
 }
