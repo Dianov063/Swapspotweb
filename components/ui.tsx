@@ -106,17 +106,20 @@ export function SectionHead({
   eyebrow,
   title,
   children,
+  headingLevel = "h2",
 }: {
   eyebrow: string;
   title: string;
   children?: ReactNode;
+  headingLevel?: "h1" | "h2";
 }) {
+  const Heading = headingLevel;
   return (
     <div className="mx-auto max-w-[640px] text-center">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-3.5 font-head text-[clamp(28px,3.6vw,44px)] font-bold leading-[1.08] tracking-[-0.02em] text-ink">
+      <Heading className="mt-3.5 font-head text-[clamp(28px,3.6vw,44px)] font-bold leading-[1.08] tracking-[-0.02em] text-ink">
         {title}
-      </h2>
+      </Heading>
       {children ? (
         <p className="mt-4 text-[17px] leading-[1.55] text-ink-soft">{children}</p>
       ) : null}

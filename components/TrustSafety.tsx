@@ -8,8 +8,10 @@ import {
 
 export default function TrustSafety({
   dictionary = dictionaries[defaultLocale],
+  headingLevel = "h2",
 }: {
   dictionary?: Dictionary;
+  headingLevel?: "h1" | "h2";
 }) {
   return (
     <section id="trust" className="border-y border-line bg-cream">
@@ -17,6 +19,7 @@ export default function TrustSafety({
         <SectionHead
           eyebrow={dictionary.trust.eyebrow}
           title={dictionary.trust.title}
+          headingLevel={headingLevel}
         >
           {dictionary.trust.body}
         </SectionHead>

@@ -365,6 +365,12 @@ export async function fetchSearchConsoleReport() {
   return runSearchConsoleReport({ dimensions: ["query"], rowLimit: 25 });
 }
 
+function shiftReportDate(isoDate: string, days: number) {
+  const date = new Date(`${isoDate}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
 export async function fetchDailyGoogleReport({
   analyticsDate,
   searchStartDate,
@@ -376,16 +382,49 @@ export async function fetchDailyGoogleReport({
 }) {
   const gaMetrics = ["activeUsers", "sessions", "screenPageViews", "engagedSessions"];
   const dateRanges = [{ startDate: analyticsDate, endDate: analyticsDate }];
+  const previousAnalyticsDate = shiftReportDate(analyticsDate, -1);
+  const previousDateRanges = [{ startDate: previousAnalyticsDate, endDate: previousAnalyticsDate }];
   const searchDates = { startDate: searchStartDate, endDate: searchEndDate };
-  const [gaTotals, gaLocations, gaSources, gaPages, searchQueries, searchPages, searchCountries, searchByDate] = await Promise.all([
+  const searchWindowDays = Math.max(
+    1,
+    Math.round(
+      (new Date(`${searchEndDate}T12:00:00Z`).getTime() - new Date(`${searchStartDate}T12:00:00Z`).getTime()) /
+        (24 * 60 * 60 * 1000),
+    ) + 1,
+  );
+  const previousSearchEndDate = shiftReportDate(searchStartDate, -1);
+  const previousSearchStartDate = shiftReportDate(previousSearchEndDate, -(searchWindowDays - 1));
+  const [
+    gaTotals,
+    gaPreviousTotals,
+    gaLocations,
+    gaSources,
+    gaPages,
+    gaDevices,
+    gaLanguages,
+    searchQueries,
+    searchPages,
+    searchCountries,
+    searchByDate,
+    searchPreviousByDate,
+  ] = await Promise.all([
     runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }),
+    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges: previousDateRanges }),
     runGa4Report({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }),
     runGa4Report({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }),
     runGa4Report({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }),
+    runGa4Report({ dimensions: ["deviceCategory"], metrics: gaMetrics, rowLimit: 10, orderByMetric: "activeUsers", dateRanges }),
+    runGa4Report({ dimensions: ["language"], metrics: gaMetrics, rowLimit: 15, orderByMetric: "activeUsers", dateRanges }),
     runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }),
     runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }),
     runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }),
     runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }),
+    runSearchConsoleReport({
+      dimensions: ["date"],
+      rowLimit: 30,
+      startDate: previousSearchStartDate,
+      endDate: previousSearchEndDate,
+    }),
   ]);
 
   return {
@@ -394,15 +433,22 @@ export async function fetchDailyGoogleReport({
     searchEndDate,
     ga4: {
       totals: normalizeGa4Rows(gaTotals, [], gaMetrics)[0] || {},
+      previousDate: previousAnalyticsDate,
+      previousTotals: normalizeGa4Rows(gaPreviousTotals, [], gaMetrics)[0] || {},
       locations: normalizeGa4Rows(gaLocations, ["country", "city"], gaMetrics),
       sources: normalizeGa4Rows(gaSources, ["sessionSourceMedium"], gaMetrics),
       pages: normalizeGa4Rows(gaPages, ["pagePath"], gaMetrics),
+      devices: normalizeGa4Rows(gaDevices, ["deviceCategory"], gaMetrics),
+      languages: normalizeGa4Rows(gaLanguages, ["language"], gaMetrics),
     },
     searchConsole: {
       queries: normalizeSearchRows(searchQueries, ["query"]),
       pages: normalizeSearchRows(searchPages, ["page"]),
       countries: normalizeSearchRows(searchCountries, ["country"]),
       byDate: normalizeSearchRows(searchByDate, ["date"]),
+      previousStartDate: previousSearchStartDate,
+      previousEndDate: previousSearchEndDate,
+      previousByDate: normalizeSearchRows(searchPreviousByDate, ["date"]),
     },
   };
 }

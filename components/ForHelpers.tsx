@@ -8,10 +8,13 @@ const bars = [42, 64, 38, 78, 54, 90, 62];
 export default function ForHelpers({
   locale,
   dictionary,
+  headingLevel = "h2",
 }: {
   locale: Locale;
   dictionary: Dictionary;
+  headingLevel?: "h1" | "h2";
 }) {
+  const Heading = headingLevel;
   return (
     <section id="helpers" className="mx-auto max-w-wrap px-6 pb-[clamp(48px,6vw,86px)]">
       <div className="relative overflow-hidden rounded-card bg-green p-[clamp(34px,4.5vw,60px)] text-surface shadow-card">
@@ -21,9 +24,9 @@ export default function ForHelpers({
         <div className="relative grid items-center gap-[clamp(32px,5vw,56px)] lg:grid-cols-[1.2fr_1fr]">
           <div>
             <Eyebrow tone="cream">{dictionary.helpers.eyebrow}</Eyebrow>
-            <h2 className="mt-3.5 font-head text-[clamp(28px,3.6vw,44px)] font-bold leading-[1.08] tracking-[-0.02em]">
+            <Heading className="mt-3.5 font-head text-[clamp(28px,3.6vw,44px)] font-bold leading-[1.08] tracking-[-0.02em]">
               {dictionary.helpers.title}
-            </h2>
+            </Heading>
             <p className="mt-4 max-w-[460px] text-[17px] leading-[1.55] text-white/80">
               {dictionary.helpers.body}
             </p>

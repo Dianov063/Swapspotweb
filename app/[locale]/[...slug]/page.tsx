@@ -119,7 +119,7 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     "account-deletion": "I-delete ang iyong SwapSpot account",
     "delete-account": "I-delete ang iyong SwapSpot account",
     helpers: "Maging Helper",
-    "trust-safety": "Trust & Safety",
+    "trust-safety": "Tiwala at Kaligtasan",
   },
   hi: {
     privacy: "गोपनीयता नीति",
@@ -221,7 +221,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     slug[0] === "delete-account" ? "account-deletion" : slug[0];
   return {
     title,
-    description: localizedIntros[locale],
+    description: `${title}. ${localizedIntros[locale]}`,
     alternates: { canonical: localizedPath(locale, `/${canonicalPage}`) },
   };
 }
@@ -244,7 +244,7 @@ export default async function LocalizedStaticPage({ params }: Props) {
       >
         <Header locale={locale} dictionary={dictionary} />
         <main className="py-[clamp(32px,5vw,64px)]">
-          <TrustSafety dictionary={dictionary} />
+          <TrustSafety dictionary={dictionary} headingLevel="h1" />
         </main>
         <Footer locale={locale} dictionary={dictionary} />
       </div>

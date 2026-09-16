@@ -58,6 +58,7 @@ export type DirectoryPair = {
   marketName: string;
   countryCode: string | null;
   listingCount: number;
+  sourceMarketSlugs: string[];
 };
 
 export type PublicHelperProfile = {
@@ -158,7 +159,7 @@ export async function getDirectoryMarkets(): Promise<DirectoryMarket[]> {
   return fallbackCities.map((city) => ({ slug: city.slug, name: city.name }));
 }
 
-export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
+async function getRawDirectoryPairs(): Promise<DirectoryPair[]> {
   const rows = await fetchRest<{
     category_name: string;
     category_slug: string;
@@ -185,6 +186,7 @@ export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
         marketName: row.market_name,
         countryCode: row.country_code,
         listingCount: 1,
+        sourceMarketSlugs: [row.market_slug],
       });
     }
   }
@@ -192,15 +194,48 @@ export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
   return [...byKey.values()];
 }
 
+function directoryPairGroupKey(pair: DirectoryPair) {
+  return [
+    pair.categorySlug,
+    pair.marketName.trim().toLocaleLowerCase("en-US"),
+    pair.countryCode || "",
+  ].join(":");
+}
+
+function preferredDirectoryPair(pairs: DirectoryPair[]) {
+  return [...pairs].sort((left, right) =>
+    left.marketSlug.length - right.marketSlug.length ||
+    left.marketSlug.localeCompare(right.marketSlug),
+  )[0];
+}
+
+function mergeDirectoryPairGroup(pairs: DirectoryPair[]): DirectoryPair {
+  const preferred = preferredDirectoryPair(pairs);
+  return {
+    ...preferred,
+    listingCount: pairs.reduce((total, pair) => total + pair.listingCount, 0),
+    sourceMarketSlugs: [...new Set(pairs.map((pair) => pair.marketSlug))],
+  };
+}
+
+export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
+  const grouped = new Map<string, DirectoryPair[]>();
+  for (const pair of await getRawDirectoryPairs()) {
+    const key = directoryPairGroupKey(pair);
+    grouped.set(key, [...(grouped.get(key) || []), pair]);
+  }
+  return [...grouped.values()].map(mergeDirectoryPairGroup);
+}
+
 export async function getDirectoryPair(categorySlug: string, marketSlug: string) {
   const canonicalCategorySlug = categoryAliases[categorySlug] || categorySlug;
-  const pairs = await getDirectoryPairs();
-
-  return (
-    pairs.find(
-      (pair) =>
-        pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
-    ) || null
+  const pairs = await getRawDirectoryPairs();
+  const requested = pairs.find(
+    (pair) => pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
+  );
+  if (!requested) return null;
+  return mergeDirectoryPairGroup(
+    pairs.filter((pair) => directoryPairGroupKey(pair) === directoryPairGroupKey(requested)),
   );
 }
 
@@ -217,10 +252,12 @@ export async function getDirectoryMarket(slug: string) {
 export async function getPublicServiceListings({
   categorySlug,
   marketSlug,
+  marketSlugs,
   limit = 24,
 }: {
   categorySlug?: string;
   marketSlug?: string;
+  marketSlugs?: string[];
   limit?: number;
 }) {
   const params = new URLSearchParams({
@@ -230,7 +267,14 @@ export async function getPublicServiceListings({
   });
 
   if (categorySlug) params.set("category_slug", `eq.${categorySlug}`);
-  if (marketSlug) params.set("market_slug", `eq.${marketSlug}`);
+  const uniqueMarketSlugs = [...new Set((marketSlugs || []).filter(Boolean))];
+  if (uniqueMarketSlugs.length > 1) {
+    params.set("market_slug", `in.(${uniqueMarketSlugs.join(",")})`);
+  } else if (uniqueMarketSlugs.length === 1) {
+    params.set("market_slug", `eq.${uniqueMarketSlugs[0]}`);
+  } else if (marketSlug) {
+    params.set("market_slug", `eq.${marketSlug}`);
+  }
 
   return fetchRest<PublicServiceListing>(`public_service_listings?${params}`);
 }

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Trust & Safety",
   description:
     "How SwapSpot keeps neighbors safe: verified reviews, private in-app chat, reporting tools, and full data control.",
+  alternates: { canonical: "/trust-safety" },
 };
 
 export default function TrustSafetyPage() {
@@ -14,7 +15,7 @@ export default function TrustSafetyPage() {
     <>
       <Header />
       <main>
-        <TrustSafety />
+        <TrustSafety headingLevel="h1" />
       </main>
       <Footer />
     </>

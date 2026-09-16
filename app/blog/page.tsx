@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Tips, neighborhood stories, and product news from SwapSpot.",
+  alternates: { canonical: "/blog" },
+  robots: { index: false, follow: true },
 };
 
 /**

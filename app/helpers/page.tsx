@@ -22,7 +22,7 @@ export default function HelpersPage() {
     <div lang={defaultLocale} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={defaultLocale} dictionary={dictionary} />
       <main className="pt-[clamp(42px,6vw,78px)]">
-        <ForHelpers locale={defaultLocale} dictionary={dictionary} />
+        <ForHelpers locale={defaultLocale} dictionary={dictionary} headingLevel="h1" />
         <TrustSafety dictionary={dictionary} />
         <AppDownloadStrip locale={defaultLocale} dictionary={dictionary} />
       </main>

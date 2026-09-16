@@ -84,7 +84,7 @@ export default async function ServiceMarketPage({ params }: Props) {
 
   const listings = await getPublicServiceListings({
     categorySlug: pair.categorySlug,
-    marketSlug: pair.marketSlug,
+    marketSlugs: pair.sourceMarketSlugs,
     limit: 30,
   });
   const serviceNames = uniqueValues(listings.map((listing) => getServiceTitle(listing)));
