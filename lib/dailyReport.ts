@@ -198,6 +198,31 @@ type BingCrawlStat = {
   ContainsMalware?: number;
 };
 
+type BingCrawlIssue = {
+  Url?: string;
+  HttpCode?: number;
+  Issues?: number;
+  InLinks?: number;
+};
+
+const bingCrawlIssueFlags: Array<[number, string]> = [
+  [1, "301 redirect"],
+  [2, "302 redirect"],
+  [4, "4xx"],
+  [8, "5xx"],
+  [16, "blocked by robots.txt"],
+  [32, "malware"],
+  [64, "important URL blocked by robots.txt"],
+  [128, "DNS error"],
+  [256, "timeout"],
+];
+
+function describeBingCrawlIssues(value: number | undefined) {
+  const flags = Number(value || 0);
+  const labels = bingCrawlIssueFlags.filter(([bit]) => (flags & bit) === bit).map(([, label]) => label);
+  return labels.length ? labels.join(", ") : "none";
+}
+
 async function fetchBingRows<T>(method: string, siteUrl: string, apiKey: string) {
   const params = new URLSearchParams({ siteUrl, apikey: apiKey });
   const response = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/${method}?${params}`, { cache: "no-store" });
@@ -226,20 +251,24 @@ async function fetchBingReport() {
     siteUrl,
     queries: [] as BingQueryStat[],
     crawl: null as BingCrawlStat | null,
+    issues: [] as BingCrawlIssue[],
     warnings: [] as string[],
   };
-  const [queryResult, crawlResult] = await Promise.allSettled([
+  const [queryResult, crawlResult, issuesResult] = await Promise.allSettled([
     fetchBingRows<BingQueryStat>("GetQueryStats", siteUrl, apiKey),
     fetchBingRows<BingCrawlStat>("GetCrawlStats", siteUrl, apiKey),
+    fetchBingRows<BingCrawlIssue>("GetCrawlIssues", siteUrl, apiKey),
   ]);
   const warnings: string[] = [];
   if (queryResult.status === "rejected") warnings.push(`Query stats: ${String(queryResult.reason)}`);
   if (crawlResult.status === "rejected") warnings.push(`Crawl stats: ${String(crawlResult.reason)}`);
-  if (queryResult.status === "rejected" && crawlResult.status === "rejected") {
+  if (issuesResult.status === "rejected") warnings.push(`Crawl issues: ${String(issuesResult.reason)}`);
+  if (queryResult.status === "rejected" && crawlResult.status === "rejected" && issuesResult.status === "rejected") {
     throw new Error(warnings.join("; "));
   }
   const rows = queryResult.status === "fulfilled" ? queryResult.value : [];
   const crawlRows = crawlResult.status === "fulfilled" ? crawlResult.value : [];
+  const issues = issuesResult.status === "fulfilled" ? issuesResult.value : [];
   const aggregated = new Map<string, BingQueryStat>();
   for (const row of rows) {
     const query = row.Query?.trim();
@@ -256,6 +285,7 @@ async function fetchBingReport() {
     siteUrl,
     queries: [...aggregated.values()].sort((a, b) => Number(b.Impressions || 0) - Number(a.Impressions || 0)).slice(0, 15),
     crawl: [...crawlRows].sort((a, b) => bingDateValue(b.Date) - bingDateValue(a.Date))[0] || null,
+    issues,
     warnings,
   };
 }
@@ -308,6 +338,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
     siteUrl: "https://www.swapspot.org/",
     queries: [],
     crawl: null,
+    issues: [],
     warnings: [],
   };
   if (googleResult.status === "rejected") errors.push(`Google: ${String(googleResult.reason)}`);
@@ -350,6 +381,12 @@ export async function buildDailyReport(window: DailyReportWindow) {
     number(bing.crawl.Code5xx),
     number(bing.crawl.BlockedByRobotsTxt),
   ]] : [];
+  const bingIssueRows = bing.issues.slice(0, 25).map((issue) => [
+    issue.Url || "—",
+    number(issue.HttpCode),
+    describeBingCrawlIssues(issue.Issues),
+    number(issue.InLinks),
+  ]);
 
   const gaUsers = number(gaTotals.activeUsers);
   const gaSessions = number(gaTotals.sessions);
@@ -362,7 +399,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Новые услуги в профилях</h2>${renderTable(["Исполнитель", "Услуга", "Цена", "Тип цены", "Страна", "Город"], serviceRows)}<h3>По странам</h3>${renderTable(["Страна", "Услуги"], serviceCountries)}<h3>По городам</h3>${renderTable(["Город", "Услуги"], serviceCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Google Analytics</h2><p style="color:#6b7280">Данные за ${escapeHtml(window.analyticsDate)}; сравнение с ${escapeHtml(google?.ga4.previousDate || "—")}.</p><h3>Страны и города</h3>${renderTable(["Страна", "Город", "Пользователи", "Сессии"], locationRows)}<h3>Источники трафика</h3>${renderTable(["Источник / канал", "Пользователи", "Сессии", "Вовлечённые сессии"], sourceRows)}<h3>Страницы</h3>${renderTable(["Страница", "Пользователи", "Просмотры", "Вовлечённые сессии"], pageRows)}<h3>Устройства</h3>${renderTable(["Устройство", "Пользователи", "Сессии"], deviceRows)}<h3>Языки браузера</h3>${renderTable(["Язык", "Пользователи", "Сессии"], languageRows)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Google Search Console</h2><p style="color:#6b7280">Текущий период: ${escapeHtml(window.searchStartDate)}–${escapeHtml(window.searchEndDate)}; предыдущий: ${escapeHtml(google?.searchConsole.previousStartDate || "—")}–${escapeHtml(google?.searchConsole.previousEndDate || "—")}.</p><h3>Запросы</h3>${renderTable(["Запрос", "Клики", "Показы", "CTR", "Позиция"], searchRows)}<h3>Страницы</h3>${renderTable(["Страница", "Клики", "Показы", "CTR", "Позиция"], searchPageRows)}<h3>Страны</h3>${renderTable(["Страна", "Клики", "Показы", "CTR"], searchCountryRows)}</section>
-  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Bing Webmaster</h2>${bing.configured ? `<h3>Поисковые запросы</h3>${renderTable(["Запрос", "Клики", "Показы", "Позиция"], bingRows)}<h3>Последнее сканирование</h3>${renderTable(["Дата", "Просканировано", "В индексе", "Ошибки", "4xx", "5xx", "robots.txt"], bingCrawlRows)}<p style="font-size:12px;color:#6b7280">Полный список рекомендаций: https://www.bing.com/webmasters/recommendations</p>` : '<p style="color:#6b7280">Bing API пока не подключён. Добавьте BING_WEBMASTER_API_KEY, и блок заполнится автоматически.</p>'}</section>
+  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Bing Webmaster</h2>${bing.configured ? `<h3>Поисковые запросы</h3>${renderTable(["Запрос", "Клики", "Показы", "Позиция"], bingRows)}<h3>Последнее сканирование</h3>${renderTable(["Дата", "Просканировано", "В индексе", "Ошибки", "4xx", "5xx", "robots.txt"], bingCrawlRows)}<h3>URL с проблемами сканирования</h3>${renderTable(["URL", "HTTP", "Проблема", "Входящие ссылки"], bingIssueRows)}<p style="font-size:12px;color:#6b7280">Полный список рекомендаций: https://www.bing.com/webmasters/recommendations</p>` : '<p style="color:#6b7280">Bing API пока не подключён. Добавьте BING_WEBMASTER_API_KEY, и блок заполнится автоматически.</p>'}</section>
   ${errors.length ? `<section style="background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:20px;margin-top:12px"><h2>Частичные ошибки</h2><ul>${errors.map((error) => `<li>${escapeHtml(error)}</li>`).join("")}</ul></section>` : ""}
   <p style="color:#6b7280;font-size:12px;margin-top:18px">Автоматический внутренний отчёт SwapSpot. Тестовые аккаунты @example.com исключены.</p></div></body></html>`;
 
@@ -382,7 +419,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
     textTable("Google Search Console: запросы", ["Запрос", "Клики", "Показы", "CTR", "Позиция"], searchRows),
     textTable("Google Search Console: страницы", ["Страница", "Клики", "Показы", "CTR", "Позиция"], searchPageRows),
     textTable("Google Search Console: страны", ["Страна", "Клики", "Показы", "CTR"], searchCountryRows),
-    bing.configured ? `${textTable("Bing Webmaster: запросы", ["Запрос", "Клики", "Показы", "Позиция"], bingRows)}${textTable("Bing Webmaster: сканирование", ["Дата", "Просканировано", "В индексе", "Ошибки", "4xx", "5xx", "robots.txt"], bingCrawlRows)}` : "\nBing API пока не подключён.",
+    bing.configured ? `${textTable("Bing Webmaster: запросы", ["Запрос", "Клики", "Показы", "Позиция"], bingRows)}${textTable("Bing Webmaster: сканирование", ["Дата", "Просканировано", "В индексе", "Ошибки", "4xx", "5xx", "robots.txt"], bingCrawlRows)}${textTable("Bing Webmaster: URL с проблемами", ["URL", "HTTP", "Проблема", "Входящие ссылки"], bingIssueRows)}` : "\nBing API пока не подключён.",
     errors.length ? `\nЧастичные ошибки:\n${errors.join("\n")}` : "",
   ].join("\n");
 
@@ -404,6 +441,12 @@ export async function buildDailyReport(window: DailyReportWindow) {
       searchPreviousImpressions: previousSearchTotals.impressions,
       bingConfigured: bing.configured,
       bingCrawlErrors: number(bing.crawl?.CrawlErrors),
+      bingCrawlIssues: bing.issues.map((issue) => ({
+        url: issue.Url || "",
+        httpCode: number(issue.HttpCode),
+        issue: describeBingCrawlIssues(issue.Issues),
+        inLinks: number(issue.InLinks),
+      })),
       errors,
     },
   };
