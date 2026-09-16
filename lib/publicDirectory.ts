@@ -198,7 +198,6 @@ function directoryPairGroupKey(pair: DirectoryPair) {
   return [
     pair.categorySlug,
     pair.marketName.trim().toLocaleLowerCase("en-US"),
-    pair.countryCode || "",
   ].join(":");
 }
 
