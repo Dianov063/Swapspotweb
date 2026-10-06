@@ -457,7 +457,7 @@ export async function sendDailyReport(report: Awaited<ReturnType<typeof buildDai
   if (!recipient) throw new Error("DAILY_REPORT_RECIPIENT is not configured");
   const response = await invokeSupabaseAdminFunction("admin-report-email", {
     recipientEmail: recipient,
-    recipientName: "Dmitry",
+    recipientName: "SwapSpot Admin",
     subject: report.subject,
     html: report.html,
     text: report.text,
