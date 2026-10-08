@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { resetLocale, resetStrings } from "./strings";
 
 // Two kinds of e-mailed reset links land here, both with their secret in the URL
 // fragment (browsers never send it to servers or put it in referrers/logs):
@@ -48,23 +49,26 @@ export default function ResetPasswordForm() {
   const [confirm, setConfirm] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [locale, setLocale] = useState<keyof typeof resetStrings>("en");
+  const s = resetStrings[locale];
 
   useEffect(() => {
+    setLocale(resetLocale(window.location.search, navigator.languages ?? [navigator.language]));
     setLink(parseResetFragment(window.location.hash));
     // Drop the secret from the address bar once read.
-    if (window.location.hash) window.history.replaceState(null, "", window.location.pathname);
+    if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
   }, []);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     if (password.length < 8) {
       setState("error");
-      setMessage("Use at least 8 characters.");
+      setMessage(s.tooShort);
       return;
     }
     if (password !== confirm) {
       setState("error");
-      setMessage("The passwords do not match.");
+      setMessage(s.mismatch);
       return;
     }
     setState("saving");
@@ -72,42 +76,54 @@ export default function ResetPasswordForm() {
       const response = await savePassword(link, password);
       if (!response.ok) throw new Error(String(response.status));
       setState("done");
-      setMessage("Your password has been changed. Open the SwapSpot app and sign in.");
+      setMessage(s.done);
     } catch {
       setState("error");
-      setMessage("This reset link is invalid or has expired. Request a new one from the app.");
+      setMessage(s.invalid);
     }
   }
 
-  if (state === "done") {
-    return <p className="mt-8 rounded-[8px] bg-white p-5 text-[16px] font-bold text-green shadow-sm">{message}</p>;
-  }
-  if (link.kind === "expired") {
-    return <p className="mt-8 text-[16px] text-ink/72">This reset link is invalid or has expired. Request a new one from the app.</p>;
-  }
-  if (link.kind === "none") {
-    return <p className="mt-8 text-[16px] text-ink/72">Open the reset link from your e-mail to continue.</p>;
-  }
-  if ((link.kind === "platform" && !PLATFORM_URL) || (link.kind === "supabase" && !SUPABASE_ANON_KEY)) {
-    return <p className="mt-8 text-[16px] text-ink/72">Password reset is not available on this site yet.</p>;
-  }
   return (
-    <form onSubmit={submit} className="mt-8 grid gap-4 rounded-[8px] border border-ink/10 bg-white p-6 shadow-sm">
-      <label className="grid gap-2 text-[15px] font-bold">
-        New password
-        <input type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}
-          className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
-      </label>
-      <label className="grid gap-2 text-[15px] font-bold">
-        Repeat the new password
-        <input type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)}
-          className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
-      </label>
-      {state === "error" && <p className="text-[15px] font-bold text-red-700">{message}</p>}
-      <button type="submit" disabled={state === "saving"}
-        className="rounded-[8px] bg-green px-5 py-3 text-[16px] font-black text-white disabled:opacity-60">
-        {state === "saving" ? "Saving…" : "Save new password"}
-      </button>
-    </form>
+    <div dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
+      <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">{s.eyebrow}</p>
+      <h1 className="text-[clamp(34px,5vw,56px)] font-black leading-[0.95] tracking-[-0.03em]">{s.title}</h1>
+      <p className="mt-5 text-[17px] leading-[1.6] text-ink/72">{s.intro}</p>
+      {body()}
+    </div>
   );
+
+  // A plain function, not a component: the inputs keep their state and focus.
+  function body() {
+    if (state === "done") {
+      return <p className="mt-8 rounded-[8px] bg-white p-5 text-[16px] font-bold text-green shadow-sm">{message}</p>;
+    }
+    if (link.kind === "expired") {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.invalid}</p>;
+    }
+    if (link.kind === "none") {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.openLink}</p>;
+    }
+    if ((link.kind === "platform" && !PLATFORM_URL) || (link.kind === "supabase" && !SUPABASE_ANON_KEY)) {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.unavailable}</p>;
+    }
+    return (
+      <form onSubmit={submit} className="mt-8 grid gap-4 rounded-[8px] border border-ink/10 bg-white p-6 shadow-sm">
+        <label className="grid gap-2 text-[15px] font-bold">
+          {s.newPassword}
+          <input type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}
+            className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
+        </label>
+        <label className="grid gap-2 text-[15px] font-bold">
+          {s.repeatPassword}
+          <input type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)}
+            className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
+        </label>
+        {state === "error" && <p className="text-[15px] font-bold text-red-700">{message}</p>}
+        <button type="submit" disabled={state === "saving"}
+          className="rounded-[8px] bg-green px-5 py-3 text-[16px] font-black text-white disabled:opacity-60">
+          {state === "saving" ? s.saving : s.save}
+        </button>
+      </form>
+    );
+}
 }

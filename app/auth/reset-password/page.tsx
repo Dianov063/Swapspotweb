@@ -13,11 +13,7 @@ export default function ResetPasswordPage() {
     <main className="bg-cream text-ink">
       <section className="mx-auto max-w-wrap px-6 py-[clamp(56px,8vw,96px)]">
         <div className="max-w-xl">
-          <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">Account</p>
-          <h1 className="text-[clamp(34px,5vw,56px)] font-black leading-[0.95] tracking-[-0.03em]">Reset your password</h1>
-          <p className="mt-5 text-[17px] leading-[1.6] text-ink/72">
-            Choose a new password, then sign in to the SwapSpot app with your e-mail and the new password.
-          </p>
+          {/* Heading, texts and form are rendered in the e-mail's language (16 locales). */}
           <ResetPasswordForm />
         </div>
       </section>
