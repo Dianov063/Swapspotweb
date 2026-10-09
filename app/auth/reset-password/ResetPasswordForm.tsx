@@ -1,0 +1,129 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { resetLocale, resetStrings } from "./strings";
+
+// Two kinds of e-mailed reset links land here, both with their secret in the URL
+// fragment (browsers never send it to servers or put it in referrers/logs):
+// - App Platform: #token=<one-time token>                 -> POST /v1/auth/reset-password
+// - Supabase Auth recovery (also used by a rollback):     -> PUT /auth/v1/user with the
+//   #access_token=…&type=recovery                            recovery session token
+const PLATFORM_URL = (process.env.NEXT_PUBLIC_APP_PLATFORM_URL || "").replace(/\/$/, "");
+const APP_SLUG = process.env.NEXT_PUBLIC_APP_PLATFORM_APP_SLUG || "swapspot";
+const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || "https://hoohhuqgyaifjglfzanx.supabase.co").replace(/\/$/, "");
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+type Link = { kind: "platform"; token: string } | { kind: "supabase"; accessToken: string } | { kind: "expired" } | { kind: "none" };
+
+export function parseResetFragment(hash: string): Link {
+  const params = new URLSearchParams(hash.replace(/^#/, ""));
+  if (params.get("token")) return { kind: "platform", token: params.get("token") as string };
+  if (params.get("access_token") && params.get("type") === "recovery") {
+    return { kind: "supabase", accessToken: params.get("access_token") as string };
+  }
+  if (params.get("error") || params.get("error_code")) return { kind: "expired" };
+  return { kind: "none" };
+}
+
+async function savePassword(link: Link, password: string) {
+  if (link.kind === "platform") {
+    return fetch(`${PLATFORM_URL}/v1/auth/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-App-Slug": APP_SLUG },
+      body: JSON.stringify({ app_slug: APP_SLUG, token: link.token, new_password: password }),
+    });
+  }
+  if (link.kind === "supabase") {
+    return fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${link.accessToken}` },
+      body: JSON.stringify({ password }),
+    });
+  }
+  throw new Error("no reset link");
+}
+
+export default function ResetPasswordForm() {
+  const [link, setLink] = useState<Link>({ kind: "none" });
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const [locale, setLocale] = useState<keyof typeof resetStrings>("en");
+  const s = resetStrings[locale];
+
+  useEffect(() => {
+    setLocale(resetLocale(window.location.search, navigator.languages ?? [navigator.language]));
+    setLink(parseResetFragment(window.location.hash));
+    // Drop the secret from the address bar once read.
+    if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  }, []);
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    if (password.length < 8) {
+      setState("error");
+      setMessage(s.tooShort);
+      return;
+    }
+    if (password !== confirm) {
+      setState("error");
+      setMessage(s.mismatch);
+      return;
+    }
+    setState("saving");
+    try {
+      const response = await savePassword(link, password);
+      if (!response.ok) throw new Error(String(response.status));
+      setState("done");
+      setMessage(s.done);
+    } catch {
+      setState("error");
+      setMessage(s.invalid);
+    }
+  }
+
+  return (
+    <div dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
+      <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">{s.eyebrow}</p>
+      <h1 className="text-[clamp(34px,5vw,56px)] font-black leading-[0.95] tracking-[-0.03em]">{s.title}</h1>
+      <p className="mt-5 text-[17px] leading-[1.6] text-ink/72">{s.intro}</p>
+      {body()}
+    </div>
+  );
+
+  // A plain function, not a component: the inputs keep their state and focus.
+  function body() {
+    if (state === "done") {
+      return <p className="mt-8 rounded-[8px] bg-white p-5 text-[16px] font-bold text-green shadow-sm">{message}</p>;
+    }
+    if (link.kind === "expired") {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.invalid}</p>;
+    }
+    if (link.kind === "none") {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.openLink}</p>;
+    }
+    if ((link.kind === "platform" && !PLATFORM_URL) || (link.kind === "supabase" && !SUPABASE_ANON_KEY)) {
+      return <p className="mt-8 text-[16px] text-ink/72">{s.unavailable}</p>;
+    }
+    return (
+      <form onSubmit={submit} className="mt-8 grid gap-4 rounded-[8px] border border-ink/10 bg-white p-6 shadow-sm">
+        <label className="grid gap-2 text-[15px] font-bold">
+          {s.newPassword}
+          <input type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}
+            className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
+        </label>
+        <label className="grid gap-2 text-[15px] font-bold">
+          {s.repeatPassword}
+          <input type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)}
+            className="rounded-[8px] border border-ink/20 px-4 py-3 font-normal" required minLength={8} />
+        </label>
+        {state === "error" && <p className="text-[15px] font-bold text-red-700">{message}</p>}
+        <button type="submit" disabled={state === "saving"}
+          className="rounded-[8px] bg-green px-5 py-3 text-[16px] font-black text-white disabled:opacity-60">
+          {state === "saving" ? s.saving : s.save}
+        </button>
+      </form>
+    );
+}
+}
