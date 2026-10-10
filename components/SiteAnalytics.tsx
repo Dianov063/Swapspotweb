@@ -15,7 +15,15 @@ export function isPrivatePath(pathname: string) {
 
 export default function SiteAnalytics({ googleAnalyticsId }: { googleAnalyticsId: string }) {
   const pathname = usePathname() ?? "";
-  if (isPrivatePath(pathname)) return null;
+  const privatePath = isPrivatePath(pathname);
+  // Hiding the tags does not unload a gtag.js that an earlier page already loaded
+  // (client-side navigation, Back/Forward). Google's documented opt-out flag stops
+  // it from sending anything while a private page is shown. Set during render so it
+  // is in place before the route change is committed and history events fire.
+  if (typeof window !== "undefined") {
+    (window as unknown as Record<string, boolean>)[`ga-disable-${googleAnalyticsId}`] = privatePath;
+  }
+  if (privatePath) return null;
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`} strategy="afterInteractive" />
