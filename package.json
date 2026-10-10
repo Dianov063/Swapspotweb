@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:reset": "node --test scripts/reset-page-config.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.400.0",
