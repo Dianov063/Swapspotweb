@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import CookieConsent from "@/components/CookieConsent";
+import SiteAnalytics from "@/components/SiteAnalytics";
 import { locales, localizedPath } from "@/lib/i18n";
 import "./globals.css";
 
@@ -103,20 +103,10 @@ export default function RootLayout({
             gtag('set', 'ads_data_redaction', true);
           `}
         </Script>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            gtag('js', new Date());
-            gtag('config', '${googleAnalyticsId}');
-          `}
-        </Script>
       </head>
       <body>
         {children}
-        <CookieConsent />
+        <SiteAnalytics googleAnalyticsId={googleAnalyticsId} />
       </body>
     </html>
   );
