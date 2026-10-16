@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import MaintenanceBanner from "@/components/MaintenanceBanner";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import { locales, localizedPath } from "@/lib/i18n";
 import "./globals.css";
@@ -105,6 +106,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
+        <MaintenanceBanner />
         {children}
         <SiteAnalytics googleAnalyticsId={googleAnalyticsId} />
       </body>
