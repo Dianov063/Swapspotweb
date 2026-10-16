@@ -1,3 +1,4 @@
+import { supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
 import { categories as fallbackCategories, cities as fallbackCities } from "@/lib/data";
 
 const SUPABASE_URL =
@@ -107,13 +108,23 @@ function supabaseHeaders() {
 }
 
 async function fetchRest<T>(path: string): Promise<T[]> {
-  const headers = supabaseHeaders();
-  if (!headers) return [];
-
-  const response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, {
-    headers,
-    next: { revalidate: 3600 },
-  });
+  let response: Response;
+  if (swapspotBackend() === "appplatform") {
+    // Same PostgREST path through the App Platform backend credential.
+    try {
+      response = await supabaseAdminFetch(path, { next: { revalidate: 3600 } });
+    } catch (error) {
+      console.error("SwapSpot public directory is not configured", error);
+      return [];
+    }
+  } else {
+    const headers = supabaseHeaders();
+    if (!headers) return [];
+    response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, {
+      headers,
+      next: { revalidate: 3600 },
+    });
+  }
 
   if (!response.ok) {
     console.error("SwapSpot public directory fetch failed", await response.text());
