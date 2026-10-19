@@ -1,0 +1,705 @@
+{
+  "format": 1,
+  "updated_at": null,
+  "generated_from": "swapspot_markets_seed.json",
+  "seed_source": "tzdata (pytz 2025.2) + CLDR via Node v24.18.0 Intl.DisplayNames; ht names added manually",
+  "markets": [
+    {
+      "code": "US",
+      "status": "active",
+      "sort_order": 10,
+      "currency": {
+        "code": "USD",
+        "minor_units": 2
+      },
+      "distance_unit": "mi",
+      "default_timezone": "America/New_York",
+      "timezones": [
+        "America/Adak",
+        "America/Anchorage",
+        "America/Boise",
+        "America/Chicago",
+        "America/Denver",
+        "America/Detroit",
+        "America/Indiana/Indianapolis",
+        "America/Indiana/Knox",
+        "America/Indiana/Marengo",
+        "America/Indiana/Petersburg",
+        "America/Indiana/Tell_City",
+        "America/Indiana/Vevay",
+        "America/Indiana/Vincennes",
+        "America/Indiana/Winamac",
+        "America/Juneau",
+        "America/Kentucky/Louisville",
+        "America/Kentucky/Monticello",
+        "America/Los_Angeles",
+        "America/Menominee",
+        "America/Metlakatla",
+        "America/New_York",
+        "America/Nome",
+        "America/North_Dakota/Beulah",
+        "America/North_Dakota/Center",
+        "America/North_Dakota/New_Salem",
+        "America/Phoenix",
+        "America/Sitka",
+        "America/Yakutat",
+        "Pacific/Honolulu"
+      ],
+      "postal": {
+        "kind": "zip",
+        "required": true,
+        "pattern": "^\\d{5}(-\\d{4})?$",
+        "example": "10001"
+      },
+      "region_kind": "state",
+      "map_center": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en",
+          "es"
+        ]
+      },
+      "names": {
+        "en": "United States",
+        "es": "Estados Unidos",
+        "ru": "Соединенные Штаты",
+        "zh-Hans": "美国",
+        "ar": "الولايات المتحدة",
+        "pt": "Estados Unidos",
+        "fr": "États-Unis",
+        "ht": "Etazini",
+        "de": "Vereinigte Staaten",
+        "fil": "Estados Unidos",
+        "hi": "संयुक्त राज्य",
+        "bn": "মার্কিন যুক্তরাষ্ট্র",
+        "te": "యునైటెడ్ స్టేట్స్",
+        "ta": "அமெரிக்கா",
+        "vi": "Hoa Kỳ",
+        "th": "สหรัฐอเมริกา"
+      }
+    },
+    {
+      "code": "PR",
+      "status": "active",
+      "sort_order": 20,
+      "currency": {
+        "code": "USD",
+        "minor_units": 2
+      },
+      "distance_unit": "mi",
+      "default_timezone": "America/Puerto_Rico",
+      "timezones": [
+        "America/Puerto_Rico"
+      ],
+      "postal": {
+        "kind": "zip",
+        "required": false,
+        "pattern": "^00[679]\\d{2}(-\\d{4})?$",
+        "example": "00901"
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 18.4655,
+        "lng": -66.1057,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "es",
+        "recommended": [
+          "es",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Puerto Rico",
+        "es": "Puerto Rico",
+        "ru": "Пуэрто-Рико",
+        "zh-Hans": "波多黎各",
+        "ar": "بورتوريكو",
+        "pt": "Porto Rico",
+        "fr": "Porto Rico",
+        "ht": "Pòtoriko",
+        "de": "Puerto Rico",
+        "fil": "Puerto Rico",
+        "hi": "पोर्टो रिको",
+        "bn": "পুয়ের্তো রিকো",
+        "te": "ప్యూర్టో రికో",
+        "ta": "பியூர்டோ ரிகோ",
+        "vi": "Puerto Rico",
+        "th": "เปอร์โตริโก"
+      }
+    },
+    {
+      "code": "PH",
+      "status": "active",
+      "sort_order": 30,
+      "currency": {
+        "code": "PHP",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Manila",
+      "timezones": [
+        "Asia/Manila"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{4}$",
+        "example": "1000"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 14.5995,
+        "lng": 120.9842,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en",
+          "fil"
+        ]
+      },
+      "names": {
+        "en": "Philippines",
+        "es": "Filipinas",
+        "ru": "Филиппины",
+        "zh-Hans": "菲律宾",
+        "ar": "الفلبين",
+        "pt": "Filipinas",
+        "fr": "Philippines",
+        "ht": "Filipin",
+        "de": "Philippinen",
+        "fil": "Pilipinas",
+        "hi": "फ़िलिपींस",
+        "bn": "ফিলিপাইন",
+        "te": "ఫిలిప్పైన్స్",
+        "ta": "பிலிப்பைன்ஸ்",
+        "vi": "Philippines",
+        "th": "ฟิลิปปินส์"
+      }
+    },
+    {
+      "code": "IN",
+      "status": "active",
+      "sort_order": 40,
+      "currency": {
+        "code": "INR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Kolkata",
+      "timezones": [
+        "Asia/Kolkata"
+      ],
+      "postal": {
+        "kind": "pin",
+        "required": false,
+        "pattern": "^[1-9]\\d{5}$",
+        "example": "400001"
+      },
+      "region_kind": "state",
+      "map_center": {
+        "lat": 19.076,
+        "lng": 72.8777,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en",
+          "hi",
+          "bn",
+          "te",
+          "ta"
+        ]
+      },
+      "names": {
+        "en": "India",
+        "es": "India",
+        "ru": "Индия",
+        "zh-Hans": "印度",
+        "ar": "الهند",
+        "pt": "Índia",
+        "fr": "Inde",
+        "ht": "End",
+        "de": "Indien",
+        "fil": "India",
+        "hi": "भारत",
+        "bn": "ভারত",
+        "te": "భారతదేశం",
+        "ta": "இந்தியா",
+        "vi": "Ấn Độ",
+        "th": "อินเดีย"
+      }
+    },
+    {
+      "code": "SG",
+      "status": "active",
+      "sort_order": 50,
+      "currency": {
+        "code": "SGD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Singapore",
+      "timezones": [
+        "Asia/Singapore"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{6}$",
+        "example": "018956"
+      },
+      "region_kind": null,
+      "map_center": {
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en",
+          "zh-Hans",
+          "ta"
+        ]
+      },
+      "names": {
+        "en": "Singapore",
+        "es": "Singapur",
+        "ru": "Сингапур",
+        "zh-Hans": "新加坡",
+        "ar": "سنغافورة",
+        "pt": "Singapura",
+        "fr": "Singapour",
+        "ht": "Singapou",
+        "de": "Singapur",
+        "fil": "Singapore",
+        "hi": "सिंगापुर",
+        "bn": "সিঙ্গাপুর",
+        "te": "సింగపూర్",
+        "ta": "சிங்கப்பூர்",
+        "vi": "Singapore",
+        "th": "สิงคโปร์"
+      }
+    },
+    {
+      "code": "MY",
+      "status": "active",
+      "sort_order": 60,
+      "currency": {
+        "code": "MYR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Kuala_Lumpur",
+      "timezones": [
+        "Asia/Kuala_Lumpur",
+        "Asia/Kuching"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^\\d{5}$",
+        "example": "50000"
+      },
+      "region_kind": "state",
+      "map_center": {
+        "lat": 3.139,
+        "lng": 101.6869,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en",
+          "zh-Hans",
+          "ta"
+        ]
+      },
+      "names": {
+        "en": "Malaysia",
+        "es": "Malasia",
+        "ru": "Малайзия",
+        "zh-Hans": "马来西亚",
+        "ar": "ماليزيا",
+        "pt": "Malásia",
+        "fr": "Malaisie",
+        "ht": "Malezi",
+        "de": "Malaysia",
+        "fil": "Malaysia",
+        "hi": "मलेशिया",
+        "bn": "মালয়েশিয়া",
+        "te": "మలేషియా",
+        "ta": "மலேசியா",
+        "vi": "Malaysia",
+        "th": "มาเลเซีย"
+      }
+    },
+    {
+      "code": "TH",
+      "status": "active",
+      "sort_order": 70,
+      "currency": {
+        "code": "THB",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Bangkok",
+      "timezones": [
+        "Asia/Bangkok"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{5}$",
+        "example": "10200"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 13.7563,
+        "lng": 100.5018,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "th",
+        "recommended": [
+          "th",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Thailand",
+        "es": "Tailandia",
+        "ru": "Таиланд",
+        "zh-Hans": "泰国",
+        "ar": "تايلاند",
+        "pt": "Tailândia",
+        "fr": "Thaïlande",
+        "ht": "Tayland",
+        "de": "Thailand",
+        "fil": "Thailand",
+        "hi": "थाईलैंड",
+        "bn": "থাইল্যান্ড",
+        "te": "థాయిలాండ్",
+        "ta": "தாய்லாந்து",
+        "vi": "Thái Lan",
+        "th": "ไทย"
+      }
+    },
+    {
+      "code": "ID",
+      "status": "active",
+      "sort_order": 80,
+      "currency": {
+        "code": "IDR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Jakarta",
+      "timezones": [
+        "Asia/Jakarta",
+        "Asia/Jayapura",
+        "Asia/Makassar",
+        "Asia/Pontianak"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{5}$",
+        "example": "10110"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": -6.2088,
+        "lng": 106.8456,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Indonesia",
+        "es": "Indonesia",
+        "ru": "Индонезия",
+        "zh-Hans": "印度尼西亚",
+        "ar": "إندونيسيا",
+        "pt": "Indonésia",
+        "fr": "Indonésie",
+        "ht": "Endonezi",
+        "de": "Indonesien",
+        "fil": "Indonesia",
+        "hi": "इंडोनेशिया",
+        "bn": "ইন্দোনেশিয়া",
+        "te": "ఇండోనేషియా",
+        "ta": "இந்தோனேசியா",
+        "vi": "Indonesia",
+        "th": "อินโดนีเซีย"
+      }
+    },
+    {
+      "code": "VN",
+      "status": "active",
+      "sort_order": 90,
+      "currency": {
+        "code": "VND",
+        "minor_units": 0
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Ho_Chi_Minh",
+      "timezones": [
+        "Asia/Ho_Chi_Minh"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{6}$",
+        "example": "700000"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 10.8231,
+        "lng": 106.6297,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "vi",
+        "recommended": [
+          "vi",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Vietnam",
+        "es": "Vietnam",
+        "ru": "Вьетнам",
+        "zh-Hans": "越南",
+        "ar": "فيتنام",
+        "pt": "Vietnã",
+        "fr": "Viêt Nam",
+        "ht": "Vyetnam",
+        "de": "Vietnam",
+        "fil": "Vietnam",
+        "hi": "वियतनाम",
+        "bn": "ভিয়েতনাম",
+        "te": "వియత్నాం",
+        "ta": "வியட்நாம்",
+        "vi": "Việt Nam",
+        "th": "เวียดนาม"
+      }
+    },
+    {
+      "code": "DO",
+      "status": "active",
+      "sort_order": 100,
+      "currency": {
+        "code": "DOP",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "America/Santo_Domingo",
+      "timezones": [
+        "America/Santo_Domingo"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{5}$",
+        "example": "10101"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 18.4861,
+        "lng": -69.9312,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "es",
+        "recommended": [
+          "es",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Dominican Republic",
+        "es": "República Dominicana",
+        "ru": "Доминиканская Республика",
+        "zh-Hans": "多米尼加共和国",
+        "ar": "جمهورية الدومينيكان",
+        "pt": "República Dominicana",
+        "fr": "République dominicaine",
+        "ht": "Repiblik Dominikèn",
+        "de": "Dominikanische Republik",
+        "fil": "Dominican Republic",
+        "hi": "डोमिनिकन गणराज्य",
+        "bn": "ডোমেনিকান প্রজাতন্ত্র",
+        "te": "డొమినికన్ రిపబ్లిక్",
+        "ta": "டொமினிகன் குடியரசு",
+        "vi": "Cộng hòa Dominica",
+        "th": "สาธารณรัฐโดมินิกัน"
+      }
+    },
+    {
+      "code": "HT",
+      "status": "active",
+      "sort_order": 110,
+      "currency": {
+        "code": "HTG",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "America/Port-au-Prince",
+      "timezones": [
+        "America/Port-au-Prince"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^(HT)?\\d{4}$",
+        "example": "6110"
+      },
+      "region_kind": "department",
+      "map_center": {
+        "lat": 18.5944,
+        "lng": -72.3074,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "ht",
+        "recommended": [
+          "ht",
+          "fr"
+        ]
+      },
+      "names": {
+        "en": "Haiti",
+        "es": "Haití",
+        "ru": "Гаити",
+        "zh-Hans": "海地",
+        "ar": "هايتي",
+        "pt": "Haiti",
+        "fr": "Haïti",
+        "ht": "Ayiti",
+        "de": "Haiti",
+        "fil": "Haiti",
+        "hi": "हैती",
+        "bn": "হাইতি",
+        "te": "హైతీ",
+        "ta": "ஹைட்டி",
+        "vi": "Haiti",
+        "th": "เฮติ"
+      }
+    },
+    {
+      "code": "JM",
+      "status": "active",
+      "sort_order": 120,
+      "currency": {
+        "code": "JMD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "America/Jamaica",
+      "timezones": [
+        "America/Jamaica"
+      ],
+      "postal": {
+        "kind": "none",
+        "required": false,
+        "pattern": null,
+        "example": null
+      },
+      "region_kind": "parish",
+      "map_center": {
+        "lat": 17.9712,
+        "lng": -76.7936,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Jamaica",
+        "es": "Jamaica",
+        "ru": "Ямайка",
+        "zh-Hans": "牙买加",
+        "ar": "جامايكا",
+        "pt": "Jamaica",
+        "fr": "Jamaïque",
+        "ht": "Jamayik",
+        "de": "Jamaika",
+        "fil": "Jamaica",
+        "hi": "जमैका",
+        "bn": "জামাইকা",
+        "te": "జమైకా",
+        "ta": "ஜமைக்கா",
+        "vi": "Jamaica",
+        "th": "จาเมกา"
+      }
+    },
+    {
+      "code": "TT",
+      "status": "active",
+      "sort_order": 130,
+      "currency": {
+        "code": "TTD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "America/Port_of_Spain",
+      "timezones": [
+        "America/Port_of_Spain"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^\\d{6}$",
+        "example": "100110"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 10.6549,
+        "lng": -61.5019,
+        "zoom": 11
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Trinidad & Tobago",
+        "es": "Trinidad y Tobago",
+        "ru": "Тринидад и Тобаго",
+        "zh-Hans": "特立尼达和多巴哥",
+        "ar": "ترينيداد وتوباغو",
+        "pt": "Trinidad e Tobago",
+        "fr": "Trinité-et-Tobago",
+        "ht": "Trinidad ak Tobago",
+        "de": "Trinidad und Tobago",
+        "fil": "Trinidad & Tobago",
+        "hi": "त्रिनिदाद और टोबैगो",
+        "bn": "ত্রিনিদাদ ও টোবাগো",
+        "te": "ట్రినిడాడ్ మరియు టొబాగో",
+        "ta": "டிரினிடாட் & டொபாகோ",
+        "vi": "Trinidad và Tobago",
+        "th": "ตรินิแดดและโตเบโก"
+      }
+    }
+  ]
+}
