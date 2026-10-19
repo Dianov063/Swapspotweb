@@ -3,7 +3,8 @@
 
 export const MARKETS_FORMAT = 1;
 
-export type MarketStatus = "active" | "preparing" | "disabled";
+// `verified` (patch 0005): all staging checks passed, still not launched; only `active` is launched.
+export type MarketStatus = "active" | "preparing" | "verified" | "disabled";
 
 export type Market = {
   code: string;
@@ -24,7 +25,7 @@ export type MarketsSource = "registry" | "snapshot";
 
 export type MarketsResult = { markets: Market[]; source: MarketsSource; updatedAt: string | null };
 
-const STATUSES: readonly string[] = ["active", "preparing", "disabled"];
+const STATUSES: readonly string[] = ["active", "preparing", "verified", "disabled"];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -174,14 +175,25 @@ export function isActiveMarket(market: Market | null | undefined): market is Mar
   return market?.status === "active";
 }
 
-// Site locale -> keys in `names` (the registry uses app language codes, e.g. zh-Hans).
-const NAME_KEYS: Record<string, string[]> = { zh: ["zh-Hans", "zh"], "zh-Hans": ["zh-Hans", "zh"] };
+// Site locale -> keys in `names` (the registry uses app language codes, e.g. zh-Hans, ar-EG).
+// `ary` (Moroccan Arabic) falls back to its registry parent `ar` (docs/swapspot-africa.md §3).
+const NAME_KEYS: Record<string, string[]> = { zh: ["zh-Hans", "zh"], "zh-Hans": ["zh-Hans", "zh"], ary: ["ary", "ar"] };
+
+/** BCP 47 casing of a URL segment: `ar-eg` -> `ar-EG`, `zh-hans` -> `zh-Hans`. */
+function bcp47(value: string) {
+  return value
+    .split("-")
+    .map((part, index) =>
+      index === 0 ? part.toLowerCase() : part.length === 2 ? part.toUpperCase() : part.length === 4 ? part[0].toUpperCase() + part.slice(1).toLowerCase() : part.toLowerCase(),
+    )
+    .join("-");
+}
 
 /** Country name in `locale` from the registry; English, then the code itself as fallback. */
 export function marketDisplayName(markets: readonly Market[], code: string | null | undefined, locale: string) {
   const market = findMarket(markets, code);
   if (!market) return normalizeCountryCode(code) ?? String(code ?? "");
-  const keys = [...(NAME_KEYS[locale] ?? [locale]), locale.split("-")[0], "en"];
+  const keys = [...(NAME_KEYS[locale] ?? [locale, bcp47(locale)]), locale.split("-")[0], "en"];
   for (const key of keys) {
     if (market.names[key]) return market.names[key];
   }

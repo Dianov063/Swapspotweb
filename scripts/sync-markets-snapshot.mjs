@@ -27,7 +27,7 @@ const markets = seed.markets
   .map((market) => {
     const { code } = market;
     if (!/^[A-Z]{2}$/.test(code ?? "")) fail(code, "code must be ISO 3166-1 alpha-2");
-    if (!["active", "preparing"].includes(market.status)) fail(code, `unknown status ${market.status}`);
+    if (!["active", "preparing", "verified"].includes(market.status)) fail(code, `unknown status ${market.status}`);
     if (!/^[A-Z]{3}$/.test(market.currency_code ?? "")) fail(code, "currency_code must be ISO 4217");
     if (![0, 1, 2, 3].includes(market.currency_minor_units)) fail(code, "currency_minor_units must be 0-3");
     if (!market.names?.en) fail(code, "names.en is required");
