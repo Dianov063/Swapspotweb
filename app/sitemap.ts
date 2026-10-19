@@ -1,98 +1,77 @@
 import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
-import { locales } from "@/lib/i18n";
+import { absoluteLanguageAlternates, locales, localizedPath, siteUrl } from "@/lib/locales";
 import { getDirectoryPairs, getPublicHelperProfiles } from "@/lib/publicDirectory";
 
-const base = "https://www.swapspot.org";
-const localizedStaticPaths = [
-  "/helpers",
-  "/trust-safety",
-  "/contact",
-  "/support",
-  "/account-deletion",
-  "/privacy",
-  "/terms",
-];
+// Short localized notice pages (no hreflang: the legal texts themselves stay English).
+const localizedNoticePaths = ["/trust-safety", "/contact", "/support", "/account-deletion", "/privacy", "/terms"];
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
+type Entry = MetadataRoute.Sitemap[number];
+
+function url(path: string) {
+  return `${siteUrl}${path === "/" ? "" : path}`;
+}
+
+/** Every locale version of an English path, each listing all alternates (hreflang + x-default). */
+function localizedEntries(path: string, options: Omit<Entry, "url" | "alternates">): Entry[] {
+  const alternates = { languages: absoluteLanguageAlternates(path) };
+  return locales.map((locale) => ({
+    url: url(localizedPath(locale, path)),
+    alternates,
+    ...options,
+    priority: locale === "en" ? options.priority : Math.max(0.1, (options.priority ?? 0.5) - 0.1),
+  }));
+}
+
+/** The English URL with its language alternates (the localized URLs are announced as alternates). */
+function englishEntry(path: string, options: Omit<Entry, "url" | "alternates">): Entry {
+  return { url: url(path), alternates: { languages: absoluteLanguageAlternates(path) }, ...options };
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = [
-    "",
-    "/services",
-    "/helpers",
-    "/trust-safety",
-    "/contact",
-    "/support",
-    "/account-deletion",
-    "/privacy",
-    "/terms",
-  ].map((path) => ({
-    url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.7,
-  }));
+  const lastModified = new Date();
+  const [directoryPairs, helperProfiles] = await Promise.all([
+    getDirectoryPairs(),
+    getPublicHelperProfiles({ limit: 1000 }),
+  ]);
 
-  const categoryRoutes = categories.map((c) => ({
-    url: `${base}/categories/${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
-
-  const cityRoutes = cities.map((city) => ({
-    url: `${base}/cities/${city.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
-
-  const directoryPairs = await getDirectoryPairs();
-  const helperProfiles = await getPublicHelperProfiles({ limit: 1000 });
-
-  const serviceMarketRoutes = directoryPairs.map((pair) => ({
-      url: `${base}/services/${pair.categorySlug}/${pair.marketSlug}`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.72,
-  }));
-
-  const helperProfileRoutes = helperProfiles.slice(0, 500).map((profile) => ({
-    url: `${base}/helpers/${profile.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.62,
-  }));
-
-  const localeRoutes = locales
-    .filter((locale) => locale !== "en")
-    .map((locale) => ({
-      url: `${base}/${locale}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    }));
-
-  const localizedStaticRoutes = locales
-    .filter((locale) => locale !== "en")
-    .flatMap((locale) =>
-      localizedStaticPaths.map((path) => ({
-        url: `${base}/${locale}${path}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly" as const,
-        priority: 0.55,
-      })),
-    );
-
-  return [
-    ...staticRoutes,
-    ...localeRoutes,
-    ...localizedStaticRoutes,
-    ...categoryRoutes,
-    ...cityRoutes,
-    ...serviceMarketRoutes,
-    ...helperProfileRoutes,
+  // Low-cardinality pages: all 16 locale URLs are listed.
+  const pages = [
+    ...localizedEntries("/", { lastModified, changeFrequency: "weekly", priority: 1 }),
+    ...localizedEntries("/services", { lastModified, changeFrequency: "weekly", priority: 0.7 }),
+    ...localizedEntries("/helpers", { lastModified, changeFrequency: "weekly", priority: 0.7 }),
+    ...categories.flatMap((category) =>
+      localizedEntries(`/categories/${category.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+    ),
+    ...cities.flatMap((city) =>
+      localizedEntries(`/cities/${city.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+    ),
   ];
+
+  const noticePages = localizedNoticePaths.flatMap((path) =>
+    locales.map((locale) => ({
+      url: url(localizedPath(locale, path)),
+      lastModified,
+      changeFrequency: locale === "en" ? ("weekly" as const) : ("monthly" as const),
+      priority: locale === "en" ? 0.7 : 0.55,
+    })),
+  );
+
+  // Data-driven pages (hundreds of URLs): the English URL carries the 16 language alternates; every
+  // localized page also declares the same hreflang set in its HTML.
+  const serviceMarketRoutes = directoryPairs.map((pair) =>
+    englishEntry(`/services/${pair.categorySlug}/${pair.marketSlug}`, {
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.72,
+    }),
+  );
+  const helperProfileRoutes = helperProfiles.slice(0, 500).map((profile) =>
+    englishEntry(`/helpers/${profile.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
+  );
+
+  return [...pages, ...noticePages, ...serviceMarketRoutes, ...helperProfileRoutes];
 }

@@ -14,7 +14,6 @@ const supportedPages = [
   "contact",
   "account-deletion",
   "delete-account",
-  "helpers",
   "trust-safety",
 ] as const;
 
@@ -28,7 +27,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Contact SwapSpot",
     "account-deletion": "Delete your SwapSpot account",
     "delete-account": "Delete your SwapSpot account",
-    helpers: "Become a Helper",
     "trust-safety": "Trust & Safety",
   },
   es: {
@@ -38,7 +36,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Contacto SwapSpot",
     "account-deletion": "Eliminar tu cuenta de SwapSpot",
     "delete-account": "Eliminar tu cuenta de SwapSpot",
-    helpers: "Ser Helper",
     "trust-safety": "Confianza y seguridad",
   },
   zh: {
@@ -48,7 +45,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "联系 SwapSpot",
     "account-deletion": "删除你的 SwapSpot 账户",
     "delete-account": "删除你的 SwapSpot 账户",
-    helpers: "成为 Helper",
     "trust-safety": "信任与安全",
   },
   fr: {
@@ -58,7 +54,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Contacter SwapSpot",
     "account-deletion": "Supprimer votre compte SwapSpot",
     "delete-account": "Supprimer votre compte SwapSpot",
-    helpers: "Devenir Helper",
     "trust-safety": "Confiance et sécurité",
   },
   ru: {
@@ -68,7 +63,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Контакты SwapSpot",
     "account-deletion": "Удаление аккаунта SwapSpot",
     "delete-account": "Удаление аккаунта SwapSpot",
-    helpers: "Стать исполнителем",
     "trust-safety": "Доверие и безопасность",
   },
   ar: {
@@ -78,7 +72,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "اتصل بـ SwapSpot",
     "account-deletion": "حذف حساب SwapSpot",
     "delete-account": "حذف حساب SwapSpot",
-    helpers: "كن مساعدا",
     "trust-safety": "الثقة والأمان",
   },
   pt: {
@@ -88,7 +81,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Contato SwapSpot",
     "account-deletion": "Excluir sua conta SwapSpot",
     "delete-account": "Excluir sua conta SwapSpot",
-    helpers: "Virar Helper",
     "trust-safety": "Confiança e segurança",
   },
   ht: {
@@ -98,7 +90,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Kontakte SwapSpot",
     "account-deletion": "Efase kont SwapSpot ou",
     "delete-account": "Efase kont SwapSpot ou",
-    helpers: "Vin Helper",
     "trust-safety": "Konfyans ak sekirite",
   },
   de: {
@@ -108,7 +99,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "SwapSpot Kontakt",
     "account-deletion": "SwapSpot Konto löschen",
     "delete-account": "SwapSpot Konto löschen",
-    helpers: "Helper werden",
     "trust-safety": "Vertrauen & Sicherheit",
   },
   fil: {
@@ -118,7 +108,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Kontakin ang SwapSpot",
     "account-deletion": "I-delete ang iyong SwapSpot account",
     "delete-account": "I-delete ang iyong SwapSpot account",
-    helpers: "Maging Helper",
     "trust-safety": "Tiwala at Kaligtasan",
   },
   hi: {
@@ -128,7 +117,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "SwapSpot से संपर्क करें",
     "account-deletion": "अपना SwapSpot खाता हटाएं",
     "delete-account": "अपना SwapSpot खाता हटाएं",
-    helpers: "Helper बनें",
     "trust-safety": "भरोसा और सुरक्षा",
   },
   bn: {
@@ -138,7 +126,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "SwapSpot যোগাযোগ",
     "account-deletion": "আপনার SwapSpot অ্যাকাউন্ট মুছুন",
     "delete-account": "আপনার SwapSpot অ্যাকাউন্ট মুছুন",
-    helpers: "Helper হন",
     "trust-safety": "বিশ্বাস ও নিরাপত্তা",
   },
   te: {
@@ -148,7 +135,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "SwapSpot సంప్రదించండి",
     "account-deletion": "మీ SwapSpot ఖాతాను తొలగించండి",
     "delete-account": "మీ SwapSpot ఖాతాను తొలగించండి",
-    helpers: "Helper అవ్వండి",
     "trust-safety": "నమ్మకం మరియు భద్రత",
   },
   ta: {
@@ -158,7 +144,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "SwapSpot தொடர்பு",
     "account-deletion": "உங்கள் SwapSpot கணக்கை நீக்கவும்",
     "delete-account": "உங்கள் SwapSpot கணக்கை நீக்கவும்",
-    helpers: "Helper ஆகுங்கள்",
     "trust-safety": "நம்பிக்கை மற்றும் பாதுகாப்பு",
   },
   vi: {
@@ -168,7 +153,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "Liên hệ SwapSpot",
     "account-deletion": "Xóa tài khoản SwapSpot của bạn",
     "delete-account": "Xóa tài khoản SwapSpot của bạn",
-    helpers: "Trở thành người trợ giúp",
     "trust-safety": "Tin cậy & An toàn",
   },
   th: {
@@ -178,7 +162,6 @@ const localizedTitles: Record<Locale, Record<SupportedPage, string>> = {
     contact: "ติดต่อ SwapSpot",
     "account-deletion": "ลบบัญชี SwapSpot ของคุณ",
     "delete-account": "ลบบัญชี SwapSpot ของคุณ",
-    helpers: "สมัครเป็นผู้ช่วย",
     "trust-safety": "ความไว้วางใจและความปลอดภัย",
   },
 };

@@ -7,6 +7,7 @@ import {
   type Dictionary,
   type Locale,
 } from "@/lib/i18n";
+import { directoryStrings } from "@/lib/directoryStrings";
 
 export default function Footer({
   locale = defaultLocale,
@@ -22,7 +23,7 @@ export default function Footer({
         { href: localizedPath(locale, "/#how"), label: dictionary.nav.how },
         { href: localizedPath(locale, "/#pricing"), label: dictionary.nav.pricing },
         { href: localizedPath(locale, "/#categories"), label: dictionary.nav.categories },
-        { href: "/services", label: "Service directory" },
+        { href: localizedPath(locale, "/services"), label: directoryStrings(locale).directory },
         { href: localizedPath(locale, "/#trust"), label: dictionary.nav.trust },
       ],
     },

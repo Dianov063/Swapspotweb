@@ -1,25 +1,17 @@
 import localeComplements from "./i18n-complements.json";
 
-export const locales = [
-  "en",
-  "es",
-  "zh",
-  "fr",
-  "ru",
-  "ar",
-  "pt",
-  "ht",
-  "de",
-  "fil",
-  "hi",
-  "bn",
-  "te",
-  "ta",
-  "vi",
-  "th",
-] as const;
+import type { Locale } from "./locales";
 
-export type Locale = (typeof locales)[number];
+export {
+  defaultLocale,
+  hreflangAlternates,
+  isLocale,
+  languageTag,
+  localizedPath,
+  locales,
+  textDirection,
+  type Locale,
+} from "./locales";
 
 export const localeNames: Record<Locale, string> = {
   en: "English",
@@ -39,18 +31,6 @@ export const localeNames: Record<Locale, string> = {
   vi: "Tiếng Việt",
   th: "ไทย",
 };
-
-export const defaultLocale: Locale = "en";
-
-export function isLocale(value: string): value is Locale {
-  return locales.includes(value as Locale);
-}
-
-export function localizedPath(locale: Locale, path: string) {
-  if (locale === defaultLocale) return path;
-  if (path === "/") return `/${locale}`;
-  return `/${locale}${path}`;
-}
 
 const en = {
   metaTitle: "SwapSpot - Find Trusted Local Help Near You",

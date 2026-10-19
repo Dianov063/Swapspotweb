@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Languages, Menu } from "lucide-react";
 import { Brand, Button } from "./ui";
 import {
@@ -13,6 +14,7 @@ import {
   type Dictionary,
   type Locale,
 } from "@/lib/i18n";
+import { switchLocalePath } from "@/lib/locales";
 
 export default function Header({
   locale = defaultLocale,
@@ -22,6 +24,7 @@ export default function Header({
   dictionary?: Dictionary;
 }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() || "/";
   const navLinks = [
     { href: localizedPath(locale, "/#how"), label: dictionary.nav.how },
     { href: localizedPath(locale, "/#clients"), label: dictionary.nav.clients },
@@ -34,7 +37,8 @@ export default function Header({
   function changeLanguage(value: string) {
     if (!locales.includes(value as Locale)) return;
     window.sessionStorage.setItem("swapspot-locale-detected", "1");
-    window.location.href = localizedPath(value as Locale, "/");
+    // Same page in the new language when it has a localized version, else that language's home.
+    window.location.href = switchLocalePath(pathname, value as Locale) + window.location.hash;
   }
 
   return (
