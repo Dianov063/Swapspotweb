@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:reset": "node --test scripts/reset-page-config.test.mjs",
-    "test:intl": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/intl.test.mjs"
+    "test:intl": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/intl.test.mjs scripts/intl-locales.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.400.0",
