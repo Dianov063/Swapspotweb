@@ -30,7 +30,7 @@ export default function WaitlistCTA({
             <div className="text-[13px] font-bold tracking-[0.02em] text-white/70">
               {dictionary.waitlist.storeCaption}
             </div>
-            <AppStoreButtons tone="light" className="mt-3 justify-center" />
+            <AppStoreButtons tone="light" locale={locale} className="mt-3 justify-center" />
           </div>
 
           <div className="mt-[18px] flex flex-wrap items-center justify-center gap-3.5">

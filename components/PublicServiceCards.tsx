@@ -34,7 +34,7 @@ export default function PublicServiceCards({
       <section className="mt-10 rounded-card-md border border-line bg-surface p-7 shadow-card-sm">
         <h2 className="font-head text-[26px] font-extrabold text-ink">{fillTemplate(t.cardsEmptyTitle, vars)}</h2>
         <p className="mt-3 max-w-[720px] text-[16px] leading-[1.55] text-ink-soft">{t.cardsEmptyBody}</p>
-        <AppStoreButtons className="mt-6" />
+        <AppStoreButtons locale={locale} className="mt-6" />
       </section>
     );
   }
@@ -46,7 +46,7 @@ export default function PublicServiceCards({
           <h2 className="font-head text-[28px] font-extrabold text-ink">{fillTemplate(t.cardsTitle, vars)}</h2>
           <p className="mt-2 text-[16px] text-ink-soft">{fillTemplate(t.cardsBody, vars)}</p>
         </div>
-        <AppStoreButtons />
+        <AppStoreButtons locale={locale} />
       </div>
 
       <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-3">

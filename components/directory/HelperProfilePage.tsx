@@ -320,7 +320,7 @@ export default async function HelperProfilePage({ locale, helperSlug }: { locale
               {t.areasTitle}
             </h2>
             <p className="mt-4 text-[16px] leading-[1.65] text-ink-soft">{t.areasBody}</p>
-            <AppStoreButtons className="mt-6" />
+            <AppStoreButtons locale={locale} className="mt-6" />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
