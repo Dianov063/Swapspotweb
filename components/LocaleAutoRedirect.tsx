@@ -1,30 +1,25 @@
 "use client";
 
 import { useEffect } from "react";
-import { defaultLocale, locales, type Locale } from "@/lib/i18n";
+import { defaultLocale } from "@/lib/locales";
+import { matchLanguage } from "@/lib/languagesCore";
 
-const languageAliases: Record<string, Locale> = {
-  tl: "fil",
-  "zh-cn": "zh",
-  "zh-sg": "zh",
-};
-
-export default function LocaleAutoRedirect() {
+/**
+ * First visit of the English home page: redirects once to the visitor's browser language when the
+ * site has it. `segments` are the current site languages (shipped + public registry languages).
+ * Exact match first, then the language part (`ar-MA` -> `ar`, never `ary`).
+ */
+export default function LocaleAutoRedirect({ segments }: { segments: string[] }) {
   useEffect(() => {
     const storageKey = "swapspot-locale-detected";
     if (window.sessionStorage.getItem(storageKey)) return;
     window.sessionStorage.setItem(storageKey, "1");
 
-    const supported = new Set<string>(locales);
-    const detected = navigator.languages
-      .map((value) => value.toLowerCase())
-      .map((value) => languageAliases[value] ?? languageAliases[value.split("-")[0]] ?? value.split("-")[0])
-      .find((value) => supported.has(value)) as Locale | undefined;
-
+    const detected = matchLanguage(navigator.languages ?? [navigator.language], segments);
     if (detected && detected !== defaultLocale) {
       window.location.replace(`/${detected}`);
     }
-  }, []);
+  }, [segments]);
 
   return null;
 }

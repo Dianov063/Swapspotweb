@@ -1,7 +1,8 @@
 // Copy of the home page pricing section (components/ClientPricing.tsx) in the 16 site languages.
 // Pure module (type-only import) so `npm run test:intl` can check that every locale is complete.
 // "Client Pro" is the product name and stays as is.
-import type { Locale } from "./locales";
+import { extraLocaleTables } from "./extraLocales";
+import type { Locale, ShippedLocale } from "./locales";
 
 export type ClientPricingCopy = {
     eyebrow: string;
@@ -20,7 +21,7 @@ export type ClientPricingCopy = {
     actions: string[];
   };
 
-export const clientPricingCopy: Record<Locale, ClientPricingCopy> = {
+export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   en: {
     eyebrow: "Client Pricing",
     title: "Browse for free. Use a pass when you are ready to act.",
@@ -394,7 +395,7 @@ export type PassPriceCopy = { seeStore: string; referenceNote: string; footnote:
 
 // Contract §4.2: a reference price only where it is confirmed in both stores (lib/storePrices.ts),
 // otherwise the neutral store text. Every reference price says that the store shows the final price.
-export const passPriceCopy: Record<Locale, PassPriceCopy> = {
+export const passPriceCopy: Record<ShippedLocale, PassPriceCopy> = {
   en: {
     seeStore: "See the current price in the App Store or Google Play",
     referenceNote: "Reference price. The App Store or Google Play shows the final price.",
@@ -476,3 +477,11 @@ export const passPriceCopy: Record<Locale, PassPriceCopy> = {
     footnote: "App Store หรือ Google Play จะแสดงราคาท้องถิ่นสุดท้ายและภาษีก่อนการซื้อ",
   },
 };
+
+export function pricingCopy(locale: Locale): ClientPricingCopy {
+  return (clientPricingCopy as Partial<Record<string, ClientPricingCopy>>)[locale] ?? extraLocaleTables(locale)?.pricing ?? clientPricingCopy.en;
+}
+
+export function passPriceCopyFor(locale: Locale): PassPriceCopy {
+  return (passPriceCopy as Partial<Record<string, PassPriceCopy>>)[locale] ?? extraLocaleTables(locale)?.passPrice ?? passPriceCopy.en;
+}

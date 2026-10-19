@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CityPage, { cityMetadata, findCity } from "@/components/directory/CityPage";
 import { cities } from "@/lib/data";
-import { isLocale, locales } from "@/lib/i18n";
+import { locales } from "@/lib/i18n";
+import { routeLocale } from "@/lib/languages";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
+// Shipped locales are prerendered; public registry languages render on demand.
 export function generateStaticParams() {
   return locales
     .filter((locale) => locale !== "en")
@@ -13,13 +15,15 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
-  return isLocale(locale) && locale !== "en" ? cityMetadata(locale, slug) : {};
+  const { locale: segment, slug } = await params;
+  const locale = await routeLocale(segment);
+  return locale ? cityMetadata(locale, slug) : {};
 }
 
 export default async function Page({ params }: Props) {
-  const { locale, slug } = await params;
+  const { locale: segment, slug } = await params;
+  const locale = await routeLocale(segment);
   const city = findCity(slug);
-  if (!isLocale(locale) || locale === "en" || !city) notFound();
+  if (!locale || !city) notFound();
   return <CityPage locale={locale} city={city} />;
 }

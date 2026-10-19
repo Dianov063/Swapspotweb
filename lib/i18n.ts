@@ -1,36 +1,33 @@
 import localeComplements from "./i18n-complements.json";
 
-import type { Locale } from "./locales";
+import { extraLocaleTables } from "./extraLocales";
+import {
+  languageTag as segmentLanguageTag,
+  textDirection as segmentTextDirection,
+  type Locale,
+  type ShippedLocale,
+} from "./locales";
 
 export {
   defaultLocale,
   hreflangAlternates,
   isLocale,
-  languageTag,
+  localeNames,
   localizedPath,
   locales,
-  textDirection,
   type Locale,
+  type ShippedLocale,
 } from "./locales";
 
-export const localeNames: Record<Locale, string> = {
-  en: "English",
-  es: "Español",
-  zh: "中文",
-  fr: "Français",
-  ru: "Русский",
-  ar: "العربية",
-  pt: "Português",
-  ht: "Kreyòl Ayisyen",
-  de: "Deutsch",
-  fil: "Filipino",
-  hi: "हिन्दी",
-  bn: "বাংলা",
-  te: "తెలుగు",
-  ta: "தமிழ்",
-  vi: "Tiếng Việt",
-  th: "ไทย",
-};
+/** BCP 47 tag of a site locale (`zh` -> `zh-Hans`; registry languages: their registry code). */
+export function languageTag(locale: Locale) {
+  return extraLocaleTables(locale)?.meta.tag ?? segmentLanguageTag(locale);
+}
+
+/** Text direction of a site locale (registry languages: the registry `dir`). */
+export function textDirection(locale: Locale): "rtl" | "ltr" {
+  return extraLocaleTables(locale)?.meta.dir ?? segmentTextDirection(locale);
+}
 
 const en = {
   metaTitle: "SwapSpot - Find Trusted Local Help Near You",
@@ -188,7 +185,7 @@ function mergeDictionary(overrides: DeepPartial<DictionaryShape>): DictionarySha
   };
 }
 
-export const dictionaries: Record<Locale, DictionaryShape> = {
+export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
   en,
   es: mergeDictionary({
     metaTitle: "SwapSpot - Encuentra ayuda local de confianza cerca de ti",
@@ -444,8 +441,16 @@ function mergeLocalizedValues<T>(base: T, override: unknown): T {
 }
 
 for (const [locale, overrides] of Object.entries(localeComplements)) {
-  const localeKey = locale as Locale;
+  const localeKey = locale as ShippedLocale;
   dictionaries[localeKey] = mergeLocalizedValues(dictionaries[localeKey], overrides);
 }
 
 export type Dictionary = DictionaryShape;
+
+/**
+ * Dictionary of a site locale: the shipped table, the resolved locale pack of a registry language
+ * (registered by lib/localePacks.ts), else English.
+ */
+export function getDictionary(locale: Locale): Dictionary {
+  return (dictionaries as Partial<Record<string, Dictionary>>)[locale] ?? extraLocaleTables(locale)?.site ?? dictionaries.en;
+}

@@ -10,7 +10,8 @@ import TrustSafety from "@/components/TrustSafety";
 import AppPreview from "@/components/AppPreview";
 import WaitlistCTA from "@/components/WaitlistCTA";
 import Footer from "@/components/Footer";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { languageTag, textDirection, type Dictionary, type Locale } from "@/lib/i18n";
+import { storeBadgesFor } from "@/lib/storeBadges";
 
 export default function HomePage({
   locale,
@@ -23,8 +24,8 @@ export default function HomePage({
 }) {
   return (
     <div
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
+      lang={languageTag(locale)}
+      dir={textDirection(locale)}
       className="min-w-0 overflow-x-clip [&_*]:min-w-0"
     >
       <script
@@ -50,7 +51,7 @@ export default function HomePage({
         <Categories locale={locale} dictionary={dictionary} />
         <TrustSafety dictionary={dictionary} />
         <AppPreview locale={locale} />
-        <WaitlistCTA locale={locale} dictionary={dictionary} />
+        <WaitlistCTA locale={locale} dictionary={dictionary} storeBadges={storeBadgesFor(locale)} />
       </main>
       <Footer locale={locale} dictionary={dictionary} />
     </div>

@@ -1,7 +1,8 @@
 // Names of the 14 service categories in the 16 site languages (catalog labels, not user content).
 // Keys are the site category slugs (lib/data.ts); backend directory slugs such as
 // `home-repair-and-maintenance` map to them by dropping "-and-".
-import type { Locale } from "./locales";
+import { extraLocaleTables } from "./extraLocales";
+import type { Locale, ShippedLocale } from "./locales";
 
 export const categorySlugs = [
   "home-repair-maintenance",
@@ -21,7 +22,7 @@ export const categorySlugs = [
 ] as const;
 
 // Same order as `categorySlugs`.
-const names: Record<Locale, readonly string[]> = {
+export const categoryNamesTable: Record<ShippedLocale, readonly string[]> = {
   en: ["Home Repair & Maintenance", "Construction & Remodeling", "Cleaning", "Lawn & Outdoor", "Moving & Delivery", "Tech & Smart Home", "Tutoring & Lessons", "Beauty & Wellness", "Care & Assistance", "Events & Entertainment", "Professional Services", "Pet Services", "Design & Creative", "Specialty & Seasonal"],
   es: ["Reparación y mantenimiento del hogar", "Construcción y remodelación", "Limpieza", "Jardín y exteriores", "Mudanzas y entregas", "Tecnología y hogar inteligente", "Clases y tutorías", "Belleza y bienestar", "Cuidado y asistencia", "Eventos y entretenimiento", "Servicios profesionales", "Servicios para mascotas", "Diseño y creatividad", "Especiales y de temporada"],
   zh: ["家居维修与保养", "建筑与装修", "清洁", "草坪与户外", "搬家与配送", "科技与智能家居", "辅导与课程", "美容与健康", "照护与协助", "活动与娱乐", "专业服务", "宠物服务", "设计与创意", "特色与季节性服务"],
@@ -45,5 +46,7 @@ export function categoryName(slug: string | null | undefined, locale: Locale): s
   const raw = String(slug ?? "");
   const index = categorySlugs.indexOf((raw.replace(/-and-/g, "-") as (typeof categorySlugs)[number]));
   if (index < 0) return null;
-  return (names[locale] ?? names.en)[index] ?? names.en[index];
+  const shipped = (categoryNamesTable as Partial<Record<string, readonly string[]>>)[locale];
+  if (shipped) return shipped[index] ?? categoryNamesTable.en[index];
+  return extraLocaleTables(locale)?.categories[categorySlugs[index]] ?? categoryNamesTable.en[index];
 }

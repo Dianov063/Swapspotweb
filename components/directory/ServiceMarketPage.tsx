@@ -5,7 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PublicServiceCards from "@/components/PublicServiceCards";
 import { categoryVars, directoryStrings, fillTemplate, localizedCategoryName } from "@/lib/directoryStrings";
-import { dictionaries, hreflangAlternates, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/languages";
 import { siteUrl } from "@/lib/locales";
 import { formatLowestPrices, schemaOffer } from "@/lib/priceFormat";
 import {
@@ -39,7 +40,7 @@ export async function serviceMarketMetadata(locale: Locale, categorySlug: string
   return {
     title: fillTemplate(t.pairMetaTitle, vars),
     description: fillTemplate(t.pairMetaDescription, vars),
-    alternates: hreflangAlternates(path, locale),
+    alternates: await localeAlternates(path, locale),
     openGraph: {
       title: fillTemplate(t.pairTitle, vars),
       description: fillTemplate(t.pairOgDescription, vars),
@@ -62,7 +63,7 @@ export default async function ServiceMarketPage({
   if (!pair) notFound();
 
   const t = directoryStrings(locale);
-  const dictionary = dictionaries[locale];
+  const dictionary = getDictionary(locale);
   const vars = pairVars(pair, locale);
   const listings = await getPublicServiceListings({
     categorySlug: pair.categorySlug,
@@ -84,7 +85,7 @@ export default async function ServiceMarketPage({
     "@type": "ItemList",
     name: fillTemplate(t.pairTitle, vars),
     description: fillTemplate(t.pairListDescription, vars),
-    inLanguage: locale,
+    inLanguage: languageTag(locale),
     itemListElement: listings.slice(0, 12).map((listing, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -119,7 +120,7 @@ export default async function ServiceMarketPage({
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    inLanguage: locale,
+    inLanguage: languageTag(locale),
     mainEntity: faq.map((item) => ({
       "@type": "Question",
       name: item.question,
@@ -136,7 +137,7 @@ export default async function ServiceMarketPage({
   ];
 
   return (
-    <div lang={locale} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
+    <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main className="mx-auto max-w-wrap px-6 py-[clamp(48px,6vw,86px)]">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

@@ -1,7 +1,8 @@
 // Locale-aware prices and distances (contract §4.1): Intl.NumberFormat in the page language with
 // the currency stored on the record, no decimals for whole amounts, translated "from",
 // "per hour" and "Price on request". Amounts in different currencies are never compared or
-// summed. Pure module without imports so `node --test` can load it.
+// summed. Registry languages (lib/extraLocales.ts) use their locale pack (keys `priceWords.*`).
+import { extraLocaleTables } from "./extraLocales";
 
 export type PriceWords = {
   from: string;
@@ -32,7 +33,7 @@ export const PRICE_WORDS: Record<string, PriceWords> = {
 };
 
 export function priceWords(locale: string): PriceWords {
-  return PRICE_WORDS[locale] ?? PRICE_WORDS.en;
+  return PRICE_WORDS[locale] ?? extraLocaleTables(locale)?.priceWords ?? PRICE_WORDS.en;
 }
 
 function fill(template: string, price: string) {
@@ -43,6 +44,8 @@ function fill(template: string, price: string) {
 export function intlLocales(locale: string): string[] {
   if (locale === "zh") return ["zh-Hans", "en"];
   if (locale === "ht") return ["ht", "fr", "en"];
+  const extra = extraLocaleTables(locale);
+  if (extra) return extra.meta.intl;
   return [locale, "en"];
 }
 

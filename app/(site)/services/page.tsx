@@ -2,7 +2,9 @@ import ServicesDirectoryPage, { servicesDirectoryMetadata } from "@/components/d
 
 export const dynamic = "force-dynamic";
 
-export const metadata = servicesDirectoryMetadata("en");
+export function generateMetadata() {
+  return servicesDirectoryMetadata("en");
+}
 
 export default function Page() {
   return <ServicesDirectoryPage locale="en" />;

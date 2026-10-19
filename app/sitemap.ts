@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
-import { absoluteLanguageAlternates, locales, localizedPath, siteUrl } from "@/lib/locales";
+import { getSiteLanguages } from "@/lib/languages";
+import { absoluteLanguageAlternates, localizedPath, siteUrl, type LanguageRoute } from "@/lib/locales";
 import { getDirectoryPairs, getPublicHelperProfiles } from "@/lib/publicDirectory";
 
 // Short localized notice pages (no hreflang: the legal texts themselves stay English).
@@ -15,10 +16,14 @@ function url(path: string) {
   return `${siteUrl}${path === "/" ? "" : path}`;
 }
 
-/** Every locale version of an English path, each listing all alternates (hreflang + x-default). */
-function localizedEntries(path: string, options: Omit<Entry, "url" | "alternates">): Entry[] {
-  const alternates = { languages: absoluteLanguageAlternates(path) };
-  return locales.map((locale) => ({
+/**
+ * Every language version of an English path, each listing all alternates (hreflang + x-default).
+ * `languages` are the site languages: the shipped locales plus public, bundled registry languages
+ * (hidden languages get no entry and no alternate).
+ */
+function localizedEntries(path: string, languages: readonly LanguageRoute[], options: Omit<Entry, "url" | "alternates">): Entry[] {
+  const alternates = { languages: absoluteLanguageAlternates(path, languages) };
+  return languages.map(({ segment: locale }) => ({
     url: url(localizedPath(locale, path)),
     alternates,
     ...options,
@@ -27,32 +32,33 @@ function localizedEntries(path: string, options: Omit<Entry, "url" | "alternates
 }
 
 /** The English URL with its language alternates (the localized URLs are announced as alternates). */
-function englishEntry(path: string, options: Omit<Entry, "url" | "alternates">): Entry {
-  return { url: url(path), alternates: { languages: absoluteLanguageAlternates(path) }, ...options };
+function englishEntry(path: string, languages: readonly LanguageRoute[], options: Omit<Entry, "url" | "alternates">): Entry {
+  return { url: url(path), alternates: { languages: absoluteLanguageAlternates(path, languages) }, ...options };
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  const [directoryPairs, helperProfiles] = await Promise.all([
+  const [directoryPairs, helperProfiles, languages] = await Promise.all([
     getDirectoryPairs(),
     getPublicHelperProfiles({ limit: 1000 }),
+    getSiteLanguages(),
   ]);
 
-  // Low-cardinality pages: all 16 locale URLs are listed.
+  // Low-cardinality pages: every site language URL is listed.
   const pages = [
-    ...localizedEntries("/", { lastModified, changeFrequency: "weekly", priority: 1 }),
-    ...localizedEntries("/services", { lastModified, changeFrequency: "weekly", priority: 0.7 }),
-    ...localizedEntries("/helpers", { lastModified, changeFrequency: "weekly", priority: 0.7 }),
+    ...localizedEntries("/", languages, { lastModified, changeFrequency: "weekly", priority: 1 }),
+    ...localizedEntries("/services", languages, { lastModified, changeFrequency: "weekly", priority: 0.7 }),
+    ...localizedEntries("/helpers", languages, { lastModified, changeFrequency: "weekly", priority: 0.7 }),
     ...categories.flatMap((category) =>
-      localizedEntries(`/categories/${category.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+      localizedEntries(`/categories/${category.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
     ),
     ...cities.flatMap((city) =>
-      localizedEntries(`/cities/${city.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+      localizedEntries(`/cities/${city.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
     ),
   ];
 
   const noticePages = localizedNoticePaths.flatMap((path) =>
-    locales.map((locale) => ({
+    languages.map(({ segment: locale }) => ({
       url: url(localizedPath(locale, path)),
       lastModified,
       changeFrequency: locale === "en" ? ("weekly" as const) : ("monthly" as const),
@@ -60,17 +66,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  // Data-driven pages (hundreds of URLs): the English URL carries the 16 language alternates; every
+  // Data-driven pages (hundreds of URLs): the English URL carries the language alternates; every
   // localized page also declares the same hreflang set in its HTML.
   const serviceMarketRoutes = directoryPairs.map((pair) =>
-    englishEntry(`/services/${pair.categorySlug}/${pair.marketSlug}`, {
+    englishEntry(`/services/${pair.categorySlug}/${pair.marketSlug}`, languages, {
       lastModified,
       changeFrequency: "daily",
       priority: 0.72,
     }),
   );
   const helperProfileRoutes = helperProfiles.slice(0, 500).map((profile) =>
-    englishEntry(`/helpers/${profile.slug}`, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
+    englishEntry(`/helpers/${profile.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
   );
 
   return [...pages, ...noticePages, ...serviceMarketRoutes, ...helperProfileRoutes];

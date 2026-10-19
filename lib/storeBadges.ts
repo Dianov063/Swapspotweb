@@ -1,7 +1,8 @@
 // Text of the App Store / Google Play buttons (components/AppStoreButtons.tsx) in the 16 site
 // languages. The store names themselves are trademarks and stay as written; only the line above
 // them and the accessible label are translated. Pure module for `npm run test:intl`.
-import type { Locale } from "./locales";
+import { extraLocaleTables } from "./extraLocales";
+import type { Locale, ShippedLocale } from "./locales";
 
 export type StoreBadgeCopy = {
   appStoreTop: string;
@@ -10,7 +11,7 @@ export type StoreBadgeCopy = {
   playLabel: string;
 };
 
-export const storeBadgeCopy: Record<Locale, StoreBadgeCopy> = {
+export const storeBadgeCopy: Record<ShippedLocale, StoreBadgeCopy> = {
   en: {
     appStoreTop: "Download on the",
     playTop: "Get it on",
@@ -108,3 +109,8 @@ export const storeBadgeCopy: Record<Locale, StoreBadgeCopy> = {
     playLabel: "ดาวน์โหลด SwapSpot บน Google Play",
   },
 };
+
+/** Server-side lookup; client components get the copy as a prop (see AppStoreButtons). */
+export function storeBadgesFor(locale: Locale): StoreBadgeCopy {
+  return (storeBadgeCopy as Partial<Record<string, StoreBadgeCopy>>)[locale] ?? extraLocaleTables(locale)?.storeBadges ?? storeBadgeCopy.en;
+}
