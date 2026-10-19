@@ -1,7 +1,9 @@
 import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
 import { dictionaries, localizedPath, type Locale } from "@/lib/i18n";
-import { pricingForCountry } from "@/lib/market";
+import { getMarket, isActive } from "@/lib/markets";
+import { formatPassPrice } from "@/lib/priceFormat";
+import { referencePassPrices, type StorePrice } from "@/lib/storePrices";
 
 type ClientPricingCopy = {
     eyebrow: string;
@@ -12,7 +14,6 @@ type ClientPricingCopy = {
     unlock: string;
     plans: {
       name: string;
-      price: string;
       note: string;
       best?: string;
       features: string[];
@@ -34,14 +35,12 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     plans: [
       {
         name: "Day Pass",
-        price: "$5/day",
         note: "Best for one task, urgent help, or trying SwapSpot.",
         features: ["Message helpers for the day", "Request quotes", "Book when you are ready"],
         cta: "Get Day Pass",
       },
       {
         name: "Client Pro",
-        price: "$25/month",
         note: "Best for regular home, family, rental, or business needs.",
         best: "Best value",
         features: ["Monthly access", "Message and request quotes anytime", "Better value after 5 active days"],
@@ -61,14 +60,12 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     plans: [
       {
         name: "Day Pass",
-        price: "$5/día",
         note: "Para una tarea, ayuda urgente o probar SwapSpot.",
         features: ["Escribe a helpers durante el día", "Solicita quotes", "Reserva cuando estés listo"],
         cta: "Obtener Day Pass",
       },
       {
         name: "Client Pro",
-        price: "$25/mes",
         note: "Para casa, familia, renta o negocio con necesidades frecuentes.",
         best: "Mejor valor",
         features: ["Acceso mensual", "Mensajes y quotes cuando quieras", "Mejor valor después de 5 días activos"],
@@ -88,14 +85,12 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     plans: [
       {
         name: "Day Pass",
-        price: "$5/天",
         note: "适合一次任务、紧急帮助或试用 SwapSpot。",
         features: ["当天可联系 helpers", "请求 quotes", "准备好后预订"],
         cta: "获取 Day Pass",
       },
       {
         name: "Client Pro",
-        price: "$25/月",
         note: "适合家庭、租房、照护或小生意的常规需求。",
         best: "最划算",
         features: ["月度访问", "随时发消息和请求 quotes", "使用超过 5 天更划算"],
@@ -115,14 +110,12 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     plans: [
       {
         name: "Day Pass",
-        price: "$5/jour",
         note: "Pour une tâche, une urgence ou tester SwapSpot.",
         features: ["Écrire aux helpers pour la journée", "Demander des quotes", "Réserver quand tout est prêt"],
         cta: "Obtenir Day Pass",
       },
       {
         name: "Client Pro",
-        price: "$25/mois",
         note: "Pour les besoins réguliers maison, famille, location ou business.",
         best: "Meilleure valeur",
         features: ["Accès mensuel", "Messages et quotes à tout moment", "Plus rentable après 5 jours actifs"],
@@ -142,14 +135,12 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     plans: [
       {
         name: "Доступ на день",
-        price: "$5/день",
         note: "Для одной задачи, срочной помощи или знакомства со SwapSpot.",
         features: ["Пишите исполнителям в течение дня", "Запрашивайте стоимость", "Бронируйте, когда готовы"],
         cta: "Получить доступ",
       },
       {
         name: "Client Pro",
-        price: "$25/месяц",
         note: "Для регулярных задач дома, семьи, аренды или бизнеса.",
         best: "Лучшая цена",
         features: ["Доступ на месяц", "Переписка и запросы стоимости без ограничений", "Выгодно уже после 5 активных дней"],
@@ -166,8 +157,8 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     unlock: "Pass mở khóa",
     actions: ["Nhắn tin cho người trợ giúp", "Yêu cầu báo giá", "Đặt công việc"],
     plans: [
-      { name: "Pass một ngày", price: "$5/ngày", note: "Phù hợp cho một công việc, nhu cầu gấp hoặc dùng thử SwapSpot.", features: ["Nhắn tin trong ngày", "Yêu cầu báo giá", "Đặt lịch khi sẵn sàng"], cta: "Mua pass một ngày" },
-      { name: "Client Pro", price: "$25/tháng", note: "Phù hợp cho nhu cầu thường xuyên của gia đình, nhà cho thuê hoặc doanh nghiệp.", best: "Giá trị tốt nhất", features: ["Truy cập hàng tháng", "Nhắn tin và yêu cầu báo giá bất cứ lúc nào", "Tiết kiệm hơn sau 5 ngày sử dụng"], cta: "Bắt đầu Pro" },
+      { name: "Pass một ngày", note: "Phù hợp cho một công việc, nhu cầu gấp hoặc dùng thử SwapSpot.", features: ["Nhắn tin trong ngày", "Yêu cầu báo giá", "Đặt lịch khi sẵn sàng"], cta: "Mua pass một ngày" },
+      { name: "Client Pro", note: "Phù hợp cho nhu cầu thường xuyên của gia đình, nhà cho thuê hoặc doanh nghiệp.", best: "Giá trị tốt nhất", features: ["Truy cập hàng tháng", "Nhắn tin và yêu cầu báo giá bất cứ lúc nào", "Tiết kiệm hơn sau 5 ngày sử dụng"], cta: "Bắt đầu Pro" },
     ],
   },
   th: {
@@ -179,22 +170,102 @@ const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy
     unlock: "Pass ช่วยให้คุณ",
     actions: ["ส่งข้อความหาผู้ช่วย", "ขอใบเสนอราคา", "จองงาน"],
     plans: [
-      { name: "Pass หนึ่งวัน", price: "$5/วัน", note: "เหมาะสำหรับงานเดียว งานเร่งด่วน หรือทดลองใช้ SwapSpot", features: ["ส่งข้อความได้ตลอดวัน", "ขอใบเสนอราคา", "จองเมื่อคุณพร้อม"], cta: "รับ pass หนึ่งวัน" },
-      { name: "Client Pro", price: "$25/เดือน", note: "เหมาะสำหรับความต้องการประจำของบ้าน ครอบครัว ที่เช่า หรือธุรกิจ", best: "คุ้มค่าที่สุด", features: ["ใช้งานรายเดือน", "ส่งข้อความและขอราคาได้ทุกเมื่อ", "คุ้มขึ้นหลังใช้งาน 5 วัน"], cta: "เริ่ม Pro" },
+      { name: "Pass หนึ่งวัน", note: "เหมาะสำหรับงานเดียว งานเร่งด่วน หรือทดลองใช้ SwapSpot", features: ["ส่งข้อความได้ตลอดวัน", "ขอใบเสนอราคา", "จองเมื่อคุณพร้อม"], cta: "รับ pass หนึ่งวัน" },
+      { name: "Client Pro", note: "เหมาะสำหรับความต้องการประจำของบ้าน ครอบครัว ที่เช่า หรือธุรกิจ", best: "คุ้มค่าที่สุด", features: ["ใช้งานรายเดือน", "ส่งข้อความและขอราคาได้ทุกเมื่อ", "คุ้มขึ้นหลังใช้งาน 5 วัน"], cta: "เริ่ม Pro" },
     ],
   },
 };
 
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
-const pricingFootnotes: Partial<Record<Locale, string>> = {
-  es: "El precio local final y los impuestos aparecen en App Store o Google Play antes de la compra.",
-  zh: "购买前，App Store 或 Google Play 会显示最终本地价格和税费。",
-  fr: "Le prix local final et les taxes sont affichés par l'App Store ou Google Play avant l'achat.",
-  ru: "Итоговую цену в вашей стране и налоги покажет App Store или Google Play перед покупкой.",
+type PassPriceCopy = { seeStore: string; referenceNote: string; footnote: string };
+
+// Contract §4.2: a reference price only where it is confirmed in both stores (lib/storePrices.ts),
+// otherwise the neutral store text. Every reference price says that the store shows the final price.
+const passPriceCopy: Record<Locale, PassPriceCopy> = {
+  en: {
+    seeStore: "See the current price in the App Store or Google Play",
+    referenceNote: "Reference price. The App Store or Google Play shows the final price.",
+    footnote: "Final local price and taxes are shown by the App Store or Google Play before purchase.",
+  },
+  es: {
+    seeStore: "Consulta el precio actual en App Store o Google Play",
+    referenceNote: "Precio de referencia. App Store o Google Play muestran el precio final.",
+    footnote: "El precio local final y los impuestos aparecen en App Store o Google Play antes de la compra.",
+  },
+  zh: {
+    seeStore: "请在 App Store 或 Google Play 查看当前价格",
+    referenceNote: "参考价格。最终价格以 App Store 或 Google Play 显示为准。",
+    footnote: "购买前，App Store 或 Google Play 会显示最终本地价格和税费。",
+  },
+  fr: {
+    seeStore: "Consultez le prix actuel sur l'App Store ou Google Play",
+    referenceNote: "Prix indicatif. L'App Store ou Google Play affiche le prix final.",
+    footnote: "Le prix local final et les taxes sont affichés par l'App Store ou Google Play avant l'achat.",
+  },
+  ru: {
+    seeStore: "Актуальная цена — в App Store или Google Play",
+    referenceNote: "Ориентировочная цена. Итоговую цену покажет App Store или Google Play.",
+    footnote: "Итоговую цену в вашей стране и налоги покажет App Store или Google Play перед покупкой.",
+  },
+  ar: {
+    seeStore: "اطّلع على السعر الحالي في App Store أو Google Play",
+    referenceNote: "سعر استرشادي. يعرض App Store أو Google Play السعر النهائي.",
+    footnote: "يعرض App Store أو Google Play السعر المحلي النهائي والضرائب قبل الشراء.",
+  },
+  pt: {
+    seeStore: "Veja o preço atual na App Store ou no Google Play",
+    referenceNote: "Preço de referência. A App Store ou o Google Play mostram o preço final.",
+    footnote: "O preço local final e os impostos aparecem na App Store ou no Google Play antes da compra.",
+  },
+  ht: {
+    seeStore: "Gade pri aktyèl la nan App Store oswa Google Play",
+    referenceNote: "Pri referans. App Store oswa Google Play ap montre pri final la.",
+    footnote: "App Store oswa Google Play ap montre pri lokal final la ak taks yo anvan ou achte.",
+  },
+  de: {
+    seeStore: "Den aktuellen Preis finden Sie im App Store oder bei Google Play",
+    referenceNote: "Richtpreis. Den endgültigen Preis zeigt der App Store oder Google Play.",
+    footnote: "Der endgültige lokale Preis und Steuern werden vor dem Kauf im App Store oder bei Google Play angezeigt.",
+  },
+  fil: {
+    seeStore: "Tingnan ang kasalukuyang presyo sa App Store o Google Play",
+    referenceNote: "Reference na presyo. Ang App Store o Google Play ang magpapakita ng huling presyo.",
+    footnote: "Ipinapakita ng App Store o Google Play ang huling lokal na presyo at buwis bago bumili.",
+  },
+  hi: {
+    seeStore: "मौजूदा कीमत App Store या Google Play में देखें",
+    referenceNote: "संदर्भ कीमत। अंतिम कीमत App Store या Google Play दिखाता है।",
+    footnote: "खरीद से पहले App Store या Google Play अंतिम स्थानीय कीमत और कर दिखाता है।",
+  },
+  bn: {
+    seeStore: "বর্তমান মূল্য App Store বা Google Play-তে দেখুন",
+    referenceNote: "রেফারেন্স মূল্য। চূড়ান্ত মূল্য App Store বা Google Play দেখাবে।",
+    footnote: "কেনার আগে App Store বা Google Play চূড়ান্ত স্থানীয় মূল্য ও কর দেখায়।",
+  },
+  te: {
+    seeStore: "ప్రస్తుత ధరను App Store లేదా Google Playలో చూడండి",
+    referenceNote: "సూచన ధర. తుది ధరను App Store లేదా Google Play చూపిస్తుంది.",
+    footnote: "కొనుగోలుకు ముందు App Store లేదా Google Play తుది స్థానిక ధర మరియు పన్నులను చూపిస్తుంది.",
+  },
+  ta: {
+    seeStore: "தற்போதைய விலையை App Store அல்லது Google Play-இல் பார்க்கவும்",
+    referenceNote: "குறிப்பு விலை. இறுதி விலையை App Store அல்லது Google Play காட்டும்.",
+    footnote: "வாங்குவதற்கு முன் App Store அல்லது Google Play இறுதி உள்ளூர் விலையையும் வரிகளையும் காட்டும்.",
+  },
+  vi: {
+    seeStore: "Xem giá hiện tại trên App Store hoặc Google Play",
+    referenceNote: "Giá tham khảo. App Store hoặc Google Play sẽ hiển thị giá cuối cùng.",
+    footnote: "App Store hoặc Google Play hiển thị giá địa phương cuối cùng và thuế trước khi mua.",
+  },
+  th: {
+    seeStore: "ดูราคาปัจจุบันได้ใน App Store หรือ Google Play",
+    referenceNote: "ราคาอ้างอิง ราคาสุดท้ายจะแสดงใน App Store หรือ Google Play",
+    footnote: "App Store หรือ Google Play จะแสดงราคาท้องถิ่นสุดท้ายและภาษีก่อนการซื้อ",
+  },
 };
 
-export default function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
+export default async function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
   const dictionary = dictionaries[locale];
   const t =
     copy[locale] ??
@@ -209,14 +280,12 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
       plans: [
         {
           name: "Day Pass",
-          price: "$5",
           note: dictionary.waitlist.body,
           features: [dictionary.download.pointB, dictionary.download.pointA, dictionary.waitlist.noSpam],
           cta: dictionary.waitlist.join,
         },
         {
           name: "Client Pro",
-          price: "$25",
           note: dictionary.download.body,
           best: dictionary.download.badge,
           features: [dictionary.download.pointA, dictionary.download.pointB, dictionary.waitlist.noSpam],
@@ -225,10 +294,15 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
       ],
     } satisfies ClientPricingCopy);
 
-  const pricing = pricingForCountry(marketCountry);
+  const priceCopy = passPriceCopy[locale] ?? passPriceCopy.en;
+  // Unknown, absent or inactive country: neutral text, never a US price.
+  const market = await getMarket(marketCountry);
+  const reference = referencePassPrices(marketCountry, isActive(market));
+  const priceFor = (price: StorePrice | undefined, period: "day" | "month") =>
+    price ? formatPassPrice(price.amount, price.currency, locale, period) : null;
   const localizedPlans = t.plans.map((plan, index) => ({
     ...plan,
-    price: index === 0 ? pricing.dayPass : pricing.monthlyPass,
+    price: index === 0 ? priceFor(reference?.dayPass, "day") : priceFor(reference?.monthlyPass, "month"),
   }));
 
   return (
@@ -296,9 +370,18 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
                 <h3 className="font-head text-[24px] font-extrabold text-ink">
                   {plan.name}
                 </h3>
-                <div className="mt-3 font-head text-[42px] font-extrabold tracking-[-0.02em] text-green-deep">
-                  {plan.price}
-                </div>
+                {plan.price ? (
+                  <>
+                    <div className="mt-3 font-head text-[42px] font-extrabold tracking-[-0.02em] text-green-deep">
+                      {plan.price}
+                    </div>
+                    <p className="mt-1 text-[12.5px] font-semibold text-ink-soft">{priceCopy.referenceNote}</p>
+                  </>
+                ) : (
+                  <div className="mt-3 text-[17px] font-extrabold leading-[1.35] text-green-deep">
+                    {priceCopy.seeStore}
+                  </div>
+                )}
                 <p className="mt-2 min-h-[48px] text-[14.5px] leading-[1.5] text-ink-soft">
                   {plan.note}
                 </p>
@@ -323,8 +406,7 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
           </div>
         </div>
         <p className="mt-5 text-center text-[13px] font-semibold text-ink-soft">
-          {pricingFootnotes[locale] ??
-            "Final local price and taxes are shown by the App Store or Google Play before purchase."}
+          {priceCopy.footnote}
         </p>
       </div>
     </section>
