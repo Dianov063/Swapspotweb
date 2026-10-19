@@ -1,234 +1,25 @@
 import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
-import { dictionaries, localizedPath, type Locale } from "@/lib/i18n";
-import { pricingForCountry } from "@/lib/market";
-
-type ClientPricingCopy = {
-    eyebrow: string;
-    title: string;
-    body: string;
-    freeTitle: string;
-    freeBody: string;
-    unlock: string;
-    plans: {
-      name: string;
-      price: string;
-      note: string;
-      best?: string;
-      features: string[];
-      cta: string;
-    }[];
-    actions: string[];
-  };
-
-const copy: Partial<Record<Locale, ClientPricingCopy>> & { en: ClientPricingCopy } = {
-  en: {
-    eyebrow: "Client Pricing",
-    title: "Browse for free. Use a pass when you are ready to act.",
-    body:
-      "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper.",
-    freeTitle: "Free browsing",
-    freeBody: "See categories, helper previews, service areas, and basic trust signals before choosing a pass.",
-    unlock: "A pass unlocks",
-    actions: ["Messaging helpers", "Requesting quotes", "Booking jobs"],
-    plans: [
-      {
-        name: "Day Pass",
-        price: "$5/day",
-        note: "Best for one task, urgent help, or trying SwapSpot.",
-        features: ["Message helpers for the day", "Request quotes", "Book when you are ready"],
-        cta: "Get Day Pass",
-      },
-      {
-        name: "Client Pro",
-        price: "$25/month",
-        note: "Best for regular home, family, rental, or business needs.",
-        best: "Best value",
-        features: ["Monthly access", "Message and request quotes anytime", "Better value after 5 active days"],
-        cta: "Start Pro",
-      },
-    ],
-  },
-  es: {
-    eyebrow: "Precios para clientes",
-    title: "Explora gratis. Usa un pass cuando quieras actuar.",
-    body:
-      "Los clientes pueden ver categorías y comparar helpers sin pagar. Se necesita un pass para escribir, pedir quote o reservar.",
-    freeTitle: "Explorar gratis",
-    freeBody: "Mira categorías, previews de helpers, áreas de servicio y señales básicas de confianza antes de elegir un pass.",
-    unlock: "Un pass desbloquea",
-    actions: ["Mensajes a helpers", "Solicitar quotes", "Reservar trabajos"],
-    plans: [
-      {
-        name: "Day Pass",
-        price: "$5/día",
-        note: "Para una tarea, ayuda urgente o probar SwapSpot.",
-        features: ["Escribe a helpers durante el día", "Solicita quotes", "Reserva cuando estés listo"],
-        cta: "Obtener Day Pass",
-      },
-      {
-        name: "Client Pro",
-        price: "$25/mes",
-        note: "Para casa, familia, renta o negocio con necesidades frecuentes.",
-        best: "Mejor valor",
-        features: ["Acceso mensual", "Mensajes y quotes cuando quieras", "Mejor valor después de 5 días activos"],
-        cta: "Empezar Pro",
-      },
-    ],
-  },
-  zh: {
-    eyebrow: "客户价格",
-    title: "免费浏览。准备行动时再使用 pass。",
-    body:
-      "客户可以免费浏览类别并比较 helpers。发送消息、请求 quote 或预订 helper 时需要 pass。",
-    freeTitle: "免费浏览",
-    freeBody: "选择 pass 前，可查看类别、helper 预览、服务区域和基础信任信息。",
-    unlock: "Pass 解锁",
-    actions: ["给 helpers 发消息", "请求 quotes", "预订服务"],
-    plans: [
-      {
-        name: "Day Pass",
-        price: "$5/天",
-        note: "适合一次任务、紧急帮助或试用 SwapSpot。",
-        features: ["当天可联系 helpers", "请求 quotes", "准备好后预订"],
-        cta: "获取 Day Pass",
-      },
-      {
-        name: "Client Pro",
-        price: "$25/月",
-        note: "适合家庭、租房、照护或小生意的常规需求。",
-        best: "最划算",
-        features: ["月度访问", "随时发消息和请求 quotes", "使用超过 5 天更划算"],
-        cta: "开始 Pro",
-      },
-    ],
-  },
-  fr: {
-    eyebrow: "Tarifs clients",
-    title: "Parcourez gratuitement. Utilisez un pass pour agir.",
-    body:
-      "Les clients peuvent explorer les catégories et comparer les helpers sans payer. Un pass est nécessaire pour écrire, demander un quote ou réserver.",
-    freeTitle: "Navigation gratuite",
-    freeBody: "Voyez les catégories, aperçus de helpers, zones de service et signaux de confiance avant de choisir un pass.",
-    unlock: "Un pass débloque",
-    actions: ["Messages aux helpers", "Demandes de quotes", "Réservations"],
-    plans: [
-      {
-        name: "Day Pass",
-        price: "$5/jour",
-        note: "Pour une tâche, une urgence ou tester SwapSpot.",
-        features: ["Écrire aux helpers pour la journée", "Demander des quotes", "Réserver quand tout est prêt"],
-        cta: "Obtenir Day Pass",
-      },
-      {
-        name: "Client Pro",
-        price: "$25/mois",
-        note: "Pour les besoins réguliers maison, famille, location ou business.",
-        best: "Meilleure valeur",
-        features: ["Accès mensuel", "Messages et quotes à tout moment", "Plus rentable après 5 jours actifs"],
-        cta: "Démarrer Pro",
-      },
-    ],
-  },
-  ru: {
-    eyebrow: "Оплата для клиентов",
-    title: "Просмотр бесплатный. Платите, только когда готовы связаться.",
-    body:
-      "Смотрите категории и сравнивайте исполнителей бесплатно. Платный доступ нужен только для переписки, запроса стоимости и бронирования.",
-    freeTitle: "Бесплатный просмотр",
-    freeBody: "До оплаты можно смотреть категории, профили исполнителей, районы работы, отзывы и цены.",
-    unlock: "Платный доступ открывает",
-    actions: ["Переписку с исполнителями", "Запрос стоимости", "Бронирование услуг"],
-    plans: [
-      {
-        name: "Доступ на день",
-        price: "$5/день",
-        note: "Для одной задачи, срочной помощи или знакомства со SwapSpot.",
-        features: ["Пишите исполнителям в течение дня", "Запрашивайте стоимость", "Бронируйте, когда готовы"],
-        cta: "Получить доступ",
-      },
-      {
-        name: "Client Pro",
-        price: "$25/месяц",
-        note: "Для регулярных задач дома, семьи, аренды или бизнеса.",
-        best: "Лучшая цена",
-        features: ["Доступ на месяц", "Переписка и запросы стоимости без ограничений", "Выгодно уже после 5 активных дней"],
-        cta: "Подключить Pro",
-      },
-    ],
-  },
-  vi: {
-    eyebrow: "Bảng giá cho khách hàng",
-    title: "Xem miễn phí. Dùng pass khi bạn sẵn sàng hành động.",
-    body: "Khách hàng có thể xem danh mục và so sánh người trợ giúp miễn phí. Bạn cần pass để nhắn tin, yêu cầu báo giá hoặc đặt lịch.",
-    freeTitle: "Xem miễn phí",
-    freeBody: "Xem danh mục, hồ sơ người trợ giúp, khu vực phục vụ và thông tin tin cậy cơ bản trước khi chọn pass.",
-    unlock: "Pass mở khóa",
-    actions: ["Nhắn tin cho người trợ giúp", "Yêu cầu báo giá", "Đặt công việc"],
-    plans: [
-      { name: "Pass một ngày", price: "$5/ngày", note: "Phù hợp cho một công việc, nhu cầu gấp hoặc dùng thử SwapSpot.", features: ["Nhắn tin trong ngày", "Yêu cầu báo giá", "Đặt lịch khi sẵn sàng"], cta: "Mua pass một ngày" },
-      { name: "Client Pro", price: "$25/tháng", note: "Phù hợp cho nhu cầu thường xuyên của gia đình, nhà cho thuê hoặc doanh nghiệp.", best: "Giá trị tốt nhất", features: ["Truy cập hàng tháng", "Nhắn tin và yêu cầu báo giá bất cứ lúc nào", "Tiết kiệm hơn sau 5 ngày sử dụng"], cta: "Bắt đầu Pro" },
-    ],
-  },
-  th: {
-    eyebrow: "ราคาสำหรับลูกค้า",
-    title: "ดูได้ฟรี ใช้ pass เมื่อคุณพร้อมดำเนินการ",
-    body: "ลูกค้าดูหมวดหมู่และเปรียบเทียบผู้ช่วยได้ฟรี ต้องมี pass เพื่อส่งข้อความ ขอใบเสนอราคา หรือจอง",
-    freeTitle: "ดูได้ฟรี",
-    freeBody: "ดูหมวดหมู่ โปรไฟล์ผู้ช่วย พื้นที่ให้บริการ และข้อมูลความน่าเชื่อถือก่อนเลือก pass",
-    unlock: "Pass ช่วยให้คุณ",
-    actions: ["ส่งข้อความหาผู้ช่วย", "ขอใบเสนอราคา", "จองงาน"],
-    plans: [
-      { name: "Pass หนึ่งวัน", price: "$5/วัน", note: "เหมาะสำหรับงานเดียว งานเร่งด่วน หรือทดลองใช้ SwapSpot", features: ["ส่งข้อความได้ตลอดวัน", "ขอใบเสนอราคา", "จองเมื่อคุณพร้อม"], cta: "รับ pass หนึ่งวัน" },
-      { name: "Client Pro", price: "$25/เดือน", note: "เหมาะสำหรับความต้องการประจำของบ้าน ครอบครัว ที่เช่า หรือธุรกิจ", best: "คุ้มค่าที่สุด", features: ["ใช้งานรายเดือน", "ส่งข้อความและขอราคาได้ทุกเมื่อ", "คุ้มขึ้นหลังใช้งาน 5 วัน"], cta: "เริ่ม Pro" },
-    ],
-  },
-};
+import { localizedPath, type Locale } from "@/lib/i18n";
+import { clientPricingCopy, passPriceCopy } from "@/lib/pricingCopy";
+import { getMarket, isActive } from "@/lib/markets";
+import { formatPassPrice } from "@/lib/priceFormat";
+import { referencePassPrices, type StorePrice } from "@/lib/storePrices";
 
 const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
-const pricingFootnotes: Partial<Record<Locale, string>> = {
-  es: "El precio local final y los impuestos aparecen en App Store o Google Play antes de la compra.",
-  zh: "购买前，App Store 或 Google Play 会显示最终本地价格和税费。",
-  fr: "Le prix local final et les taxes sont affichés par l'App Store ou Google Play avant l'achat.",
-  ru: "Итоговую цену в вашей стране и налоги покажет App Store или Google Play перед покупкой.",
-};
-
-export default function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
-  const dictionary = dictionaries[locale];
-  const t =
-    copy[locale] ??
-    ({
-      eyebrow: dictionary.nav.pricing,
-      title: dictionary.waitlist.title,
-      body: dictionary.waitlist.body,
-      freeTitle: dictionary.download.pointB,
-      freeBody: dictionary.download.body,
-      unlock: dictionary.download.badge,
-      actions: [dictionary.download.pointA, dictionary.download.pointB, dictionary.waitlist.noSpam],
-      plans: [
-        {
-          name: "Day Pass",
-          price: "$5",
-          note: dictionary.waitlist.body,
-          features: [dictionary.download.pointB, dictionary.download.pointA, dictionary.waitlist.noSpam],
-          cta: dictionary.waitlist.join,
-        },
-        {
-          name: "Client Pro",
-          price: "$25",
-          note: dictionary.download.body,
-          best: dictionary.download.badge,
-          features: [dictionary.download.pointA, dictionary.download.pointB, dictionary.waitlist.noSpam],
-          cta: dictionary.waitlist.join,
-        },
-      ],
-    } satisfies ClientPricingCopy);
-
-  const pricing = pricingForCountry(marketCountry);
+export default async function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
+  // Complete in all 16 locales (checked by npm run test:intl).
+  const t = clientPricingCopy[locale] ?? clientPricingCopy.en;
+  const priceCopy = passPriceCopy[locale] ?? passPriceCopy.en;
+  // Unknown, absent or inactive country: neutral text, never a US price.
+  const market = await getMarket(marketCountry);
+  const reference = referencePassPrices(marketCountry, isActive(market));
+  const priceFor = (price: StorePrice | undefined, period: "day" | "month") =>
+    price ? formatPassPrice(price.amount, price.currency, locale, period) : null;
   const localizedPlans = t.plans.map((plan, index) => ({
     ...plan,
-    price: index === 0 ? pricing.dayPass : pricing.monthlyPass,
+    price: index === 0 ? priceFor(reference?.dayPass, "day") : priceFor(reference?.monthlyPass, "month"),
   }));
 
   return (
@@ -296,9 +87,18 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
                 <h3 className="font-head text-[24px] font-extrabold text-ink">
                   {plan.name}
                 </h3>
-                <div className="mt-3 font-head text-[42px] font-extrabold tracking-[-0.02em] text-green-deep">
-                  {plan.price}
-                </div>
+                {plan.price ? (
+                  <>
+                    <div className="mt-3 font-head text-[42px] font-extrabold tracking-[-0.02em] text-green-deep">
+                      {plan.price}
+                    </div>
+                    <p className="mt-1 text-[12.5px] font-semibold text-ink-soft">{priceCopy.referenceNote}</p>
+                  </>
+                ) : (
+                  <div className="mt-3 text-[17px] font-extrabold leading-[1.35] text-green-deep">
+                    {priceCopy.seeStore}
+                  </div>
+                )}
                 <p className="mt-2 min-h-[48px] text-[14.5px] leading-[1.5] text-ink-soft">
                   {plan.note}
                 </p>
@@ -323,8 +123,7 @@ export default function ClientPricing({ locale, marketCountry }: { locale: Local
           </div>
         </div>
         <p className="mt-5 text-center text-[13px] font-semibold text-ink-soft">
-          {pricingFootnotes[locale] ??
-            "Final local price and taxes are shown by the App Store or Google Play before purchase."}
+          {priceCopy.footnote}
         </p>
       </div>
     </section>

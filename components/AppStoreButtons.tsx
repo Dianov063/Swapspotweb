@@ -1,15 +1,20 @@
 import { Apple, Play } from "lucide-react";
 import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/lib/appLinks";
+import type { Locale } from "@/lib/locales";
+import { storeBadgeCopy } from "@/lib/storeBadges";
 
 type AppStoreButtonsProps = {
   tone?: "dark" | "light";
   className?: string;
+  locale?: Locale;
 };
 
 export default function AppStoreButtons({
   tone = "dark",
   className = "",
+  locale = "en",
 }: AppStoreButtonsProps) {
+  const t = storeBadgeCopy[locale] ?? storeBadgeCopy.en;
   const buttonClass =
     tone === "light"
       ? "border-white/15 bg-[#10231A] text-white hover:bg-[#0A1A12]"
@@ -21,13 +26,13 @@ export default function AppStoreButtons({
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download SwapSpot on the App Store"
-        className={`inline-flex min-h-[54px] items-center gap-3 rounded-[14px] border px-5 py-2.5 text-left shadow-card-sm transition-all duration-150 hover:-translate-y-0.5 ${buttonClass}`}
+        aria-label={t.appStoreLabel}
+        className={`inline-flex min-h-[54px] items-center gap-3 rounded-[14px] border px-5 py-2.5 text-start shadow-card-sm transition-all duration-150 hover:-translate-y-0.5 ${buttonClass}`}
       >
         <Apple className="h-6 w-6 shrink-0" />
         <span>
           <span className="block text-[10.5px] font-semibold leading-[1.1] opacity-70">
-            Download on the
+            {t.appStoreTop}
           </span>
           <span className="block text-[15px] font-extrabold leading-[1.15]">
             App Store
@@ -39,13 +44,13 @@ export default function AppStoreButtons({
         href={GOOGLE_PLAY_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Get SwapSpot on Google Play"
-        className={`inline-flex min-h-[54px] items-center gap-3 rounded-[14px] border px-5 py-2.5 text-left shadow-card-sm transition-all duration-150 hover:-translate-y-0.5 ${buttonClass}`}
+        aria-label={t.playLabel}
+        className={`inline-flex min-h-[54px] items-center gap-3 rounded-[14px] border px-5 py-2.5 text-start shadow-card-sm transition-all duration-150 hover:-translate-y-0.5 ${buttonClass}`}
       >
         <Play className="h-6 w-6 shrink-0" />
         <span>
           <span className="block text-[10.5px] font-semibold leading-[1.1] opacity-70">
-            Get it on
+            {t.playTop}
           </span>
           <span className="block text-[15px] font-extrabold leading-[1.15]">
             Google Play
