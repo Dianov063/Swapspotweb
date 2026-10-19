@@ -1,0 +1,2820 @@
+{
+  "format": 1,
+  "source_locale": "en",
+  "generated_by": "scripts/i18n/export-source.mjs (from lib/stringTables.ts)",
+  "target": "lib/locales/<code>.json: flat JSON object, key -> translated string; regional variants (ar-EG, pt-AO, sw-KE) contain only the keys that differ from their parent",
+  "rules": [
+    "Keep every placeholder exactly as written: {name}, {count}, {price}, ... ({category} and {categoryLower} are the same variable; use the one that reads naturally).",
+    "Brand and product names stay as written: SwapSpot, Client Pro, App Store, Google Play.",
+    "Never return the English text unchanged (except strings made only of brand names); never leave a value empty.",
+    "Write in the language's registry script (e.g. Ethiopic for am/ti, Tifinagh for zgh, Arabic for ar-EG/ary).",
+    "max_length is a hint for short UI labels; longer translations only produce a warning."
+  ],
+  "brand_terms": [
+    "SwapSpot",
+    "Client Pro",
+    "App Store",
+    "Google Play"
+  ],
+  "untranslated": [
+    "site.waitlist.placeholder"
+  ],
+  "strings": [
+    {
+      "key": "site.metaTitle",
+      "text": "SwapSpot - Find Trusted Local Help Near You",
+      "context": "lib/i18n.ts (home page, header, footer) > metaTitle",
+      "placeholders": [],
+      "max_length": 86,
+      "hash": "7422382d3c67"
+    },
+    {
+      "key": "site.metaDescription",
+      "text": "Book trusted local helpers for cleaning, repairs, beauty, lawn care, moving, pet care, senior care, tutoring, and more.",
+      "context": "lib/i18n.ts (home page, header, footer) > metaDescription",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "680662ce973e"
+    },
+    {
+      "key": "site.nav.how",
+      "text": "How it works",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "9c870aa6e5e9"
+    },
+    {
+      "key": "site.nav.clients",
+      "text": "For Clients",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "d67b720ff5d5"
+    },
+    {
+      "key": "site.nav.pricing",
+      "text": "Pricing",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "dfe95783edfe"
+    },
+    {
+      "key": "site.nav.categories",
+      "text": "Categories",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 20,
+      "hash": "b8b1d894c683"
+    },
+    {
+      "key": "site.nav.helpers",
+      "text": "For Helpers",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "b90a3cd10a65"
+    },
+    {
+      "key": "site.nav.trust",
+      "text": "Trust & Safety",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "5b9c374d59a6"
+    },
+    {
+      "key": "site.nav.getApp",
+      "text": "Get the app",
+      "context": "lib/i18n.ts (home page, header, footer) > nav",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "ec196e05b672"
+    },
+    {
+      "key": "site.hero.badge",
+      "text": "Now launching in your neighborhood",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 68,
+      "hash": "be2f694a6800"
+    },
+    {
+      "key": "site.hero.before",
+      "text": "Find",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "822b2ae4542b"
+    },
+    {
+      "key": "site.hero.highlight",
+      "text": "trusted local help",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 36,
+      "hash": "d666ed9499b2"
+    },
+    {
+      "key": "site.hero.after",
+      "text": "near you",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "36d7e15c6d54"
+    },
+    {
+      "key": "site.hero.body",
+      "text": "Book cleaning, repairs, beauty, lawn care, moving help, pet care and more from one neighborhood marketplace.",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "3376f76badf6"
+    },
+    {
+      "key": "site.hero.findHelp",
+      "text": "Find Help",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "0e8c9d22f771"
+    },
+    {
+      "key": "site.hero.becomeHelper",
+      "text": "Become a Helper",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "186d8498cf30"
+    },
+    {
+      "key": "site.hero.rating",
+      "text": "from 2,300+ neighbors · 1,200 helpers nearby",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 88,
+      "hash": "7c955db5a1ba"
+    },
+    {
+      "key": "site.hero.review",
+      "text": "Booked a handyman down the street in 10 minutes.",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 96,
+      "hash": "e88eb2c76f03"
+    },
+    {
+      "key": "site.hero.reviewer",
+      "text": "David · 1 mi away",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "e71dd63f3f32"
+    },
+    {
+      "key": "site.hero.bookingConfirmed",
+      "text": "Booking confirmed",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "32629c7e2653"
+    },
+    {
+      "key": "site.hero.bookingMeta",
+      "text": "Lawn care · Sat 9:00 AM",
+      "context": "lib/i18n.ts (home page, header, footer) > hero",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "ba42a94f0583"
+    },
+    {
+      "key": "site.how.eyebrow",
+      "text": "How it works",
+      "context": "lib/i18n.ts (home page, header, footer) > how",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "9c870aa6e5e9"
+    },
+    {
+      "key": "site.how.title",
+      "text": "Help is three taps away",
+      "context": "lib/i18n.ts (home page, header, footer) > how",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "622f19468feb"
+    },
+    {
+      "key": "site.how.body",
+      "text": "From I need this done to it is booked, without phone tag, guesswork, or unclear quotes.",
+      "context": "lib/i18n.ts (home page, header, footer) > how",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "be2b97cb401b"
+    },
+    {
+      "key": "site.steps.0.0",
+      "text": "Search nearby helpers",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.0",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "94721b4ae7da"
+    },
+    {
+      "key": "site.steps.0.1",
+      "text": "See trusted local helpers on a live map, sorted by distance and rating.",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.0",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "10448b7405e7"
+    },
+    {
+      "key": "site.steps.1.0",
+      "text": "Compare services and prices",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.1",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "61fc39a9f597"
+    },
+    {
+      "key": "site.steps.1.1",
+      "text": "Browse profiles, services, and transparent pricing before you commit.",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.1",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "861be01e8766"
+    },
+    {
+      "key": "site.steps.2.0",
+      "text": "Book, chat and pay safely",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.2",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "5824bac5ce2c"
+    },
+    {
+      "key": "site.steps.2.1",
+      "text": "Message, get a quote, and pay securely inside the app.",
+      "context": "lib/i18n.ts (home page, header, footer) > steps.2",
+      "placeholders": [],
+      "max_length": 108,
+      "hash": "1b0b43a19692"
+    },
+    {
+      "key": "site.helpers.eyebrow",
+      "text": "For Helpers",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "b90a3cd10a65"
+    },
+    {
+      "key": "site.helpers.title",
+      "text": "Turn your skills into local income",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 68,
+      "hash": "ff151217f46d"
+    },
+    {
+      "key": "site.helpers.body",
+      "text": "Set up once and start getting booked by neighbors who already need exactly what you do.",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "17b3a28a39b5"
+    },
+    {
+      "key": "site.helpers.freeTitle",
+      "text": "Always free for helpers",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "80713ab9bb29"
+    },
+    {
+      "key": "site.helpers.freeBody",
+      "text": "Keep 100% of what you earn. SwapSpot takes no commission, no percentage, and no lead fee.",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "7251baeab77c"
+    },
+    {
+      "key": "site.helpers.start",
+      "text": "Start as a Helper",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "a378c95bd53b"
+    },
+    {
+      "key": "site.helpers.earnings",
+      "text": "Earnings this week",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 36,
+      "hash": "c171bdd64864"
+    },
+    {
+      "key": "site.helpers.bookings",
+      "text": "3 new bookings",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "277446aca871"
+    },
+    {
+      "key": "site.helpers.quotes",
+      "text": "2 quotes awaiting reply",
+      "context": "lib/i18n.ts (home page, header, footer) > helpers",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "66703f703b9d"
+    },
+    {
+      "key": "site.perks.0.0",
+      "text": "Create your service profile",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.0",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "e1400b17420b"
+    },
+    {
+      "key": "site.perks.0.1",
+      "text": "List your skills, photos, and work area in minutes.",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.0",
+      "placeholders": [],
+      "max_length": 102,
+      "hash": "4e3553ec7d0f"
+    },
+    {
+      "key": "site.perks.1.0",
+      "text": "Set your prices and availability",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.1",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "f0f144d1d0fc"
+    },
+    {
+      "key": "site.perks.1.1",
+      "text": "You control your rates, radius, and schedule.",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.1",
+      "placeholders": [],
+      "max_length": 90,
+      "hash": "e3dc8a32d1df"
+    },
+    {
+      "key": "site.perks.2.0",
+      "text": "Receive bookings and send quotes",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.2",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "d03a68f71532"
+    },
+    {
+      "key": "site.perks.2.1",
+      "text": "Get nearby requests and reply with custom quotes.",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.2",
+      "placeholders": [],
+      "max_length": 98,
+      "hash": "5ae1226c6d8e"
+    },
+    {
+      "key": "site.perks.3.0",
+      "text": "Build reviews and repeat clients",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.3",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "a1dad8d1ffb6"
+    },
+    {
+      "key": "site.perks.3.1",
+      "text": "Earn ratings that turn first jobs into regulars.",
+      "context": "lib/i18n.ts (home page, header, footer) > perks.3",
+      "placeholders": [],
+      "max_length": 96,
+      "hash": "30e2a1ee3a02"
+    },
+    {
+      "key": "site.categories.eyebrow",
+      "text": "Categories",
+      "context": "lib/i18n.ts (home page, header, footer) > categories",
+      "placeholders": [],
+      "max_length": 20,
+      "hash": "b8b1d894c683"
+    },
+    {
+      "key": "site.categories.title",
+      "text": "Whatever the job, there is a helper",
+      "context": "lib/i18n.ts (home page, header, footer) > categories",
+      "placeholders": [],
+      "max_length": 70,
+      "hash": "a1c9da0df4d6"
+    },
+    {
+      "key": "site.categories.body",
+      "text": "Core local service categories at launch, with more added as each market grows.",
+      "context": "lib/i18n.ts (home page, header, footer) > categories",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "97f6ca0d4154"
+    },
+    {
+      "key": "site.categories.nearby",
+      "text": "nearby",
+      "context": "lib/i18n.ts (home page, header, footer) > categories",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "71ed8bd8993d"
+    },
+    {
+      "key": "site.categories.names.home-repair-maintenance",
+      "text": "Home Repair & Maintenance",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "c0ffd8ccb4bf"
+    },
+    {
+      "key": "site.categories.names.construction-remodeling",
+      "text": "Construction & Remodeling",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "20b677fc7e9b"
+    },
+    {
+      "key": "site.categories.names.cleaning",
+      "text": "Cleaning",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "019f34ed2b19"
+    },
+    {
+      "key": "site.categories.names.lawn-outdoor",
+      "text": "Lawn & Outdoor",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "29ac0f3016a0"
+    },
+    {
+      "key": "site.categories.names.moving-delivery",
+      "text": "Moving & Delivery",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "821c6fb35769"
+    },
+    {
+      "key": "site.categories.names.tech-smart-home",
+      "text": "Tech & Smart Home",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "1840f6481fcc"
+    },
+    {
+      "key": "site.categories.names.tutoring-lessons",
+      "text": "Tutoring & Lessons",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 36,
+      "hash": "ed6d33761c61"
+    },
+    {
+      "key": "site.categories.names.beauty-wellness",
+      "text": "Beauty & Wellness",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "d77f3bed512d"
+    },
+    {
+      "key": "site.categories.names.care-assistance",
+      "text": "Care & Assistance",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "06f25ca6e727"
+    },
+    {
+      "key": "site.categories.names.events-entertainment",
+      "text": "Events & Entertainment",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 44,
+      "hash": "4d76e3a17d5d"
+    },
+    {
+      "key": "site.categories.names.professional-services",
+      "text": "Professional Services",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "c4ede4b993b7"
+    },
+    {
+      "key": "site.categories.names.pet-services",
+      "text": "Pet Services",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "28e27b622852"
+    },
+    {
+      "key": "site.categories.names.design-creative",
+      "text": "Design & Creative",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "95532d7ac71c"
+    },
+    {
+      "key": "site.categories.names.specialty-seasonal",
+      "text": "Specialty & Seasonal",
+      "context": "lib/i18n.ts (home page, header, footer) > categories.names",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "52d7498a5a56"
+    },
+    {
+      "key": "site.trust.eyebrow",
+      "text": "Trust & Safety",
+      "context": "lib/i18n.ts (home page, header, footer) > trust",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "5b9c374d59a6"
+    },
+    {
+      "key": "site.trust.title",
+      "text": "Built to feel safe on both sides",
+      "context": "lib/i18n.ts (home page, header, footer) > trust",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "43459e45ebfe"
+    },
+    {
+      "key": "site.trust.body",
+      "text": "Real reviews, private messaging, and controls that keep neighbors in charge of their own data.",
+      "context": "lib/i18n.ts (home page, header, footer) > trust",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "e2abe660e763"
+    },
+    {
+      "key": "site.trustItems.0.0",
+      "text": "Verified reviews",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.0",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "dd3744117bd5"
+    },
+    {
+      "key": "site.trustItems.0.1",
+      "text": "Real ratings from real neighbors after every job.",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.0",
+      "placeholders": [],
+      "max_length": 98,
+      "hash": "b6b7c0a9dfa7"
+    },
+    {
+      "key": "site.trustItems.1.0",
+      "text": "In-app chat",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.1",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "69423fb9dcc4"
+    },
+    {
+      "key": "site.trustItems.1.1",
+      "text": "Keep conversations and quotes in one place.",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.1",
+      "placeholders": [],
+      "max_length": 86,
+      "hash": "7d829a83f072"
+    },
+    {
+      "key": "site.trustItems.2.0",
+      "text": "Report and block",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.2",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "91bd9b954711"
+    },
+    {
+      "key": "site.trustItems.2.1",
+      "text": "Flag or block any user anytime.",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.2",
+      "placeholders": [],
+      "max_length": 62,
+      "hash": "123245e93305"
+    },
+    {
+      "key": "site.trustItems.3.0",
+      "text": "Account deletion",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.3",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "f2a90e6c2fb2"
+    },
+    {
+      "key": "site.trustItems.3.1",
+      "text": "Delete your account and data whenever you choose.",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.3",
+      "placeholders": [],
+      "max_length": 98,
+      "hash": "e65bfe734c3c"
+    },
+    {
+      "key": "site.trustItems.4.0",
+      "text": "Location privacy",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.4",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "22d366c35ef6"
+    },
+    {
+      "key": "site.trustItems.4.1",
+      "text": "Helpers control how their location is shown.",
+      "context": "lib/i18n.ts (home page, header, footer) > trustItems.4",
+      "placeholders": [],
+      "max_length": 88,
+      "hash": "c07644b42af4"
+    },
+    {
+      "key": "site.waitlist.title",
+      "text": "Download SwapSpot today",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "8014d6b511d5"
+    },
+    {
+      "key": "site.waitlist.body",
+      "text": "Browse nearby helpers for free. Use a pass when you are ready to message, request quotes, or book.",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "908eda7b1d36"
+    },
+    {
+      "key": "site.waitlist.email",
+      "text": "Email address",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "f2488fd4ef4a"
+    },
+    {
+      "key": "site.waitlist.join",
+      "text": "Download app",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "44fa5f4f82fb"
+    },
+    {
+      "key": "site.waitlist.thanks",
+      "text": "Thanks, you are on the list.",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 56,
+      "hash": "1de1494150ed"
+    },
+    {
+      "key": "site.waitlist.storeCaption",
+      "text": "Available now on iOS and Android",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "876ae2568eda"
+    },
+    {
+      "key": "site.waitlist.comingSoon",
+      "text": "Available on",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "b867a3288d1f"
+    },
+    {
+      "key": "site.waitlist.noSpam",
+      "text": "Download the app, browse helpers, and start when you are ready.",
+      "context": "lib/i18n.ts (home page, header, footer) > waitlist",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "eda2cfc71966"
+    },
+    {
+      "key": "site.download.badge",
+      "text": "Available now",
+      "context": "lib/i18n.ts (home page, header, footer) > download",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "2a4729fa7647"
+    },
+    {
+      "key": "site.download.title",
+      "text": "Download SwapSpot for iOS or Android",
+      "context": "lib/i18n.ts (home page, header, footer) > download",
+      "placeholders": [],
+      "max_length": 72,
+      "hash": "ec697f7c7ecd"
+    },
+    {
+      "key": "site.download.body",
+      "text": "Browse nearby helpers for free. Use a pass when you are ready to message, request quotes, or book.",
+      "context": "lib/i18n.ts (home page, header, footer) > download",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "908eda7b1d36"
+    },
+    {
+      "key": "site.download.pointA",
+      "text": "Clients and helpers welcome",
+      "context": "lib/i18n.ts (home page, header, footer) > download",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "2501fdd30365"
+    },
+    {
+      "key": "site.download.pointB",
+      "text": "Free browsing before you contact a helper",
+      "context": "lib/i18n.ts (home page, header, footer) > download",
+      "placeholders": [],
+      "max_length": 82,
+      "hash": "fe92e82856e9"
+    },
+    {
+      "key": "site.footer.tagline",
+      "text": "The neighborhood marketplace for trusted local help. Made for communities across the US.",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "4a3f21c275e2"
+    },
+    {
+      "key": "site.footer.product",
+      "text": "Product",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "fb9ef894175c"
+    },
+    {
+      "key": "site.footer.company",
+      "text": "Company",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "de4743c87973"
+    },
+    {
+      "key": "site.footer.about",
+      "text": "About",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "4efca0d10c5f"
+    },
+    {
+      "key": "site.footer.contact",
+      "text": "Contact",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "2b5c3d26721a"
+    },
+    {
+      "key": "site.footer.privacy",
+      "text": "Privacy",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "54a57c3147c4"
+    },
+    {
+      "key": "site.footer.support",
+      "text": "Support",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "be91940b79f4"
+    },
+    {
+      "key": "site.footer.accountDeletion",
+      "text": "Account deletion",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "f2a90e6c2fb2"
+    },
+    {
+      "key": "site.footer.terms",
+      "text": "Terms",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "ede548996483"
+    },
+    {
+      "key": "site.footer.pricingPayouts",
+      "text": "Pricing & payouts",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "72e2284fc68f"
+    },
+    {
+      "key": "site.footer.rights",
+      "text": "© 2026 SwapSpot. All rights reserved.",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 74,
+      "hash": "8f0bfc14196d"
+    },
+    {
+      "key": "site.footer.bottom",
+      "text": "Find trusted local help near you.",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": 66,
+      "hash": "a31f44e2b68e"
+    },
+    {
+      "key": "site.footer.companyLine",
+      "text": "Operating under USPROJECT LLC · EIN 83-3989558 · New York, USA",
+      "context": "lib/i18n.ts (home page, header, footer) > footer",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "d0c434d21532"
+    },
+    {
+      "key": "directory.directory",
+      "text": "Service directory",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > directory",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "efe6edfd09b2"
+    },
+    {
+      "key": "directory.otherMarkets",
+      "text": "Other markets",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > otherMarkets",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "30d259489000"
+    },
+    {
+      "key": "directory.localHelper",
+      "text": "Local helper",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > localHelper",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "8e70f9e32f03"
+    },
+    {
+      "key": "directory.zipArea",
+      "text": "ZIP {code}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > zipArea",
+      "placeholders": [
+        "{code}"
+      ],
+      "max_length": 20,
+      "hash": "ce7fb0a4db29"
+    },
+    {
+      "key": "directory.postalArea",
+      "text": "Postal code {code}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > postalArea",
+      "placeholders": [
+        "{code}"
+      ],
+      "max_length": 36,
+      "hash": "a91456c9c2c6"
+    },
+    {
+      "key": "directory.indexMetaTitle",
+      "text": "Local Service Directory",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > indexMetaTitle",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "309b59776137"
+    },
+    {
+      "key": "directory.indexMetaDescription",
+      "text": "Browse SwapSpot public service pages by category and local market. Find cleaning, repairs, moving, tutoring, pet care, beauty, professional services, and more.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > indexMetaDescription",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "b771cf298ccd"
+    },
+    {
+      "key": "directory.indexBadge",
+      "text": "Public service directory",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > indexBadge",
+      "placeholders": [],
+      "max_length": 48,
+      "hash": "d6fb2bbbb680"
+    },
+    {
+      "key": "directory.indexTitle",
+      "text": "Local helper services by category and market",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > indexTitle",
+      "placeholders": [],
+      "max_length": 88,
+      "hash": "0fe60d89980a"
+    },
+    {
+      "key": "directory.indexIntro",
+      "text": "These pages are generated from published helper services in SwapSpot. They help clients discover real service previews by city, postal code, neighborhood, category, price, language, and rating.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > indexIntro",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "1b94980f5dc0"
+    },
+    {
+      "key": "directory.browseMarkets",
+      "text": "Browse markets",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > browseMarkets",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "307e309aaeea"
+    },
+    {
+      "key": "directory.statCountries",
+      "text": "countries and regional markets",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statCountries",
+      "placeholders": [],
+      "max_length": 60,
+      "hash": "86429ff87505"
+    },
+    {
+      "key": "directory.statPages",
+      "text": "live category and market pages",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statPages",
+      "placeholders": [],
+      "max_length": 60,
+      "hash": "ae3bc52a5d6e"
+    },
+    {
+      "key": "directory.statPreviewsIndexed",
+      "text": "public service previews",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statPreviewsIndexed",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "e64c23f90510"
+    },
+    {
+      "key": "directory.availableEyebrow",
+      "text": "Available pages",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > availableEyebrow",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "095d24c46746"
+    },
+    {
+      "key": "directory.byCountryTitle",
+      "text": "Browse by country",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > byCountryTitle",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "cf972d3175f1"
+    },
+    {
+      "key": "directory.byCountryBody",
+      "text": "Every link below opens a public page. When a helper publishes a new service area, it appears here after the site cache refreshes.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > byCountryBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "d3c3bbe8b29e"
+    },
+    {
+      "key": "directory.emptyTitle",
+      "text": "Service links are being prepared",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > emptyTitle",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "18e33f0cb5fc"
+    },
+    {
+      "key": "directory.emptyBody",
+      "text": "The directory is built from published helper services. If no links appear here yet, check back soon or open the app to browse helpers near you.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > emptyBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "1e8ce6ad93b4"
+    },
+    {
+      "key": "directory.pagesCount",
+      "text": "Pages: {count}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pagesCount",
+      "placeholders": [
+        "{count}"
+      ],
+      "max_length": 28,
+      "hash": "45aba1a48063"
+    },
+    {
+      "key": "directory.servicesCount",
+      "text": "Services: {count}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > servicesCount",
+      "placeholders": [
+        "{count}"
+      ],
+      "max_length": 34,
+      "hash": "f0ab9042e1cd"
+    },
+    {
+      "key": "directory.pairTitle",
+      "text": "{category} helpers in {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairTitle",
+      "placeholders": [
+        "{category}",
+        "{market}"
+      ],
+      "max_length": 60,
+      "hash": "95c5234f3023"
+    },
+    {
+      "key": "directory.pairMetaTitle",
+      "text": "{category} Helpers in {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairMetaTitle",
+      "placeholders": [
+        "{category}",
+        "{market}"
+      ],
+      "max_length": 60,
+      "hash": "89549d065462"
+    },
+    {
+      "key": "directory.pairMetaDescription",
+      "text": "Find {categoryLower} helpers in {market}. Compare public service previews, service areas, pricing, languages, and ratings before opening SwapSpot.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairMetaDescription",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "aaaa5537f173"
+    },
+    {
+      "key": "directory.pairOgDescription",
+      "text": "Browse local {categoryLower} services near {market} and continue in the SwapSpot app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairOgDescription",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "28bc603b6092"
+    },
+    {
+      "key": "directory.pairSummaryEmpty",
+      "text": "SwapSpot is preparing {categoryLower} helper previews in {market}. Open the app to browse nearby helpers, compare service areas, and request quotes.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairSummaryEmpty",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "c728f6032235"
+    },
+    {
+      "key": "directory.pairSummary",
+      "text": "Compare public {categoryLower} service previews from local helpers around {market}. Use the app when you are ready to message, request a quote, or book.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairSummary",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "2e745597c970"
+    },
+    {
+      "key": "directory.pairEyebrow",
+      "text": "Local service directory",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairEyebrow",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "586ea5cdf7f8"
+    },
+    {
+      "key": "directory.statPreviews",
+      "text": "service previews",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statPreviews",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "5325e4bdf3bf"
+    },
+    {
+      "key": "directory.statHelpers",
+      "text": "helpers listed",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statHelpers",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "85b00b8ea830"
+    },
+    {
+      "key": "directory.statLanguages",
+      "text": "languages shown",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statLanguages",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "7b8744e30930"
+    },
+    {
+      "key": "directory.statStartingPrice",
+      "text": "sample starting price",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statStartingPrice",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "f515be6995e2"
+    },
+    {
+      "key": "directory.popularEyebrow",
+      "text": "Popular local services",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > popularEyebrow",
+      "placeholders": [],
+      "max_length": 44,
+      "hash": "2e9f3166239f"
+    },
+    {
+      "key": "directory.popularTitle",
+      "text": "What people can find in {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > popularTitle",
+      "placeholders": [
+        "{market}"
+      ],
+      "max_length": 64,
+      "hash": "5daf7fd08c94"
+    },
+    {
+      "key": "directory.popularBody",
+      "text": "These services come from published helper profiles, not a static marketing list.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > popularBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "9a3ea4232623"
+    },
+    {
+      "key": "directory.areaTitle",
+      "text": "Local area, not exact address",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > areaTitle",
+      "placeholders": [],
+      "max_length": 58,
+      "hash": "ea50dd8317ab"
+    },
+    {
+      "key": "directory.areaBody",
+      "text": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > areaBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "706056d10f0e"
+    },
+    {
+      "key": "directory.namesTitle",
+      "text": "Search-ready service names",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > namesTitle",
+      "placeholders": [],
+      "max_length": 52,
+      "hash": "7893d4be8475"
+    },
+    {
+      "key": "directory.namesBody",
+      "text": "Helper services are normalized into searchable titles, local terms, and category pages so clients can search by the real jobs they need.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > namesBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "885997b1ac45"
+    },
+    {
+      "key": "directory.inAppTitle",
+      "text": "Chat and booking stay in-app",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > inAppTitle",
+      "placeholders": [],
+      "max_length": 56,
+      "hash": "94908d608442"
+    },
+    {
+      "key": "directory.inAppBody",
+      "text": "The website helps people discover services. SwapSpot keeps quotes, messages, bookings, reviews, and safety controls inside the mobile app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > inAppBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "ed49c33adbdf"
+    },
+    {
+      "key": "directory.faqEyebrow",
+      "text": "Questions",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > faqEyebrow",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "9a72221a2747"
+    },
+    {
+      "key": "directory.faqTitle",
+      "text": "How this public page works",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > faqTitle",
+      "placeholders": [],
+      "max_length": 52,
+      "hash": "e6815fbad359"
+    },
+    {
+      "key": "directory.pairFaq1Q",
+      "text": "Can I book {categoryLower} helpers in {market} on this page?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq1Q",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": 120,
+      "hash": "2399e5cfa067"
+    },
+    {
+      "key": "directory.pairFaq1A",
+      "text": "This website page is a public preview for discovery. Download SwapSpot to message helpers, request quotes, share exact addresses, and manage bookings.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq1A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "9e82939bfeb4"
+    },
+    {
+      "key": "directory.pairFaq2Q",
+      "text": "Are exact helper addresses public?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq2Q",
+      "placeholders": [],
+      "max_length": 68,
+      "hash": "92aa06954075"
+    },
+    {
+      "key": "directory.pairFaq2A",
+      "text": "No. SwapSpot shows approximate service areas such as postal codes, neighborhoods, cities, or radius. Exact addresses stay private and can be shared in chat only when both sides are ready.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq2A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "8dbd977743f6"
+    },
+    {
+      "key": "directory.pairFaq3Q",
+      "text": "Do helpers pay SwapSpot a commission?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq3Q",
+      "placeholders": [],
+      "max_length": 74,
+      "hash": "849d772845e2"
+    },
+    {
+      "key": "directory.pairFaq3A",
+      "text": "No. Helpers can create a profile and list services without a SwapSpot commission or percentage fee. Clients pay for access when they want to message, request quotes, or book.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairFaq3A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "bd4e648ce663"
+    },
+    {
+      "key": "directory.pairListDescription",
+      "text": "Public previews of {categoryLower} services available through SwapSpot in {market}.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > pairListDescription",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "bf69b3183e91"
+    },
+    {
+      "key": "directory.onSwapSpot",
+      "text": "{name} on SwapSpot",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > onSwapSpot",
+      "placeholders": [
+        "{name}"
+      ],
+      "max_length": 36,
+      "hash": "8cf206dfa164"
+    },
+    {
+      "key": "directory.cardsEmptyTitle",
+      "text": "Browse {categoryLower} helpers in the app",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cardsEmptyTitle",
+      "placeholders": [
+        "{categoryLower}"
+      ],
+      "max_length": 82,
+      "hash": "280d284a1787"
+    },
+    {
+      "key": "directory.cardsEmptyBody",
+      "text": "SwapSpot is opening local helper profiles by market. Download the app to see nearby services, compare prices, and message helpers when you are ready.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cardsEmptyBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "c1e2bcfc3081"
+    },
+    {
+      "key": "directory.cardsTitle",
+      "text": "Real {categoryLower} helper previews",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cardsTitle",
+      "placeholders": [
+        "{categoryLower}"
+      ],
+      "max_length": 72,
+      "hash": "586dce51e83f"
+    },
+    {
+      "key": "directory.cardsBody",
+      "text": "Compare services, prices, areas, languages, ratings, and helper experience near {market}. Exact addresses and direct contact stay inside SwapSpot.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cardsBody",
+      "placeholders": [
+        "{market}"
+      ],
+      "max_length": null,
+      "hash": "98b11bac38ff"
+    },
+    {
+      "key": "directory.cardNoDescription",
+      "text": "See this service preview in SwapSpot, then open the app to message, request a quote, or book.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cardNoDescription",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "d7b159195ac6"
+    },
+    {
+      "key": "directory.jobsCompleted",
+      "text": "Jobs completed: {count}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > jobsCompleted",
+      "placeholders": [
+        "{count}"
+      ],
+      "max_length": 46,
+      "hash": "5b393ec1fdf2"
+    },
+    {
+      "key": "directory.viewProfile",
+      "text": "View helper profile",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > viewProfile",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "e99d25a40c5d"
+    },
+    {
+      "key": "directory.helperMetaTitle",
+      "text": "{name} - {category} Helper in {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperMetaTitle",
+      "placeholders": [
+        "{category}",
+        "{market}",
+        "{name}"
+      ],
+      "max_length": 76,
+      "hash": "e0303f159473"
+    },
+    {
+      "key": "directory.helperDescription",
+      "text": "{name} offers {services} through SwapSpot around {markets}. Compare public service previews, prices, languages, ratings, and service areas before opening the app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperDescription",
+      "placeholders": [
+        "{markets}",
+        "{name}",
+        "{services}"
+      ],
+      "max_length": null,
+      "hash": "215a0083a49b"
+    },
+    {
+      "key": "directory.helperDescriptionNoMarket",
+      "text": "{name} offers {services} through SwapSpot. Compare public service previews, prices, languages, ratings, and service areas before opening the app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperDescriptionNoMarket",
+      "placeholders": [
+        "{name}",
+        "{services}"
+      ],
+      "max_length": null,
+      "hash": "d867e09228d1"
+    },
+    {
+      "key": "directory.localServices",
+      "text": "local services",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > localServices",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "a00193bcca6a"
+    },
+    {
+      "key": "directory.defaultCategory",
+      "text": "Local services",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > defaultCategory",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "99cc5fa5fefe"
+    },
+    {
+      "key": "directory.yourArea",
+      "text": "your area",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > yourArea",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "040ac4c6c18e"
+    },
+    {
+      "key": "directory.nearby",
+      "text": "nearby",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > nearby",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "71ed8bd8993d"
+    },
+    {
+      "key": "directory.backToDirectory",
+      "text": "Browse service directory",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > backToDirectory",
+      "placeholders": [],
+      "max_length": 48,
+      "hash": "8574dc3d9d14"
+    },
+    {
+      "key": "directory.profileEyebrow",
+      "text": "Public helper profile",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > profileEyebrow",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "e4b82660a062"
+    },
+    {
+      "key": "directory.helperTagline",
+      "text": "{category} helper around {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperTagline",
+      "placeholders": [
+        "{category}",
+        "{market}"
+      ],
+      "max_length": 66,
+      "hash": "36747750b9fc"
+    },
+    {
+      "key": "directory.openInApp",
+      "text": "Open in SwapSpot",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > openInApp",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "932de8e29579"
+    },
+    {
+      "key": "directory.viewLocalCategory",
+      "text": "View local category",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > viewLocalCategory",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "ac1a2d942560"
+    },
+    {
+      "key": "directory.servicesListed",
+      "text": "Services listed: {count}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > servicesListed",
+      "placeholders": [
+        "{count}"
+      ],
+      "max_length": 48,
+      "hash": "cd7413d5ed31"
+    },
+    {
+      "key": "directory.previewTitle",
+      "text": "Public profile preview",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > previewTitle",
+      "placeholders": [],
+      "max_length": 44,
+      "hash": "9982340a96c8"
+    },
+    {
+      "key": "directory.previewBody",
+      "text": "Compare services here, then message and book inside the app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > previewBody",
+      "placeholders": [],
+      "max_length": 120,
+      "hash": "74dbfd7dab4d"
+    },
+    {
+      "key": "directory.noCommissionTitle",
+      "text": "No helper commission",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > noCommissionTitle",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "d7f35c28fb79"
+    },
+    {
+      "key": "directory.noCommissionBody",
+      "text": "Helpers keep job payments. SwapSpot does not take a percentage or commission from helper work.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > noCommissionBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "1f462992e2b1"
+    },
+    {
+      "key": "directory.statPublicServices",
+      "text": "public services",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statPublicServices",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "f1495be05f7e"
+    },
+    {
+      "key": "directory.statMarketsServed",
+      "text": "markets served",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statMarketsServed",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "0320de71cb0a"
+    },
+    {
+      "key": "directory.statLanguagesShort",
+      "text": "languages",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statLanguagesShort",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "6cb574fa10b6"
+    },
+    {
+      "key": "directory.statSamplePrice",
+      "text": "sample price",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > statSamplePrice",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "68af9e07fa3a"
+    },
+    {
+      "key": "directory.servicesEyebrow",
+      "text": "Services",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > servicesEyebrow",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "604dce445e32"
+    },
+    {
+      "key": "directory.servicesTitle",
+      "text": "What {name} can help with",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > servicesTitle",
+      "placeholders": [
+        "{name}"
+      ],
+      "max_length": 50,
+      "hash": "4ba3afc5f655"
+    },
+    {
+      "key": "directory.servicesBody",
+      "text": "These are published service previews from SwapSpot. Prices may be fixed, hourly, starting from, or on request depending on the job.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > servicesBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "d8cfa393b8d3"
+    },
+    {
+      "key": "directory.serviceFallback",
+      "text": "Open SwapSpot to see this service, request details, and confirm the scope before booking.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > serviceFallback",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "be44e07d62f6"
+    },
+    {
+      "key": "directory.moreInMarket",
+      "text": "More {categoryLower} helpers in {market}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > moreInMarket",
+      "placeholders": [
+        "{categoryLower}",
+        "{market}"
+      ],
+      "max_length": 80,
+      "hash": "510ec8ffe033"
+    },
+    {
+      "key": "directory.areasEyebrow",
+      "text": "Areas and languages",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > areasEyebrow",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "b74774565c2b"
+    },
+    {
+      "key": "directory.areasTitle",
+      "text": "Built for local discovery",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > areasTitle",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "013ed44b71cd"
+    },
+    {
+      "key": "directory.areasBody",
+      "text": "Public helper pages give search engines and clients enough context: service names, neighborhoods, cities, approximate areas, and language signals. Exact contact details stay inside SwapSpot.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > areasBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "e475081f2988"
+    },
+    {
+      "key": "directory.serviceAreas",
+      "text": "Service areas",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > serviceAreas",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "89eed6613d1f"
+    },
+    {
+      "key": "directory.serviceKeywords",
+      "text": "Service keywords",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > serviceKeywords",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "dc333f582adf"
+    },
+    {
+      "key": "directory.languages",
+      "text": "Languages",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > languages",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "318655cea4bd"
+    },
+    {
+      "key": "directory.languagesInApp",
+      "text": "Language details in the app",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > languagesInApp",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "99ffd9de84f1"
+    },
+    {
+      "key": "directory.continueEyebrow",
+      "text": "Continue in the app",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > continueEyebrow",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "6865501d71eb"
+    },
+    {
+      "key": "directory.continueTitle",
+      "text": "Message, quote, and book with privacy controls.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > continueTitle",
+      "placeholders": [],
+      "max_length": 94,
+      "hash": "3db03ec851da"
+    },
+    {
+      "key": "directory.helperFaq1Q",
+      "text": "How do I contact {name}?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq1Q",
+      "placeholders": [
+        "{name}"
+      ],
+      "max_length": 48,
+      "hash": "decd299e81c0"
+    },
+    {
+      "key": "directory.helperFaq1A",
+      "text": "Open SwapSpot to message the helper, request a quote, share exact job details, and manage the booking safely inside the app.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq1A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "e7645f12c946"
+    },
+    {
+      "key": "directory.helperFaq2Q",
+      "text": "Are exact addresses public?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq2Q",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "a64b8e50c17c"
+    },
+    {
+      "key": "directory.helperFaq2A",
+      "text": "No. Public pages show approximate service areas such as neighborhoods, cities, postal codes, or radius. Exact addresses stay private until users share them in chat.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq2A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "411a7be668a7"
+    },
+    {
+      "key": "directory.helperFaq3Q",
+      "text": "Does SwapSpot take a commission from helpers?",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq3Q",
+      "placeholders": [],
+      "max_length": 90,
+      "hash": "7d0705fcada5"
+    },
+    {
+      "key": "directory.helperFaq3A",
+      "text": "No. Helpers can list services without SwapSpot taking a commission or percentage from their job payments.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helperFaq3A",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "290832825b7e"
+    },
+    {
+      "key": "directory.categoryMetaTitle",
+      "text": "{category} Near You - Trusted Local Helpers",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > categoryMetaTitle",
+      "placeholders": [
+        "{category}"
+      ],
+      "max_length": 86,
+      "hash": "581a8b2d6be6"
+    },
+    {
+      "key": "directory.categoryMetaDescription",
+      "text": "Book trusted local {categoryLower} helpers near you on SwapSpot. Compare profiles, prices, and reviews.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > categoryMetaDescription",
+      "placeholders": [
+        "{categoryLower}"
+      ],
+      "max_length": null,
+      "hash": "9f9d21ae8617"
+    },
+    {
+      "key": "directory.categoryTitle",
+      "text": "{category} helpers near you",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > categoryTitle",
+      "placeholders": [
+        "{category}"
+      ],
+      "max_length": 54,
+      "hash": "a617c11beb05"
+    },
+    {
+      "key": "directory.categoryBody",
+      "text": "Explore {categoryLower} services from local helpers in your area.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > categoryBody",
+      "placeholders": [
+        "{categoryLower}"
+      ],
+      "max_length": null,
+      "hash": "2daa3ca4982e"
+    },
+    {
+      "key": "directory.cityMetaTitle",
+      "text": "Local Help in {city}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityMetaTitle",
+      "placeholders": [
+        "{city}"
+      ],
+      "max_length": 40,
+      "hash": "74f681a4d91c"
+    },
+    {
+      "key": "directory.cityMetaDescription",
+      "text": "Find trusted local helpers in {city} for cleaning, repairs, lawn care, pet care, and more.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityMetaDescription",
+      "placeholders": [
+        "{city}"
+      ],
+      "max_length": null,
+      "hash": "2f886d450b37"
+    },
+    {
+      "key": "directory.cityTitle",
+      "text": "Trusted local help in {city}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityTitle",
+      "placeholders": [
+        "{city}"
+      ],
+      "max_length": 56,
+      "hash": "96681131f3ef"
+    },
+    {
+      "key": "directory.cityBody",
+      "text": "Book nearby helpers for cleaning, repairs, lawn care, moving, pet care, senior care, tutoring, and more. SwapSpot helps neighbors compare services, prices, reviews, and availability before they book.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "8a688566dd93"
+    },
+    {
+      "key": "directory.cityCategory",
+      "text": "{category} in {city}",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityCategory",
+      "placeholders": [
+        "{category}",
+        "{city}"
+      ],
+      "max_length": 40,
+      "hash": "07208a072e77"
+    },
+    {
+      "key": "directory.cityCategoryBody",
+      "text": "Compare trusted local helpers near you",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > cityCategoryBody",
+      "placeholders": [],
+      "max_length": 76,
+      "hash": "0e7c621860be"
+    },
+    {
+      "key": "directory.helpersMetaTitle",
+      "text": "Become a Helper - Earn Locally",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helpersMetaTitle",
+      "placeholders": [],
+      "max_length": 60,
+      "hash": "0c28d61dfa45"
+    },
+    {
+      "key": "directory.helpersMetaDescription",
+      "text": "Turn your skills into local income on SwapSpot. Create a free helper profile, set your prices and availability, and get booked by nearby clients.",
+      "context": "lib/directoryStrings (public directory pages: /services, /helpers, /categories, /cities) > helpersMetaDescription",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "df0f0497da07"
+    },
+    {
+      "key": "categories.home-repair-maintenance",
+      "text": "Home Repair & Maintenance",
+      "context": "lib/categoryNames.ts (service category names) > home-repair-maintenance",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "c0ffd8ccb4bf"
+    },
+    {
+      "key": "categories.construction-remodeling",
+      "text": "Construction & Remodeling",
+      "context": "lib/categoryNames.ts (service category names) > construction-remodeling",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "20b677fc7e9b"
+    },
+    {
+      "key": "categories.cleaning",
+      "text": "Cleaning",
+      "context": "lib/categoryNames.ts (service category names) > cleaning",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "019f34ed2b19"
+    },
+    {
+      "key": "categories.lawn-outdoor",
+      "text": "Lawn & Outdoor",
+      "context": "lib/categoryNames.ts (service category names) > lawn-outdoor",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "29ac0f3016a0"
+    },
+    {
+      "key": "categories.moving-delivery",
+      "text": "Moving & Delivery",
+      "context": "lib/categoryNames.ts (service category names) > moving-delivery",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "821c6fb35769"
+    },
+    {
+      "key": "categories.tech-smart-home",
+      "text": "Tech & Smart Home",
+      "context": "lib/categoryNames.ts (service category names) > tech-smart-home",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "1840f6481fcc"
+    },
+    {
+      "key": "categories.tutoring-lessons",
+      "text": "Tutoring & Lessons",
+      "context": "lib/categoryNames.ts (service category names) > tutoring-lessons",
+      "placeholders": [],
+      "max_length": 36,
+      "hash": "ed6d33761c61"
+    },
+    {
+      "key": "categories.beauty-wellness",
+      "text": "Beauty & Wellness",
+      "context": "lib/categoryNames.ts (service category names) > beauty-wellness",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "d77f3bed512d"
+    },
+    {
+      "key": "categories.care-assistance",
+      "text": "Care & Assistance",
+      "context": "lib/categoryNames.ts (service category names) > care-assistance",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "06f25ca6e727"
+    },
+    {
+      "key": "categories.events-entertainment",
+      "text": "Events & Entertainment",
+      "context": "lib/categoryNames.ts (service category names) > events-entertainment",
+      "placeholders": [],
+      "max_length": 44,
+      "hash": "4d76e3a17d5d"
+    },
+    {
+      "key": "categories.professional-services",
+      "text": "Professional Services",
+      "context": "lib/categoryNames.ts (service category names) > professional-services",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "c4ede4b993b7"
+    },
+    {
+      "key": "categories.pet-services",
+      "text": "Pet Services",
+      "context": "lib/categoryNames.ts (service category names) > pet-services",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "28e27b622852"
+    },
+    {
+      "key": "categories.design-creative",
+      "text": "Design & Creative",
+      "context": "lib/categoryNames.ts (service category names) > design-creative",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "95532d7ac71c"
+    },
+    {
+      "key": "categories.specialty-seasonal",
+      "text": "Specialty & Seasonal",
+      "context": "lib/categoryNames.ts (service category names) > specialty-seasonal",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "52d7498a5a56"
+    },
+    {
+      "key": "pricing.eyebrow",
+      "text": "Client Pricing",
+      "context": "lib/pricingCopy.ts (home page pricing section) > eyebrow",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "cf4d252a2354"
+    },
+    {
+      "key": "pricing.title",
+      "text": "Browse for free. Use a pass when you are ready to act.",
+      "context": "lib/pricingCopy.ts (home page pricing section) > title",
+      "placeholders": [],
+      "max_length": 108,
+      "hash": "e47980899c55"
+    },
+    {
+      "key": "pricing.body",
+      "text": "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper.",
+      "context": "lib/pricingCopy.ts (home page pricing section) > body",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "0c7e37172f88"
+    },
+    {
+      "key": "pricing.freeTitle",
+      "text": "Free browsing",
+      "context": "lib/pricingCopy.ts (home page pricing section) > freeTitle",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "c7e42ed21537"
+    },
+    {
+      "key": "pricing.freeBody",
+      "text": "See categories, helper previews, service areas, and basic trust signals before choosing a pass.",
+      "context": "lib/pricingCopy.ts (home page pricing section) > freeBody",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "ab006b952107"
+    },
+    {
+      "key": "pricing.unlock",
+      "text": "A pass unlocks",
+      "context": "lib/pricingCopy.ts (home page pricing section) > unlock",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "e18c0b2ce7fc"
+    },
+    {
+      "key": "pricing.actions.0",
+      "text": "Messaging helpers",
+      "context": "lib/pricingCopy.ts (home page pricing section) > actions",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "6e9566b12f3b"
+    },
+    {
+      "key": "pricing.actions.1",
+      "text": "Requesting quotes",
+      "context": "lib/pricingCopy.ts (home page pricing section) > actions",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "edb0e7da7d5c"
+    },
+    {
+      "key": "pricing.actions.2",
+      "text": "Booking jobs",
+      "context": "lib/pricingCopy.ts (home page pricing section) > actions",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "0bde238cea91"
+    },
+    {
+      "key": "pricing.plans.0.name",
+      "text": "Day Pass",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "8fcf4c9d1601"
+    },
+    {
+      "key": "pricing.plans.0.note",
+      "text": "Best for one task, urgent help, or trying SwapSpot.",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0",
+      "placeholders": [],
+      "max_length": 102,
+      "hash": "179a26dcf4a8"
+    },
+    {
+      "key": "pricing.plans.0.features.0",
+      "text": "Message helpers for the day",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0.features",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "e9f7138d74fd"
+    },
+    {
+      "key": "pricing.plans.0.features.1",
+      "text": "Request quotes",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0.features",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "3e9db23c9060"
+    },
+    {
+      "key": "pricing.plans.0.features.2",
+      "text": "Book when you are ready",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0.features",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "d825fa1322be"
+    },
+    {
+      "key": "pricing.plans.0.cta",
+      "text": "Get Day Pass",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.0",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "9db01a9cc70e"
+    },
+    {
+      "key": "pricing.plans.1.name",
+      "text": "Client Pro",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1",
+      "placeholders": [],
+      "max_length": 20,
+      "hash": "f9b0982ed84d"
+    },
+    {
+      "key": "pricing.plans.1.note",
+      "text": "Best for regular home, family, rental, or business needs.",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1",
+      "placeholders": [],
+      "max_length": 114,
+      "hash": "e560607c036c"
+    },
+    {
+      "key": "pricing.plans.1.best",
+      "text": "Best value",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1",
+      "placeholders": [],
+      "max_length": 20,
+      "hash": "b4d06debb5f8"
+    },
+    {
+      "key": "pricing.plans.1.features.0",
+      "text": "Monthly access",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1.features",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "3787ebb38f6c"
+    },
+    {
+      "key": "pricing.plans.1.features.1",
+      "text": "Message and request quotes anytime",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1.features",
+      "placeholders": [],
+      "max_length": 68,
+      "hash": "88fdc7119adc"
+    },
+    {
+      "key": "pricing.plans.1.features.2",
+      "text": "Better value after 5 active days",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1.features",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "0794d30e2ca2"
+    },
+    {
+      "key": "pricing.plans.1.cta",
+      "text": "Start Pro",
+      "context": "lib/pricingCopy.ts (home page pricing section) > plans.1",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "1cc30b317ba8"
+    },
+    {
+      "key": "passPrice.seeStore",
+      "text": "See the current price in the App Store or Google Play",
+      "context": "lib/pricingCopy.ts (pass price notes) > seeStore",
+      "placeholders": [],
+      "max_length": 106,
+      "hash": "375abaeade3c"
+    },
+    {
+      "key": "passPrice.referenceNote",
+      "text": "Reference price. The App Store or Google Play shows the final price.",
+      "context": "lib/pricingCopy.ts (pass price notes) > referenceNote",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "79851cb67270"
+    },
+    {
+      "key": "passPrice.footnote",
+      "text": "Final local price and taxes are shown by the App Store or Google Play before purchase.",
+      "context": "lib/pricingCopy.ts (pass price notes) > footnote",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "0e7083331b77"
+    },
+    {
+      "key": "priceWords.from",
+      "text": "From {price}",
+      "context": "lib/priceFormat.ts (price labels; {price} is the formatted amount) > from",
+      "placeholders": [
+        "{price}"
+      ],
+      "max_length": 24,
+      "hash": "174fc8f831e3"
+    },
+    {
+      "key": "priceWords.perHour",
+      "text": "{price} per hour",
+      "context": "lib/priceFormat.ts (price labels; {price} is the formatted amount) > perHour",
+      "placeholders": [
+        "{price}"
+      ],
+      "max_length": 32,
+      "hash": "904128141059"
+    },
+    {
+      "key": "priceWords.onRequest",
+      "text": "Price on request",
+      "context": "lib/priceFormat.ts (price labels; {price} is the formatted amount) > onRequest",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "d047b31da275"
+    },
+    {
+      "key": "priceWords.perDay",
+      "text": "{price} / day",
+      "context": "lib/priceFormat.ts (price labels; {price} is the formatted amount) > perDay",
+      "placeholders": [
+        "{price}"
+      ],
+      "max_length": 26,
+      "hash": "f2e6b32ae3ff"
+    },
+    {
+      "key": "priceWords.perMonth",
+      "text": "{price} / month",
+      "context": "lib/priceFormat.ts (price labels; {price} is the formatted amount) > perMonth",
+      "placeholders": [
+        "{price}"
+      ],
+      "max_length": 30,
+      "hash": "62a986f9278f"
+    },
+    {
+      "key": "storeBadges.appStoreTop",
+      "text": "Download on the",
+      "context": "lib/storeBadges.ts (App Store / Google Play buttons) > appStoreTop",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "f73809731952"
+    },
+    {
+      "key": "storeBadges.playTop",
+      "text": "Get it on",
+      "context": "lib/storeBadges.ts (App Store / Google Play buttons) > playTop",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "341b3d56fe9c"
+    },
+    {
+      "key": "storeBadges.appStoreLabel",
+      "text": "Download SwapSpot on the App Store",
+      "context": "lib/storeBadges.ts (App Store / Google Play buttons) > appStoreLabel",
+      "placeholders": [],
+      "max_length": 68,
+      "hash": "283cd25d6de6"
+    },
+    {
+      "key": "storeBadges.playLabel",
+      "text": "Get SwapSpot on Google Play",
+      "context": "lib/storeBadges.ts (App Store / Google Play buttons) > playLabel",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "cdbcd6fe9138"
+    },
+    {
+      "key": "staticPages.titles.privacy",
+      "text": "Privacy Policy",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "506ff3946215"
+    },
+    {
+      "key": "staticPages.titles.terms",
+      "text": "Terms of Service",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "4afa55bf7aec"
+    },
+    {
+      "key": "staticPages.titles.support",
+      "text": "SwapSpot Support",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "6c0f07ef16b1"
+    },
+    {
+      "key": "staticPages.titles.contact",
+      "text": "Contact SwapSpot",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "1719ba9c4cbf"
+    },
+    {
+      "key": "staticPages.titles.account-deletion",
+      "text": "Delete your SwapSpot account",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 56,
+      "hash": "7749427c8dba"
+    },
+    {
+      "key": "staticPages.titles.delete-account",
+      "text": "Delete your SwapSpot account",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 56,
+      "hash": "7749427c8dba"
+    },
+    {
+      "key": "staticPages.titles.trust-safety",
+      "text": "Trust & Safety",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > titles",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "5b9c374d59a6"
+    },
+    {
+      "key": "staticPages.intro",
+      "text": "This page is available in your selected language. For legal or account-specific questions, contact hello@swapspot.org.",
+      "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > intro",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "0f42636c6f41"
+    },
+    {
+      "key": "appPreview.eyebrow",
+      "text": "Inside the app",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > eyebrow",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "e65b9af58fbb"
+    },
+    {
+      "key": "appPreview.title",
+      "text": "A whole booking, start to finish",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > title",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "3a1e29c881b4"
+    },
+    {
+      "key": "appPreview.mapTitle",
+      "text": "Map view",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > mapTitle",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "e57a70983c4f"
+    },
+    {
+      "key": "appPreview.mapBody",
+      "text": "12 helpers within 2 miles, live.",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > mapBody",
+      "placeholders": [],
+      "max_length": 64,
+      "hash": "02411eef8bc1"
+    },
+    {
+      "key": "appPreview.chips.0",
+      "text": "Furniture",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > chips",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "c50440e0e411"
+    },
+    {
+      "key": "appPreview.chips.1",
+      "text": "TV mount",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > chips",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "c34a3724450a"
+    },
+    {
+      "key": "appPreview.chips.2",
+      "text": "Repairs",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > chips",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "1c007c29d3af"
+    },
+    {
+      "key": "appPreview.role",
+      "text": "Handyman · 4.9 (124)",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > role",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "7c9df2bae9a5"
+    },
+    {
+      "key": "appPreview.book",
+      "text": "Book",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > book",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "909cb81127c5"
+    },
+    {
+      "key": "appPreview.summary",
+      "text": "Booking summary",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > summary",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "6b00218f389a"
+    },
+    {
+      "key": "appPreview.service",
+      "text": "Deep cleaning",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > service",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "a7ab9f847790"
+    },
+    {
+      "key": "appPreview.with",
+      "text": "with Maria R.",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > with",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "67663b511b00"
+    },
+    {
+      "key": "appPreview.date",
+      "text": "Sat, Jun 27 · 9:00 AM",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > date",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "f8855412bfd7"
+    },
+    {
+      "key": "appPreview.total",
+      "text": "Total",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > total",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "c9b3c38247f7"
+    },
+    {
+      "key": "appPreview.pay",
+      "text": "Confirm & pay",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > pay",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "133ff9d5467b"
+    },
+    {
+      "key": "appPreview.online",
+      "text": "Online",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > online",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "0d21bd52022c"
+    },
+    {
+      "key": "appPreview.messageA",
+      "text": "Hi! Can you do a 2-bed apartment Saturday?",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > messageA",
+      "placeholders": [],
+      "max_length": 84,
+      "hash": "1b1423fb95a4"
+    },
+    {
+      "key": "appPreview.messageB",
+      "text": "Yes! Sending a quote now.",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > messageB",
+      "placeholders": [],
+      "max_length": 50,
+      "hash": "8fb6b28abfe1"
+    },
+    {
+      "key": "appPreview.quote",
+      "text": "Quote · Deep clean",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > quote",
+      "placeholders": [],
+      "max_length": 36,
+      "hash": "f3b4c30a4adc"
+    },
+    {
+      "key": "appPreview.approve",
+      "text": "Approve quote",
+      "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > approve",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "dfc7b687d17b"
+    },
+    {
+      "key": "forClients.eyebrow",
+      "text": "For Clients",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > eyebrow",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "d67b720ff5d5"
+    },
+    {
+      "key": "forClients.title",
+      "text": "Get the job done without chasing people around",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > title",
+      "placeholders": [],
+      "max_length": 92,
+      "hash": "2a7d7d2c246b"
+    },
+    {
+      "key": "forClients.body",
+      "text": "Open the app, see who is nearby, compare real profiles, message inside SwapSpot, and book when it feels right.",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > body",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "f4971cd84b01"
+    },
+    {
+      "key": "forClients.cta",
+      "text": "Find local help",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cta",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "3c02e5b63759"
+    },
+    {
+      "key": "forClients.statA",
+      "text": "Live map",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > statA",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "49e061ff2cff"
+    },
+    {
+      "key": "forClients.statB",
+      "text": "Clear quotes",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > statB",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "d0f5c6858fd6"
+    },
+    {
+      "key": "forClients.statC",
+      "text": "Safer booking",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > statC",
+      "placeholders": [],
+      "max_length": 26,
+      "hash": "16def88aba30"
+    },
+    {
+      "key": "forClients.cards.0.0",
+      "text": "Find nearby help",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.0",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "98287b0128db"
+    },
+    {
+      "key": "forClients.cards.0.1",
+      "text": "Search by category, distance, rating, and availability.",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.0",
+      "placeholders": [],
+      "max_length": 110,
+      "hash": "a15d4bd53044"
+    },
+    {
+      "key": "forClients.cards.1.0",
+      "text": "Compare before booking",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.1",
+      "placeholders": [],
+      "max_length": 44,
+      "hash": "a2c63d331fdd"
+    },
+    {
+      "key": "forClients.cards.1.1",
+      "text": "See profiles, prices, reviews, photos, and services.",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.1",
+      "placeholders": [],
+      "max_length": 104,
+      "hash": "c4e957e484c2"
+    },
+    {
+      "key": "forClients.cards.2.0",
+      "text": "Chat in one place",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.2",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "9ef7fa044c87"
+    },
+    {
+      "key": "forClients.cards.2.1",
+      "text": "Ask questions, confirm details, and keep quotes organized.",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.2",
+      "placeholders": [],
+      "max_length": 116,
+      "hash": "7879ff4af06c"
+    },
+    {
+      "key": "forClients.cards.3.0",
+      "text": "Book with confidence",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.3",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "0f8c8a41940c"
+    },
+    {
+      "key": "forClients.cards.3.1",
+      "text": "Use reviews, reports, blocks, and account controls when needed.",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > cards.3",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "8059f736dddc"
+    },
+    {
+      "key": "forClients.panelTitle",
+      "text": "Saturday deep clean",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > panelTitle",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "ed1f41ead4e4"
+    },
+    {
+      "key": "forClients.panelMeta",
+      "text": "Maria R. · 0.8 mi · 4.9 rating",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > panelMeta",
+      "placeholders": [],
+      "max_length": 60,
+      "hash": "3c0f63e7bd3f"
+    },
+    {
+      "key": "forClients.panelAction",
+      "text": "Quote ready",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > panelAction",
+      "placeholders": [],
+      "max_length": 22,
+      "hash": "d28f4506f9af"
+    },
+    {
+      "key": "forClients.panelTotal",
+      "text": "$90 total",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > panelTotal",
+      "placeholders": [],
+      "max_length": 18,
+      "hash": "b87034021f7f"
+    },
+    {
+      "key": "forClients.panelSecure",
+      "text": "Secure",
+      "context": "lib/copy/forClients.ts (home page: for clients section) > panelSecure",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "1bced1d0ce55"
+    },
+    {
+      "key": "phone.search",
+      "text": "Services near Oak Street",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > search",
+      "placeholders": [],
+      "max_length": 48,
+      "hash": "6bf874543eed"
+    },
+    {
+      "key": "phone.nearby",
+      "text": "12 helpers nearby",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > nearby",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "4da2857b51c1"
+    },
+    {
+      "key": "phone.service",
+      "text": "Maria's Cleaning",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > service",
+      "placeholders": [],
+      "max_length": 32,
+      "hash": "aeb6a2e542d4"
+    },
+    {
+      "key": "phone.distance",
+      "text": "0.6 mi",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > distance",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "a390de3ece71"
+    },
+    {
+      "key": "phone.hour",
+      "text": "/hr",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > hour",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "0a6ca99bd1a2"
+    },
+    {
+      "key": "phone.book",
+      "text": "Book now",
+      "context": "lib/copy/phone.ts (home page hero phone mockup) > book",
+      "placeholders": [],
+      "max_length": 16,
+      "hash": "b6b3d1164a64"
+    },
+    {
+      "key": "cookieConsent.title",
+      "text": "Your privacy choices",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > title",
+      "placeholders": [],
+      "max_length": 40,
+      "hash": "f6a8e96ba024"
+    },
+    {
+      "key": "cookieConsent.body",
+      "text": "We use Google Analytics cookies to understand visits and improve SwapSpot. You can accept or reject optional analytics cookies.",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > body",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "877a772bca84"
+    },
+    {
+      "key": "cookieConsent.accept",
+      "text": "Accept",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > accept",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "89713b9c9c1b"
+    },
+    {
+      "key": "cookieConsent.reject",
+      "text": "Reject",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > reject",
+      "placeholders": [],
+      "max_length": 12,
+      "hash": "ab604a360777"
+    },
+    {
+      "key": "cookieConsent.privacy",
+      "text": "Privacy policy",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > privacy",
+      "placeholders": [],
+      "max_length": 28,
+      "hash": "ba445cff3898"
+    },
+    {
+      "key": "cookieConsent.settings",
+      "text": "Cookie settings",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > settings",
+      "placeholders": [],
+      "max_length": 30,
+      "hash": "df9b9219f0e5"
+    },
+    {
+      "key": "cookieConsent.close",
+      "text": "Close cookie settings",
+      "context": "lib/copy/cookieConsent.ts (cookie consent banner) > close",
+      "placeholders": [],
+      "max_length": 42,
+      "hash": "6dd6fadfed9d"
+    },
+    {
+      "key": "maintenance.text",
+      "text": "SwapSpot is moving to new servers. For about an hour, signing in, password reset and account changes may not work. Please try again a little later.",
+      "context": "lib/copy/maintenance.ts (maintenance banner) > text",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "c9c0a4dd69b6"
+    },
+    {
+      "key": "reset.eyebrow",
+      "text": "Account",
+      "context": "lib/resetStrings.ts (password reset page) > eyebrow",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "7e1b0d5641f2"
+    },
+    {
+      "key": "reset.title",
+      "text": "Reset your password",
+      "context": "lib/resetStrings.ts (password reset page) > title",
+      "placeholders": [],
+      "max_length": 38,
+      "hash": "59fa4379be1f"
+    },
+    {
+      "key": "reset.intro",
+      "text": "Choose a new password, then sign in to the SwapSpot app with your e-mail and the new password.",
+      "context": "lib/resetStrings.ts (password reset page) > intro",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "c87d891fac84"
+    },
+    {
+      "key": "reset.newPassword",
+      "text": "New password",
+      "context": "lib/resetStrings.ts (password reset page) > newPassword",
+      "placeholders": [],
+      "max_length": 24,
+      "hash": "3dd9df4441fb"
+    },
+    {
+      "key": "reset.repeatPassword",
+      "text": "Repeat the new password",
+      "context": "lib/resetStrings.ts (password reset page) > repeatPassword",
+      "placeholders": [],
+      "max_length": 46,
+      "hash": "f97c59839f78"
+    },
+    {
+      "key": "reset.save",
+      "text": "Save new password",
+      "context": "lib/resetStrings.ts (password reset page) > save",
+      "placeholders": [],
+      "max_length": 34,
+      "hash": "1a145dd7125d"
+    },
+    {
+      "key": "reset.saving",
+      "text": "Saving…",
+      "context": "lib/resetStrings.ts (password reset page) > saving",
+      "placeholders": [],
+      "max_length": 14,
+      "hash": "23e39291d613"
+    },
+    {
+      "key": "reset.tooShort",
+      "text": "Use at least 8 characters.",
+      "context": "lib/resetStrings.ts (password reset page) > tooShort",
+      "placeholders": [],
+      "max_length": 52,
+      "hash": "9b15ce9e25e9"
+    },
+    {
+      "key": "reset.mismatch",
+      "text": "The passwords do not match.",
+      "context": "lib/resetStrings.ts (password reset page) > mismatch",
+      "placeholders": [],
+      "max_length": 54,
+      "hash": "f694aaa8da2c"
+    },
+    {
+      "key": "reset.done",
+      "text": "Your password has been changed. Open the SwapSpot app and sign in.",
+      "context": "lib/resetStrings.ts (password reset page) > done",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "333b56524857"
+    },
+    {
+      "key": "reset.invalid",
+      "text": "This reset link is invalid or has expired. Request a new one from the app.",
+      "context": "lib/resetStrings.ts (password reset page) > invalid",
+      "placeholders": [],
+      "max_length": null,
+      "hash": "7bbc2840d89c"
+    },
+    {
+      "key": "reset.openLink",
+      "text": "Open the reset link from your e-mail to continue.",
+      "context": "lib/resetStrings.ts (password reset page) > openLink",
+      "placeholders": [],
+      "max_length": 98,
+      "hash": "9b0eaf2a3b51"
+    },
+    {
+      "key": "reset.unavailable",
+      "text": "Password reset is not available on this site yet.",
+      "context": "lib/resetStrings.ts (password reset page) > unavailable",
+      "placeholders": [],
+      "max_length": 98,
+      "hash": "87816d856d65"
+    }
+  ]
+}
