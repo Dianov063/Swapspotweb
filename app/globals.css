@@ -17,6 +17,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Standard Moroccan Tamazight: Tifinagh from next/font (app/[locale]/fonts.ts, zgh pages only). */
+html[lang="zgh"] {
+  --font-bricolage: var(--font-tifinagh), ui-rounded, "Aptos Display", "Segoe UI", system-ui, sans-serif;
+  --font-hanken: var(--font-tifinagh), "Aptos", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Amharic and Tigrinya: Ethiopic system fonts, named so every platform picks one consistently. */
+html[lang="am"],
+html[lang="ti"] {
+  --font-bricolage: ui-rounded, "Aptos Display", "Segoe UI", "Nyala", "Ebrima", "Noto Sans Ethiopic", "Kefa", system-ui, sans-serif;
+  --font-hanken: "Aptos", "Segoe UI", "Nyala", "Ebrima", "Noto Sans Ethiopic", "Kefa", system-ui, sans-serif;
+}
+
 body {
   @apply bg-sand text-ink font-body antialiased;
   text-rendering: optimizeLegibility;

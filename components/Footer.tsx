@@ -32,7 +32,7 @@ export default function Footer({
       links: [
         { href: localizedPath(locale, "/helpers"), label: dictionary.hero.becomeHelper },
         { href: localizedPath(locale, "/#download"), label: dictionary.nav.getApp },
-        { href: localizedPath(locale, "/helpers#pricing"), label: dictionary.footer.pricingPayouts },
+        { href: localizedPath(locale, "/helpers#helper-pricing"), label: dictionary.footer.pricingPayouts },
       ],
     },
     {

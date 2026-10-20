@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { resetLocale, resetStrings } from "./strings";
+import { isLocale } from "@/lib/locales";
+import { resetLocale, resetStrings, type ResetStrings } from "@/lib/resetStrings";
+
+/** Reset strings of public registry languages, resolved by the server page (segment -> copy). */
+export type RegistryResetStrings = Record<string, { tag: string; dir: "ltr" | "rtl"; strings: ResetStrings }>;
 
 // Two kinds of e-mailed reset links land here, both with their secret in the URL
 // fragment (browsers never send it to servers or put it in referrers/logs):
@@ -43,17 +47,20 @@ async function savePassword(link: Link, password: string) {
   throw new Error("no reset link");
 }
 
-export default function ResetPasswordForm() {
+export default function ResetPasswordForm({ registry = {} }: { registry?: RegistryResetStrings }) {
   const [link, setLink] = useState<Link>({ kind: "none" });
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [locale, setLocale] = useState<keyof typeof resetStrings>("en");
-  const s = resetStrings[locale];
+  const [locale, setLocale] = useState<string>("en");
+  const extra = registry[locale];
+  const s = extra?.strings ?? (isLocale(locale) ? resetStrings[locale] : resetStrings.en);
+  const dir = extra?.dir ?? (locale === "ar" ? "rtl" : "ltr");
+  const lang = extra?.tag ?? (locale === "zh" ? "zh-Hans" : locale);
 
   useEffect(() => {
-    setLocale(resetLocale(window.location.search, navigator.languages ?? [navigator.language]));
+    setLocale(resetLocale(window.location.search, navigator.languages ?? [navigator.language], Object.keys(registry)));
     setLink(parseResetFragment(window.location.hash));
     // Drop the secret from the address bar once read.
     if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -84,7 +91,7 @@ export default function ResetPasswordForm() {
   }
 
   return (
-    <div dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
+    <div dir={dir} lang={lang}>
       <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-green">{s.eyebrow}</p>
       <h1 className="text-[clamp(34px,5vw,56px)] font-black leading-[0.95] tracking-[-0.03em]">{s.title}</h1>
       <p className="mt-5 text-[17px] leading-[1.6] text-ink/72">{s.intro}</p>

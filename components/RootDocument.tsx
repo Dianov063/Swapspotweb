@@ -1,6 +1,7 @@
 import Script from "next/script";
 import MaintenanceBanner from "@/components/MaintenanceBanner";
 import SiteAnalytics from "@/components/SiteAnalytics";
+import type { RegistryLanguageCopy } from "@/lib/registryLanguageCopy";
 import "@/app/globals.css";
 
 const googleAnalyticsId = "G-7Q90DY0VEK";
@@ -12,19 +13,25 @@ const consentRegions = [
 
 /**
  * `<html>` shell shared by the two root layouts: app/(site) (English, `lang="en"`) and
- * app/[locale] (`lang` of the URL locale, `dir="rtl"` for Arabic).
+ * app/[locale] (`lang` and `dir` of the URL locale from the language registry, e.g. `rtl` for
+ * ar, ar-EG and ary). `className` carries font variables (Tifinagh for zgh); `registryCopy` the
+ * client-side strings of a registry language.
  */
 export default function RootDocument({
   lang,
   dir = "ltr",
+  className,
+  registryCopy,
   children,
 }: {
   lang: string;
   dir?: "ltr" | "rtl";
+  className?: string;
+  registryCopy?: RegistryLanguageCopy;
   children: React.ReactNode;
 }) {
   return (
-    <html lang={lang} dir={dir}>
+    <html lang={lang} dir={dir} className={className}>
       <head>
         <Script id="google-consent-default" strategy="beforeInteractive">
           {`
@@ -62,9 +69,9 @@ export default function RootDocument({
         </Script>
       </head>
       <body>
-        <MaintenanceBanner />
+        <MaintenanceBanner registryCopy={registryCopy} />
         {children}
-        <SiteAnalytics googleAnalyticsId={googleAnalyticsId} />
+        <SiteAnalytics googleAnalyticsId={googleAnalyticsId} registryCopy={registryCopy} />
       </body>
     </html>
   );

@@ -1,7 +1,10 @@
-import { isLocale, type Locale } from "@/lib/i18n";
+import { isLocale, type Locale, type ShippedLocale } from "./locales";
 
-// Texts of the password reset page in the 16 site languages. The e-mailed link carries
-// ?lang=<locale> (App Platform and rollback e-mails); otherwise the browser language is used.
+// Texts of the password reset page (app/(site)/auth/reset-password) in the 16 site languages. The
+// e-mailed link carries ?lang=<locale> (App Platform and rollback e-mails); otherwise the browser
+// language is used. Registry languages (keys `reset.*` of lib/locales/<code>.json) are passed to
+// the form by the server page, only when the language is public on the site.
+// Kept free of other imports: scripts/build-staging-reset-page.mjs evaluates this file.
 export type ResetStrings = {
   eyebrow: string;
   title: string;
@@ -18,7 +21,7 @@ export type ResetStrings = {
   unavailable: string;
 };
 
-export const resetStrings: Record<Locale, ResetStrings> = {
+export const resetStrings: Record<ShippedLocale, ResetStrings> = {
   en: {
     eyebrow: "Account", title: "Reset your password",
     intro: "Choose a new password, then sign in to the SwapSpot app with your e-mail and the new password.",
@@ -165,15 +168,21 @@ export const resetStrings: Record<Locale, ResetStrings> = {
   },
 };
 
-/** ?lang= from the e-mail (platform/SwapSpot codes like zh-Hans, pt-BR), then the browser languages. */
-export function resetLocale(search: string, browser: readonly string[]): Locale {
+/**
+ * ?lang= from the e-mail (platform/SwapSpot codes like zh-Hans, pt-BR, sw-KE), then the browser
+ * languages: exact match, then the language part (`ar-MA` -> `ar`, never `ary`). `extra` are the
+ * URL segments of public registry languages whose strings the page received.
+ */
+export function resetLocale(search: string, browser: readonly string[], extra: readonly string[] = []): Locale {
   const candidates = [new URLSearchParams(search).get("lang") || "", ...browser];
   for (const raw of candidates) {
     const code = raw.trim().toLowerCase().replace("_", "-");
     if (!code) continue;
     if (code.startsWith("zh")) return "zh";
     const base = code.split("-")[0];
+    if (extra.includes(code)) return code;
     if (isLocale(code)) return code;
+    if (extra.includes(base)) return base;
     if (isLocale(base)) return base;
   }
   return "en";

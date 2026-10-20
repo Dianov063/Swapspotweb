@@ -22,7 +22,8 @@ import {
   languageLabel,
   localizedCategoryName,
 } from "@/lib/directoryStrings";
-import { dictionaries, hreflangAlternates, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/languages";
 import { siteUrl } from "@/lib/locales";
 import { formatLowestPrices, schemaOffer } from "@/lib/priceFormat";
 import {
@@ -90,7 +91,7 @@ export async function helperProfileMetadata(locale: Locale, helperSlug: string):
   return {
     title: fillTemplate(t.helperMetaTitle, { name, category, market }),
     description,
-    alternates: hreflangAlternates(path, locale),
+    alternates: await localeAlternates(path, locale),
     openGraph: {
       title: fillTemplate(t.onSwapSpot, { name }),
       description,
@@ -105,7 +106,7 @@ export default async function HelperProfilePage({ locale, helperSlug }: { locale
   const profile = await getPublicHelperProfileBySlug(helperSlug);
   if (!profile) notFound();
 
-  const dictionary = dictionaries[locale];
+  const dictionary = getDictionary(locale);
   const { t, name, category, market, description } = profileText(profile, locale);
   const serviceTitles = uniqueValues(profile.listings.map((listing) => getServiceTitle(listing, locale)));
   const serviceAreas = uniqueValues(profile.listings.map((listing) => listing.service_area_label || listing.market_name));
@@ -140,7 +141,7 @@ export default async function HelperProfilePage({ locale, helperSlug }: { locale
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    inLanguage: locale,
+    inLanguage: languageTag(locale),
     mainEntity: faq.map((item) => ({
       "@type": "Question",
       name: item.question,
@@ -157,7 +158,7 @@ export default async function HelperProfilePage({ locale, helperSlug }: { locale
   ];
 
   return (
-    <div lang={locale} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
+    <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

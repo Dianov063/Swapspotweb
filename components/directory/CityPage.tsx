@@ -5,7 +5,8 @@ import Footer from "@/components/Footer";
 import { categoryLabel } from "@/components/directory/CategoryPage";
 import { categories, cities } from "@/lib/data";
 import { directoryStrings, fillTemplate } from "@/lib/directoryStrings";
-import { dictionaries, hreflangAlternates, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/languages";
 
 export type City = (typeof cities)[number];
 
@@ -13,24 +14,24 @@ export function findCity(slug: string) {
   return cities.find((city) => city.slug === slug) ?? null;
 }
 
-export function cityMetadata(locale: Locale, slug: string): Metadata {
+export async function cityMetadata(locale: Locale, slug: string): Promise<Metadata> {
   const city = findCity(slug);
   if (!city) return {};
   const t = directoryStrings(locale);
   return {
     title: fillTemplate(t.cityMetaTitle, { city: city.name }),
     description: fillTemplate(t.cityMetaDescription, { city: city.name }),
-    alternates: hreflangAlternates(`/cities/${city.slug}`, locale),
+    alternates: await localeAlternates(`/cities/${city.slug}`, locale),
   };
 }
 
 /** /cities/[slug]. City names are place names and stay as written. */
 export default function CityPage({ locale, city }: { locale: Locale; city: City }) {
   const t = directoryStrings(locale);
-  const dictionary = dictionaries[locale];
+  const dictionary = getDictionary(locale);
 
   return (
-    <div lang={locale} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
+    <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main className="mx-auto max-w-wrap px-6 py-[clamp(48px,6vw,86px)]">
         <h1 className="font-head text-[clamp(32px,5vw,52px)] font-bold tracking-[-0.02em] text-ink">
