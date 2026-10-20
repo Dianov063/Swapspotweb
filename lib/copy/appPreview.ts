@@ -18,6 +18,7 @@ export type AppPreviewCopy = {
   with: string;
   date: string;
   total: string;
+  /** Booking summary button (no in-app payment for the job; key name kept for translations). */
   pay: string;
   online: string;
   messageA: string;
@@ -40,7 +41,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "with Maria R.",
     date: "Sat, Jun 27 · 9:00 AM",
     total: "Total",
-    pay: "Confirm & pay",
+    pay: "Confirm booking",
     online: "Online",
     messageA: "Hi! Can you do a 2-bed apartment Saturday?",
     messageB: "Yes! Sending a quote now.",
@@ -60,7 +61,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "con Maria R.",
     date: "Sáb, Jun 27 · 9:00 AM",
     total: "Total",
-    pay: "Confirmar y pagar",
+    pay: "Confirmar reserva",
     online: "En línea",
     messageA: "Hola, ¿puedes limpiar un apto de 2 cuartos el sábado?",
     messageB: "Sí, te envío un quote ahora.",
@@ -80,7 +81,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "Maria R. 服务",
     date: "周六，6月27日 · 9:00 AM",
     total: "总计",
-    pay: "确认并付款",
+    pay: "确认预订",
     online: "在线",
     messageA: "你好，周六可以清洁两居室公寓吗？",
     messageB: "可以！我现在发送 quote。",
@@ -100,7 +101,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "avec Maria R.",
     date: "Sam, 27 juin · 9:00",
     total: "Total",
-    pay: "Confirmer et payer",
+    pay: "Confirmer la réservation",
     online: "En ligne",
     messageA: "Bonjour, pouvez-vous faire un 2 pièces samedi ?",
     messageB: "Oui ! J'envoie un quote maintenant.",
@@ -120,7 +121,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "с Марией Р.",
     date: "Сб, 27 июня · 9:00",
     total: "Итого",
-    pay: "Подтвердить и оплатить",
+    pay: "Подтвердить бронь",
     online: "Онлайн",
     messageA: "Привет! Сможешь убрать двухкомнатную квартиру в субботу?",
     messageB: "Да! Сейчас отправлю стоимость.",
@@ -140,7 +141,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "với Maria R.",
     date: "Thứ Bảy, 27/6 · 9:00",
     total: "Tổng cộng",
-    pay: "Xác nhận và thanh toán",
+    pay: "Xác nhận đặt lịch",
     online: "Trực tuyến",
     messageA: "Chào bạn! Bạn có thể dọn căn hộ 2 phòng ngủ vào thứ Bảy không?",
     messageB: "Được! Tôi gửi báo giá ngay đây.",
@@ -160,7 +161,7 @@ export const appPreviewCopyTable: Partial<Record<ShippedLocale, AppPreviewCopy>>
     with: "กับ Maria R.",
     date: "เสาร์ 27 มิ.ย. · 9:00 น.",
     total: "รวม",
-    pay: "ยืนยันและชำระเงิน",
+    pay: "ยืนยันการจอง",
     online: "ออนไลน์",
     messageA: "สวัสดี! วันเสาร์รับทำความสะอาดอพาร์ตเมนต์ 2 ห้องนอนไหม?",
     messageB: "ได้ค่ะ! กำลังส่งใบเสนอราคาให้ตอนนี้",

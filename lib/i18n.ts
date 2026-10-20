@@ -66,7 +66,7 @@ const en = {
   steps: [
     ["Search nearby helpers", "See trusted local helpers on a live map, sorted by distance and rating."],
     ["Compare services and prices", "Browse profiles, services, and transparent pricing before you commit."],
-    ["Book, chat and pay safely", "Message, get a quote, and pay securely inside the app."],
+    ["Chat, get a quote and book", "Message, get a quote, and book inside the app. Payment for the job is arranged directly with the helper."],
   ],
   helpers: {
     eyebrow: "For Helpers",
@@ -149,7 +149,7 @@ const en = {
     support: "Support",
     accountDeletion: "Account deletion",
     terms: "Terms",
-    pricingPayouts: "Pricing & payouts",
+    pricingPayouts: "Free for helpers",
     rights: "© 2026 SwapSpot. All rights reserved.",
     bottom: "Find trusted local help near you.",
     companyLine: "Operating under USPROJECT LLC · EIN 83-3989558 · New York, USA",
@@ -193,7 +193,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     nav: { how: "Cómo funciona", clients: "Para clientes", pricing: "Precios", categories: "Categorías", helpers: "Para Helpers", trust: "Confianza y seguridad", getApp: "Obtener la app" },
     hero: { badge: "Lanzando en tu vecindario", before: "Encuentra", highlight: "ayuda local confiable", after: "cerca de ti", body: "Reserva limpieza, reparaciones, belleza, jardín, mudanzas, mascotas y más desde un marketplace del vecindario.", findHelp: "Buscar ayuda", becomeHelper: "Ser Helper", bookingConfirmed: "Reserva confirmada" },
     how: { eyebrow: "Cómo funciona", title: "Ayuda en tres toques", body: "De necesito ayuda a reservado, sin llamadas largas ni cotizaciones confusas." },
-    steps: [["Busca helpers cercanos", "Ve helpers confiables en un mapa en vivo."], ["Compara servicios y precios", "Revisa perfiles, servicios y precios antes de reservar."], ["Reserva, chatea y paga", "Envía mensajes, recibe quotes y paga en la app."]],
+    steps: [["Busca helpers cercanos", "Ve helpers confiables en un mapa en vivo."], ["Compara servicios y precios", "Revisa perfiles, servicios y precios antes de reservar."], ["Chatea, recibe quotes y reserva", "Envía mensajes, recibe quotes y reserva en la app. El pago del trabajo se acuerda directamente con el helper."]],
     helpers: { eyebrow: "Para Helpers", title: "Convierte tus habilidades en ingresos locales", body: "Configura tu perfil y recibe reservas de vecinos que necesitan tus servicios.", start: "Empezar como Helper", earnings: "Ganancias esta semana", bookings: "3 reservas nuevas", quotes: "2 quotes pendientes" },
     perks: [["Crea tu perfil", "Publica habilidades, fotos y zona de trabajo."], ["Define precios y horario", "Controlas tarifas, radio y disponibilidad."], ["Recibe reservas", "Responde solicitudes cercanas con quotes."], ["Construye reseñas", "Gana reputación y clientes recurrentes."]],
     categories: { eyebrow: "Categorías", title: "Para cada trabajo hay un helper", body: "Categorías locales principales, con más a medida que crece cada mercado.", nearby: "cerca" },
@@ -201,7 +201,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     trustItems: [["Reseñas verificadas", "Calificaciones reales después de cada trabajo."], ["Chat en la app", "Conversaciones y quotes en un lugar."], ["Reportar y bloquear", "Reporta o bloquea usuarios cuando quieras."], ["Eliminar cuenta", "Elimina tu cuenta y datos."], ["Privacidad de ubicación", "Los helpers controlan cómo se muestra su ubicación."]],
     waitlist: { title: "Descarga SwapSpot hoy", body: "Explora helpers gratis. Usa un pass para escribir, pedir quotes o reservar.", join: "Descargar app", storeCaption: "Disponible en iOS y Android", noSpam: "Descarga la app y empieza cuando estés listo." },
     download: { badge: "Disponible ahora", title: "Descarga SwapSpot para iOS o Android", body: "Explora helpers gratis. Usa un pass para escribir, pedir quotes o reservar.", pointA: "Clientes y helpers son bienvenidos", pointB: "Exploración gratis antes de contactar" },
-    footer: { product: "Producto", company: "Compañía", contact: "Contacto", privacy: "Privacidad", support: "Soporte", accountDeletion: "Eliminar cuenta", terms: "Términos", pricingPayouts: "Precios y pagos", bottom: "Encuentra ayuda local confiable cerca de ti." },
+    footer: { product: "Producto", company: "Compañía", contact: "Contacto", privacy: "Privacidad", support: "Soporte", accountDeletion: "Eliminar cuenta", terms: "Términos", pricingPayouts: "Gratis para helpers", bottom: "Encuentra ayuda local confiable cerca de ti." },
   }),
   zh: mergeDictionary({
     metaTitle: "SwapSpot - 寻找附近可信赖的本地帮手",
@@ -209,7 +209,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     nav: { how: "如何使用", clients: "给客户", pricing: "价格", categories: "服务类别", helpers: "给 Helpers", trust: "信任与安全", getApp: "获取应用" },
     hero: { badge: "正在你的社区上线", before: "寻找", highlight: "可信赖的本地帮手", after: "就在附近", body: "在一个社区 marketplace 中预订清洁、维修、美容、庭院、搬家、宠物护理等服务。", findHelp: "寻找帮助", becomeHelper: "成为 Helper", bookingConfirmed: "预订已确认" },
     how: { eyebrow: "如何使用", title: "三步即可获得帮助", body: "从需要帮助到完成预订，减少电话、猜价和不确定性。" },
-    steps: [["搜索附近 helpers", "在实时地图上查看可信赖的本地 helpers。"], ["比较服务和价格", "预订前查看资料、服务和透明价格。"], ["预订、聊天和付款", "在应用内发送消息、获取 quote 并付款。"]],
+    steps: [["搜索附近 helpers", "在实时地图上查看可信赖的本地 helpers。"], ["比较服务和价格", "预订前查看资料、服务和透明价格。"], ["聊天、获取 quote 并预订", "在应用内发送消息、获取 quote 并预订。工作费用的支付方式由你与 helper 直接商定。"]],
     helpers: { eyebrow: "给 Helpers", title: "把技能变成本地收入", body: "设置一次资料，让附近需要服务的客户找到你。", start: "开始成为 Helper" },
     categories: { title: "各种需求，都能找到 helper", nearby: "附近" },
     trust: { eyebrow: "信任与安全", title: "让双方都安心的设计", body: "真实评价、私密聊天和数据控制。" },
@@ -223,7 +223,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     nav: { how: "Comment ça marche", clients: "Pour clients", pricing: "Tarifs", categories: "Catégories", helpers: "Pour Helpers", trust: "Sécurité", getApp: "Obtenir l'app" },
     hero: { badge: "Lancement dans votre quartier", before: "Trouvez", highlight: "de l'aide locale fiable", after: "près de vous", body: "Réservez ménage, réparations, beauté, jardin, déménagement, animaux et plus depuis une marketplace de quartier.", findHelp: "Trouver de l'aide", becomeHelper: "Devenir Helper", bookingConfirmed: "Réservation confirmée" },
     how: { eyebrow: "Comment ça marche", title: "De l'aide en trois clics", body: "De besoin d'aide à réservé, sans appels longs ni devis confus." },
-    steps: [["Cherchez des helpers proches", "Voyez les helpers fiables sur une carte."], ["Comparez services et prix", "Consultez profils, services et tarifs."], ["Réservez, discutez et payez", "Messagez, recevez un quote et payez dans l'app."]],
+    steps: [["Cherchez des helpers proches", "Voyez les helpers fiables sur une carte."], ["Comparez services et prix", "Consultez profils, services et tarifs."], ["Discutez, recevez un quote et réservez", "Messagez, recevez un quote et réservez dans l'app. Le paiement du travail se règle directement avec le helper."]],
     helpers: { eyebrow: "Pour Helpers", title: "Transformez vos compétences en revenu local", body: "Créez votre profil et recevez des réservations de voisins.", start: "Commencer comme Helper" },
     categories: { title: "Quel que soit le besoin, il y a un helper", nearby: "proches" },
     trust: { eyebrow: "Confiance et sécurité", title: "Conçu pour rassurer les deux côtés", body: "Avis réels, messagerie privée et contrôle des données." },
@@ -237,13 +237,13 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     nav: { how: "Как работает", clients: "Для клиентов", pricing: "Цены", categories: "Категории", helpers: "Для исполнителей", trust: "Безопасность", getApp: "Скачать приложение" },
     hero: { badge: "Уже в вашем районе", before: "Найдите", highlight: "надежных местных исполнителей", after: "рядом", body: "Заказывайте уборку, ремонт, уход за садом и питомцами, переезд и другие услуги в одном приложении.", findHelp: "Найти исполнителя", becomeHelper: "Стать исполнителем", bookingConfirmed: "Бронирование подтверждено" },
     how: { eyebrow: "Как работает", title: "Помощь в три шага", body: "От поиска до бронирования — без долгих звонков и непонятных расчетов." },
-    steps: [["Найдите исполнителей рядом", "Смотрите проверенных местных исполнителей на карте."], ["Сравните услуги и цены", "Изучите профили, услуги и цены до бронирования."], ["Бронируйте, общайтесь и платите", "Переписка, расчет стоимости и оплата внутри приложения."]],
+    steps: [["Найдите исполнителей рядом", "Смотрите проверенных местных исполнителей на карте."], ["Сравните услуги и цены", "Изучите профили, услуги и цены до бронирования."], ["Общайтесь, узнавайте стоимость и бронируйте", "Переписка, расчёт стоимости и бронирование — в приложении. Оплату работы вы согласуете напрямую с исполнителем."]],
     helpers: { eyebrow: "Для исполнителей", title: "Превратите навыки в дополнительный доход", body: "Настройте профиль и получайте заказы от клиентов рядом.", start: "Стать исполнителем", earnings: "Доход за неделю", bookings: "3 новых бронирования", quotes: "2 запроса ждут ответа" },
     categories: { title: "Для любой задачи найдется исполнитель", nearby: "рядом" },
     trust: { eyebrow: "Доверие и безопасность", title: "Спокойно для обеих сторон", body: "Реальные отзывы, приватный чат и контроль данных." },
     waitlist: { title: "Скачайте SwapSpot сегодня", body: "Просматривайте исполнителей бесплатно. Доступ понадобится, только чтобы написать, запросить стоимость или забронировать услугу.", join: "Скачать приложение", storeCaption: "Доступно на iOS и Android" },
     download: { badge: "Уже доступно", title: "Скачайте SwapSpot для iOS или Android", body: "Просматривайте исполнителей бесплатно. Доступ понадобится, только чтобы написать, запросить стоимость или забронировать услугу.", pointA: "Для клиентов и исполнителей", pointB: "Бесплатный просмотр до обращения" },
-    footer: { product: "Продукт", company: "Компания", contact: "Контакты", privacy: "Конфиденциальность", support: "Поддержка", accountDeletion: "Удаление аккаунта", terms: "Условия", pricingPayouts: "Цены и выплаты", bottom: "Найдите надежного местного исполнителя рядом." },
+    footer: { product: "Продукт", company: "Компания", contact: "Контакты", privacy: "Конфиденциальность", support: "Поддержка", accountDeletion: "Удаление аккаунта", terms: "Условия", pricingPayouts: "Бесплатно для исполнителей", bottom: "Найдите надежного местного исполнителя рядом." },
   }),
   ar: mergeDictionary({
     metaTitle: "SwapSpot - اعثر على مساعدة محلية موثوقة بالقرب منك",
@@ -317,7 +317,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     steps: [
       ["సమీపంలోని హెల్పర్లను వెతకండి", "దూరం మరియు రేటింగ్ ఆధారంగా అమర్చిన నమ్మదగిన స్థానిక హెల్పర్లను లైవ్ మ్యాప్‌లో చూడండి."],
       ["సేవలు మరియు ధరలను పోల్చండి", "బుక్ చేసే ముందు ప్రొఫైళ్లు, సేవలు మరియు స్పష్టమైన ధరలను చూడండి."],
-      ["బుక్ చేయండి, చాట్ చేయండి, సురక్షితంగా చెల్లించండి", "యాప్‌లోనే మెసేజ్ పంపండి, కోట్ పొందండి మరియు సురక్షితంగా చెల్లించండి."],
+      ["చాట్ చేయండి, కోట్ పొందండి, బుక్ చేయండి", "యాప్‌లోనే మెసేజ్ పంపండి, కోట్ పొందండి, బుక్ చేయండి. పనికి చెల్లింపును మీరు నేరుగా హెల్పర్‌తో ఏర్పాటు చేసుకుంటారు."],
     ],
     helpers: { eyebrow: "హెల్పర్ల కోసం", title: "మీ నైపుణ్యాలను స్థానిక ఆదాయంగా మార్చుకోండి", body: "ఒక్కసారి ప్రొఫైల్ సెటప్ చేసి, మీ సేవలు అవసరమైన సమీపంలోని కస్టమర్ల నుంచి బుకింగ్‌లు పొందండి.", start: "హెల్పర్‌గా ప్రారంభించండి", earnings: "ఈ వారం ఆదాయం", bookings: "3 కొత్త బుకింగ్‌లు", quotes: "సమాధానం కోసం 2 కోట్లు" },
     perks: [
@@ -337,7 +337,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     ],
     download: { badge: "ఇప్పుడు అందుబాటులో", title: "iOS లేదా Android కోసం SwapSpot డౌన్‌లోడ్ చేయండి", body: "సహాయకులను ఉచితంగా చూడండి. మెసేజ్, కోట్ లేదా బుకింగ్ కోసం పాస్ ఉపయోగించండి.", pointA: "క్లయింట్లు మరియు సహాయకులకు స్వాగతం", pointB: "సంప్రదించే ముందు ఉచితంగా చూడండి" },
     waitlist: { title: "ఈరోజే SwapSpot డౌన్‌లోడ్ చేయండి", body: "హెల్పర్లను ఉచితంగా చూడండి. మెసేజ్, కోట్ లేదా బుకింగ్‌కు పాస్ వాడండి.", email: "ఇమెయిల్ చిరునామా", placeholder: "you@email.com", join: "యాప్ డౌన్‌లోడ్", thanks: "ధన్యవాదాలు.", storeCaption: "iOS మరియు Android లో అందుబాటులో", comingSoon: "ఇక్కడ అందుబాటులో", noSpam: "యాప్‌ను డౌన్‌లోడ్ చేసి, హెల్పర్లను చూడండి, సిద్ధమైనప్పుడు ప్రారంభించండి." },
-    footer: { tagline: "నమ్మదగిన స్థానిక సహాయం కోసం పొరుగువారి మార్కెట్‌ప్లేస్.", product: "ప్రోడక్ట్", company: "కంపెనీ", contact: "సంప్రదించండి", about: "మా గురించి", privacy: "గోప్యత", support: "సహాయం", terms: "నిబంధనలు", accountDeletion: "ఖాతా తొలగింపు", pricingPayouts: "ధరలు & చెల్లింపులు", rights: "© 2026 SwapSpot. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.", companyLine: "USPROJECT LLC ఆధ్వర్యంలో · EIN 83-3989558 · న్యూయార్క్, USA", bottom: "మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి." },
+    footer: { tagline: "నమ్మదగిన స్థానిక సహాయం కోసం పొరుగువారి మార్కెట్‌ప్లేస్.", product: "ప్రోడక్ట్", company: "కంపెనీ", contact: "సంప్రదించండి", about: "మా గురించి", privacy: "గోప్యత", support: "సహాయం", terms: "నిబంధనలు", accountDeletion: "ఖాతా తొలగింపు", pricingPayouts: "సహాయకులకు ఉచితం", rights: "© 2026 SwapSpot. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.", companyLine: "USPROJECT LLC ఆధ్వర్యంలో · EIN 83-3989558 · న్యూయార్క్, USA", bottom: "మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి." },
   }),
   ta: mergeDictionary({
     metaTitle: "SwapSpot - உங்கள் அருகில் நம்பகமான உள்ளூர் உதவி கண்டுபிடிக்கவும்",
@@ -357,7 +357,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     steps: [
       ["Tìm người trợ giúp gần bạn", "Xem người trợ giúp đáng tin cậy trên bản đồ, được sắp xếp theo khoảng cách và đánh giá."],
       ["So sánh dịch vụ và giá", "Xem hồ sơ, dịch vụ và mức giá rõ ràng trước khi quyết định."],
-      ["Đặt lịch, nhắn tin và thanh toán an toàn", "Nhắn tin, nhận báo giá và thanh toán an toàn trong ứng dụng."],
+      ["Nhắn tin, nhận báo giá và đặt lịch", "Nhắn tin, nhận báo giá và đặt lịch ngay trong ứng dụng. Bạn thỏa thuận việc thanh toán cho công việc trực tiếp với người trợ giúp."],
     ],
     helpers: { eyebrow: "Dành cho người trợ giúp", title: "Biến kỹ năng của bạn thành thu nhập tại địa phương", body: "Tạo hồ sơ một lần và bắt đầu nhận việc từ những người hàng xóm đang cần đúng dịch vụ của bạn.", start: "Bắt đầu làm người trợ giúp", earnings: "Thu nhập tuần này", bookings: "3 lịch đặt mới", quotes: "2 báo giá đang chờ trả lời" },
     perks: [
@@ -377,7 +377,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     ],
     download: { badge: "Đã có sẵn", title: "Tải SwapSpot cho iOS hoặc Android", body: "Xem người trợ giúp gần bạn miễn phí. Dùng pass khi bạn muốn nhắn tin, yêu cầu báo giá hoặc đặt lịch.", pointA: "Dành cho cả khách hàng và người trợ giúp", pointB: "Xem miễn phí trước khi liên hệ" },
     waitlist: { title: "Tải SwapSpot ngay hôm nay", body: "Xem người trợ giúp gần bạn miễn phí. Dùng pass khi bạn muốn nhắn tin, yêu cầu báo giá hoặc đặt lịch.", email: "Địa chỉ email", placeholder: "you@email.com", join: "Tải ứng dụng", thanks: "Cảm ơn bạn.", storeCaption: "Đã có trên iOS và Android", comingSoon: "Có sẵn trên", noSpam: "Tải ứng dụng, xem người trợ giúp và bắt đầu khi bạn sẵn sàng." },
-    footer: { tagline: "Nền tảng cộng đồng để tìm sự trợ giúp địa phương đáng tin cậy.", product: "Sản phẩm", company: "Công ty", about: "Giới thiệu", contact: "Liên hệ", privacy: "Quyền riêng tư", support: "Hỗ trợ", accountDeletion: "Xóa tài khoản", terms: "Điều khoản", pricingPayouts: "Giá & thanh toán", bottom: "Tìm sự trợ giúp địa phương đáng tin cậy gần bạn." },
+    footer: { tagline: "Nền tảng cộng đồng để tìm sự trợ giúp địa phương đáng tin cậy.", product: "Sản phẩm", company: "Công ty", about: "Giới thiệu", contact: "Liên hệ", privacy: "Quyền riêng tư", support: "Hỗ trợ", accountDeletion: "Xóa tài khoản", terms: "Điều khoản", pricingPayouts: "Miễn phí cho người trợ giúp", bottom: "Tìm sự trợ giúp địa phương đáng tin cậy gần bạn." },
   }),
   th: mergeDictionary({
     metaTitle: "SwapSpot - ค้นหาผู้ช่วยในพื้นที่ที่ไว้ใจได้ใกล้คุณ",
@@ -388,7 +388,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     steps: [
       ["ค้นหาผู้ช่วยใกล้คุณ", "ดูผู้ช่วยที่ไว้ใจได้บนแผนที่ เรียงตามระยะทางและคะแนน"],
       ["เปรียบเทียบบริการและราคา", "ดูโปรไฟล์ บริการ และราคาที่ชัดเจนก่อนตัดสินใจ"],
-      ["จอง แชต และชำระเงินอย่างปลอดภัย", "ส่งข้อความ ขอใบเสนอราคา และชำระเงินอย่างปลอดภัยในแอป"],
+      ["แชต ขอใบเสนอราคา และจอง", "ส่งข้อความ ขอใบเสนอราคา และจองในแอป ส่วนการชำระค่างานให้ตกลงกับผู้ช่วยโดยตรง"],
     ],
     helpers: { eyebrow: "สำหรับผู้ช่วย", title: "เปลี่ยนทักษะของคุณให้เป็นรายได้ในพื้นที่", body: "สร้างโปรไฟล์ครั้งเดียว แล้วเริ่มรับงานจากเพื่อนบ้านที่กำลังต้องการบริการของคุณ", start: "เริ่มเป็นผู้ช่วย", earnings: "รายได้สัปดาห์นี้", bookings: "การจองใหม่ 3 รายการ", quotes: "ใบเสนอราคา 2 รายการรอตอบกลับ" },
     perks: [
@@ -408,7 +408,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     ],
     download: { badge: "พร้อมให้ดาวน์โหลด", title: "ดาวน์โหลด SwapSpot สำหรับ iOS หรือ Android", body: "ดูผู้ช่วยใกล้คุณได้ฟรี ใช้ pass เมื่อพร้อมส่งข้อความ ขอใบเสนอราคา หรือจอง", pointA: "ยินดีต้อนรับทั้งลูกค้าและผู้ช่วย", pointB: "ดูก่อนได้ฟรีก่อนติดต่อผู้ช่วย" },
     waitlist: { title: "ดาวน์โหลด SwapSpot วันนี้", body: "ดูผู้ช่วยใกล้คุณได้ฟรี ใช้ pass เมื่อพร้อมส่งข้อความ ขอใบเสนอราคา หรือจอง", email: "อีเมล", placeholder: "you@email.com", join: "ดาวน์โหลดแอป", thanks: "ขอบคุณ", storeCaption: "พร้อมใช้งานบน iOS และ Android", comingSoon: "พร้อมใช้งานบน", noSpam: "ดาวน์โหลดแอป ดูผู้ช่วย และเริ่มเมื่อคุณพร้อม" },
-    footer: { tagline: "ตลาดชุมชนสำหรับความช่วยเหลือในพื้นที่ที่ไว้ใจได้", product: "ผลิตภัณฑ์", company: "บริษัท", about: "เกี่ยวกับเรา", contact: "ติดต่อ", privacy: "ความเป็นส่วนตัว", support: "ช่วยเหลือ", accountDeletion: "ลบบัญชี", terms: "ข้อกำหนด", pricingPayouts: "ราคาและการจ่ายเงิน", bottom: "ค้นหาความช่วยเหลือในพื้นที่ที่ไว้ใจได้ใกล้คุณ" },
+    footer: { tagline: "ตลาดชุมชนสำหรับความช่วยเหลือในพื้นที่ที่ไว้ใจได้", product: "ผลิตภัณฑ์", company: "บริษัท", about: "เกี่ยวกับเรา", contact: "ติดต่อ", privacy: "ความเป็นส่วนตัว", support: "ช่วยเหลือ", accountDeletion: "ลบบัญชี", terms: "ข้อกำหนด", pricingPayouts: "ฟรีสำหรับผู้ช่วย", bottom: "ค้นหาความช่วยเหลือในพื้นที่ที่ไว้ใจได้ใกล้คุณ" },
   }),
 };
 

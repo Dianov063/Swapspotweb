@@ -18,6 +18,7 @@ export type ForClientsCopy = {
     panelMeta: string;
     panelAction: string;
     panelTotal: string;
+    /** Payment note next to the total (the job is paid to the helper directly, not in the app). */
     panelSecure: string;
   };
 
@@ -41,7 +42,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0.8 mi · 4.9 rating",
     panelAction: "Quote ready",
     panelTotal: "$90 total",
-    panelSecure: "Secure",
+    panelSecure: "Pay the helper directly",
   },
   es: {
     eyebrow: "Para clientes",
@@ -62,7 +63,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0.8 mi · rating 4.9",
     panelAction: "Quote listo",
     panelTotal: "$90 total",
-    panelSecure: "Seguro",
+    panelSecure: "Pago directo al helper",
   },
   zh: {
     eyebrow: "给客户",
@@ -82,7 +83,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0.8 英里 · 4.9 评分",
     panelAction: "Quote 已准备",
     panelTotal: "$90 总计",
-    panelSecure: "安全",
+    panelSecure: "直接向 helper 付款",
   },
   fr: {
     eyebrow: "Pour clients",
@@ -103,7 +104,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0.8 mi · note 4.9",
     panelAction: "Quote prêt",
     panelTotal: "$90 total",
-    panelSecure: "Sécurisé",
+    panelSecure: "Paiement direct au helper",
   },
   ru: {
     eyebrow: "Для клиентов",
@@ -117,14 +118,14 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     cards: [
       ["Найдите помощь рядом", "Ищите по категории, расстоянию, рейтингу и доступности."],
       ["Сравните до брони", "Смотрите профили, цены, отзывы, фото и услуги."],
-      ["Общайтесь в одном месте", "Задавайте вопросы, уточняйте детали и храните все расчеты."],
+      ["Общайтесь в одном месте", "Задавайте вопросы, уточняйте детали и храните все предложения по стоимости."],
       ["Бронируйте спокойнее", "Используйте отзывы, жалобы, блокировки и контроль аккаунта."],
     ],
     panelTitle: "Глубокая уборка в субботу",
     panelMeta: "Мария Р. · 0,8 мили · рейтинг 4,9",
     panelAction: "Стоимость рассчитана",
     panelTotal: "$90 итого",
-    panelSecure: "Защищено",
+    panelSecure: "Оплата напрямую исполнителю",
   },
   vi: {
     eyebrow: "Dành cho khách hàng",
@@ -144,7 +145,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0,8 dặm · đánh giá 4,9",
     panelAction: "Báo giá đã sẵn sàng",
     panelTotal: "Tổng $90",
-    panelSecure: "An toàn",
+    panelSecure: "Thanh toán trực tiếp cho người trợ giúp",
   },
   th: {
     eyebrow: "สำหรับลูกค้า",
@@ -164,7 +165,7 @@ export const forClientsCopyTable: Partial<Record<ShippedLocale, ForClientsCopy>>
     panelMeta: "Maria R. · 0.8 ไมล์ · คะแนน 4.9",
     panelAction: "ใบเสนอราคาพร้อมแล้ว",
     panelTotal: "รวม $90",
-    panelSecure: "ปลอดภัย",
+    panelSecure: "ชำระเงินกับผู้ช่วยโดยตรง",
   },
 };
 

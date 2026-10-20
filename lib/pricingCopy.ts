@@ -26,7 +26,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
     eyebrow: "Client Pricing",
     title: "Browse for free. Use a pass when you are ready to act.",
     body:
-      "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper.",
+      "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper. Payment for the job itself is arranged directly with the helper.",
     freeTitle: "Free browsing",
     freeBody: "See categories, helper previews, service areas, and basic trust signals before choosing a pass.",
     unlock: "A pass unlocks",
@@ -51,7 +51,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
     eyebrow: "Precios para clientes",
     title: "Explora gratis. Usa un pass cuando quieras actuar.",
     body:
-      "Los clientes pueden ver categorías y comparar helpers sin pagar. Se necesita un pass para escribir, pedir quote o reservar.",
+      "Los clientes pueden ver categorías y comparar helpers sin pagar. Se necesita un pass para escribir, pedir quote o reservar. El pago del trabajo se acuerda directamente con el helper.",
     freeTitle: "Explorar gratis",
     freeBody: "Mira categorías, previews de helpers, áreas de servicio y señales básicas de confianza antes de elegir un pass.",
     unlock: "Un pass desbloquea",
@@ -76,7 +76,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
     eyebrow: "客户价格",
     title: "免费浏览。准备行动时再使用 pass。",
     body:
-      "客户可以免费浏览类别并比较 helpers。发送消息、请求 quote 或预订 helper 时需要 pass。",
+      "客户可以免费浏览类别并比较 helpers。发送消息、请求 quote 或预订 helper 时需要 pass。工作费用的支付方式由你与 helper 直接商定。",
     freeTitle: "免费浏览",
     freeBody: "选择 pass 前，可查看类别、helper 预览、服务区域和基础信任信息。",
     unlock: "Pass 解锁",
@@ -101,7 +101,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
     eyebrow: "Tarifs clients",
     title: "Parcourez gratuitement. Utilisez un pass pour agir.",
     body:
-      "Les clients peuvent explorer les catégories et comparer les helpers sans payer. Un pass est nécessaire pour écrire, demander un quote ou réserver.",
+      "Les clients peuvent explorer les catégories et comparer les helpers sans payer. Un pass est nécessaire pour écrire, demander un quote ou réserver. Le paiement du travail lui-même se règle directement avec le helper.",
     freeTitle: "Navigation gratuite",
     freeBody: "Voyez les catégories, aperçus de helpers, zones de service et signaux de confiance avant de choisir un pass.",
     unlock: "Un pass débloque",
@@ -126,7 +126,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
     eyebrow: "Оплата для клиентов",
     title: "Просмотр бесплатный. Платите, только когда готовы связаться.",
     body:
-      "Смотрите категории и сравнивайте исполнителей бесплатно. Платный доступ нужен только для переписки, запроса стоимости и бронирования.",
+      "Смотрите категории и сравнивайте исполнителей бесплатно. Платный доступ нужен только для переписки, запроса стоимости и бронирования. Оплату самой работы вы согласуете напрямую с исполнителем.",
     freeTitle: "Бесплатный просмотр",
     freeBody: "До оплаты можно смотреть категории, профили исполнителей, районы работы, отзывы и цены.",
     unlock: "Платный доступ открывает",
@@ -150,7 +150,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   vi: {
     eyebrow: "Bảng giá cho khách hàng",
     title: "Xem miễn phí. Dùng pass khi bạn sẵn sàng hành động.",
-    body: "Khách hàng có thể xem danh mục và so sánh người trợ giúp miễn phí. Bạn cần pass để nhắn tin, yêu cầu báo giá hoặc đặt lịch.",
+    body: "Khách hàng có thể xem danh mục và so sánh người trợ giúp miễn phí. Bạn cần pass để nhắn tin, yêu cầu báo giá hoặc đặt lịch. Bạn thỏa thuận việc thanh toán cho công việc trực tiếp với người trợ giúp.",
     freeTitle: "Xem miễn phí",
     freeBody: "Xem danh mục, hồ sơ người trợ giúp, khu vực phục vụ và thông tin tin cậy cơ bản trước khi chọn pass.",
     unlock: "Pass mở khóa",
@@ -163,7 +163,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   th: {
     eyebrow: "ราคาสำหรับลูกค้า",
     title: "ดูได้ฟรี ใช้ pass เมื่อคุณพร้อมดำเนินการ",
-    body: "ลูกค้าดูหมวดหมู่และเปรียบเทียบผู้ช่วยได้ฟรี ต้องมี pass เพื่อส่งข้อความ ขอใบเสนอราคา หรือจอง",
+    body: "ลูกค้าดูหมวดหมู่และเปรียบเทียบผู้ช่วยได้ฟรี ต้องมี pass เพื่อส่งข้อความ ขอใบเสนอราคา หรือจอง ส่วนค่างานให้ตกลงการชำระเงินกับผู้ช่วยโดยตรง",
     freeTitle: "ดูได้ฟรี",
     freeBody: "ดูหมวดหมู่ โปรไฟล์ผู้ช่วย พื้นที่ให้บริการ และข้อมูลความน่าเชื่อถือก่อนเลือก pass",
     unlock: "Pass ช่วยให้คุณ",
@@ -176,7 +176,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   ar: {
     eyebrow: "أسعار العملاء",
     title: "تصفح مجانًا. استخدم اشتراكًا عندما تكون مستعدًا.",
-    body: "يمكن للعملاء استكشاف الفئات ومقارنة مقدمي الخدمة دون دفع. تحتاج إلى اشتراك للمراسلة أو طلب عرض سعر أو حجز مقدم خدمة.",
+    body: "يمكن للعملاء استكشاف الفئات ومقارنة مقدمي الخدمة دون دفع. تحتاج إلى اشتراك للمراسلة أو طلب عرض سعر أو حجز مقدم خدمة. أما أجر العمل نفسه فيتم الاتفاق على دفعه مباشرة مع مقدم الخدمة.",
     freeTitle: "تصفح مجاني",
     freeBody: "اطّلع على الفئات ومعاينات مقدمي الخدمة ومناطق الخدمة ومؤشرات الثقة الأساسية قبل اختيار اشتراك.",
     unlock: "الاشتراك يتيح لك",
@@ -200,7 +200,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   pt: {
     eyebrow: "Preços para clientes",
     title: "Navegue grátis. Use um passe quando estiver pronto.",
-    body: "Os clientes podem ver categorias e comparar profissionais sem pagar. É preciso um passe para enviar mensagens, pedir orçamento ou reservar.",
+    body: "Os clientes podem ver categorias e comparar profissionais sem pagar. É preciso um passe para enviar mensagens, pedir orçamento ou reservar. O pagamento do serviço em si é combinado diretamente com o profissional.",
     freeTitle: "Navegação gratuita",
     freeBody: "Veja categorias, prévias de profissionais, áreas de atendimento e sinais básicos de confiança antes de escolher um passe.",
     unlock: "Um passe libera",
@@ -224,7 +224,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   ht: {
     eyebrow: "Pri pou kliyan",
     title: "Gade gratis. Sèvi ak yon pas lè w pare.",
-    body: "Kliyan ka gade kategori epi konpare moun ki bay sèvis san yo pa peye. Ou bezwen yon pas pou ekri, mande yon pri oswa rezève.",
+    body: "Kliyan ka gade kategori epi konpare moun ki bay sèvis san yo pa peye. Ou bezwen yon pas pou ekri, mande yon pri oswa rezève. Peman pou travay la menm, ou regle l dirèkteman ak moun ki bay sèvis la.",
     freeTitle: "Gade gratis",
     freeBody: "Gade kategori, apèsi pwofil, zòn sèvis ak siy konfyans debaz anvan ou chwazi yon pas.",
     unlock: "Yon pas louvri",
@@ -248,7 +248,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   de: {
     eyebrow: "Preise für Kunden",
     title: "Kostenlos stöbern. Einen Pass nutzen, wenn Sie loslegen möchten.",
-    body: "Kunden können Kategorien ansehen und Helfer vergleichen, ohne zu bezahlen. Für Nachrichten, Angebotsanfragen oder Buchungen braucht es einen Pass.",
+    body: "Kunden können Kategorien ansehen und Helfer vergleichen, ohne zu bezahlen. Für Nachrichten, Angebotsanfragen oder Buchungen braucht es einen Pass. Die Bezahlung der Arbeit selbst vereinbaren Sie direkt mit dem Helfer.",
     freeTitle: "Kostenlos stöbern",
     freeBody: "Sehen Sie Kategorien, Helfervorschauen, Einsatzgebiete und grundlegende Vertrauensmerkmale, bevor Sie einen Pass wählen.",
     unlock: "Ein Pass schaltet frei",
@@ -272,7 +272,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   fil: {
     eyebrow: "Presyo para sa kliyente",
     title: "Mag-browse nang libre. Gumamit ng pass kapag handa ka na.",
-    body: "Puwedeng tumingin ng mga kategorya at maghambing ng mga helper ang kliyente nang walang bayad. Kailangan ng pass para mag-message, humingi ng quote o mag-book.",
+    body: "Puwedeng tumingin ng mga kategorya at maghambing ng mga helper ang kliyente nang walang bayad. Kailangan ng pass para mag-message, humingi ng quote o mag-book. Ang bayad para sa mismong trabaho ay direktang pinagkakasunduan ninyo ng helper.",
     freeTitle: "Libreng pag-browse",
     freeBody: "Tingnan ang mga kategorya, preview ng helper, service area at mga pangunahing palatandaan ng tiwala bago pumili ng pass.",
     unlock: "Binubuksan ng pass ang",
@@ -296,7 +296,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   hi: {
     eyebrow: "ग्राहकों के लिए कीमतें",
     title: "मुफ़्त में देखें। तैयार होने पर पास इस्तेमाल करें।",
-    body: "ग्राहक बिना भुगतान के श्रेणियां देख सकते हैं और सेवा प्रदाताओं की तुलना कर सकते हैं। मैसेज, कोटेशन या बुकिंग के लिए पास चाहिए।",
+    body: "ग्राहक बिना भुगतान के श्रेणियां देख सकते हैं और सेवा प्रदाताओं की तुलना कर सकते हैं। मैसेज, कोटेशन या बुकिंग के लिए पास चाहिए। काम का भुगतान आप सीधे सेवा प्रदाता के साथ तय करते हैं।",
     freeTitle: "मुफ़्त ब्राउज़िंग",
     freeBody: "पास चुनने से पहले श्रेणियां, सेवा प्रदाताओं की झलक, सेवा क्षेत्र और भरोसे के बुनियादी संकेत देखें।",
     unlock: "पास से मिलता है",
@@ -320,7 +320,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   bn: {
     eyebrow: "গ্রাহকদের মূল্য",
     title: "বিনামূল্যে দেখুন। প্রস্তুত হলে পাস ব্যবহার করুন।",
-    body: "গ্রাহকরা কোনো খরচ ছাড়াই বিভাগ দেখতে ও সেবাদাতাদের তুলনা করতে পারেন। মেসেজ, কোটেশন বা বুকিংয়ের জন্য পাস লাগে।",
+    body: "গ্রাহকরা কোনো খরচ ছাড়াই বিভাগ দেখতে ও সেবাদাতাদের তুলনা করতে পারেন। মেসেজ, কোটেশন বা বুকিংয়ের জন্য পাস লাগে। কাজের টাকা পরিশোধের বিষয়টি আপনি সরাসরি সেবাদাতার সাথে ঠিক করবেন।",
     freeTitle: "বিনামূল্যে ব্রাউজিং",
     freeBody: "পাস বেছে নেওয়ার আগে বিভাগ, সেবাদাতার প্রিভিউ, সেবা এলাকা ও আস্থার মৌলিক তথ্য দেখুন।",
     unlock: "পাস দিয়ে পাবেন",
@@ -344,7 +344,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   te: {
     eyebrow: "క్లయింట్ ధరలు",
     title: "ఉచితంగా చూడండి. సిద్ధమైనప్పుడు పాస్ ఉపయోగించండి.",
-    body: "క్లయింట్లు డబ్బు చెల్లించకుండానే వర్గాలను చూసి సేవా ప్రదాతలను పోల్చవచ్చు. మెసేజ్, కోట్ లేదా బుకింగ్ కోసం పాస్ అవసరం.",
+    body: "క్లయింట్లు డబ్బు చెల్లించకుండానే వర్గాలను చూసి సేవా ప్రదాతలను పోల్చవచ్చు. మెసేజ్, కోట్ లేదా బుకింగ్ కోసం పాస్ అవసరం. పనికి చెల్లింపును మీరు నేరుగా సేవా ప్రదాతతో ఏర్పాటు చేసుకుంటారు.",
     freeTitle: "ఉచిత బ్రౌజింగ్",
     freeBody: "పాస్ ఎంచుకునే ముందు వర్గాలు, సేవా ప్రదాతల ప్రివ్యూలు, సేవా ప్రాంతాలు మరియు ప్రాథమిక నమ్మక సూచనలు చూడండి.",
     unlock: "పాస్‌తో లభించేవి",
@@ -368,7 +368,7 @@ export const clientPricingCopy: Record<ShippedLocale, ClientPricingCopy> = {
   ta: {
     eyebrow: "வாடிக்கையாளர் விலைகள்",
     title: "இலவசமாகப் பாருங்கள். தயாரானதும் பாஸ் பயன்படுத்துங்கள்.",
-    body: "வாடிக்கையாளர்கள் கட்டணமின்றி வகைகளைப் பார்த்து சேவை வழங்குநர்களை ஒப்பிடலாம். செய்தி, விலைப்புள்ளி அல்லது முன்பதிவுக்கு பாஸ் தேவை.",
+    body: "வாடிக்கையாளர்கள் கட்டணமின்றி வகைகளைப் பார்த்து சேவை வழங்குநர்களை ஒப்பிடலாம். செய்தி, விலைப்புள்ளி அல்லது முன்பதிவுக்கு பாஸ் தேவை. வேலைக்கான கட்டணத்தை சேவை வழங்குநருடன் நேரடியாக ஏற்பாடு செய்துகொள்வீர்கள்.",
     freeTitle: "இலவச உலாவல்",
     freeBody: "பாஸைத் தேர்ந்தெடுக்கும் முன் வகைகள், சேவை வழங்குநர் முன்னோட்டங்கள், சேவைப் பகுதிகள் மற்றும் அடிப்படை நம்பிக்கை குறிப்புகளைப் பாருங்கள்.",
     unlock: "பாஸ் மூலம் கிடைப்பவை",

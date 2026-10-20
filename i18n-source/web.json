@@ -246,19 +246,19 @@
     },
     {
       "key": "site.steps.2.0",
-      "text": "Book, chat and pay safely",
+      "text": "Chat, get a quote and book",
       "context": "lib/i18n.ts (home page, header, footer) > steps.2",
       "placeholders": [],
-      "max_length": 50,
-      "hash": "5824bac5ce2c"
+      "max_length": 52,
+      "hash": "ee1bf113c3a7"
     },
     {
       "key": "site.steps.2.1",
-      "text": "Message, get a quote, and pay securely inside the app.",
+      "text": "Message, get a quote, and book inside the app. Payment for the job is arranged directly with the helper.",
       "context": "lib/i18n.ts (home page, header, footer) > steps.2",
       "placeholders": [],
-      "max_length": 108,
-      "hash": "1b0b43a19692"
+      "max_length": null,
+      "hash": "fdc628e513df"
     },
     {
       "key": "site.helpers.eyebrow",
@@ -822,11 +822,11 @@
     },
     {
       "key": "site.footer.pricingPayouts",
-      "text": "Pricing & payouts",
+      "text": "Free for helpers",
       "context": "lib/i18n.ts (home page, header, footer) > footer",
       "placeholders": [],
-      "max_length": 34,
-      "hash": "72e2284fc68f"
+      "max_length": 32,
+      "hash": "19a3cc753c03"
     },
     {
       "key": "site.footer.rights",
@@ -1954,11 +1954,11 @@
     },
     {
       "key": "pricing.body",
-      "text": "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper.",
+      "text": "Clients can explore categories and compare helpers without paying. A pass is needed to message, request a quote, or book a helper. Payment for the job itself is arranged directly with the helper.",
       "context": "lib/pricingCopy.ts (home page pricing section) > body",
       "placeholders": [],
       "max_length": null,
-      "hash": "0c7e37172f88"
+      "hash": "b3060d23ec82"
     },
     {
       "key": "pricing.freeTitle",
@@ -2394,11 +2394,11 @@
     },
     {
       "key": "appPreview.pay",
-      "text": "Confirm & pay",
+      "text": "Confirm booking",
       "context": "lib/copy/appPreview.ts (home page: inside the app mockups) > pay",
       "placeholders": [],
-      "max_length": 26,
-      "hash": "133ff9d5467b"
+      "max_length": 30,
+      "hash": "fa1e17d8f863"
     },
     {
       "key": "appPreview.online",
@@ -2594,11 +2594,11 @@
     },
     {
       "key": "forClients.panelSecure",
-      "text": "Secure",
+      "text": "Pay the helper directly",
       "context": "lib/copy/forClients.ts (home page: for clients section) > panelSecure",
       "placeholders": [],
-      "max_length": 12,
-      "hash": "1bced1d0ce55"
+      "max_length": 46,
+      "hash": "ed2c403049f4"
     },
     {
       "key": "phone.search",

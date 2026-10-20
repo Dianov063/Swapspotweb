@@ -1,6 +1,6 @@
 import {
   CalendarCheck,
-  CreditCard,
+  Handshake,
   MapPinned,
   MessageCircle,
   SearchCheck,
@@ -62,7 +62,7 @@ export default function ForClients({ locale }: { locale: Locale }) {
             <div className="flex items-center justify-between rounded-card-sm bg-cream px-4 py-3">
               <span className="text-[14px] font-bold text-ink-soft">{t.panelTotal}</span>
               <span className="inline-flex items-center gap-2 text-[14px] font-extrabold text-green">
-                <CreditCard className="h-4 w-4" />
+                <Handshake className="h-4 w-4" />
                 {t.panelSecure}
               </span>
             </div>

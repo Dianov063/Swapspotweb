@@ -1,4 +1,4 @@
-import { BadgeCheck, Calendar, Lock, MapPin, Sparkles } from "lucide-react";
+import { BadgeCheck, Calendar, CalendarCheck, MapPin, Sparkles } from "lucide-react";
 import { SectionHead } from "./ui";
 import { appPreviewCopy } from "@/lib/copy/appPreview";
 import type { Locale } from "@/lib/i18n";
@@ -108,7 +108,7 @@ export default function AppPreview({ locale }: { locale: Locale }) {
             <span className="text-[19px] font-extrabold text-ink">$90</span>
           </div>
           <button type="button" className="mt-3.5 flex w-full items-center justify-center gap-[7px] rounded-card-sm bg-green py-3 text-[14px] font-extrabold text-white">
-            <Lock className="h-[15px] w-[15px]" />
+            <CalendarCheck className="h-[15px] w-[15px]" />
             {t.pay}
           </button>
         </div>
