@@ -187,7 +187,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 1,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -198,7 +198,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 1,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -209,7 +209,7 @@
       "dir": "rtl",
       "parent": "ar",
       "wave": 1,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -220,7 +220,7 @@
       "dir": "ltr",
       "parent": "pt",
       "wave": 1,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -231,7 +231,7 @@
       "dir": "ltr",
       "parent": "sw",
       "wave": 1,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -242,7 +242,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -253,7 +253,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -264,7 +264,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -275,7 +275,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -286,7 +286,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -297,7 +297,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -308,7 +308,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -319,7 +319,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -330,7 +330,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -341,7 +341,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -352,7 +352,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -363,7 +363,7 @@
       "dir": "rtl",
       "parent": "ar",
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -374,7 +374,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -385,7 +385,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -396,7 +396,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 2,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -407,7 +407,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -418,7 +418,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -429,7 +429,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -440,7 +440,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -451,7 +451,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -462,7 +462,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -473,7 +473,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -484,7 +484,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -495,7 +495,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     },
     {
@@ -506,7 +506,7 @@
       "dir": "ltr",
       "parent": null,
       "wave": 3,
-      "status": "draft",
+      "status": "machine",
       "public": false
     }
   ]
