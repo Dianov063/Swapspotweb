@@ -10,6 +10,7 @@
     "test:reset": "node --test scripts/reset-page-config.test.mjs",
     "test:intl": "node --import ./scripts/i18n/register-ts.mjs --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/intl.test.mjs scripts/intl-locales.test.mjs",
     "test:languages": "node --import ./scripts/i18n/register-ts.mjs --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/languages.test.mjs",
+    "test:report": "node --import ./scripts/i18n/register-ts.mjs --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/supportReport.test.mjs",
     "i18n:export": "node --import ./scripts/i18n/register-ts.mjs --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n/export-source.mjs",
     "i18n:check": "node scripts/i18n/check-locales.mjs"
   },

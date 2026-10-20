@@ -1,6 +1,7 @@
 import { fetchDailyGoogleReport } from "@/lib/googleServerApis";
 import { invokeSupabaseAdminFunction } from "@/lib/supabaseAdmin";
 import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
+import { emptySupportSummary, fetchSupportActivity } from "@/lib/supportReport";
 
 const REPORT_TIME_ZONE = "America/New_York";
 
@@ -54,6 +55,23 @@ function dateInNewYork(date: Date) {
   }).formatToParts(date);
   const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value || "";
   return `${value("year")}-${value("month")}-${value("day")}`;
+}
+
+/** "2026-10-20 10:05" in the report's zone (support message times). */
+function timeInNewYork(iso: string) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "—";
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: REPORT_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value || "";
+  return `${value("year")}-${value("month")}-${value("day")} ${value("hour")}:${value("minute")}`;
 }
 
 function shiftIsoDate(isoDate: string, days: number) {
@@ -326,10 +344,11 @@ function textTable(title: string, headers: string[], rows: (string | number)[][]
 
 export async function buildDailyReport(window: DailyReportWindow) {
   const errors: string[] = [];
-  const [googleResult, productResult, bingResult] = await Promise.allSettled([
+  const [googleResult, productResult, bingResult, supportResult] = await Promise.allSettled([
     fetchDailyGoogleReport(window),
     fetchProductActivity(window),
     fetchBingReport(),
+    fetchSupportActivity(window, readJson),
   ]);
   const google = googleResult.status === "fulfilled" ? googleResult.value : null;
   const product = productResult.status === "fulfilled" ? productResult.value : { registrations: [], services: [] };
@@ -344,6 +363,8 @@ export async function buildDailyReport(window: DailyReportWindow) {
   if (googleResult.status === "rejected") errors.push(`Google: ${String(googleResult.reason)}`);
   if (productResult.status === "rejected") errors.push(`SwapSpot: ${String(productResult.reason)}`);
   if (bingResult.status === "rejected") errors.push(`Bing: ${String(bingResult.reason)}`);
+  const support = supportResult.status === "fulfilled" ? supportResult.value : emptySupportSummary();
+  if (supportResult.status === "rejected") errors.push(`Поддержка: ${String(supportResult.reason)}`);
   if (bingResult.status === "fulfilled") errors.push(...bingResult.value.warnings.map((warning) => `Bing: ${warning}`));
 
   const registrationCountries = aggregate(product.registrations, (row) => row.country);
@@ -388,15 +409,20 @@ export async function buildDailyReport(window: DailyReportWindow) {
     number(issue.InLinks),
   ]);
 
+  const supportNewRows = support.newMessages.slice(0, 50).map((row) => [timeInNewYork(row.createdAt), row.name, row.email, row.preview]);
+  const supportAwaitingRows = support.awaiting.slice(0, 50).map((row) => [row.name, row.email, timeInNewYork(row.lastUserMessageAt), row.unanswered, row.preview]);
+  const supportLink = `<a href="${escapeHtml(support.inboxUrl)}" style="color:#174d37;font-weight:bold">Открыть входящие поддержки</a>`;
+
   const gaUsers = number(gaTotals.activeUsers);
   const gaSessions = number(gaTotals.sessions);
   const previousGaUsers = number(previousGaTotals.activeUsers);
   const previousGaSessions = number(previousGaTotals.sessions);
 
   const html = `<!doctype html><html><body style="margin:0;background:#f4f5f2;color:#1f2937;font-family:Arial,sans-serif"><div style="max-width:900px;margin:0 auto;padding:24px"><div style="background:#174d37;color:white;border-radius:16px;padding:24px"><div style="font-size:13px;opacity:.8">ЕЖЕДНЕВНЫЙ ОТЧЁТ</div><h1 style="margin:8px 0 0;font-size:28px">SwapSpot — ${escapeHtml(window.reportDate)}</h1><p style="margin:8px 0 0;opacity:.9">Регистрации и услуги: последние 24 часа · GA4: ${escapeHtml(window.analyticsDate)} · Search Console: ${escapeHtml(window.searchStartDate)}–${escapeHtml(window.searchEndDate)}</p></div>
-  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaUsers} / ${gaSessions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchTotals.clicks} / ${searchTotals.impressions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Сообщения в поддержку</b><div style="font-size:30px;margin-top:8px">${support.newMessages.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">диалогов: ${support.newMessageThreads}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Ждут ответа поддержки</b><div style="font-size:30px;margin-top:8px;color:${support.awaiting.length ? "#b45309" : "inherit"}">${support.awaiting.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">${supportLink}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaUsers} / ${gaSessions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchTotals.clicks} / ${searchTotals.impressions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}</div></div></div>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Регистрации: кто и откуда</h2>${renderTable(["Имя", "Email", "Роль", "Страна", "Город", "Платформа"], registrationRows)}<h3>По странам</h3>${renderTable(["Страна", "Регистрации"], registrationCountries)}<h3>По городам</h3>${renderTable(["Город", "Регистрации"], registrationCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Новые услуги в профилях</h2>${renderTable(["Исполнитель", "Услуга", "Цена", "Тип цены", "Страна", "Город"], serviceRows)}<h3>По странам</h3>${renderTable(["Страна", "Услуги"], serviceCountries)}<h3>По городам</h3>${renderTable(["Город", "Услуги"], serviceCities)}</section>
+  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Поддержка</h2><p style="color:#6b7280">Новые сообщения пользователей за последние 24 часа: ${support.newMessages.length} (диалогов: ${support.newMessageThreads}). Ждут ответа (последнее сообщение от пользователя, за ${support.lookbackDays} дней): ${support.awaiting.length}. ${supportLink}</p><h3>Новые сообщения</h3>${renderTable(["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows)}<h3>Ждут ответа</h3>${renderTable(["Имя", "Email", "Последнее сообщение", "Без ответа", "Текст"], supportAwaitingRows)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Google Analytics</h2><p style="color:#6b7280">Данные за ${escapeHtml(window.analyticsDate)}; сравнение с ${escapeHtml(google?.ga4.previousDate || "—")}.</p><h3>Страны и города</h3>${renderTable(["Страна", "Город", "Пользователи", "Сессии"], locationRows)}<h3>Источники трафика</h3>${renderTable(["Источник / канал", "Пользователи", "Сессии", "Вовлечённые сессии"], sourceRows)}<h3>Страницы</h3>${renderTable(["Страница", "Пользователи", "Просмотры", "Вовлечённые сессии"], pageRows)}<h3>Устройства</h3>${renderTable(["Устройство", "Пользователи", "Сессии"], deviceRows)}<h3>Языки браузера</h3>${renderTable(["Язык", "Пользователи", "Сессии"], languageRows)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Google Search Console</h2><p style="color:#6b7280">Текущий период: ${escapeHtml(window.searchStartDate)}–${escapeHtml(window.searchEndDate)}; предыдущий: ${escapeHtml(google?.searchConsole.previousStartDate || "—")}–${escapeHtml(google?.searchConsole.previousEndDate || "—")}.</p><h3>Запросы</h3>${renderTable(["Запрос", "Клики", "Показы", "CTR", "Позиция"], searchRows)}<h3>Страницы</h3>${renderTable(["Страница", "Клики", "Показы", "CTR", "Позиция"], searchPageRows)}<h3>Страны</h3>${renderTable(["Страна", "Клики", "Показы", "CTR"], searchCountryRows)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Bing Webmaster</h2>${bing.configured ? `<h3>Поисковые запросы</h3>${renderTable(["Запрос", "Клики", "Показы", "Позиция"], bingRows)}<h3>Последнее сканирование</h3>${renderTable(["Дата", "Просканировано", "В индексе", "Ошибки", "4xx", "5xx", "robots.txt"], bingCrawlRows)}<h3>URL с проблемами сканирования</h3>${renderTable(["URL", "HTTP", "Проблема", "Входящие ссылки"], bingIssueRows)}<p style="font-size:12px;color:#6b7280">Полный список рекомендаций: https://www.bing.com/webmasters/recommendations</p>` : '<p style="color:#6b7280">Bing API пока не подключён. Добавьте BING_WEBMASTER_API_KEY, и блок заполнится автоматически.</p>'}</section>
@@ -407,10 +433,13 @@ export async function buildDailyReport(window: DailyReportWindow) {
     `SwapSpot — ежедневный отчёт ${window.reportDate}`,
     `Новые регистрации: ${product.registrations.length}`,
     `Новые услуги: ${product.services.length}`,
+    `Сообщения в поддержку: ${support.newMessages.length} (диалогов: ${support.newMessageThreads}); ждут ответа: ${support.awaiting.length} — ${support.inboxUrl}`,
     `GA4 пользователи / сессии: ${gaUsers} / ${gaSessions} (${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)} к предыдущему дню)`,
     `Google Search клики / показы: ${searchTotals.clicks} / ${searchTotals.impressions} (${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)} к предыдущему периоду)`,
     textTable("Регистрации", ["Имя", "Email", "Роль", "Страна", "Город", "Платформа"], registrationRows),
     textTable("Новые услуги", ["Исполнитель", "Услуга", "Цена", "Тип", "Страна", "Город"], serviceRows),
+    textTable("Поддержка: новые сообщения", ["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows),
+    textTable("Поддержка: ждут ответа", ["Имя", "Email", "Последнее сообщение", "Без ответа", "Текст"], supportAwaitingRows),
     textTable("GA4: страны и города", ["Страна", "Город", "Пользователи", "Сессии"], locationRows),
     textTable("GA4: источники", ["Источник / канал", "Пользователи", "Сессии", "Вовлечённые"], sourceRows),
     textTable("GA4: страницы", ["Страница", "Пользователи", "Просмотры", "Вовлечённые"], pageRows),
@@ -424,13 +453,16 @@ export async function buildDailyReport(window: DailyReportWindow) {
   ].join("\n");
 
   return {
-    subject: `SwapSpot: отчёт за ${window.reportDate} — ${product.registrations.length} регистраций, ${product.services.length} услуг`,
+    subject: `SwapSpot: отчёт за ${window.reportDate} — ${product.registrations.length} регистраций, ${product.services.length} услуг${support.awaiting.length ? `, ${support.awaiting.length} ждут ответа поддержки` : ""}`,
     html,
     text,
     summary: {
       reportDate: window.reportDate,
       registrations: product.registrations.length,
       services: product.services.length,
+      supportNewMessages: support.newMessages.length,
+      supportNewMessageThreads: support.newMessageThreads,
+      supportAwaiting: support.awaiting.length,
       ga4Users: gaUsers,
       ga4Sessions: gaSessions,
       ga4PreviousUsers: previousGaUsers,
