@@ -51,7 +51,11 @@ for (const code of codes) {
     }
     const hashFile = join(hashDir, `${code}.json`);
     const hashes = existsSync(hashFile) ? JSON.parse(readFileSync(hashFile, "utf8")) : null;
-    const result = checkLocalePack({ code, text: readFileSync(file, "utf8"), source, language, hashes });
+    // Keys whose correct value is identical to English (loanwords, names, abbreviations):
+    // i18n-source/allow-identical/<code>.json, a JSON array of keys.
+    const allowFile = join(hashDir, "..", "allow-identical", `${code}.json`);
+    const allowIdentical = new Set(existsSync(allowFile) ? JSON.parse(readFileSync(allowFile, "utf8")) : []);
+    const result = checkLocalePack({ code, text: readFileSync(file, "utf8"), source, language, hashes, allowIdentical });
     errors.push(...result.errors);
     warnings.push(...result.warnings);
     if (language?.parent && !languages.get(language.parent)) errors.push(`${code}: parent ${language.parent} is not registered`);

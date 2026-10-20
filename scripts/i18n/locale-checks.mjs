@@ -69,7 +69,7 @@ export function isRegionalVariant(code) {
  * Checks one pack. `source` is i18n-source/web.json, `language` the registry entry
  * ({code, script, parent}), `text` the file content. Returns {errors, warnings} (strings).
  */
-export function checkLocalePack({ code, text, source, language, hashes = null }) {
+export function checkLocalePack({ code, text, source, language, hashes = null, allowIdentical = new Set() }) {
   const errors = [];
   const warnings = [];
   if (!language) {
@@ -112,7 +112,7 @@ export function checkLocalePack({ code, text, source, language, hashes = null })
     if (expected.join(" ") !== actual.join(" ")) {
       errors.push(`${code}: ${key} placeholders ${JSON.stringify(actual)} differ from English ${JSON.stringify(expected)}`);
     }
-    if (value.trim() === entry.text.trim() && !isBrandOnly(entry.text)) {
+    if (value.trim() === entry.text.trim() && !isBrandOnly(entry.text) && !allowIdentical.has(key)) {
       errors.push(`${code}: ${key} is a copy of the English text`);
     }
     if (language.script && !scriptMatches(value, language.script)) {
