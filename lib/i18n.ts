@@ -194,7 +194,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     hero: { badge: "Lanzando en tu vecindario", before: "Encuentra", highlight: "ayuda local confiable", after: "cerca de ti", body: "Reserva limpieza, reparaciones, belleza, jardín, mudanzas, mascotas y más desde un marketplace del vecindario.", findHelp: "Buscar ayuda", becomeHelper: "Ser Helper", bookingConfirmed: "Reserva confirmada" },
     how: { eyebrow: "Cómo funciona", title: "Ayuda en tres toques", body: "De necesito ayuda a reservado, sin llamadas largas ni cotizaciones confusas." },
     steps: [["Busca helpers cercanos", "Ve helpers confiables en un mapa en vivo."], ["Compara servicios y precios", "Revisa perfiles, servicios y precios antes de reservar."], ["Chatea, recibe quotes y reserva", "Envía mensajes, recibe quotes y reserva en la app. El pago del trabajo se acuerda directamente con el helper."]],
-    helpers: { eyebrow: "Para Helpers", title: "Convierte tus habilidades en ingresos locales", body: "Configura tu perfil y recibe reservas de vecinos que necesitan tus servicios.", start: "Empezar como Helper", earnings: "Ganancias esta semana", bookings: "3 reservas nuevas", quotes: "2 quotes pendientes" },
+    helpers: { freeTitle: "Siempre gratis para helpers", freeBody: "Quédate con el 100% de lo que ganas. SwapSpot no cobra comisión, ni porcentaje, ni tarifa por contacto.", eyebrow: "Para Helpers", title: "Convierte tus habilidades en ingresos locales", body: "Configura tu perfil y recibe reservas de vecinos que necesitan tus servicios.", start: "Empezar como Helper", earnings: "Ganancias esta semana", bookings: "3 reservas nuevas", quotes: "2 quotes pendientes" },
     perks: [["Crea tu perfil", "Publica habilidades, fotos y zona de trabajo."], ["Define precios y horario", "Controlas tarifas, radio y disponibilidad."], ["Recibe reservas", "Responde solicitudes cercanas con quotes."], ["Construye reseñas", "Gana reputación y clientes recurrentes."]],
     categories: { eyebrow: "Categorías", title: "Para cada trabajo hay un helper", body: "Categorías locales principales, con más a medida que crece cada mercado.", nearby: "cerca" },
     trust: { eyebrow: "Confianza y seguridad", title: "Diseñado para sentirse seguro en ambos lados", body: "Reseñas reales, chat privado y controles de datos." },
@@ -210,7 +210,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     hero: { badge: "正在你的社区上线", before: "寻找", highlight: "可信赖的本地帮手", after: "就在附近", body: "在一个社区 marketplace 中预订清洁、维修、美容、庭院、搬家、宠物护理等服务。", findHelp: "寻找帮助", becomeHelper: "成为 Helper", bookingConfirmed: "预订已确认" },
     how: { eyebrow: "如何使用", title: "三步即可获得帮助", body: "从需要帮助到完成预订，减少电话、猜价和不确定性。" },
     steps: [["搜索附近 helpers", "在实时地图上查看可信赖的本地 helpers。"], ["比较服务和价格", "预订前查看资料、服务和透明价格。"], ["聊天、获取 quote 并预订", "在应用内发送消息、获取 quote 并预订。工作费用的支付方式由你与 helper 直接商定。"]],
-    helpers: { eyebrow: "给 Helpers", title: "把技能变成本地收入", body: "设置一次资料，让附近需要服务的客户找到你。", start: "开始成为 Helper" },
+    helpers: { freeTitle: "对 helpers 永久免费", freeBody: "收入 100% 归你。SwapSpot 不收佣金、不抽成，也不收线索费。", eyebrow: "给 Helpers", title: "把技能变成本地收入", body: "设置一次资料，让附近需要服务的客户找到你。", start: "开始成为 Helper" },
     categories: { title: "各种需求，都能找到 helper", nearby: "附近" },
     trust: { eyebrow: "信任与安全", title: "让双方都安心的设计", body: "真实评价、私密聊天和数据控制。" },
     waitlist: { title: "立即下载 SwapSpot", body: "免费浏览附近 helpers。准备联系、询价或预订时使用 pass。", join: "下载应用", storeCaption: "现已支持 iOS 和 Android" },
@@ -224,7 +224,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     hero: { badge: "Lancement dans votre quartier", before: "Trouvez", highlight: "de l'aide locale fiable", after: "près de vous", body: "Réservez ménage, réparations, beauté, jardin, déménagement, animaux et plus depuis une marketplace de quartier.", findHelp: "Trouver de l'aide", becomeHelper: "Devenir Helper", bookingConfirmed: "Réservation confirmée" },
     how: { eyebrow: "Comment ça marche", title: "De l'aide en trois clics", body: "De besoin d'aide à réservé, sans appels longs ni devis confus." },
     steps: [["Cherchez des helpers proches", "Voyez les helpers fiables sur une carte."], ["Comparez services et prix", "Consultez profils, services et tarifs."], ["Discutez, recevez un quote et réservez", "Messagez, recevez un quote et réservez dans l'app. Le paiement du travail se règle directement avec le helper."]],
-    helpers: { eyebrow: "Pour Helpers", title: "Transformez vos compétences en revenu local", body: "Créez votre profil et recevez des réservations de voisins.", start: "Commencer comme Helper" },
+    helpers: { freeTitle: "Toujours gratuit pour les helpers", freeBody: "Gardez 100 % de vos gains. SwapSpot ne prend ni commission, ni pourcentage, ni frais de mise en relation.", eyebrow: "Pour Helpers", title: "Transformez vos compétences en revenu local", body: "Créez votre profil et recevez des réservations de voisins.", start: "Commencer comme Helper" },
     categories: { title: "Quel que soit le besoin, il y a un helper", nearby: "proches" },
     trust: { eyebrow: "Confiance et sécurité", title: "Conçu pour rassurer les deux côtés", body: "Avis réels, messagerie privée et contrôle des données." },
     waitlist: { title: "Téléchargez SwapSpot aujourd'hui", body: "Parcourez les helpers gratuitement. Utilisez un pass pour écrire, demander un quote ou réserver.", join: "Télécharger l'app", storeCaption: "Disponible sur iOS et Android" },
@@ -238,7 +238,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     hero: { badge: "Уже в вашем районе", before: "Найдите", highlight: "надежных местных исполнителей", after: "рядом", body: "Заказывайте уборку, ремонт, уход за садом и питомцами, переезд и другие услуги в одном приложении.", findHelp: "Найти исполнителя", becomeHelper: "Стать исполнителем", bookingConfirmed: "Бронирование подтверждено" },
     how: { eyebrow: "Как работает", title: "Помощь в три шага", body: "От поиска до бронирования — без долгих звонков и непонятных расчетов." },
     steps: [["Найдите исполнителей рядом", "Смотрите проверенных местных исполнителей на карте."], ["Сравните услуги и цены", "Изучите профили, услуги и цены до бронирования."], ["Общайтесь, узнавайте стоимость и бронируйте", "Переписка, расчёт стоимости и бронирование — в приложении. Оплату работы вы согласуете напрямую с исполнителем."]],
-    helpers: { eyebrow: "Для исполнителей", title: "Превратите навыки в дополнительный доход", body: "Настройте профиль и получайте заказы от клиентов рядом.", start: "Стать исполнителем", earnings: "Доход за неделю", bookings: "3 новых бронирования", quotes: "2 запроса ждут ответа" },
+    helpers: { freeTitle: "Всегда бесплатно для исполнителей", freeBody: "Весь заработок остаётся у вас. SwapSpot не берёт комиссию, процент или плату за заявки.", eyebrow: "Для исполнителей", title: "Превратите навыки в дополнительный доход", body: "Настройте профиль и получайте заказы от клиентов рядом.", start: "Стать исполнителем", earnings: "Доход за неделю", bookings: "3 новых бронирования", quotes: "2 запроса ждут ответа" },
     categories: { title: "Для любой задачи найдется исполнитель", nearby: "рядом" },
     trust: { eyebrow: "Доверие и безопасность", title: "Спокойно для обеих сторон", body: "Реальные отзывы, приватный чат и контроль данных." },
     waitlist: { title: "Скачайте SwapSpot сегодня", body: "Просматривайте исполнителей бесплатно. Доступ понадобится, только чтобы написать, запросить стоимость или забронировать услугу.", join: "Скачать приложение", storeCaption: "Доступно на iOS и Android" },
@@ -246,6 +246,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "Продукт", company: "Компания", contact: "Контакты", privacy: "Конфиденциальность", support: "Поддержка", accountDeletion: "Удаление аккаунта", terms: "Условия", pricingPayouts: "Бесплатно для исполнителей", bottom: "Найдите надежного местного исполнителя рядом." },
   }),
   ar: mergeDictionary({
+    helpers: { freeTitle: "مجاني دائمًا للمساعدين", freeBody: "احتفظ بـ 100% مما تكسبه. لا يأخذ SwapSpot أي عمولة أو نسبة أو رسوم مقابل العملاء." },
     metaTitle: "SwapSpot - اعثر على مساعدة محلية موثوقة بالقرب منك",
     nav: { how: "كيف يعمل", clients: "للعملاء", pricing: "الأسعار", categories: "الفئات", helpers: "للمساعدين", trust: "الأمان", getApp: "حمّل التطبيق" },
     hero: { before: "اعثر على", highlight: "مساعدة محلية موثوقة", after: "بالقرب منك", body: "احجز التنظيف والإصلاحات والجمال والحدائق والنقل ورعاية الحيوانات والمزيد.", findHelp: "ابحث عن مساعدة", becomeHelper: "كن مساعدا" },
@@ -255,6 +256,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "المنتج", company: "الشركة", contact: "اتصال", privacy: "الخصوصية", support: "الدعم", terms: "الشروط", bottom: "اعثر على مساعدة محلية موثوقة بالقرب منك." },
   }),
   pt: mergeDictionary({
+    helpers: { freeTitle: "Sempre grátis para profissionais", freeBody: "Fique com 100% do que você ganha. O SwapSpot não cobra comissão, porcentagem nem taxa por contato." },
     metaTitle: "SwapSpot - Encontre ajuda local confiável perto de você",
     nav: { how: "Como funciona", clients: "Para clientes", pricing: "Preços", categories: "Categorias", helpers: "Para Helpers", trust: "Segurança", getApp: "Baixar app" },
     hero: { before: "Encontre", highlight: "ajuda local confiável", after: "perto de você", body: "Reserve limpeza, reparos, beleza, jardim, mudança, pets e mais.", findHelp: "Encontrar ajuda", becomeHelper: "Virar Helper" },
@@ -264,6 +266,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "Produto", company: "Empresa", contact: "Contato", privacy: "Privacidade", support: "Suporte", terms: "Termos", bottom: "Encontre ajuda local confiável perto de você." },
   }),
   ht: mergeDictionary({
+    helpers: { freeTitle: "Toujou gratis pou helpers", freeBody: "Kenbe 100% sa ou touche. SwapSpot pa pran komisyon, pousantaj, ni frè pou kliyan." },
     metaTitle: "SwapSpot - Jwenn èd lokal ou ka fè konfyans toupre ou",
     nav: { how: "Kijan li mache", clients: "Pou kliyan", pricing: "Pri", categories: "Kategori", helpers: "Pou Helpers", trust: "Sekirite", getApp: "Telechaje app la" },
     hero: { before: "Jwenn", highlight: "èd lokal ou ka fè konfyans", after: "toupre ou", body: "Rezève netwayaj, reparasyon, bote, jaden, demenajman, swen bèt ak plis.", findHelp: "Jwenn èd", becomeHelper: "Vin Helper" },
@@ -273,6 +276,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "Pwodwi", company: "Konpayi", contact: "Kontak", privacy: "Konfidansyalite", support: "Sipò", terms: "Tèm", bottom: "Jwenn èd lokal ou ka fè konfyans toupre ou." },
   }),
   de: mergeDictionary({
+    helpers: { freeTitle: "Für Helfer immer kostenlos", freeBody: "Sie behalten 100 % Ihrer Einnahmen. SwapSpot nimmt keine Provision, keinen Prozentsatz und keine Vermittlungsgebühr." },
     metaTitle: "SwapSpot - Finde vertrauenswürdige lokale Hilfe in deiner Nähe",
     nav: { how: "So funktioniert es", clients: "Für Kunden", pricing: "Preise", categories: "Kategorien", helpers: "Für Helpers", trust: "Sicherheit", getApp: "App laden" },
     hero: { before: "Finde", highlight: "vertrauenswürdige lokale Hilfe", after: "in deiner Nähe", body: "Buche Reinigung, Reparaturen, Beauty, Garten, Umzug, Tierbetreuung und mehr.", findHelp: "Hilfe finden", becomeHelper: "Helper werden" },
@@ -282,6 +286,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "Produkt", company: "Unternehmen", contact: "Kontakt", privacy: "Datenschutz", support: "Support", terms: "Bedingungen", bottom: "Finde vertrauenswürdige lokale Hilfe in deiner Nähe." },
   }),
   fil: mergeDictionary({
+    helpers: { freeTitle: "Laging libre para sa mga helper", freeBody: "Sa iyo ang 100% ng kinikita mo. Walang komisyon, porsyento, o lead fee ang SwapSpot." },
     metaTitle: "SwapSpot - Maghanap ng mapagkakatiwalaang lokal na tulong malapit sa iyo",
     nav: { how: "Paano ito gumagana", clients: "Para sa Clients", pricing: "Presyo", categories: "Mga kategorya", helpers: "Para sa Helpers", trust: "Trust & Safety", getApp: "Kunin ang app" },
     hero: { before: "Maghanap ng", highlight: "mapagkakatiwalaang lokal na tulong", after: "malapit sa iyo", body: "Mag-book ng cleaning, repairs, beauty, garden, moving, pet care at iba pa.", findHelp: "Maghanap ng tulong", becomeHelper: "Maging Helper" },
@@ -291,6 +296,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "Produkto", company: "Kompanya", contact: "Kontak", privacy: "Privacy", support: "Suporta", terms: "Mga tuntunin", bottom: "Maghanap ng mapagkakatiwalaang lokal na tulong malapit sa iyo." },
   }),
   hi: mergeDictionary({
+    helpers: { freeTitle: "Helpers के लिए हमेशा मुफ्त", freeBody: "अपनी कमाई का 100% अपने पास रखें। SwapSpot कोई कमीशन, प्रतिशत या लीड फीस नहीं लेता।" },
     metaTitle: "SwapSpot - अपने पास भरोसेमंद स्थानीय मदद पाएं",
     nav: { how: "कैसे काम करता है", clients: "क्लाइंट्स के लिए", pricing: "कीमत", categories: "श्रेणियां", helpers: "Helpers के लिए", trust: "सुरक्षा", getApp: "ऐप डाउनलोड करें" },
     hero: { before: "पाएं", highlight: "भरोसेमंद स्थानीय मदद", after: "अपने पास", body: "क्लीनिंग, रिपेयर, ब्यूटी, गार्डन, मूविंग, पेट केयर और अधिक बुक करें।", findHelp: "मदद पाएं", becomeHelper: "Helper बनें" },
@@ -300,6 +306,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { product: "प्रोडक्ट", company: "कंपनी", contact: "संपर्क", privacy: "गोपनीयता", support: "सहायता", terms: "शर्तें", bottom: "अपने पास भरोसेमंद स्थानीय मदद पाएं।" },
   }),
   bn: mergeDictionary({
+    helpers: { freeTitle: "Helpers এর জন্য সবসময় বিনামূল্যে", freeBody: "আপনার আয়ের ১০০% আপনারই। SwapSpot কোনো কমিশন, শতাংশ বা লিড ফি নেয় না।" },
     metaTitle: "SwapSpot - আপনার কাছাকাছি বিশ্বস্ত স্থানীয় সাহায্য খুঁজুন",
     nav: { how: "কীভাবে কাজ করে", clients: "ক্লায়েন্টদের জন্য", pricing: "দাম", categories: "ক্যাটাগরি", helpers: "Helpers এর জন্য", trust: "নিরাপত্তা", getApp: "অ্যাপ ডাউনলোড" },
     hero: { before: "খুঁজুন", highlight: "বিশ্বস্ত স্থানীয় সাহায্য", after: "আপনার কাছে", body: "ক্লিনিং, রিপেয়ার, বিউটি, গার্ডেন, মুভিং, পেট কেয়ার এবং আরও বুক করুন।", findHelp: "সাহায্য খুঁজুন", becomeHelper: "Helper হন" },
@@ -319,7 +326,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
       ["సేవలు మరియు ధరలను పోల్చండి", "బుక్ చేసే ముందు ప్రొఫైళ్లు, సేవలు మరియు స్పష్టమైన ధరలను చూడండి."],
       ["చాట్ చేయండి, కోట్ పొందండి, బుక్ చేయండి", "యాప్‌లోనే మెసేజ్ పంపండి, కోట్ పొందండి, బుక్ చేయండి. పనికి చెల్లింపును మీరు నేరుగా హెల్పర్‌తో ఏర్పాటు చేసుకుంటారు."],
     ],
-    helpers: { eyebrow: "హెల్పర్ల కోసం", title: "మీ నైపుణ్యాలను స్థానిక ఆదాయంగా మార్చుకోండి", body: "ఒక్కసారి ప్రొఫైల్ సెటప్ చేసి, మీ సేవలు అవసరమైన సమీపంలోని కస్టమర్ల నుంచి బుకింగ్‌లు పొందండి.", start: "హెల్పర్‌గా ప్రారంభించండి", earnings: "ఈ వారం ఆదాయం", bookings: "3 కొత్త బుకింగ్‌లు", quotes: "సమాధానం కోసం 2 కోట్లు" },
+    helpers: { freeTitle: "సహాయకులకు ఎప్పుడూ ఉచితం", freeBody: "మీ సంపాదనలో 100% మీదే. SwapSpot ఎలాంటి కమిషన్, శాతం లేదా లీడ్ ఫీజు తీసుకోదు.", eyebrow: "హెల్పర్ల కోసం", title: "మీ నైపుణ్యాలను స్థానిక ఆదాయంగా మార్చుకోండి", body: "ఒక్కసారి ప్రొఫైల్ సెటప్ చేసి, మీ సేవలు అవసరమైన సమీపంలోని కస్టమర్ల నుంచి బుకింగ్‌లు పొందండి.", start: "హెల్పర్‌గా ప్రారంభించండి", earnings: "ఈ వారం ఆదాయం", bookings: "3 కొత్త బుకింగ్‌లు", quotes: "సమాధానం కోసం 2 కోట్లు" },
     perks: [
       ["మీ సేవా ప్రొఫైల్‌ను సృష్టించండి", "మీ నైపుణ్యాలు, ఫోటోలు మరియు పని ప్రాంతాన్ని నిమిషాల్లో జోడించండి."],
       ["ధరలు మరియు అందుబాటును నిర్ణయించండి", "మీ రేట్లు, సేవా పరిధి మరియు షెడ్యూల్‌పై మీకే నియంత్రణ."],
@@ -340,6 +347,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
     footer: { tagline: "నమ్మదగిన స్థానిక సహాయం కోసం పొరుగువారి మార్కెట్‌ప్లేస్.", product: "ప్రోడక్ట్", company: "కంపెనీ", contact: "సంప్రదించండి", about: "మా గురించి", privacy: "గోప్యత", support: "సహాయం", terms: "నిబంధనలు", accountDeletion: "ఖాతా తొలగింపు", pricingPayouts: "సహాయకులకు ఉచితం", rights: "© 2026 SwapSpot. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.", companyLine: "USPROJECT LLC ఆధ్వర్యంలో · EIN 83-3989558 · న్యూయార్క్, USA", bottom: "మీ దగ్గర నమ్మదగిన స్థానిక సహాయం కనుగొనండి." },
   }),
   ta: mergeDictionary({
+    helpers: { freeTitle: "உதவியாளர்களுக்கு எப்போதும் இலவசம்", freeBody: "நீங்கள் சம்பாதிப்பதில் 100% உங்களுக்கே. SwapSpot கமிஷன், சதவீதம் அல்லது லீட் கட்டணம் எதுவும் எடுப்பதில்லை." },
     metaTitle: "SwapSpot - உங்கள் அருகில் நம்பகமான உள்ளூர் உதவி கண்டுபிடிக்கவும்",
     nav: { how: "எப்படி வேலை செய்கிறது", clients: "Clients க்காக", pricing: "விலை", categories: "வகைகள்", helpers: "Helpers க்காக", trust: "பாதுகாப்பு", getApp: "ஆப் பதிவிறக்கவும்" },
     hero: { before: "கண்டுபிடிக்கவும்", highlight: "நம்பகமான உள்ளூர் உதவி", after: "உங்கள் அருகில்", body: "Cleaning, repair, beauty, garden, moving, pet care மற்றும் பலவற்றை book செய்யுங்கள்.", findHelp: "உதவி தேடுங்கள்", becomeHelper: "Helper ஆகுங்கள்" },
@@ -359,7 +367,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
       ["So sánh dịch vụ và giá", "Xem hồ sơ, dịch vụ và mức giá rõ ràng trước khi quyết định."],
       ["Nhắn tin, nhận báo giá và đặt lịch", "Nhắn tin, nhận báo giá và đặt lịch ngay trong ứng dụng. Bạn thỏa thuận việc thanh toán cho công việc trực tiếp với người trợ giúp."],
     ],
-    helpers: { eyebrow: "Dành cho người trợ giúp", title: "Biến kỹ năng của bạn thành thu nhập tại địa phương", body: "Tạo hồ sơ một lần và bắt đầu nhận việc từ những người hàng xóm đang cần đúng dịch vụ của bạn.", start: "Bắt đầu làm người trợ giúp", earnings: "Thu nhập tuần này", bookings: "3 lịch đặt mới", quotes: "2 báo giá đang chờ trả lời" },
+    helpers: { freeTitle: "Luôn miễn phí cho người trợ giúp", freeBody: "Bạn giữ 100% số tiền mình kiếm được. SwapSpot không thu hoa hồng, không lấy phần trăm và không thu phí giới thiệu khách.", eyebrow: "Dành cho người trợ giúp", title: "Biến kỹ năng của bạn thành thu nhập tại địa phương", body: "Tạo hồ sơ một lần và bắt đầu nhận việc từ những người hàng xóm đang cần đúng dịch vụ của bạn.", start: "Bắt đầu làm người trợ giúp", earnings: "Thu nhập tuần này", bookings: "3 lịch đặt mới", quotes: "2 báo giá đang chờ trả lời" },
     perks: [
       ["Tạo hồ sơ dịch vụ", "Thêm kỹ năng, ảnh và khu vực làm việc chỉ trong vài phút."],
       ["Đặt giá và lịch làm việc", "Bạn kiểm soát mức giá, bán kính và thời gian làm việc."],
@@ -390,7 +398,7 @@ export const dictionaries: Record<ShippedLocale, DictionaryShape> = {
       ["เปรียบเทียบบริการและราคา", "ดูโปรไฟล์ บริการ และราคาที่ชัดเจนก่อนตัดสินใจ"],
       ["แชต ขอใบเสนอราคา และจอง", "ส่งข้อความ ขอใบเสนอราคา และจองในแอป ส่วนการชำระค่างานให้ตกลงกับผู้ช่วยโดยตรง"],
     ],
-    helpers: { eyebrow: "สำหรับผู้ช่วย", title: "เปลี่ยนทักษะของคุณให้เป็นรายได้ในพื้นที่", body: "สร้างโปรไฟล์ครั้งเดียว แล้วเริ่มรับงานจากเพื่อนบ้านที่กำลังต้องการบริการของคุณ", start: "เริ่มเป็นผู้ช่วย", earnings: "รายได้สัปดาห์นี้", bookings: "การจองใหม่ 3 รายการ", quotes: "ใบเสนอราคา 2 รายการรอตอบกลับ" },
+    helpers: { freeTitle: "ฟรีเสมอสำหรับผู้ช่วย", freeBody: "รับรายได้เต็ม 100% SwapSpot ไม่เก็บค่าคอมมิชชัน ไม่หักเปอร์เซ็นต์ และไม่มีค่าธรรมเนียมลูกค้า", eyebrow: "สำหรับผู้ช่วย", title: "เปลี่ยนทักษะของคุณให้เป็นรายได้ในพื้นที่", body: "สร้างโปรไฟล์ครั้งเดียว แล้วเริ่มรับงานจากเพื่อนบ้านที่กำลังต้องการบริการของคุณ", start: "เริ่มเป็นผู้ช่วย", earnings: "รายได้สัปดาห์นี้", bookings: "การจองใหม่ 3 รายการ", quotes: "ใบเสนอราคา 2 รายการรอตอบกลับ" },
     perks: [
       ["สร้างโปรไฟล์บริการ", "เพิ่มทักษะ รูปภาพ และพื้นที่ทำงานได้ในไม่กี่นาที"],
       ["กำหนดราคาและเวลาว่าง", "คุณควบคุมราคา รัศมี และตารางงานของคุณเอง"],

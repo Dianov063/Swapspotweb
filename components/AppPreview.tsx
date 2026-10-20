@@ -1,6 +1,7 @@
 import { BadgeCheck, Calendar, CalendarCheck, MapPin, Sparkles } from "lucide-react";
 import { SectionHead } from "./ui";
 import { appPreviewCopy } from "@/lib/copy/appPreview";
+import { phoneCopy } from "@/lib/copy/phone";
 import type { Locale } from "@/lib/i18n";
 
 const miniMarks = [
@@ -11,6 +12,7 @@ const miniMarks = [
 
 export default function AppPreview({ locale }: { locale: Locale }) {
   const t = appPreviewCopy(locale);
+  const perHour = phoneCopy(locale).hour;
 
   return (
     <section className="mx-auto max-w-wrap px-6 py-[clamp(48px,6vw,86px)]">
@@ -80,7 +82,7 @@ export default function AppPreview({ locale }: { locale: Locale }) {
           </div>
           <div className="flex items-center justify-between border-t border-line pt-3.5">
             <div className="text-[18px] font-extrabold text-ink">
-              $50<span className="text-[12px] font-semibold text-ink-soft">{locale === "ru" ? "/ч" : "/hr"}</span>
+              $50<span className="text-[12px] font-semibold text-ink-soft">{perHour}</span>
             </div>
             <button type="button" className="rounded-[11px] bg-green px-[18px] py-2.5 text-[13.5px] font-extrabold text-white">
               {t.book}
