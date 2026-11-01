@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import HelpersLandingPage, { helpersLandingMetadata } from "@/components/directory/HelpersLandingPage";
-import { isLocale, locales } from "@/lib/i18n";
+import { locales } from "@/lib/i18n";
+import { routeLocale } from "@/lib/languages";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -10,12 +11,12 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  return isLocale(locale) && locale !== "en" ? helpersLandingMetadata(locale) : {};
+  const locale = await routeLocale((await params).locale);
+  return locale ? helpersLandingMetadata(locale) : {};
 }
 
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  if (!isLocale(locale) || locale === "en") notFound();
+  const locale = await routeLocale((await params).locale);
+  if (!locale) notFound();
   return <HelpersLandingPage locale={locale} />;
 }

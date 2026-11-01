@@ -5,17 +5,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui";
 import { categoryVars, directoryStrings, fillTemplate, localizedCategoryName } from "@/lib/directoryStrings";
-import { dictionaries, hreflangAlternates, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/languages";
 import { getMarkets, marketName } from "@/lib/markets";
 import { getDirectoryPairs, type DirectoryPair } from "@/lib/publicDirectory";
 import { siteUrl } from "@/lib/locales";
 
-export function servicesDirectoryMetadata(locale: Locale): Metadata {
+export async function servicesDirectoryMetadata(locale: Locale): Promise<Metadata> {
   const t = directoryStrings(locale);
   return {
     title: t.indexMetaTitle,
     description: t.indexMetaDescription,
-    alternates: hreflangAlternates("/services", locale),
+    alternates: await localeAlternates("/services", locale),
   };
 }
 
@@ -38,7 +39,7 @@ function groupByCountry(pairs: DirectoryPair[], locale: Locale, otherMarkets: st
 
 export default async function ServicesDirectoryPage({ locale }: { locale: Locale }) {
   const t = directoryStrings(locale);
-  const dictionary = dictionaries[locale];
+  const dictionary = getDictionary(locale);
   const [pairs, markets] = await Promise.all([getDirectoryPairs(), getMarkets()]);
   const countries = groupByCountry(pairs, locale, t.otherMarkets, (code) => marketName(code, locale, markets));
   const pairLabel = (pair: DirectoryPair) => ({
@@ -53,7 +54,7 @@ export default async function ServicesDirectoryPage({ locale }: { locale: Locale
     "@type": "CollectionPage",
     name: t.indexTitle,
     description: t.indexMetaDescription,
-    inLanguage: locale,
+    inLanguage: languageTag(locale),
     hasPart: topPairs.map((pair) => ({
       "@type": "WebPage",
       name: fillTemplate(t.pairTitle, pairLabel(pair)),
@@ -62,7 +63,7 @@ export default async function ServicesDirectoryPage({ locale }: { locale: Locale
   };
 
   return (
-    <div lang={locale} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
+    <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

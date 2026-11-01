@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import HomePage from "@/components/HomePage";
-import { dictionaries, hreflangAlternates, isLocale, locales } from "@/lib/i18n";
+import { getDictionary, locales } from "@/lib/i18n";
+import { localeAlternates, routeLocale } from "@/lib/languages";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -13,21 +14,21 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  if (!isLocale(locale)) return {};
-  const dictionary = dictionaries[locale];
+  const locale = await routeLocale((await params).locale);
+  if (!locale) return {};
+  const dictionary = getDictionary(locale);
 
   return {
     title: { absolute: dictionary.metaTitle },
     description: dictionary.metaDescription,
-    alternates: hreflangAlternates("/", locale),
+    alternates: await localeAlternates("/", locale),
   };
 }
 
 export default async function LocalizedPage({ params }: Props) {
-  const { locale } = await params;
-  if (!isLocale(locale) || locale === "en") notFound();
+  const locale = await routeLocale((await params).locale);
+  if (!locale) notFound();
   const country = (await headers()).get("x-vercel-ip-country");
 
-  return <HomePage locale={locale} dictionary={dictionaries[locale]} marketCountry={country} />;
+  return <HomePage locale={locale} dictionary={getDictionary(locale)} marketCountry={country} />;
 }

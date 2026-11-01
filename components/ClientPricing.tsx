@@ -1,7 +1,7 @@
 import { Check, Clock, LockKeyhole, MessageSquareText, Search } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
 import { localizedPath, type Locale } from "@/lib/i18n";
-import { clientPricingCopy, passPriceCopy } from "@/lib/pricingCopy";
+import { passPriceCopyFor, pricingCopy } from "@/lib/pricingCopy";
 import { getMarket, isActive } from "@/lib/markets";
 import { formatPassPrice } from "@/lib/priceFormat";
 import { referencePassPrices, type StorePrice } from "@/lib/storePrices";
@@ -10,8 +10,8 @@ const actionIcons = [MessageSquareText, Search, LockKeyhole];
 
 export default async function ClientPricing({ locale, marketCountry }: { locale: Locale; marketCountry?: string | null }) {
   // Complete in all 16 locales (checked by npm run test:intl).
-  const t = clientPricingCopy[locale] ?? clientPricingCopy.en;
-  const priceCopy = passPriceCopy[locale] ?? passPriceCopy.en;
+  const t = pricingCopy(locale);
+  const priceCopy = passPriceCopyFor(locale);
   // Unknown, absent or inactive country: neutral text, never a US price.
   const market = await getMarket(marketCountry);
   const reference = referencePassPrices(marketCountry, isActive(market));

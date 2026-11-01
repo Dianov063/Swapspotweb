@@ -4,13 +4,17 @@ import Link from "next/link";
 import { Hammer } from "lucide-react";
 import AppStoreButtons from "./AppStoreButtons";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
+import type { StoreBadgeCopy } from "@/lib/storeBadges";
 
 export default function WaitlistCTA({
   locale,
   dictionary,
+  storeBadges,
 }: {
   locale: Locale;
   dictionary: Dictionary;
+  /** Store button copy from the server (client components cannot read registry-language strings). */
+  storeBadges: StoreBadgeCopy;
 }) {
   return (
     <section className="mx-auto max-w-wrap px-6 pb-[clamp(56px,7vw,96px)]">
@@ -30,7 +34,7 @@ export default function WaitlistCTA({
             <div className="text-[13px] font-bold tracking-[0.02em] text-white/70">
               {dictionary.waitlist.storeCaption}
             </div>
-            <AppStoreButtons tone="light" locale={locale} className="mt-3 justify-center" />
+            <AppStoreButtons tone="light" copy={storeBadges} className="mt-3 justify-center" />
           </div>
 
           <div className="mt-[18px] flex flex-wrap items-center justify-center gap-3.5">

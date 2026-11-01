@@ -52,14 +52,21 @@ const market = (overrides = {}) => ({
 
 // ---------------------------------------------------------------- registry
 
-test("the bundled snapshot is format 1 with the 13 active markets in sort order", () => {
+const ACTIVE = ["US", "PR", "PH", "IN", "SG", "MY", "TH", "ID", "VN", "DO", "HT", "JM", "TT"];
+const AFRICA = ["ZA", "EG", "NG", "DZ", "MA", "AO", "KE", "GH", "ET", "CD"];
+
+test("the bundled snapshot is format 1: 13 active markets, then the 10 African markets preparing", () => {
   const parsed = parseMarketsPayload(snapshot);
   assert.ok(parsed);
-  assert.deepEqual(
-    parsed.markets.map((item) => item.code),
-    ["US", "PR", "PH", "IN", "SG", "MY", "TH", "ID", "VN", "DO", "HT", "JM", "TT"],
-  );
-  assert.ok(parsed.markets.every((item) => item.status === "active"));
+  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA]);
+  for (const item of parsed.markets) {
+    assert.equal(item.status, ACTIVE.includes(item.code) ? "active" : "preparing", item.code);
+  }
+  assert.equal(findMarket(parsed.markets, "CD").currency.code, "USD");
+  assert.deepEqual(findMarket(parsed.markets, "CD").timezones, ["Africa/Kinshasa", "Africa/Lubumbashi"]);
+  assert.equal(findMarket(parsed.markets, "EG").regionKind, "governorate");
+  assert.equal(findMarket(parsed.markets, "KE").regionKind, "county");
+  assert.equal(findMarket(parsed.markets, "AO").postal.kind, "none");
   assert.equal(findMarket(parsed.markets, "VN").currency.minorUnits, 0);
 });
 
@@ -83,6 +90,34 @@ test("parsing ignores unknown fields, skips invalid markets and drops disabled o
   assert.equal(parsed.updatedAt, "2026-10-19T00:00:00Z");
   assert.equal("new_column" in parsed.markets[1], false);
   assert.equal(isActiveMarket(findMarket(parsed.markets, "BR")), false);
+});
+
+test("preparing and verified markets are listed but never launched (no reference pass price)", () => {
+  const parsed = parseMarketsPayload({
+    format: 1,
+    markets: [
+      market(),
+      market({ code: "IN", status: "verified", sort_order: 40, currency: { code: "INR", minor_units: 2 } }),
+      market({ code: "ZA", status: "preparing", sort_order: 140, currency: { code: "ZAR", minor_units: 2 } }),
+    ],
+  });
+  assert.deepEqual(parsed.markets.map((item) => [item.code, item.status]), [["US", "active"], ["IN", "verified"], ["ZA", "preparing"]]);
+  for (const code of ["IN", "ZA"]) {
+    const item = findMarket(parsed.markets, code);
+    assert.equal(isActiveMarket(item), false, code);
+    // IN has a confirmed store price, but a market that is not active never shows it.
+    assert.equal(referencePassPrices(code, isActiveMarket(item)), null, code);
+  }
+  const { markets } = parseMarketsPayload(snapshot);
+  for (const code of AFRICA) assert.equal(referencePassPrices(code, isActiveMarket(findMarket(markets, code))), null, code);
+});
+
+test("country names for registry languages use the BCP 47 key, then the language, then English", () => {
+  const { markets } = parseMarketsPayload(snapshot);
+  assert.equal(marketDisplayName(markets, "EG", "ar-eg"), "مصر");
+  assert.equal(marketDisplayName(markets, "KE", "sw-ke"), "Kenya");
+  assert.equal(marketDisplayName(markets, "MA", "zgh"), findMarket(markets, "MA").names.zgh);
+  assert.equal(marketDisplayName(markets, "MA", "ary"), findMarket(markets, "MA").names.ar);
 });
 
 test("format guard: another or missing format is refused", () => {
@@ -121,7 +156,7 @@ test("registry response wins; every failure falls back to the bundled snapshot",
   for (const [name, options] of cases) {
     const result = await loadMarkets({ snapshot, onError, ...options });
     assert.equal(result.source, "snapshot", name);
-    assert.equal(result.markets.length, 13, name);
+    assert.equal(result.markets.length, 23, name);
   }
   assert.equal(errors.length, cases.length - 1);
 });

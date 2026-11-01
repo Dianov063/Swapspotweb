@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import vm from 'node:vm';
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
-const source = readFileSync(new URL('../app/(site)/auth/reset-password/strings.ts', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../lib/resetStrings.ts', import.meta.url), 'utf8');
 const exports = {};
 vm.runInNewContext(ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText,
   { exports, require: () => ({ isLocale: code => Object.hasOwn(exports.resetStrings, code) }), URLSearchParams });

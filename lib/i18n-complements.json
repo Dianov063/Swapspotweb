@@ -88,7 +88,7 @@
     "footer": {
       "tagline": "提供值得信赖的本地帮助的邻里市场。专为美国各地的社区打造。",
       "about": "关于",
-      "pricingPayouts": "定价和付款",
+      "pricingPayouts": "Helpers 免费使用",
       "rights": "© 2026 SwapSpot。版权所有。",
       "companyLine": "在 USPROJECT LLC 下运营 · EIN 83-3989558 · 美国纽约"
     }
@@ -163,7 +163,7 @@
       "about": "À propos",
       "contact": "Contacter",
       "support": "Assistance",
-      "pricingPayouts": "Tarifs et paiements",
+      "pricingPayouts": "Gratuit pour les helpers",
       "rights": "© 2026 SwapSpot. Tous droits réservés.",
       "companyLine": "Opérant sous USPROJECT LLC · EIN 83-3989558 · New York, États-Unis"
     }
@@ -255,8 +255,8 @@
         "تصفح الملفات الشخصية والخدمات والأسعار الشفافة قبل الالتزام."
       ],
       [
-        "احجز ودردش وادفع بأمان",
-        "أرسل رسالة واحصل على عرض أسعار وادفع بشكل آمن داخل التطبيق."
+        "دردش واحصل على عرض سعر واحجز",
+        "راسل المساعد واحصل على عرض سعر واحجز داخل التطبيق. يتم الاتفاق على دفع أجر العمل مباشرة مع المساعد."
       ]
     ],
     "helpers": {
@@ -341,7 +341,7 @@
       "tagline": "سوق الحي للحصول على مساعدة محلية موثوقة. صُنع للمجتمعات في جميع أنحاء الولايات المتحدة.",
       "about": "حول",
       "accountDeletion": "حذف الحساب",
-      "pricingPayouts": "التسعير والدفعات",
+      "pricingPayouts": "مجاني للمساعدين",
       "rights": "© 2026 سواب سبوت. جميع الحقوق محفوظة.",
       "companyLine": "تعمل تحت USPROJECT LLC · رقم EIN 83-3989558 · نيويورك، الولايات المتحدة الأمريكية"
     }
@@ -366,8 +366,8 @@
         "Procure perfis, serviços e preços transparentes antes de se comprometer."
       ],
       [
-        "Reserve, converse e pague com segurança",
-        "Envie mensagens, faça um orçamento e pague com segurança dentro do aplicativo."
+        "Converse, receba um orçamento e reserve",
+        "Envie mensagens, receba um orçamento e reserve dentro do aplicativo. O pagamento do serviço é combinado diretamente com o ajudante."
       ]
     ],
     "helpers": {
@@ -452,7 +452,7 @@
       "tagline": "O mercado de bairro para ajuda local confiável. Feito para comunidades nos EUA.",
       "about": "Sobre",
       "accountDeletion": "Exclusão de conta",
-      "pricingPayouts": "Preços e pagamentos",
+      "pricingPayouts": "Grátis para helpers",
       "rights": "© 2026 SwapSpot. Todos os direitos reservados.",
       "companyLine": "Operando sob USPROJECT LLC · EIN 83-3989558 · Nova York, EUA"
     }
@@ -477,8 +477,8 @@
         "Browse pwofil, sèvis, ak pri transparan anvan ou komèt."
       ],
       [
-        "Liv, chat epi peye san danje",
-        "Mesaj, jwenn yon quote, epi peye an sekirite andedan app a."
+        "Chat, jwenn yon quote epi rezève",
+        "Voye mesaj, jwenn yon quote epi rezève andedan app la. Ou regle peman travay la dirèkteman ak asistan an."
       ]
     ],
     "helpers": {
@@ -563,7 +563,7 @@
       "tagline": "Mache katye a pou èd lokal ou fè konfyans. Te fè pou kominote atravè peyi Etazini.",
       "about": "Konsènan",
       "accountDeletion": "Efase kont",
-      "pricingPayouts": "Pri ak peman",
+      "pricingPayouts": "Gratis pou helpers",
       "rights": "© 2026 SwapSpot. Tout dwa rezève.",
       "companyLine": "Opere anba USPROJECT LLC · EIN 83-3989558 · New York, USA"
     }
@@ -588,8 +588,8 @@
         "Durchsuchen Sie Profile, Dienste und transparente Preise, bevor Sie sich verpflichten."
       ],
       [
-        "Sicher buchen, chatten und bezahlen",
-        "Senden Sie eine Nachricht, holen Sie sich ein Angebot und zahlen Sie sicher in der App."
+        "Chatten, Angebot einholen und buchen",
+        "Schreiben Sie Nachrichten, holen Sie ein Angebot ein und buchen Sie in der App. Die Bezahlung der Arbeit vereinbaren Sie direkt mit dem Helfer."
       ]
     ],
     "helpers": {
@@ -675,7 +675,7 @@
       "about": "Über",
       "support": "Unterstützung",
       "accountDeletion": "Kontolöschung",
-      "pricingPayouts": "Preise und Auszahlungen",
+      "pricingPayouts": "Kostenlos für Helpers",
       "rights": "© 2026 SwapSpot. Alle Rechte vorbehalten.",
       "companyLine": "Betrieb unter USPROJECT LLC · EIN 83-3989558 · New York, USA"
     }
@@ -703,8 +703,8 @@
         "Mag-browse ng mga profile, serbisyo, at transparent na pagpepresyo bago ka mag-commit."
       ],
       [
-        "Mag-book, makipag-chat at magbayad nang ligtas",
-        "Magmensahe, kumuha ng quote, at magbayad nang secure sa loob ng app."
+        "Makipag-chat, kumuha ng quote at mag-book",
+        "Magmensahe, kumuha ng quote, at mag-book sa loob ng app. Ang bayad para sa trabaho ay direktang pinagkakasunduan ninyo ng katulong."
       ]
     ],
     "helpers": {
@@ -790,7 +790,7 @@
       "about": "Tungkol sa",
       "privacy": "Pagkapribado",
       "accountDeletion": "Pagtanggal ng account",
-      "pricingPayouts": "Pagpepresyo at mga payout",
+      "pricingPayouts": "Libre para sa helpers",
       "rights": "© 2026 SwapSpot. Lahat ng karapatan ay nakalaan.",
       "companyLine": "Pinapatakbo sa ilalim ng USPROJECT LLC · EIN 83-3989558 · New York, USA"
     }
@@ -815,8 +815,8 @@
         "प्रतिबद्ध होने से पहले प्रोफ़ाइल, सेवाएँ और पारदर्शी मूल्य निर्धारण ब्राउज़ करें।"
       ],
       [
-        "बुक करें, चैट करें और सुरक्षित रूप से भुगतान करें",
-        "संदेश भेजें, कोटेशन प्राप्त करें और ऐप के अंदर सुरक्षित रूप से भुगतान करें।"
+        "चैट करें, कोटेशन पाएं और बुक करें",
+        "ऐप में संदेश भेजें, कोटेशन पाएं और बुक करें। काम का भुगतान आप सीधे सहायक के साथ तय करते हैं।"
       ]
     ],
     "helpers": {
@@ -901,7 +901,7 @@
       "tagline": "विश्वसनीय स्थानीय सहायता के लिए पड़ोस का बाज़ार। अमेरिका भर के समुदायों के लिए बनाया गया।",
       "about": "के बारे में",
       "accountDeletion": "खाता हटाना",
-      "pricingPayouts": "मूल्य निर्धारण और भुगतान",
+      "pricingPayouts": "Helpers के लिए मुफ्त",
       "rights": "© 2026 स्वैपस्पॉट। सर्वाधिकार सुरक्षित।",
       "companyLine": "यूएसप्रोजेक्ट एलएलसी के तहत परिचालन · ईआईएन 83-3989558 · न्यूयॉर्क, यूएसए"
     }
@@ -926,8 +926,8 @@
         "প্রতিশ্রুতি দেওয়ার আগে প্রোফাইল, পরিষেবা এবং স্বচ্ছ মূল্য ব্রাউজ করুন।"
       ],
       [
-        "বুক করুন, চ্যাট করুন এবং নিরাপদে অর্থ প্রদান করুন",
-        "বার্তা পাঠান, একটি উদ্ধৃতি পান এবং অ্যাপের মধ্যে নিরাপদে অর্থ প্রদান করুন।"
+        "চ্যাট করুন, কোটেশন নিন এবং বুক করুন",
+        "অ্যাপে বার্তা পাঠান, কোটেশন নিন এবং বুক করুন। কাজের টাকা পরিশোধের বিষয়টি আপনি সরাসরি সাহায্যকারীর সাথে ঠিক করবেন।"
       ]
     ],
     "helpers": {
@@ -1012,7 +1012,7 @@
       "tagline": "বিশ্বস্ত স্থানীয় সাহায্যের জন্য আশেপাশের বাজার। মার্কিন যুক্তরাষ্ট্র জুড়ে সম্প্রদায়ের জন্য তৈরি.",
       "about": "সম্পর্কে",
       "accountDeletion": "অ্যাকাউন্ট মুছে ফেলা",
-      "pricingPayouts": "মূল্য এবং অর্থ প্রদান",
+      "pricingPayouts": "Helpers এর জন্য বিনামূল্যে",
       "rights": "© 2026 SwapSpot. সর্বস্বত্ব সংরক্ষিত",
       "companyLine": "USPROJECT LLC এর অধীনে কাজ করছে · EIN 83-3989558 · New York, USA"
     }
@@ -1037,8 +1037,8 @@
         "நீங்கள் உறுதியளிக்கும் முன் சுயவிவரங்கள், சேவைகள் மற்றும் வெளிப்படையான விலையை உலாவவும்."
       ],
       [
-        "பதிவு செய்து, அரட்டையடித்து, பாதுகாப்பாக பணம் செலுத்துங்கள்",
-        "பயன்பாட்டில் செய்தி அனுப்பவும், மேற்கோளைப் பெறவும் மற்றும் பாதுகாப்பாக பணம் செலுத்தவும்."
+        "அரட்டையடித்து, விலைப்புள்ளி பெற்று, பதிவு செய்யுங்கள்",
+        "பயன்பாட்டில் செய்தி அனுப்பி, விலைப்புள்ளி பெற்று, பதிவு செய்யுங்கள். வேலைக்கான கட்டணத்தை உதவியாளருடன் நேரடியாக ஏற்பாடு செய்துகொள்வீர்கள்."
       ]
     ],
     "helpers": {
@@ -1123,7 +1123,7 @@
       "tagline": "நம்பகமான உள்ளூர் உதவிக்கான அண்டை சந்தை. அமெரிக்கா முழுவதும் உள்ள சமூகங்களுக்காக உருவாக்கப்பட்டது.",
       "about": "பற்றி",
       "accountDeletion": "கணக்கு நீக்கம்",
-      "pricingPayouts": "விலை மற்றும் கொடுப்பனவுகள்",
+      "pricingPayouts": "உதவியாளர்களுக்கு இலவசம்",
       "rights": "© 2026 SwapSpot. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
       "companyLine": "USPROJECT LLC கீழ் இயங்குகிறது · EIN 83-3989558 · நியூயார்க், அமெரிக்கா"
     }

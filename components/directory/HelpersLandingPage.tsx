@@ -5,23 +5,24 @@ import AppDownloadStrip from "@/components/AppDownloadStrip";
 import ForHelpers from "@/components/ForHelpers";
 import TrustSafety from "@/components/TrustSafety";
 import { directoryStrings } from "@/lib/directoryStrings";
-import { dictionaries, hreflangAlternates, textDirection, type Locale } from "@/lib/i18n";
+import { getDictionary, languageTag, textDirection, type Locale } from "@/lib/i18n";
+import { localeAlternates } from "@/lib/languages";
 
-export function helpersLandingMetadata(locale: Locale): Metadata {
+export async function helpersLandingMetadata(locale: Locale): Promise<Metadata> {
   const t = directoryStrings(locale);
   return {
     title: t.helpersMetaTitle,
     description: t.helpersMetaDescription,
-    alternates: hreflangAlternates("/helpers", locale),
+    alternates: await localeAlternates("/helpers", locale),
   };
 }
 
 /** "Become a helper" page (/helpers and /<locale>/helpers). */
 export default function HelpersLandingPage({ locale }: { locale: Locale }) {
-  const dictionary = dictionaries[locale];
+  const dictionary = getDictionary(locale);
 
   return (
-    <div lang={locale} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
+    <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main className="pt-[clamp(42px,6vw,78px)]">
         <ForHelpers locale={locale} dictionary={dictionary} headingLevel="h1" />

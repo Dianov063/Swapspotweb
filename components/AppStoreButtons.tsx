@@ -1,20 +1,23 @@
 import { Apple, Play } from "lucide-react";
 import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/lib/appLinks";
 import type { Locale } from "@/lib/locales";
-import { storeBadgeCopy } from "@/lib/storeBadges";
+import { storeBadgesFor, type StoreBadgeCopy } from "@/lib/storeBadges";
 
 type AppStoreButtonsProps = {
   tone?: "dark" | "light";
   className?: string;
   locale?: Locale;
+  /** Copy resolved on the server; required inside client components for registry languages. */
+  copy?: StoreBadgeCopy;
 };
 
 export default function AppStoreButtons({
   tone = "dark",
   className = "",
   locale = "en",
+  copy,
 }: AppStoreButtonsProps) {
-  const t = storeBadgeCopy[locale] ?? storeBadgeCopy.en;
+  const t = copy ?? storeBadgesFor(locale);
   const buttonClass =
     tone === "light"
       ? "border-white/15 bg-[#10231A] text-white hover:bg-[#0A1A12]"
