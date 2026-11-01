@@ -37,7 +37,7 @@ export default function AppDownloadStrip({
         </div>
 
         <div className="flex flex-col items-start gap-3 lg:items-end">
-          <AppStoreButtons className="justify-start lg:justify-end" />
+          <AppStoreButtons locale={locale} className="justify-start lg:justify-end" />
           <div
             aria-label="SwapSpot social links coming soon"
             className="flex flex-wrap items-center gap-2"

@@ -98,7 +98,7 @@ the homepage HTML fully server-rendered for SEO.
 
 ## 3. SEO
 
-- `app/layout.tsx` sets the exact **title** `SwapSpot - Find Trusted Local Help
+- `lib/siteMetadata.ts` (used by both root layouts) sets the exact **title** `SwapSpot - Find Trusted Local Help
   Near You` and **description** from the brief, plus OpenGraph, Twitter, theme
   color, and an inline SVG favicon. Uses the title `template` so child routes
   render `Page | SwapSpot`.
@@ -200,3 +200,26 @@ Email delivery is MailHub-only. Vercel invokes the protected Supabase
 `admin-report-email` Edge Function with its service-role credential; that
 function owns the MailHub API call and uses the existing `MAILHUB_API_KEY`
 Supabase secret. No MailHub credential is exposed to Vercel or the browser.
+
+## International support (markets, prices, languages)
+
+Contract: `docs/swapspot-international.md` in the App Platform repository.
+
+- **Layouts:** two root layouts. `app/(site)` serves the English URLs (`<html lang="en">`);
+  `app/[locale]` serves `/<locale>/...` with `<html lang>` of the locale and `dir="rtl"` for Arabic.
+  Both render `components/RootDocument.tsx`. URLs are unchanged.
+- **Market registry:** `lib/markets.ts` reads the anonymous
+  `GET ${APP_PLATFORM_URL}/v1/apps/${APP_PLATFORM_APP_SLUG}/swapspot/markets` (cached 1 h, 4 s
+  timeout) and falls back to the bundled `lib/marketsSnapshot.json`. Regenerate the snapshot from the
+  server seed with `node scripts/sync-markets-snapshot.mjs <path>/swapspot_markets_seed.json`.
+  Country names on the site come from the registry `names`.
+- **Prices:** `lib/priceFormat.ts` formats in the page language with the listing's own currency
+  (never a USD default, no cross-currency comparison). Pass reference prices are shown only for
+  countries listed in `lib/storePrices.ts` (confirmed in both stores); elsewhere the site points to
+  the App Store / Google Play.
+- **Localized pages:** `/services`, `/services/<category>/<market>`, `/helpers`,
+  `/helpers/<slug>`, `/categories/<slug>`, `/cities/<slug>` exist under every locale (views in
+  `components/directory`, UI strings in `lib/directoryStrings`, category names in
+  `lib/categoryNames.ts`), with hreflang + `x-default` (`hreflangAlternates` in `lib/locales.ts`) and
+  sitemap alternates. User content is never machine-translated. Legal texts stay English.
+- **Tests:** `npm run test:intl`.

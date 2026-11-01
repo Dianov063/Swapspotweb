@@ -1,11 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { marketDisplayName, parseMarketsPayload } from '@/lib/marketsCore';
+import marketsSnapshot from '@/lib/marketsSnapshot.json';
 
 type SeedService = { service_key: string; category_id: string; category_name: string; name: string; description: string; price: number | null; price_max?: number | null; price_type: string; price_unit: string; currency_code?: string; source_url?: string; source_title?: string; source_region?: string; price_note?: string; researched_at?: string; is_active: boolean };
 type SeedProfile = { seed_key: string; country_code: string; currency_code: string; language_code: string; full_name: string; city: string; bio: string; avatar_url: string | null; avatar_rect: [number, number, number, number] | null; is_active: boolean; source_kind: string; services: SeedService[] };
 type Directory = { profiles: SeedProfile[]; total: number; countries: { country_code: string; profiles: number; with_photo: number; active_profiles: number; services: number }[]; categories: { id: string; name: string }[]; page: number; pageSize: number };
-const countries: Record<string, string> = { DO: 'Доминикана', TH: 'Таиланд', US: 'США', PR: 'Пуэрто-Рико' };
+// Country names from the market registry snapshot (the admin console is in Russian).
+const registryMarkets = parseMarketsPayload(marketsSnapshot)?.markets ?? [];
 const fieldClass = 'h-11 rounded-xl border border-line bg-white px-3 text-sm text-ink outline-none focus:border-green';
 
 function price(service: SeedService, currency: string) {
@@ -56,10 +59,10 @@ export default function SeedDirectory() {
       <button type="button" disabled={loading} className={`${fieldClass} font-bold disabled:opacity-50`} onClick={() => setReload(n => n + 1)}>Обновить</button>
     </div>
     {data && <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{data.countries.map(c => <button type="button" key={c.country_code} aria-pressed={country === c.country_code} onClick={() => { setCountry(c.country_code); setPage(1); }} className={`rounded-2xl border p-5 text-left ${country === c.country_code ? 'border-green bg-green-soft' : 'border-line bg-white'}`}>
-      <span className="text-sm font-bold text-ink-soft">{countries[c.country_code] || c.country_code} · {c.country_code}</span><strong className="mt-2 block text-3xl text-ink">{c.profiles} <span className="text-sm font-medium">профилей</span></strong><span className="mt-2 block text-sm text-ink-soft">{c.services} услуг · {c.with_photo} с фото · {c.profiles - c.with_photo} без</span><span className="mt-1 block text-xs text-ink-soft">Активных профилей: {c.active_profiles}</span>
+      <span className="text-sm font-bold text-ink-soft">{marketDisplayName(registryMarkets, c.country_code, 'ru')} · {c.country_code}</span><strong className="mt-2 block text-3xl text-ink">{c.profiles} <span className="text-sm font-medium">профилей</span></strong><span className="mt-2 block text-sm text-ink-soft">{c.services} услуг · {c.with_photo} с фото · {c.profiles - c.with_photo} без</span><span className="mt-1 block text-xs text-ink-soft">Активных профилей: {c.active_profiles}</span>
     </button>)}</div>}
     <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-[180px_1fr_180px_2fr]">
-      <label className="grid gap-1 text-xs font-bold text-ink-soft">Страна<select className={fieldClass} value={country} onChange={e => { setCountry(e.target.value); setPage(1); }}><option value="">Все страны</option>{Object.entries(countries).map(([code, name]) => <option key={code} value={code}>{name}</option>)}</select></label>
+      <label className="grid gap-1 text-xs font-bold text-ink-soft">Страна<select className={fieldClass} value={country} onChange={e => { setCountry(e.target.value); setPage(1); }}><option value="">Все страны</option>{registryMarkets.map(market => <option key={market.code} value={market.code}>{marketDisplayName(registryMarkets, market.code, 'ru')}</option>)}</select></label>
       <label className="grid gap-1 text-xs font-bold text-ink-soft">Категория<select className={fieldClass} value={category} onChange={e => { setCategory(e.target.value); setPage(1); }}><option value="">Все категории</option>{data?.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
       <label className="grid gap-1 text-xs font-bold text-ink-soft">Фото<select className={fieldClass} value={photo} onChange={e => { setPhoto(e.target.value); setPage(1); }}><option value="">Все профили</option><option value="with">С фото</option><option value="without">Без фото</option></select></label>
       <label className="grid gap-1 text-xs font-bold text-ink-soft">Поиск<input className={fieldClass} value={search} onChange={e => setSearch(e.target.value)} placeholder="Имя, ID, город или услуга" maxLength={200} /></label>

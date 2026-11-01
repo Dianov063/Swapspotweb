@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Eyebrow } from "./ui";
+import { categoryName } from "@/lib/categoryNames";
 import { categories } from "@/lib/data";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
 
 export default function Categories({
+  locale,
   dictionary,
 }: {
   locale: Locale;
@@ -27,13 +29,15 @@ export default function Categories({
         {categories.map((c) => {
           const Icon = c.icon;
           const name =
+            categoryName(c.slug, locale) ??
             dictionary.categories.names[
               c.slug as keyof typeof dictionary.categories.names
-            ] ?? c.name;
+            ] ??
+            c.name;
           return (
             <Link
               key={c.slug}
-              href={`/categories/${c.slug}`}
+              href={localizedPath(locale, `/categories/${c.slug}`)}
               className="group flex flex-col gap-3.5 rounded-card-md border border-line bg-surface p-[24px_20px] shadow-card-sm transition-all duration-150 hover:-translate-y-[3px] hover:border-green hover:shadow-card"
             >
               <span className="grid h-[50px] w-[50px] place-items-center rounded-[14px] bg-green-soft text-green">

@@ -1,5 +1,8 @@
 import { supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
 import { categories as fallbackCategories, cities as fallbackCities } from "@/lib/data";
+import { directoryStrings, fillTemplate } from "@/lib/directoryStrings";
+import type { Locale } from "@/lib/locales";
+import { formatRadius, formatServicePrice as formatListingPrice } from "@/lib/priceFormat";
 
 const SUPABASE_URL =
   process.env.SUPABASE_URL ||
@@ -399,29 +402,26 @@ export async function getPublicHelperProfileBySlug(helperSlug: string) {
   return profiles.find((profile) => profile.slug === helperSlug) || null;
 }
 
-export function formatServicePrice(listing: PublicServiceListing) {
-  const amount = Number(listing.price || 0);
-  if (!amount) return "Ask for quote";
-
-  const currency = listing.currency_code || "USD";
-  const formatted = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: amount % 1 === 0 ? 0 : 2,
-  }).format(amount);
-
-  if (listing.price_type === "hourly") return `${formatted}/hr`;
-  if (listing.price_type === "starting_at") return `From ${formatted}`;
-  return formatted;
+/**
+ * Price label in the page language with the listing's own currency ("Price on request" for
+ * quote-only services). Never assumes USD; see lib/priceFormat.ts.
+ */
+export function formatServicePrice(listing: PublicServiceListing, locale: Locale = "en") {
+  return formatListingPrice(listing, locale);
 }
 
-export function formatServiceArea(listing: PublicServiceListing) {
+/** Approximate service area: label (or postal code, or market) plus the radius in the market unit. */
+export function formatServiceArea(listing: PublicServiceListing, locale: Locale = "en") {
+  const words = directoryStrings(locale);
+  const country = (listing.country_code || "").toUpperCase();
+  const postalTemplate = country === "US" || country === "PR" ? words.zipArea : words.postalArea;
+  const area =
+    listing.service_area_label ||
+    (listing.service_area_zip ? fillTemplate(postalTemplate, { code: listing.service_area_zip }) : listing.market_name);
   const radius = Number(listing.radius_miles || 0);
-  const unit = listing.distance_unit || "mi";
-  const area = listing.service_area_label || (listing.service_area_zip ? `ZIP ${listing.service_area_zip}` : listing.market_name);
 
   if (!radius) return area;
-  return `${area} + ${radius} ${unit}`;
+  return `${area} + ${formatRadius(radius, listing.distance_unit, locale)}`;
 }
 
 export function getListingLanguages(listing: PublicServiceListing) {
@@ -432,10 +432,22 @@ export function getListingLanguages(listing: PublicServiceListing) {
     .filter(Boolean);
 }
 
-export function getServiceTitle(listing: PublicServiceListing) {
-  return listing.search_title_en || listing.service_name;
+/**
+ * Service title. English pages use the normalized English search title; other languages show the
+ * helper's own title as entered (user content is never machine-translated).
+ */
+export function getServiceTitle(listing: PublicServiceListing, locale: Locale = "en") {
+  if (locale === "en") return listing.search_title_en || listing.service_name;
+  return listing.service_name || listing.search_title_en || "";
 }
 
+/** Helper name for slugs and English pages (stable, locale independent). */
 export function getHelperName(listing: PublicServiceListing) {
   return listing.helper_display_name || "Local helper";
+}
+
+/** Helper name for display: the name as entered, or a translated "Local helper". */
+export function displayHelperName(name: string | null | undefined, locale: Locale = "en") {
+  const value = name?.trim();
+  return value && value !== "Local helper" ? value : directoryStrings(locale).localHelper;
 }

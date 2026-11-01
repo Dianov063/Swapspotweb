@@ -24,14 +24,20 @@ export function swapspotBackend(): SwapSpotBackend {
   return process.env.SWAPSPOT_BACKEND === "appplatform" ? "appplatform" : "supabase";
 }
 
-function appPlatformEnv() {
+/** `${APP_PLATFORM_URL}/v1/apps/${APP_PLATFORM_APP_SLUG}/swapspot`, or null when not configured. */
+export function appPlatformAppBase() {
   const baseUrl = (process.env.APP_PLATFORM_URL || "").replace(/\/$/, "");
   const slug = process.env.APP_PLATFORM_APP_SLUG || "swapspot";
+  return baseUrl ? `${baseUrl}/v1/apps/${slug}/swapspot` : null;
+}
+
+function appPlatformEnv() {
+  const appBase = appPlatformAppBase();
   const token = process.env.APP_PLATFORM_SERVICE_TOKEN;
-  if (!baseUrl || !token) {
+  if (!appBase || !token) {
     throw new Error("Missing APP_PLATFORM_URL or APP_PLATFORM_SERVICE_TOKEN");
   }
-  return { appBase: `${baseUrl}/v1/apps/${slug}/swapspot`, token };
+  return { appBase, token };
 }
 
 export function getSupabaseAdminEnv() {

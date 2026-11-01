@@ -52,8 +52,8 @@ export const steps: Step[] = [
   {
     n: "03",
     icon: ShieldCheck,
-    title: "Book, chat & pay safely",
-    text: "Message, get a quote, and pay securely — all inside the app.",
+    title: "Chat, get a quote & book",
+    text: "Message, get a quote, and book inside the app. Payment for the job is arranged directly with the helper.",
   },
 ];
 

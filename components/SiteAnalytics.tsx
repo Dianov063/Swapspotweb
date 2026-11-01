@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import CookieConsent from "./CookieConsent";
+import type { RegistryLanguageCopy } from "@/lib/registryLanguageCopy";
 
 // Pages that carry one-time secrets in the URL (password reset links): no
 // analytics tag, no consent banner. next.config.js adds a CSP that blocks
@@ -13,7 +14,13 @@ export function isPrivatePath(pathname: string) {
   return PRIVATE_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
-export default function SiteAnalytics({ googleAnalyticsId }: { googleAnalyticsId: string }) {
+export default function SiteAnalytics({
+  googleAnalyticsId,
+  registryCopy,
+}: {
+  googleAnalyticsId: string;
+  registryCopy?: RegistryLanguageCopy;
+}) {
   const pathname = usePathname() ?? "";
   const privatePath = isPrivatePath(pathname);
   // Hiding the tags does not unload a gtag.js that an earlier page already loaded
@@ -33,7 +40,7 @@ export default function SiteAnalytics({ googleAnalyticsId }: { googleAnalyticsId
           gtag('config', '${googleAnalyticsId}');
         `}
       </Script>
-      <CookieConsent />
+      <CookieConsent registryCopy={registryCopy} />
     </>
   );
 }

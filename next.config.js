@@ -27,6 +27,10 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // Locale packs of registry languages are read with fs at runtime (lib/localePacks.ts).
+  outputFileTracingIncludes: {
+    "/**": ["./lib/locales/*.json"],
+  },
   async headers() {
     return [
       {
