@@ -2,6 +2,7 @@ import { fetchDailyGoogleReport } from "@/lib/googleServerApis";
 import { invokeSupabaseAdminFunction } from "@/lib/supabaseAdmin";
 import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
 import { emptySupportSummary, fetchSupportActivity } from "@/lib/supportReport";
+import { prepareDailyReportEmail } from "@/lib/dailyReportEmail";
 
 const REPORT_TIME_ZONE = "America/New_York";
 
@@ -487,12 +488,13 @@ export async function buildDailyReport(window: DailyReportWindow) {
 export async function sendDailyReport(report: Awaited<ReturnType<typeof buildDailyReport>>, reportDate: string) {
   const recipient = process.env.DAILY_REPORT_RECIPIENT;
   if (!recipient) throw new Error("DAILY_REPORT_RECIPIENT is not configured");
+  const prepared = prepareDailyReportEmail(report);
   const response = await invokeSupabaseAdminFunction("admin-report-email", {
     recipientEmail: recipient,
     recipientName: "SwapSpot Admin",
-    subject: report.subject,
-    html: report.html,
-    text: report.text,
+    subject: prepared.subject,
+    html: prepared.html,
+    text: prepared.text,
     reportDate,
   });
   const data = await response.json().catch(() => ({}));
