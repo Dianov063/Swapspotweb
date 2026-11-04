@@ -1,5 +1,5 @@
 // Locale-aware prices and distances (contract §4.1): Intl.NumberFormat in the page language with
-// the currency stored on the record, no decimals for whole amounts, translated "from",
+// the currency stored on the record with an explicit ISO code, no decimals for whole amounts, translated "from",
 // "per hour" and "Price on request". Amounts in different currencies are never compared or
 // summed. Registry languages (lib/extraLocales.ts) use their locale pack (keys `priceWords.*`).
 import { extraLocaleTables } from "./extraLocales";
@@ -78,7 +78,7 @@ export function formatMoney(amount: number, currency: string | null | undefined,
     minimumFractionDigits: fractionDigits,
     maximumFractionDigits: fractionDigits,
   };
-  if (code) Object.assign(options, { style: "currency", currency: code });
+  if (code) Object.assign(options, { style: "currency", currency: code, currencyDisplay: "code" });
   return new Intl.NumberFormat(intlLocales(locale), options).format(rounded);
 }
 

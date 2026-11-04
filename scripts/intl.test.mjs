@@ -230,32 +230,32 @@ test("the snapshot generator converts the seed to the endpoint shape", () => {
 const listing = (price, currency_code, price_type = "fixed") => ({ price, currency_code, price_type });
 
 test("prices use the page locale and the listing currency; whole amounts have no decimals", () => {
-  assert.equal(formatServicePrice(listing(50, "USD"), "en"), "$50");
-  assert.equal(formatServicePrice(listing("49.5", "USD"), "en"), "$49.50");
+  assert.equal(plain(formatServicePrice(listing(50, "USD"), "en")), "USD 50");
+  assert.equal(plain(formatServicePrice(listing("49.5", "USD"), "en")), "USD 49.50");
 
   const thb = plain(formatServicePrice(listing(1500, "THB"), "th"));
-  assert.match(thb, /฿\s?1,500$/);
+  assert.match(thb, /THB\s1,500$/);
 
   const dop = plain(formatServicePrice(listing(1500, "DOP"), "es"));
   assert.match(dop, /1\.?500/);
-  assert.match(dop, /DOP|RD\$/);
+  assert.match(dop, /DOP/);
   assert.doesNotMatch(dop, /,00/);
 
-  assert.equal(plain(formatServicePrice(listing(150000, "VND"), "vi")), "150.000 ₫");
+  assert.equal(plain(formatServicePrice(listing(150000, "VND"), "vi")), "150.000 VND");
   // VND has no minor unit: a fractional amount is rounded, never shown with decimals.
-  assert.equal(plain(formatMoney(150000.4, "VND", "vi")), "150.000 ₫");
+  assert.equal(plain(formatMoney(150000.4, "VND", "vi")), "150.000 VND");
 
-  assert.equal(plain(formatServicePrice(listing(150000, "INR"), "hi")), "₹1,50,000");
+  assert.equal(plain(formatServicePrice(listing(150000, "INR"), "hi")), "INR 1,50,000");
 });
 
 test("translated price words: from, per hour, price on request", () => {
-  assert.equal(formatServicePrice(listing(40, "USD", "hourly"), "en"), "$40 per hour");
-  assert.equal(formatServicePrice(listing(40, "USD", "starting_at"), "en"), "From $40");
-  assert.equal(plain(formatServicePrice(listing(800, "THB", "starting_at"), "th")), "เริ่มต้น ฿800");
+  assert.equal(plain(formatServicePrice(listing(40, "USD", "hourly"), "en")), "USD 40 per hour");
+  assert.equal(plain(formatServicePrice(listing(40, "USD", "starting_at"), "en")), "From USD 40");
+  assert.equal(plain(formatServicePrice(listing(800, "THB", "starting_at"), "th")), "เริ่มต้น THB 800");
   assert.match(plain(formatServicePrice(listing(500, "DOP", "hourly"), "es")), / por hora$/);
-  assert.equal(formatServicePrice(listing(null, "USD", "quote_only"), "ru"), "Цена по запросу");
-  assert.equal(formatServicePrice(listing(25, "USD", "quote_only"), "en"), "Price on request");
-  assert.equal(formatServicePrice(listing(0, "USD"), "de"), "Preis auf Anfrage");
+  assert.equal(plain(formatServicePrice(listing(null, "USD", "quote_only"), "ru")), "Цена по запросу");
+  assert.equal(plain(formatServicePrice(listing(25, "USD", "quote_only"), "en")), "Price on request");
+  assert.equal(plain(formatServicePrice(listing(0, "USD"), "de")), "Preis auf Anfrage");
   for (const locale of locales) {
     assert.ok(PRICE_WORDS[locale], `price words for ${locale}`);
     for (const key of ["from", "perHour", "perDay", "perMonth"]) {
@@ -274,6 +274,24 @@ test("a missing or invalid currency is never shown as USD", () => {
   assert.deepEqual(schemaOffer(listing("1500", "thb")), { "@type": "Offer", price: 1500, priceCurrency: "THB" });
 });
 
+test("every market and registered language identifies the stored currency explicitly", () => {
+  const { languages } = JSON.parse(readFileSync(join(root, 'lib/languagesSnapshot.json'), 'utf8'));
+  assert.ok(languages.length >= 46);
+  for (const market of snapshot.markets) {
+    for (const language of languages) {
+      const locale = language.code === 'zh-Hans' ? 'zh' : language.code.toLowerCase();
+      const code = market.currency.code;
+      const shown = formatMoney(60, code, locale, market.currency.minor_units);
+      assert.ok(shown.includes(code), `${market.code}/${locale}: ${shown}`);
+      assert.ok(!shown.includes('$'), `${market.code}/${locale}: ambiguous currency`);
+    }
+  }
+  assert.equal(plain(formatMoney(60, 'CAD', 'en')), 'CAD 60');
+  assert.equal(plain(formatMoney(60, 'MXN', 'en')), 'MXN 60');
+  assert.equal(plain(formatMoney(60, 'EUR', 'en')), 'EUR 60');
+  assert.equal(plain(formatMoney(60, null, 'en')), '60');
+});
+
 test("lowest price is computed per currency; different currencies are never compared", () => {
   const listings = [
     listing(10, "USD"),
@@ -285,7 +303,7 @@ test("lowest price is computed per currency; different currencies are never comp
   ];
   const lowest = lowestPricesByCurrency(listings);
   assert.deepEqual(lowest.map((item) => [item.currency_code, item.price]), [["THB", 300], ["USD", 5]]);
-  assert.equal(plain(formatLowestPrices(listings, "en")), "From THB 300 · From $5");
+  assert.equal(plain(formatLowestPrices(listings, "en")), "From THB 300 · From USD 5");
   assert.equal(formatLowestPrices([listing(null, "USD", "quote_only")], "fr"), "Prix sur demande");
 });
 
@@ -312,9 +330,9 @@ test("pass reference prices only for active markets with prices confirmed in bot
   assert.equal(referencePassPrices("TH", true), null);
   assert.equal(referencePassPrices(null, true), null);
   assert.equal(referencePassPrices("", true), null);
-  assert.equal(formatPassPrice(4.99, "USD", "en", "day"), "$4.99 / day");
+  assert.equal(plain(formatPassPrice(4.99, "USD", "en", "day")), "USD 4.99 / day");
   assert.equal(formatPassPrice(24.99, "USD", "es", "month").includes("24,99"), true);
-  assert.equal(plain(formatPassPrice(399, "INR", "hi", "month")), "₹399 / महीना");
+  assert.equal(plain(formatPassPrice(399, "INR", "hi", "month")), "INR 399 / महीना");
 });
 
 // ---------------------------------------------------------------- hreflang
