@@ -196,6 +196,25 @@ BING_WEBMASTER_API_KEY=... # optional until Bing API access is enabled
 BING_SITE_URL=https://www.swapspot.org/
 ```
 
+The App Store sales section reads Apple’s two latest completed dates separately
+so a late daily file gets another chance to appear. It shows the App Store
+country, paid units, refunds, customer price and estimated developer proceeds
+for SwapSpot’s passes. Apple’s aggregated report contains no buyer email or city.
+An unavailable file is shown as unavailable, not as zero sales.
+
+Configure these **server-only** Vercel Production variables to enable it:
+
+```txt
+SWAPSPOT_ASC_SALES_VENDOR_NUMBER=...
+SWAPSPOT_ASC_SALES_ISSUER_ID=...
+SWAPSPOT_ASC_SALES_KEY_ID=...
+SWAPSPOT_ASC_SALES_PRIVATE_KEY=... # PEM contents
+```
+
+Use a dedicated App Store Connect team key with the Sales and Reports role.
+Keep the private key out of Git, logs, and preview deployments. Check
+the authenticated cron dry run (`force=1&dryRun=1`) without sending email.
+
 Email delivery is MailHub-only. Vercel invokes the protected Supabase
 `admin-report-email` Edge Function with its service-role credential; that
 function owns the MailHub API call and uses the existing `MAILHUB_API_KEY`
