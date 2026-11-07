@@ -215,6 +215,15 @@ Use a dedicated App Store Connect team key with the Sales and Reports role.
 Keep the private key out of Git, logs, and preview deployments. Check
 the authenticated cron dry run (`force=1&dryRun=1`) without sending email.
 
+For Google Play, set the Production-only variables
+SWAPSPOT_PLAY_SALES_BUCKET (the reporting bucket name, without gs://) and
+SWAPSPOT_PLAY_SALES_CREDENTIALS (the dedicated reporting service account JSON).
+The account needs read access to Play financial exports only. Keep its JSON
+out of Git and preview deployments. Do not reuse the Play publishing account.
+The report reads Estimated Sales over eight completed UTC dates to catch late
+entries, filters to the SwapSpot package, and shows the buyer currency and
+city when Google provides it. Estimated Sales is gross, before Google fees.
+
 Email delivery is MailHub-only. Vercel invokes the protected Supabase
 `admin-report-email` Edge Function with its service-role credential; that
 function owns the MailHub API call and uses the existing `MAILHUB_API_KEY`

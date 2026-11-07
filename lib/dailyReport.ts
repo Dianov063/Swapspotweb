@@ -4,6 +4,7 @@ import { supabaseAdminFetch } from "@/lib/supabaseAdmin";
 import { emptySupportSummary, fetchSupportActivity } from "@/lib/supportReport";
 import { prepareDailyReportEmail } from "@/lib/dailyReportEmail";
 import { fetchAppleDailySales } from "@/lib/appleSalesReport";
+import { fetchGooglePlaySales } from "@/lib/googlePlaySalesReport";
 
 const REPORT_TIME_ZONE = "America/New_York";
 
@@ -347,12 +348,14 @@ function textTable(title: string, headers: string[], rows: (string | number)[][]
 export async function buildDailyReport(window: DailyReportWindow) {
   const errors: string[] = [];
   const salesDates = [window.analyticsDate, shiftIsoDate(window.analyticsDate, -1)];
-  const [googleResult, productResult, bingResult, supportResult, salesResult] = await Promise.allSettled([
+  const playStart = shiftIsoDate(window.analyticsDate, -7);
+  const [googleResult, productResult, bingResult, supportResult, salesResult, playResult] = await Promise.allSettled([
     fetchDailyGoogleReport(window),
     fetchProductActivity(window),
     fetchBingReport(),
     fetchSupportActivity(window, readJson),
     Promise.all(salesDates.map(fetchAppleDailySales)),
+    fetchGooglePlaySales(playStart, window.analyticsDate),
   ]);
   const google = googleResult.status === "fulfilled" ? googleResult.value : null;
   const product = productResult.status === "fulfilled" ? productResult.value : { registrations: [], services: [] };
@@ -395,6 +398,28 @@ export async function buildDailyReport(window: DailyReportWindow) {
     "<h3>" + escapeHtml(date) + "</h3>" + (message ? "<p>" + escapeHtml(message) + "</p>" : "") +
     (rows.length ? renderTable(salesHeaders, rows) : ""),
   ).join("");
+
+  const playSales = playResult.status === "fulfilled" ? playResult.value : { status: "unavailable" as const, months: [] };
+  const playRows = playSales.months.flatMap((month) => month.status === "available" ? month.sales : []);
+  const playHeaders = ["Дата UTC", "Продукт", "Страна покупателя", "Город", "Операция", "Сумма"];
+  const playRowsVisible = playRows.slice(0, 30).map((sale) => [sale.date, sale.product, sale.country, sale.city, sale.operation, sale.amount]);
+  const playStatuses = {
+    "not-configured": "Доступ к финансовой выгрузке Google Play ещё не настроен.",
+    forbidden: "У сервисного аккаунта нет доступа к финансовой выгрузке Google Play.",
+    unavailable: "Не удалось получить финансовую выгрузку Google Play.",
+    missing: "Google Play пока не сформировал файл продаж.",
+  };
+  const playNote = "Даты покупок по UTC: " + playStart + "–" + window.analyticsDate +
+    ". Google добавляет операции с задержкой, поэтому даты могут повторяться в следующих письмах. Сумма указана в валюте покупателя до вычета комиссий.";
+  const playMessages = playSales.status === "checked" ? playSales.months.flatMap((month) =>
+    month.status === "available" ? [] : [month.month + ": " + playStatuses[month.status]],
+  ) : [playStatuses[playSales.status]];
+  if (!playRows.length && playSales.months.some((month) => month.status === "available")) {
+    playMessages.push("В полученных файлах за этот период нет платных операций SwapSpot.");
+  }
+  if (playRows.length > playRowsVisible.length) playMessages.push("Показано " + playRowsVisible.length + " из " + playRows.length + " строк.");
+  const playHtml = playMessages.map((message) => "<p>" + escapeHtml(message) + "</p>").join("") +
+    (playRowsVisible.length ? renderTable(playHeaders, playRowsVisible) : "");
 
   const registrationCountries = aggregate(product.registrations, (row) => row.country);
   const registrationCities = aggregate(product.registrations, (row) => `${row.city}, ${row.country}`);
@@ -450,6 +475,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
   const html = `<!doctype html><html><body style="margin:0;background:#f4f5f2;color:#1f2937;font-family:Arial,sans-serif"><div style="max-width:900px;margin:0 auto;padding:24px"><div style="background:#174d37;color:white;border-radius:16px;padding:24px"><div style="font-size:13px;opacity:.8">ЕЖЕДНЕВНЫЙ ОТЧЁТ</div><h1 style="margin:8px 0 0;font-size:28px">SwapSpot — ${escapeHtml(window.reportDate)}</h1><p style="margin:8px 0 0;opacity:.9">Регистрации и услуги: последние 24 часа · GA4: ${escapeHtml(window.analyticsDate)} · Search Console: ${escapeHtml(window.searchStartDate)}–${escapeHtml(window.searchEndDate)}</p></div>
   <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Сообщения в поддержку</b><div style="font-size:30px;margin-top:8px">${support.newMessages.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">диалогов: ${support.newMessageThreads}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Ждут ответа поддержки</b><div style="font-size:30px;margin-top:8px;color:${support.awaiting.length ? "#b45309" : "inherit"}">${support.awaiting.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">${supportLink}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaUsers} / ${gaSessions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchTotals.clicks} / ${searchTotals.impressions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}</div></div></div>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи App Store</h2><p>${escapeHtml(salesNote)}</p>${appleSalesHtml}</section>
+  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи Google Play</h2><p>${escapeHtml(playNote)}</p>${playHtml}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Регистрации: кто и откуда</h2>${renderTable(["Имя", "Email", "Роль", "Страна", "Город", "Платформа"], registrationRows)}<h3>По странам</h3>${renderTable(["Страна", "Регистрации"], registrationCountries)}<h3>По городам</h3>${renderTable(["Город", "Регистрации"], registrationCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Новые услуги в профилях</h2>${renderTable(["Исполнитель", "Услуга", "Цена", "Тип цены", "Страна", "Город"], serviceRows)}<h3>По странам</h3>${renderTable(["Страна", "Услуги"], serviceCountries)}<h3>По городам</h3>${renderTable(["Город", "Услуги"], serviceCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Поддержка</h2><p style="color:#6b7280">Новые сообщения пользователей за последние 24 часа: ${support.newMessages.length} (диалогов: ${support.newMessageThreads}). Ждут ответа (последнее сообщение от пользователя, за ${support.lookbackDays} дней): ${support.awaiting.length}. ${supportLink}</p><h3>Новые сообщения</h3>${renderTable(["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows)}<h3>Ждут ответа</h3>${renderTable(["Имя", "Email", "Последнее сообщение", "Без ответа", "Текст"], supportAwaitingRows)}</section>
@@ -468,6 +494,9 @@ export async function buildDailyReport(window: DailyReportWindow) {
     `Google Search клики / показы: ${searchTotals.clicks} / ${searchTotals.impressions} (${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)} к предыдущему периоду)`,
     "\nПродажи App Store: " + salesNote,
     ...salesSections.map(({ date, message, rows }) => [date, message, rows.length ? textTable("Покупки и возвраты", salesHeaders, rows) : ""].filter(Boolean).join("\n")),
+    "\nПродажи Google Play: " + playNote,
+    ...playMessages,
+    playRowsVisible.length ? textTable("Покупки и возвраты", playHeaders, playRowsVisible) : "",
     textTable("Регистрации", ["Имя", "Email", "Роль", "Страна", "Город", "Платформа"], registrationRows),
     textTable("Новые услуги", ["Исполнитель", "Услуга", "Цена", "Тип", "Страна", "Город"], serviceRows),
     textTable("Поддержка: новые сообщения", ["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows),
@@ -497,6 +526,11 @@ export async function buildDailyReport(window: DailyReportWindow) {
         status: report.status,
         rows: report.status === "available" ? report.sales.length : null,
       })),
+      googlePlaySales: {
+        status: playSales.status,
+        months: playSales.months.map((month) => ({ month: month.month, status: month.status })),
+        rows: playSales.months.some((month) => month.status === "available") ? playRows.length : null,
+      },
       supportNewMessages: support.newMessages.length,
       supportNewMessageThreads: support.newMessageThreads,
       supportAwaiting: support.awaiting.length,
