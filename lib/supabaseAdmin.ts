@@ -53,6 +53,20 @@ export function getSupabaseAdminEnv() {
 
 type FetchOptions = RequestInit & { next?: { revalidate?: number } };
 
+export async function fetchRegistrationClients(start: string, end: string) {
+  const { appBase, token } = appPlatformEnv();
+  const query = new URLSearchParams({ start, end });
+  const response = await fetch(`${appBase}/admin/registrations?${query}`, {
+    headers: { Authorization: `Service ${token}` },
+    cache: "no-store",
+    signal: AbortSignal.timeout(8_000),
+  });
+  if (!response.ok) throw new Error(`App Platform HTTP ${response.status}`);
+  return await response.json() as Array<{
+    id: string; created_at: string; platform: string | null; version: string | null; build: string | null;
+  }>;
+}
+
 /** PostgREST request (tables, views, rpc/*) as the trusted website backend. */
 export async function supabaseAdminFetch(path: string, init: FetchOptions = {}) {
   const headers = new Headers(init.headers);
