@@ -3,6 +3,8 @@ import { categories, cities } from "@/lib/data";
 import { getSiteLanguages } from "@/lib/languages";
 import { absoluteLanguageAlternates, localizedPath, siteUrl, type LanguageRoute } from "@/lib/locales";
 import { getDirectoryPairs, getPublicHelperProfiles } from "@/lib/publicDirectory";
+import { getMarkets, isActive } from "@/lib/markets";
+import { nationalMarkets } from "@/lib/nationalMarkets";
 
 // Short localized notice pages (no hreflang: the legal texts themselves stay English).
 const localizedNoticePaths = ["/trust-safety", "/contact", "/support", "/account-deletion", "/privacy", "/terms"];
@@ -38,10 +40,11 @@ function englishEntry(path: string, languages: readonly LanguageRoute[], options
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  const [directoryPairs, helperProfiles, languages] = await Promise.all([
+  const [directoryPairs, helperProfiles, languages, markets] = await Promise.all([
     getDirectoryPairs(),
     getPublicHelperProfiles({ limit: 1000 }),
     getSiteLanguages(),
+    getMarkets(),
   ]);
 
   // Low-cardinality pages: every site language URL is listed.
@@ -79,5 +82,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     englishEntry(`/helpers/${profile.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
   );
 
-  return [...pages, ...noticePages, ...serviceMarketRoutes, ...helperProfileRoutes];
+  const nationalPages = nationalMarkets
+    .filter(({ code }) => isActive(markets.find((market) => market.code === code)))
+    .map(({ path }): Entry => ({ url: url(path), lastModified, changeFrequency: "weekly", priority: 0.7 }));
+
+  return [...pages, ...noticePages, ...nationalPages, ...serviceMarketRoutes, ...helperProfileRoutes];
 }
