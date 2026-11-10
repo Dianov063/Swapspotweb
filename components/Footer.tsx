@@ -12,9 +12,11 @@ import { directoryStrings } from "@/lib/directoryStrings";
 export default function Footer({
   locale = defaultLocale,
   dictionary = dictionaries[defaultLocale],
+  tagline = dictionary.footer.tagline,
 }: {
   locale?: Locale;
   dictionary?: Dictionary;
+  tagline?: string;
 }) {
   const columns = [
     {
@@ -54,7 +56,7 @@ export default function Footer({
         <div className="col-span-2 max-w-[320px] md:col-span-1">
           <Brand invert className="mb-3.5" href={localizedPath(locale, "/")} />
           <p className="text-[15px] leading-[1.55]">
-            {dictionary.footer.tagline}
+            {tagline}
           </p>
           <p className="mt-3 text-[12.5px] leading-[1.5] text-white/55">
             {dictionary.footer.companyLine}

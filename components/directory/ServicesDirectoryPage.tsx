@@ -7,7 +7,8 @@ import { Button } from "@/components/ui";
 import { categoryVars, directoryStrings, fillTemplate, localizedCategoryName } from "@/lib/directoryStrings";
 import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
 import { localeAlternates } from "@/lib/languages";
-import { getMarkets, marketName } from "@/lib/markets";
+import { getMarkets, isActive, marketName } from "@/lib/markets";
+import { nationalMarkets } from "@/lib/nationalMarkets";
 import { getDirectoryPairs, type DirectoryPair } from "@/lib/publicDirectory";
 import { siteUrl } from "@/lib/locales";
 
@@ -41,6 +42,9 @@ export default async function ServicesDirectoryPage({ locale }: { locale: Locale
   const t = directoryStrings(locale);
   const dictionary = getDictionary(locale);
   const [pairs, markets] = await Promise.all([getDirectoryPairs(), getMarkets()]);
+  const activeNationalPages = nationalMarkets.filter(({ code }) =>
+    markets.some((market) => market.code === code && isActive(market)),
+  );
   const countries = groupByCountry(pairs, locale, t.otherMarkets, (code) => marketName(code, locale, markets));
   const pairLabel = (pair: DirectoryPair) => ({
     ...categoryVars(localizedCategoryName(pair.categorySlug, pair.categoryName, locale), locale),
@@ -78,6 +82,17 @@ export default async function ServicesDirectoryPage({ locale }: { locale: Locale
               {t.indexTitle}
             </h1>
             <p className="mt-5 max-w-[780px] text-[18px] leading-[1.6] text-ink-soft">{t.indexIntro}</p>
+            {activeNationalPages.length > 0 && (
+              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                {activeNationalPages.map(({ path, code }) => (
+                  <li key={code}>
+                    <Link href={path} className="font-semibold text-green-deep underline">
+                      {marketName(code, locale, markets)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href="#markets">{t.browseMarkets}</Button>
               <Button href={localizedPath(locale, "/#download")} variant="white">

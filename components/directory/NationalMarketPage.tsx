@@ -43,7 +43,7 @@ export default function NationalMarketPage({ page }: { page: NationalMarketPage 
         </div>
         <p className="mt-8 max-w-[680px] text-sm text-ink-soft">{page.demoNote}</p>
       </main>
-      <Footer locale={page.locale} dictionary={dictionary} />
+      <Footer locale={page.locale} dictionary={dictionary} tagline={"footerTagline" in page ? page.footerTagline : undefined} />
     </div>
   );
 }
