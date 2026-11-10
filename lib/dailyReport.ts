@@ -138,7 +138,7 @@ async function fetchProductActivity(window: DailyReportWindow) {
   let registrationWarning = "";
   const registrationClients = registrationIds.length && swapspotBackend() === "appplatform"
     ? await fetchRegistrationClients(start, end).catch(() => {
-        registrationWarning = "SwapSpot: не удалось получить данные о сборках при регистрации.";
+        registrationWarning = "SwapSpot: не удалось получить данные о сборках и месте регистрации.";
         return [];
       })
     : [];
@@ -163,11 +163,16 @@ async function fetchProductActivity(window: DailyReportWindow) {
     const activity = activityByUser.get(profile.id);
     const helper = helperByUser.get(profile.id);
     const area = helper ? primaryArea(registrationAreas, helper.id) : null;
+    const place = registration?.country && (registration.location_source === "device" || registration.location_source === "ip")
+      ? registration : undefined;
+    const source = place?.location_source;
+    const country = place?.country || activity?.last_country_code || area?.country_code || "—";
     return {
       ...profile,
-      country: activity?.last_country_code || area?.country_code || "—",
-      city: activity?.last_city || area?.city || "—",
-      state: activity?.last_state || area?.region || "—",
+      country,
+      countryLabel: source === "ip" ? `${country} (примерно, по IP)` : country,
+      city: source === "ip" ? "—" : source === "device" ? place?.city || "—" : activity?.last_city || area?.city || "—",
+      approximateCountry: source === "ip",
       registeredAt: registration?.created_at || profile.created_at,
       platform: registration?.platform || activity?.last_platform || "unknown",
       appVersion: registration?.version && registration.build ? `${registration.version} (${registration.build})` : "—",
@@ -433,8 +438,9 @@ export async function buildDailyReport(window: DailyReportWindow) {
   const playHtml = playMessages.map((message) => "<p>" + escapeHtml(message) + "</p>").join("") +
     (playRowsVisible.length ? renderTable(playHeaders, playRowsVisible) : "");
 
-  const registrationCountries = aggregate(product.registrations, (row) => row.country);
-  const registrationCities = aggregate(product.registrations, (row) => `${row.city}, ${row.country}`);
+  const registrationCountries = aggregate(product.registrations, (row) => row.countryLabel);
+  const registrationCities = aggregate(product.registrations.filter((row) => row.city !== "—"), (row) => `${row.city}, ${row.country}`);
+  const usesIpGeolocation = product.registrations.some((row) => row.approximateCountry);
   const serviceCountries = aggregate(product.services, (row) => row.country);
   const serviceCities = aggregate(product.services, (row) => `${row.city}, ${row.country}`);
   const gaTotals = google?.ga4.totals || {};
@@ -450,7 +456,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
 
   const registrationHeaders = ["Время (Нью-Йорк)", "Имя", "Email", "Роль", "Страна", "Город", "Платформа", "Версия (сборка)"];
   const registrationRows = product.registrations.slice(0, 50).map((row) => [
-    timeInNewYork(row.registeredAt), row.full_name, row.email || "—", row.role, row.country, row.city, row.platform, row.appVersion,
+    timeInNewYork(row.registeredAt), row.full_name, row.email || "—", row.role, row.countryLabel, row.city, row.platform, row.appVersion,
   ]);
   const serviceRows = product.services.slice(0, 50).map((row) => [row.helper_name, row.name, `${row.price} ${row.currency_code || ""}`.trim(), row.price_type, row.country, row.city]);
   const locationRows = (google?.ga4.locations || []).slice(0, 15).map((row: GenericRow) => [String(row.country || "—"), String(row.city || "—"), number(row.activeUsers), number(row.sessions)]);
@@ -491,7 +497,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
   <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Сообщения в поддержку</b><div style="font-size:30px;margin-top:8px">${support.newMessages.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">диалогов: ${support.newMessageThreads}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Ждут ответа поддержки</b><div style="font-size:30px;margin-top:8px;color:${support.awaiting.length ? "#b45309" : "inherit"}">${support.awaiting.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">${supportLink}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaUsers} / ${gaSessions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchTotals.clicks} / ${searchTotals.impressions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}</div></div></div>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи App Store</h2><p>${escapeHtml(salesNote)}</p>${appleSalesHtml}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи Google Play</h2><p>${escapeHtml(playNote)}</p>${playHtml}</section>
-  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Регистрации: кто и откуда</h2>${renderTable(registrationHeaders, registrationRows)}<h3>По странам</h3>${renderTable(["Страна", "Регистрации"], registrationCountries)}<h3>По городам</h3>${renderTable(["Город", "Регистрации"], registrationCities)}</section>
+  <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Регистрации: кто и откуда</h2>${renderTable(registrationHeaders, registrationRows)}${usesIpGeolocation ? '<p><a href="https://db-ip.com">IP Geolocation by DB-IP</a></p>' : ""}<h3>По странам</h3>${renderTable(["Страна", "Регистрации"], registrationCountries)}<h3>По городам</h3>${renderTable(["Город", "Регистрации"], registrationCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Новые услуги в профилях</h2>${renderTable(["Исполнитель", "Услуга", "Цена", "Тип цены", "Страна", "Город"], serviceRows)}<h3>По странам</h3>${renderTable(["Страна", "Услуги"], serviceCountries)}<h3>По городам</h3>${renderTable(["Город", "Услуги"], serviceCities)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Поддержка</h2><p style="color:#6b7280">Новые сообщения пользователей за последние 24 часа: ${support.newMessages.length} (диалогов: ${support.newMessageThreads}). Ждут ответа (последнее сообщение от пользователя, за ${support.lookbackDays} дней): ${support.awaiting.length}. ${supportLink}</p><h3>Новые сообщения</h3>${renderTable(["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows)}<h3>Ждут ответа</h3>${renderTable(["Имя", "Email", "Последнее сообщение", "Без ответа", "Текст"], supportAwaitingRows)}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Google Analytics</h2><p style="color:#6b7280">Данные за ${escapeHtml(window.analyticsDate)}; сравнение с ${escapeHtml(google?.ga4.previousDate || "—")}.</p><h3>Страны и города</h3>${renderTable(["Страна", "Город", "Пользователи", "Сессии"], locationRows)}<h3>Источники трафика</h3>${renderTable(["Источник / канал", "Пользователи", "Сессии", "Вовлечённые сессии"], sourceRows)}<h3>Страницы</h3>${renderTable(["Страница", "Пользователи", "Просмотры", "Вовлечённые сессии"], pageRows)}<h3>Устройства</h3>${renderTable(["Устройство", "Пользователи", "Сессии"], deviceRows)}<h3>Языки браузера</h3>${renderTable(["Язык", "Пользователи", "Сессии"], languageRows)}</section>
@@ -513,6 +519,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
     ...playMessages,
     playRowsVisible.length ? textTable("Покупки и возвраты", playHeaders, playRowsVisible) : "",
     textTable("Регистрации", registrationHeaders, registrationRows),
+    usesIpGeolocation ? "IP Geolocation by DB-IP — https://db-ip.com" : "",
     textTable("Новые услуги", ["Исполнитель", "Услуга", "Цена", "Тип", "Страна", "Город"], serviceRows),
     textTable("Поддержка: новые сообщения", ["Время (Нью-Йорк)", "Имя", "Email", "Сообщение"], supportNewRows),
     textTable("Поддержка: ждут ответа", ["Имя", "Email", "Последнее сообщение", "Без ответа", "Текст"], supportAwaitingRows),

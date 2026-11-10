@@ -64,6 +64,7 @@ export async function fetchRegistrationClients(start: string, end: string) {
   if (!response.ok) throw new Error(`App Platform HTTP ${response.status}`);
   return await response.json() as Array<{
     id: string; created_at: string; platform: string | null; version: string | null; build: string | null;
+    country?: string | null; city?: string | null; location_source?: "device" | "ip" | null;
   }>;
 }
 

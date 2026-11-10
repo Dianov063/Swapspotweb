@@ -23,14 +23,20 @@ test("the owner report uses signup time and build, independently of later device
       assert.equal(url.searchParams.get("end"), window.end.toISOString());
       return available ? Response.json([
         { id: "new", created_at: "2026-11-09T21:52:44Z", platform: "android", version: "1.0.31", build: "61" },
+        { id: "device", created_at: "2026-11-09T22:10:00Z", country: "FR", city: "Paris", location_source: "device" },
+        { id: "ip", created_at: "2026-11-09T22:15:00Z", country: "ES", city: null, location_source: "ip" },
       ]) : new Response(null, { status: 503 });
     }
     if (url.pathname.endsWith("/profiles")) return Response.json([
       { id: "new", email: "new@mail.test", full_name: "New", role: "client", created_at: "2026-11-09T22:05:00Z" },
       { id: "legacy", email: "legacy@mail.test", full_name: "Legacy", role: "client", created_at: "2026-11-09T21:10:00Z" },
+      { id: "device", email: "device@mail.test", full_name: "Device", role: "client", created_at: "2026-11-09T22:10:00Z" },
+      { id: "ip", email: "ip@mail.test", full_name: "IP", role: "client", created_at: "2026-11-09T22:15:00Z" },
     ]);
     if (url.pathname.endsWith("/user_directory_activity")) return Response.json([
       { user_id: "new", last_platform: "ios", last_country_code: "US", last_city: "Miami" },
+      { user_id: "device", last_country_code: "IT", last_city: "Rome" },
+      { user_id: "ip", last_country_code: "PT", last_city: "Lisbon" },
     ]);
     return Response.json([]);
   });
@@ -38,8 +44,12 @@ test("the owner report uses signup time and build, independently of later device
   assert.match(report.text, /2026-11-09 16:52 \| New \| new@mail\.test \| client \| US \| Miami \| android \| 1\.0\.31 \(61\)/);
   assert.match(report.text, /2026-11-09 16:10 \| Legacy \| legacy@mail\.test \| client \| — \| — \| unknown \| —/);
   assert.match(report.html, /Версия \(сборка\).*1\.0\.31 \(61\)/);
+  assert.match(report.text, /Device \| device@mail\.test \| client \| FR \| Paris/);
+  assert.match(report.text, /IP \| ip@mail\.test \| client \| ES \(примерно, по IP\) \| —/);
+  assert.doesNotMatch(report.text, /Lisbon|Rome/);
+  assert.match(report.html, /href="https:\/\/db-ip\.com">IP Geolocation by DB-IP/);
   available = false;
   const fallback = await buildDailyReport(window);
-  assert.equal(fallback.summary.registrations, 2);
-  assert.match(fallback.text, /не удалось получить данные о сборках при регистрации/);
+  assert.equal(fallback.summary.registrations, 4);
+  assert.match(fallback.text, /не удалось получить данные о сборках и месте регистрации/);
 });
