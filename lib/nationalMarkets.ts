@@ -34,4 +34,16 @@ export const nationalMarkets = [
     demoNote: "Los perfiles marcados como Demo muestran cómo funciona la aplicación. Solo puedes contactar con profesionales reales y reservar sus servicios.",
     directory: "Ver servicios",
   },
+  {
+    code: "AT",
+    slug: "austria",
+    path: "/de/markets/austria",
+    locale: "de",
+    footerTagline: "Ein Marktplatz für Hilfe vor Ort in Österreich.",
+    title: "Finde Hilfe in deiner Nähe in Österreich",
+    description: "Finde Unterstützung beim Putzen, beim Möbelaufbau, bei der Gartenarbeit oder bei einer Übersiedlung.",
+    coverage: "Suche in ganz Österreich, von Wien und Graz bis nach Innsbruck, Bregenz und in kleineren Orten.",
+    demoNote: "Demo-Profile zeigen, wie SwapSpot funktioniert. Du kannst echte Anbieter kontaktieren und ihre Leistungen buchen.",
+    directory: "Dienstleistungen ansehen",
+  },
 ] as const;
