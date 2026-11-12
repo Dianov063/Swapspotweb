@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getDirectoryPairs(),
     getPublicHelperProfiles({ limit: 1000 }),
     getSiteLanguages(),
-    getMarkets(),
+    getMarkets({ live: true }),
   ]);
 
   // Low-cardinality pages: every site language URL is listed.

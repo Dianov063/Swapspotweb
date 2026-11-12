@@ -23,24 +23,24 @@ export function marketsEndpoint() {
   return appBase ? `${appBase}/markets` : null;
 }
 
-const loadRegistry = cache(() =>
+const loadRegistry = cache((live = false) =>
   loadMarkets({
     url: marketsEndpoint(),
     snapshot,
     fetchImpl: fetch as never,
-    init: { next: { revalidate: 3600 } },
+    init: live ? { cache: "no-store" } : { next: { revalidate: 3600 } },
     onError: (reason) => console.warn(`SwapSpot markets registry unavailable, using the bundled snapshot: ${reason}`),
   }),
 );
 
 /** Active and preparing markets, ordered by `sort_order`. */
-export async function getMarkets(): Promise<Market[]> {
-  return (await loadRegistry()).markets;
+export async function getMarkets({ live = false } = {}): Promise<Market[]> {
+  return (await loadRegistry(live)).markets;
 }
 
 /** The market of a country code, or null (no US fallback). */
-export async function getMarket(code: string | null | undefined): Promise<Market | null> {
-  return findMarket(await getMarkets(), code);
+export async function getMarket(code: string | null | undefined, options?: { live?: boolean }): Promise<Market | null> {
+  return findMarket(await getMarkets(options), code);
 }
 
 /** Country name in the page locale from the registry `names`, falling back to English. */

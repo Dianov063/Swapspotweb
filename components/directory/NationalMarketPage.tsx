@@ -12,7 +12,7 @@ type NationalMarketPage = (typeof nationalMarkets)[number];
 
 export async function activeNationalMarket(country: string, locale: string) {
   const page = nationalMarkets.find((market) => market.slug === country && market.locale === locale);
-  if (!page || !isActive(await getMarket(page.code))) notFound();
+  if (!page || !isActive(await getMarket(page.code, { live: true }))) notFound();
   return page;
 }
 
