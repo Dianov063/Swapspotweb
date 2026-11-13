@@ -146,7 +146,7 @@ export async function fetchGa4Report() {
   return data;
 }
 
-async function runGa4Report({
+function ga4ReportRequest({
   dimensions,
   metrics,
   rowLimit = 25,
@@ -158,14 +158,28 @@ async function runGa4Report({
   rowLimit?: number;
   orderByMetric?: string;
   dateRanges?: { startDate: string; endDate: string }[];
-}, signal?: AbortSignal) {
+}) {
+  return {
+    dateRanges,
+    dimensions: dimensions.map((name) => ({ name })),
+    metrics: metrics.map((name) => ({ name })),
+    orderBys: orderByMetric
+      ? [{ metric: { metricName: orderByMetric }, desc: true }]
+      : dimensions.includes("date")
+        ? [{ dimension: { dimensionName: "date" } }]
+        : undefined,
+    limit: `${rowLimit}`,
+  };
+}
+
+async function runGa4Report(options: Parameters<typeof ga4ReportRequest>[0]) {
   const propertyId = process.env.GA4_PROPERTY_ID;
 
   if (!propertyId) {
     throw new Error("Missing GA4_PROPERTY_ID");
   }
 
-  const accessToken = await getAccessToken(GA4_SCOPE, signal);
+  const accessToken = await getAccessToken(GA4_SCOPE);
   const response = await fetch(
     `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`,
     {
@@ -174,19 +188,8 @@ async function runGa4Report({
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        dateRanges,
-        dimensions: dimensions.map((name) => ({ name })),
-        metrics: metrics.map((name) => ({ name })),
-        orderBys: orderByMetric
-          ? [{ metric: { metricName: orderByMetric }, desc: true }]
-          : dimensions.includes("date")
-            ? [{ dimension: { dimensionName: "date" } }]
-            : undefined,
-        limit: `${rowLimit}`,
-      }),
+      body: JSON.stringify(ga4ReportRequest(options)),
       cache: "no-store",
-      signal,
     },
   );
 
@@ -196,6 +199,27 @@ async function runGa4Report({
   }
 
   return data;
+}
+
+async function runGa4Batch(requests: ReturnType<typeof ga4ReportRequest>[], token: string, signal: AbortSignal) {
+  const propertyId = process.env.GA4_PROPERTY_ID;
+  if (!propertyId) throw new Error("Missing GA4_PROPERTY_ID");
+  const response = await fetch(
+    `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:batchRunReports`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ requests }),
+      cache: "no-store",
+      signal,
+    },
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(data?.error?.message || "GA4 batch request failed");
+  if (!Array.isArray(data?.reports) || data.reports.length !== requests.length) {
+    throw new Error("GA4 returned an incomplete batch");
+  }
+  return data.reports as { rows?: Ga4Row[] }[];
 }
 
 function normalizeGa4Rows(data: { rows?: Ga4Row[] }, dimensions: string[], metrics: string[]) {
@@ -223,14 +247,14 @@ async function runSearchConsoleReport({
   rowLimit?: number;
   startDate?: string;
   endDate?: string;
-}, signal?: AbortSignal) {
+}, signal?: AbortSignal, token?: string) {
   const siteUrl = process.env.SEARCH_CONSOLE_SITE_URL;
 
   if (!siteUrl) {
     throw new Error("Missing SEARCH_CONSOLE_SITE_URL");
   }
 
-  const accessToken = await getAccessToken(SEARCH_CONSOLE_SCOPE, signal);
+  const accessToken = token ?? await getAccessToken(SEARCH_CONSOLE_SCOPE, signal);
   const response = await fetch(
     `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
     {
@@ -256,7 +280,7 @@ async function runSearchConsoleReport({
     throw new Error(data?.error?.message || "Search Console report request failed");
   }
 
-  return data;
+  return data as { rows?: SearchConsoleRow[] };
 }
 
 function normalizeSearchRows(data: { rows?: SearchConsoleRow[] }, dimensions: string[]) {
@@ -383,6 +407,19 @@ export async function fetchDailyGoogleReport({
   searchStartDate: string;
   searchEndDate: string;
 }, signal?: AbortSignal) {
+  const tokenTimeout = AbortSignal.timeout(7_000);
+  const tokenSignal = signal ? AbortSignal.any([signal, tokenTimeout]) : tokenTimeout;
+  const token = await getAccessToken(`${GA4_SCOPE} ${SEARCH_CONSOLE_SCOPE}`, tokenSignal);
+  const warnings: string[] = [];
+  async function readSection<T>(name: string, request: (querySignal: AbortSignal) => Promise<{ rows?: T[] }>) {
+    const timeout = AbortSignal.timeout(18_000);
+    try {
+      return await request(signal ? AbortSignal.any([signal, timeout]) : timeout);
+    } catch (error) {
+      warnings.push(`${name}: ${error instanceof Error ? error.message : String(error)}`);
+      return { rows: [] as T[] };
+    }
+  }
   const gaMetrics = ["activeUsers", "sessions", "screenPageViews", "engagedSessions"];
   const dateRanges = [{ startDate: analyticsDate, endDate: analyticsDate }];
   const previousAnalyticsDate = shiftReportDate(analyticsDate, -1);
@@ -397,41 +434,35 @@ export async function fetchDailyGoogleReport({
   );
   const previousSearchEndDate = shiftReportDate(searchStartDate, -1);
   const previousSearchStartDate = shiftReportDate(previousSearchEndDate, -(searchWindowDays - 1));
-  const [
-    gaTotals,
-    gaPreviousTotals,
-    gaLocations,
-    gaSources,
-    gaPages,
-    gaDevices,
-    gaLanguages,
-    searchQueries,
-    searchPages,
-    searchCountries,
-    searchByDate,
-    searchPreviousByDate,
-  ] = await Promise.all([
-    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }, signal),
-    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges: previousDateRanges }, signal),
-    runGa4Report({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }, signal),
-    runGa4Report({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }, signal),
-    runGa4Report({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }, signal),
-    runGa4Report({ dimensions: ["deviceCategory"], metrics: gaMetrics, rowLimit: 10, orderByMetric: "activeUsers", dateRanges }, signal),
-    runGa4Report({ dimensions: ["language"], metrics: gaMetrics, rowLimit: 15, orderByMetric: "activeUsers", dateRanges }, signal),
-    runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }, signal),
-    runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }, signal),
-    runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }, signal),
-    runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }, signal),
-    runSearchConsoleReport({
+  const [gaSummary, gaBreakdowns, searchQueries, searchPages, searchCountries, searchByDate, searchPreviousByDate] = await Promise.all([
+    readSection("GA4 totals", async (querySignal) => ({ rows: await runGa4Batch([
+      ga4ReportRequest({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }),
+      ga4ReportRequest({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges: previousDateRanges }),
+    ], token, querySignal) })),
+    readSection("GA4 breakdowns", async (querySignal) => ({ rows: await runGa4Batch([
+      ga4ReportRequest({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }),
+      ga4ReportRequest({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }),
+      ga4ReportRequest({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }),
+      ga4ReportRequest({ dimensions: ["deviceCategory"], metrics: gaMetrics, rowLimit: 10, orderByMetric: "activeUsers", dateRanges }),
+      ga4ReportRequest({ dimensions: ["language"], metrics: ["activeUsers", "sessions"], rowLimit: 15, orderByMetric: "activeUsers", dateRanges }),
+    ], token, querySignal) })),
+    readSection("Search Console queries", (querySignal) => runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }, querySignal, token)),
+    readSection("Search Console pages", (querySignal) => runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }, querySignal, token)),
+    readSection("Search Console countries", (querySignal) => runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }, querySignal, token)),
+    readSection("Search Console totals", (querySignal) => runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }, querySignal, token)),
+    readSection("Search Console previous totals", (querySignal) => runSearchConsoleReport({
       dimensions: ["date"],
       rowLimit: 30,
       startDate: previousSearchStartDate,
       endDate: previousSearchEndDate,
-    }, signal),
+    }, querySignal, token)),
   ]);
 
+  const [gaTotals = {}, gaPreviousTotals = {}] = gaSummary.rows ?? [];
+  const [gaLocations = {}, gaSources = {}, gaPages = {}, gaDevices = {}, gaLanguages = {}] = gaBreakdowns.rows ?? [];
   return {
     analyticsDate,
+    warnings: warnings.sort(),
     searchStartDate,
     searchEndDate,
     ga4: {
@@ -442,7 +473,7 @@ export async function fetchDailyGoogleReport({
       sources: normalizeGa4Rows(gaSources, ["sessionSourceMedium"], gaMetrics),
       pages: normalizeGa4Rows(gaPages, ["pagePath"], gaMetrics),
       devices: normalizeGa4Rows(gaDevices, ["deviceCategory"], gaMetrics),
-      languages: normalizeGa4Rows(gaLanguages, ["language"], gaMetrics),
+      languages: normalizeGa4Rows(gaLanguages, ["language"], ["activeUsers", "sessions"]),
     },
     searchConsole: {
       queries: normalizeSearchRows(searchQueries, ["query"]),

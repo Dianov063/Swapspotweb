@@ -396,6 +396,7 @@ export async function buildDailyReport(window: DailyReportWindow) {
     warnings: [],
   };
   if (googleResult.status === "rejected") errors.push(`Google: ${String(googleResult.reason)}`);
+  if (google) errors.push(...google.warnings);
   if (productResult.status === "rejected") errors.push(`SwapSpot: ${String(productResult.reason)}`);
   if (productResult.status === "fulfilled" && productResult.value.registrationWarning) errors.push(productResult.value.registrationWarning);
   if (bingResult.status === "rejected") errors.push(`Bing: ${String(bingResult.reason)}`);
@@ -504,9 +505,17 @@ export async function buildDailyReport(window: DailyReportWindow) {
   const gaSessions = number(gaTotals.sessions);
   const previousGaUsers = number(previousGaTotals.activeUsers);
   const previousGaSessions = number(previousGaTotals.sessions);
+  const hasGaTotals = google != null && !google.warnings.some((warning) => warning.startsWith("GA4 totals:"));
+  const hasGaComparison = hasGaTotals;
+  const hasSearchTotals = google != null && !google.warnings.some((warning) => warning.startsWith("Search Console totals:"));
+  const hasSearchComparison = hasSearchTotals && !google?.warnings.some((warning) => warning.startsWith("Search Console previous totals:"));
+  const gaHeadline = hasGaTotals ? `${gaUsers} / ${gaSessions}` : "Данные недоступны";
+  const gaComparison = hasGaComparison ? `${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}` : "—";
+  const searchHeadline = hasSearchTotals ? `${searchTotals.clicks} / ${searchTotals.impressions}` : "Данные недоступны";
+  const searchComparison = hasSearchComparison ? `${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}` : "—";
 
   const html = `<!doctype html><html><body style="margin:0;background:#f4f5f2;color:#1f2937;font-family:Arial,sans-serif"><div style="max-width:900px;margin:0 auto;padding:24px"><div style="background:#174d37;color:white;border-radius:16px;padding:24px"><div style="font-size:13px;opacity:.8">ЕЖЕДНЕВНЫЙ ОТЧЁТ</div><h1 style="margin:8px 0 0;font-size:28px">SwapSpot — ${escapeHtml(window.reportDate)}</h1><p style="margin:8px 0 0;opacity:.9">Регистрации и услуги: последние 24 часа · GA4: ${escapeHtml(window.analyticsDate)} · Search Console: ${escapeHtml(window.searchStartDate)}–${escapeHtml(window.searchEndDate)}</p></div>
-  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Сообщения в поддержку</b><div style="font-size:30px;margin-top:8px">${support.newMessages.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">диалогов: ${support.newMessageThreads}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Ждут ответа поддержки</b><div style="font-size:30px;margin-top:8px;color:${support.awaiting.length ? "#b45309" : "inherit"}">${support.awaiting.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">${supportLink}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaUsers} / ${gaSessions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchTotals.clicks} / ${searchTotals.impressions}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)}</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0"><div style="background:white;border-radius:12px;padding:18px"><b>Новые регистрации</b><div style="font-size:30px;margin-top:8px">${product.registrations.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Новые услуги</b><div style="font-size:30px;margin-top:8px">${product.services.length}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Сообщения в поддержку</b><div style="font-size:30px;margin-top:8px">${support.newMessages.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">диалогов: ${support.newMessageThreads}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Ждут ответа поддержки</b><div style="font-size:30px;margin-top:8px;color:${support.awaiting.length ? "#b45309" : "inherit"}">${support.awaiting.length}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">${supportLink}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>GA4 пользователи / сессии</b><div style="font-size:24px;margin-top:8px">${gaHeadline}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему дню: ${gaComparison}</div></div><div style="background:white;border-radius:12px;padding:18px"><b>Google Search клики / показы</b><div style="font-size:24px;margin-top:8px">${searchHeadline}</div><div style="color:#6b7280;font-size:12px;margin-top:6px">к предыдущему периоду: ${searchComparison}</div></div></div>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи App Store</h2><p>${escapeHtml(salesNote)}</p>${appleSalesHtml}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Продажи Google Play</h2><p>${escapeHtml(playNote)}</p>${playHtml}</section>
   <section style="background:white;border-radius:12px;padding:20px;margin-top:12px"><h2>Регистрации: кто и откуда</h2>${renderTable(registrationHeaders, registrationRows)}${usesIpGeolocation ? '<p><a href="https://db-ip.com">IP Geolocation by DB-IP</a></p>' : ""}<h3>По странам</h3>${renderTable(["Страна", "Регистрации"], registrationCountries)}<h3>По городам</h3>${renderTable(["Город", "Регистрации"], registrationCities)}</section>
@@ -523,8 +532,8 @@ export async function buildDailyReport(window: DailyReportWindow) {
     `Новые регистрации: ${product.registrations.length}`,
     `Новые услуги: ${product.services.length}`,
     `Сообщения в поддержку: ${support.newMessages.length} (диалогов: ${support.newMessageThreads}); ждут ответа: ${support.awaiting.length} — ${support.inboxUrl}`,
-    `GA4 пользователи / сессии: ${gaUsers} / ${gaSessions} (${percentChange(gaUsers, previousGaUsers)} / ${percentChange(gaSessions, previousGaSessions)} к предыдущему дню)`,
-    `Google Search клики / показы: ${searchTotals.clicks} / ${searchTotals.impressions} (${percentChange(searchTotals.clicks, previousSearchTotals.clicks)} / ${percentChange(searchTotals.impressions, previousSearchTotals.impressions)} к предыдущему периоду)`,
+    `GA4 пользователи / сессии: ${gaHeadline} (${gaComparison} к предыдущему дню)`,
+    `Google Search клики / показы: ${searchHeadline} (${searchComparison} к предыдущему периоду)`,
     "\nПродажи App Store: " + salesNote,
     ...salesSections.map(({ date, message, rows }) => [date, message, rows.length ? textTable("Покупки и возвраты", salesHeaders, rows) : ""].filter(Boolean).join("\n")),
     "\nПродажи Google Play: " + playNote,
@@ -568,14 +577,14 @@ export async function buildDailyReport(window: DailyReportWindow) {
       supportNewMessages: support.newMessages.length,
       supportNewMessageThreads: support.newMessageThreads,
       supportAwaiting: support.awaiting.length,
-      ga4Users: gaUsers,
-      ga4Sessions: gaSessions,
-      ga4PreviousUsers: previousGaUsers,
-      ga4PreviousSessions: previousGaSessions,
-      searchClicks: searchTotals.clicks,
-      searchImpressions: searchTotals.impressions,
-      searchPreviousClicks: previousSearchTotals.clicks,
-      searchPreviousImpressions: previousSearchTotals.impressions,
+      ga4Users: hasGaTotals ? gaUsers : null,
+      ga4Sessions: hasGaTotals ? gaSessions : null,
+      ga4PreviousUsers: hasGaComparison ? previousGaUsers : null,
+      ga4PreviousSessions: hasGaComparison ? previousGaSessions : null,
+      searchClicks: hasSearchTotals ? searchTotals.clicks : null,
+      searchImpressions: hasSearchTotals ? searchTotals.impressions : null,
+      searchPreviousClicks: hasSearchComparison ? previousSearchTotals.clicks : null,
+      searchPreviousImpressions: hasSearchComparison ? previousSearchTotals.impressions : null,
       bingConfigured: bing.configured,
       bingCrawlErrors: number(bing.crawl?.CrawlErrors),
       bingCrawlIssues: bing.issues.map((issue) => ({
