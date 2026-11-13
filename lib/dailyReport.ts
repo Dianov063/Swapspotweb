@@ -7,6 +7,8 @@ import { fetchAppleDailySales } from "@/lib/appleSalesReport";
 import { fetchGooglePlaySales } from "@/lib/googlePlaySalesReport";
 
 const REPORT_TIME_ZONE = "America/New_York";
+const REPORT_SOURCE_TIMEOUT_MS = 30_000;
+const REPORT_DELIVERY_TIMEOUT_MS = 15_000;
 
 type RecordValue = string | number | null | undefined;
 type GenericRow = Record<string, RecordValue>;
@@ -97,20 +99,27 @@ export function getDailyReportWindow(now = new Date()): DailyReportWindow {
   };
 }
 
-export function isElevenInNewYork(now = new Date()) {
+export function isReportTime(now: Date, scheduledUtcHour: string | null) {
+  // The cron URL identifies its UTC slot even when Vercel runs it late.
+  if (scheduledUtcHour !== null && scheduledUtcHour !== "15" && scheduledUtcHour !== "16") return false;
+  const slot = new Date(now);
+  if (scheduledUtcHour !== null) slot.setUTCHours(Number(scheduledUtcHour), 0, 0, 0);
+  if (now < slot) return false;
   const hour = new Intl.DateTimeFormat("en-US", {
     timeZone: REPORT_TIME_ZONE,
     hour: "2-digit",
     hourCycle: "h23",
-  }).format(now);
+  }).format(slot);
   return Number(hour) === 11;
 }
 
-async function readJson<T>(path: string): Promise<T> {
-  const response = await supabaseAdminFetch(path);
-  const data = await response.json();
-  if (!response.ok) throw new Error(data?.message || data?.error || `Supabase request failed (${response.status})`);
-  return data as T;
+function reportReader(signal: AbortSignal) {
+  return async function readJson<T>(path: string): Promise<T> {
+    const response = await supabaseAdminFetch(path, { signal });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data?.message || data?.error || `SwapSpot data request failed (${response.status})`);
+    return data as T;
+  };
 }
 
 function idsFilter(ids: string[]) {
@@ -127,7 +136,8 @@ function primaryArea(areas: AreaRow[], helperId: string) {
     || null;
 }
 
-async function fetchProductActivity(window: DailyReportWindow) {
+async function fetchProductActivity(window: DailyReportWindow, signal: AbortSignal) {
+  const readJson = reportReader(signal);
   const start = window.start.toISOString();
   const end = window.end.toISOString();
   const registrations = await readJson<ProfileRow[]>(
@@ -137,7 +147,7 @@ async function fetchProductActivity(window: DailyReportWindow) {
   const registrationIds = realRegistrations.map((profile) => profile.id);
   let registrationWarning = "";
   const registrationClients = registrationIds.length && swapspotBackend() === "appplatform"
-    ? await fetchRegistrationClients(start, end).catch(() => {
+    ? await fetchRegistrationClients(start, end, signal).catch(() => {
         registrationWarning = "SwapSpot: не удалось получить данные о сборках и месте регистрации.";
         return [];
       })
@@ -260,9 +270,9 @@ function describeBingCrawlIssues(value: number | undefined) {
   return labels.length ? labels.join(", ") : "none";
 }
 
-async function fetchBingRows<T>(method: string, siteUrl: string, apiKey: string) {
+async function fetchBingRows<T>(method: string, siteUrl: string, apiKey: string, signal: AbortSignal) {
   const params = new URLSearchParams({ siteUrl, apikey: apiKey });
-  const response = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/${method}?${params}`, { cache: "no-store" });
+  const response = await fetch(`https://ssl.bing.com/webmaster/api.svc/json/${method}?${params}`, { cache: "no-store", signal });
   const data = await response.json();
   if (!response.ok) throw new Error(data?.Message || data?.message || `Bing ${method} failed (${response.status})`);
   return Array.isArray(data?.d) ? data.d as T[] : [];
@@ -280,7 +290,7 @@ function formatBingDate(value: string | undefined) {
   return timestamp ? new Date(timestamp).toISOString().slice(0, 10) : "—";
 }
 
-async function fetchBingReport() {
+async function fetchBingReport(signal: AbortSignal) {
   const apiKey = process.env.BING_WEBMASTER_API_KEY;
   const siteUrl = process.env.BING_SITE_URL || "https://www.swapspot.org/";
   if (!apiKey) return {
@@ -292,9 +302,9 @@ async function fetchBingReport() {
     warnings: [] as string[],
   };
   const [queryResult, crawlResult, issuesResult] = await Promise.allSettled([
-    fetchBingRows<BingQueryStat>("GetQueryStats", siteUrl, apiKey),
-    fetchBingRows<BingCrawlStat>("GetCrawlStats", siteUrl, apiKey),
-    fetchBingRows<BingCrawlIssue>("GetCrawlIssues", siteUrl, apiKey),
+    fetchBingRows<BingQueryStat>("GetQueryStats", siteUrl, apiKey, signal),
+    fetchBingRows<BingCrawlStat>("GetCrawlStats", siteUrl, apiKey, signal),
+    fetchBingRows<BingCrawlIssue>("GetCrawlIssues", siteUrl, apiKey, signal),
   ]);
   const warnings: string[] = [];
   if (queryResult.status === "rejected") warnings.push(`Query stats: ${String(queryResult.reason)}`);
@@ -363,12 +373,14 @@ function textTable(title: string, headers: string[], rows: (string | number)[][]
 
 export async function buildDailyReport(window: DailyReportWindow) {
   const errors: string[] = [];
+  const signal = AbortSignal.timeout(REPORT_SOURCE_TIMEOUT_MS);
+  const readJson = reportReader(signal);
   const salesDates = [window.analyticsDate, shiftIsoDate(window.analyticsDate, -1)];
   const playStart = shiftIsoDate(window.analyticsDate, -7);
   const [googleResult, productResult, bingResult, supportResult, salesResult, playResult] = await Promise.allSettled([
-    fetchDailyGoogleReport(window),
-    fetchProductActivity(window),
-    fetchBingReport(),
+    fetchDailyGoogleReport(window, signal),
+    fetchProductActivity(window, signal),
+    fetchBingReport(signal),
     fetchSupportActivity(window, readJson),
     Promise.all(salesDates.map(fetchAppleDailySales)),
     fetchGooglePlaySales(playStart, window.analyticsDate),
@@ -588,8 +600,8 @@ export async function sendDailyReport(report: Awaited<ReturnType<typeof buildDai
     html: prepared.html,
     text: prepared.text,
     reportDate,
-  });
-  const data = await response.json().catch(() => ({}));
+  }, AbortSignal.timeout(REPORT_DELIVERY_TIMEOUT_MS));
+  const data = await response.json();
   if (!response.ok) {
     throw new Error(data?.details || data?.error || `MailHub rejected report (${response.status})`);
   }

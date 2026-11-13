@@ -53,13 +53,13 @@ export function getSupabaseAdminEnv() {
 
 type FetchOptions = RequestInit & { next?: { revalidate?: number } };
 
-export async function fetchRegistrationClients(start: string, end: string) {
+export async function fetchRegistrationClients(start: string, end: string, signal?: AbortSignal) {
   const { appBase, token } = appPlatformEnv();
   const query = new URLSearchParams({ start, end });
   const response = await fetch(`${appBase}/admin/registrations?${query}`, {
     headers: { Authorization: `Service ${token}` },
     cache: "no-store",
-    signal: AbortSignal.timeout(8_000),
+    signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(8_000)]) : AbortSignal.timeout(8_000),
   });
   if (!response.ok) throw new Error(`App Platform HTTP ${response.status}`);
   return await response.json() as Array<{
@@ -96,7 +96,7 @@ const PLATFORM_FUNCTIONS: Record<string, string | null> = {
   "push-notification": null,
 };
 
-export async function invokeSupabaseAdminFunction(name: string, payload: unknown) {
+export async function invokeSupabaseAdminFunction(name: string, payload: unknown, signal?: AbortSignal) {
   if (swapspotBackend() === "appplatform") {
     if (!(name in PLATFORM_FUNCTIONS)) {
       throw new Error(`Function ${name} is not available on App Platform`);
@@ -110,6 +110,7 @@ export async function invokeSupabaseAdminFunction(name: string, payload: unknown
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Service ${token}` },
       body: JSON.stringify(payload),
+      signal,
       cache: "no-store",
     });
   }
@@ -123,6 +124,7 @@ export async function invokeSupabaseAdminFunction(name: string, payload: unknown
       Authorization: `Bearer ${serviceRoleKey}`,
     },
     body: JSON.stringify(payload),
+    signal,
     cache: "no-store",
   });
 }

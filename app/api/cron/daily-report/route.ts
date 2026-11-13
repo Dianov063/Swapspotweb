@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { buildDailyReport, getDailyReportWindow, isElevenInNewYork, sendDailyReport } from "@/lib/dailyReport";
+import { buildDailyReport, getDailyReportWindow, isReportTime, sendDailyReport } from "@/lib/dailyReport";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   const force = url.searchParams.get("force") === "1";
   const dryRun = url.searchParams.get("dryRun") === "1";
   const now = new Date();
-  if (!force && !isElevenInNewYork(now)) {
+  if (!force && !isReportTime(now, url.searchParams.get("scheduledUtcHour"))) {
     return NextResponse.json({ ok: true, skipped: true, reason: "Not 11:00 in America/New_York" });
   }
 

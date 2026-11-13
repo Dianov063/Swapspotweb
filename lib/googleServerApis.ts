@@ -53,7 +53,7 @@ function base64Url(input: string) {
     .replace(/\//g, "_");
 }
 
-async function getAccessToken(scope: string) {
+async function getAccessToken(scope: string, signal?: AbortSignal) {
   const { clientEmail, privateKey } = getGoogleEnv();
   const now = Math.floor(Date.now() / 1000);
   const header = base64Url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
@@ -81,6 +81,7 @@ async function getAccessToken(scope: string) {
       assertion: jwt,
     }),
     cache: "no-store",
+    signal,
   });
   const data = (await response.json()) as TokenResponse;
 
@@ -157,14 +158,14 @@ async function runGa4Report({
   rowLimit?: number;
   orderByMetric?: string;
   dateRanges?: { startDate: string; endDate: string }[];
-}) {
+}, signal?: AbortSignal) {
   const propertyId = process.env.GA4_PROPERTY_ID;
 
   if (!propertyId) {
     throw new Error("Missing GA4_PROPERTY_ID");
   }
 
-  const accessToken = await getAccessToken(GA4_SCOPE);
+  const accessToken = await getAccessToken(GA4_SCOPE, signal);
   const response = await fetch(
     `https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`,
     {
@@ -185,6 +186,7 @@ async function runGa4Report({
         limit: `${rowLimit}`,
       }),
       cache: "no-store",
+      signal,
     },
   );
 
@@ -221,14 +223,14 @@ async function runSearchConsoleReport({
   rowLimit?: number;
   startDate?: string;
   endDate?: string;
-}) {
+}, signal?: AbortSignal) {
   const siteUrl = process.env.SEARCH_CONSOLE_SITE_URL;
 
   if (!siteUrl) {
     throw new Error("Missing SEARCH_CONSOLE_SITE_URL");
   }
 
-  const accessToken = await getAccessToken(SEARCH_CONSOLE_SCOPE);
+  const accessToken = await getAccessToken(SEARCH_CONSOLE_SCOPE, signal);
   const response = await fetch(
     `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
     {
@@ -245,6 +247,7 @@ async function runSearchConsoleReport({
         startRow: 0,
       }),
       cache: "no-store",
+      signal,
     },
   );
 
@@ -379,7 +382,7 @@ export async function fetchDailyGoogleReport({
   analyticsDate: string;
   searchStartDate: string;
   searchEndDate: string;
-}) {
+}, signal?: AbortSignal) {
   const gaMetrics = ["activeUsers", "sessions", "screenPageViews", "engagedSessions"];
   const dateRanges = [{ startDate: analyticsDate, endDate: analyticsDate }];
   const previousAnalyticsDate = shiftReportDate(analyticsDate, -1);
@@ -408,23 +411,23 @@ export async function fetchDailyGoogleReport({
     searchByDate,
     searchPreviousByDate,
   ] = await Promise.all([
-    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }),
-    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges: previousDateRanges }),
-    runGa4Report({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }),
-    runGa4Report({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }),
-    runGa4Report({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }),
-    runGa4Report({ dimensions: ["deviceCategory"], metrics: gaMetrics, rowLimit: 10, orderByMetric: "activeUsers", dateRanges }),
-    runGa4Report({ dimensions: ["language"], metrics: gaMetrics, rowLimit: 15, orderByMetric: "activeUsers", dateRanges }),
-    runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }),
-    runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }),
-    runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }),
-    runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }),
+    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges }, signal),
+    runGa4Report({ dimensions: [], metrics: gaMetrics, rowLimit: 1, dateRanges: previousDateRanges }, signal),
+    runGa4Report({ dimensions: ["country", "city"], metrics: gaMetrics, rowLimit: 50, orderByMetric: "activeUsers", dateRanges }, signal),
+    runGa4Report({ dimensions: ["sessionSourceMedium"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "sessions", dateRanges }, signal),
+    runGa4Report({ dimensions: ["pagePath"], metrics: gaMetrics, rowLimit: 25, orderByMetric: "screenPageViews", dateRanges }, signal),
+    runGa4Report({ dimensions: ["deviceCategory"], metrics: gaMetrics, rowLimit: 10, orderByMetric: "activeUsers", dateRanges }, signal),
+    runGa4Report({ dimensions: ["language"], metrics: gaMetrics, rowLimit: 15, orderByMetric: "activeUsers", dateRanges }, signal),
+    runSearchConsoleReport({ dimensions: ["query"], rowLimit: 50, ...searchDates }, signal),
+    runSearchConsoleReport({ dimensions: ["page"], rowLimit: 50, ...searchDates }, signal),
+    runSearchConsoleReport({ dimensions: ["country"], rowLimit: 50, ...searchDates }, signal),
+    runSearchConsoleReport({ dimensions: ["date"], rowLimit: 30, ...searchDates }, signal),
     runSearchConsoleReport({
       dimensions: ["date"],
       rowLimit: 30,
       startDate: previousSearchStartDate,
       endDate: previousSearchEndDate,
-    }),
+    }, signal),
   ]);
 
   return {
