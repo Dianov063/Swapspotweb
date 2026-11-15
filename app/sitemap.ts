@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { categories, cities } from "@/lib/data";
 import { getSiteLanguages } from "@/lib/languages";
 import { absoluteLanguageAlternates, localizedPath, siteUrl, type LanguageRoute } from "@/lib/locales";
-import { getDirectoryPairs, getPublicHelperProfiles } from "@/lib/publicDirectory";
+import { getSitemapDirectory } from "@/lib/publicDirectory";
 import { getMarkets, isActive } from "@/lib/markets";
 import { nationalMarkets } from "@/lib/nationalMarkets";
 
@@ -40,9 +40,8 @@ function englishEntry(path: string, languages: readonly LanguageRoute[], options
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  const [directoryPairs, helperProfiles, languages, markets] = await Promise.all([
-    getDirectoryPairs(),
-    getPublicHelperProfiles({ limit: 1000 }),
+  const [{ directoryPairs, helperSlugs }, languages, markets] = await Promise.all([
+    getSitemapDirectory(),
     getSiteLanguages(),
     getMarkets({ live: true }),
   ]);
@@ -78,8 +77,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.72,
     }),
   );
-  const helperProfileRoutes = helperProfiles.slice(0, 500).map((profile) =>
-    englishEntry(`/helpers/${profile.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
+  const helperProfileRoutes = helperSlugs.map((slug) =>
+    englishEntry(`/helpers/${slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
   );
 
   const nationalPages = nationalMarkets

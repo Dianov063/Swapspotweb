@@ -110,19 +110,23 @@ function supabaseHeaders() {
   };
 }
 
-async function fetchRest<T>(path: string): Promise<T[]> {
+async function fetchRest<T>(path: string, required = false): Promise<T[]> {
   let response: Response;
   if (swapspotBackend() === "appplatform") {
     // Same PostgREST path through the App Platform backend credential.
     try {
       response = await supabaseAdminFetch(path, { next: { revalidate: 3600 } });
     } catch (error) {
+      if (required) throw error;
       console.error("SwapSpot public directory is not configured", error);
       return [];
     }
   } else {
     const headers = supabaseHeaders();
-    if (!headers) return [];
+    if (!headers) {
+      if (required) throw new Error("SwapSpot public directory is not configured");
+      return [];
+    }
     response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, {
       headers,
       next: { revalidate: 3600 },
@@ -130,11 +134,27 @@ async function fetchRest<T>(path: string): Promise<T[]> {
   }
 
   if (!response.ok) {
+    if (required) throw new Error(`SwapSpot public directory returned HTTP ${response.status}`);
     console.error("SwapSpot public directory fetch failed", await response.text());
     return [];
   }
 
   return (await response.json()) as T[];
+}
+
+const directoryPageSize = 500;
+
+async function readPublicListingPages<T>(query: URLSearchParams, required = false): Promise<T[]> {
+  query.set("order", "helper_id.asc,service_id.asc,service_area_id.asc");
+  query.set("limit", String(directoryPageSize));
+  const rows: T[] = [];
+  for (let offset = 0; ; ) {
+    query.set("offset", String(offset));
+    const page = await fetchRest<T>(`public_service_listings?${query}`, required);
+    if (page.length === 0) return rows;
+    rows.push(...page);
+    offset += page.length;
+  }
 }
 
 export async function getDirectoryCategories(): Promise<DirectoryCategory[]> {
@@ -173,16 +193,20 @@ export async function getDirectoryMarkets(): Promise<DirectoryMarket[]> {
   return fallbackCities.map((city) => ({ slug: city.slug, name: city.name }));
 }
 
-async function getRawDirectoryPairs(): Promise<DirectoryPair[]> {
-  const rows = await fetchRest<{
-    category_name: string;
-    category_slug: string;
-    market_name: string;
-    market_slug: string;
-    country_code: string | null;
-  }>(
-    "public_service_listings?select=category_name,category_slug,market_name,market_slug,country_code&order=category_name.asc,market_name.asc&limit=10000",
-  );
+type DirectoryListing = Pick<
+  PublicServiceListing,
+  "helper_id" | "helper_display_name" | "category_name" | "category_slug" | "market_name" | "market_slug" | "country_code"
+>;
+
+function readDirectoryListings(required = false, categorySlug?: string) {
+  const query = new URLSearchParams({
+    select: "helper_id,helper_display_name,category_name,category_slug,market_name,market_slug,country_code",
+  });
+  if (categorySlug) query.set("category_slug", `eq.${categorySlug}`);
+  return readPublicListingPages<DirectoryListing>(query, required);
+}
+
+function buildRawDirectoryPairs(rows: DirectoryListing[]): DirectoryPair[] {
   const byKey = new Map<string, DirectoryPair>();
 
   for (const row of rows) {
@@ -205,7 +229,9 @@ async function getRawDirectoryPairs(): Promise<DirectoryPair[]> {
     }
   }
 
-  return [...byKey.values()];
+  return [...byKey.values()].sort((a, b) =>
+    a.categoryName.localeCompare(b.categoryName) || a.marketName.localeCompare(b.marketName),
+  );
 }
 
 function directoryPairGroupKey(pair: DirectoryPair) {
@@ -231,18 +257,22 @@ function mergeDirectoryPairGroup(pairs: DirectoryPair[]): DirectoryPair {
   };
 }
 
-export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
+function mergeDirectoryPairs(pairs: DirectoryPair[]): DirectoryPair[] {
   const grouped = new Map<string, DirectoryPair[]>();
-  for (const pair of await getRawDirectoryPairs()) {
+  for (const pair of pairs) {
     const key = directoryPairGroupKey(pair);
     grouped.set(key, [...(grouped.get(key) || []), pair]);
   }
   return [...grouped.values()].map(mergeDirectoryPairGroup);
 }
 
+export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
+  return mergeDirectoryPairs(buildRawDirectoryPairs(await readDirectoryListings()));
+}
+
 export async function getDirectoryPair(categorySlug: string, marketSlug: string) {
   const canonicalCategorySlug = categoryAliases[categorySlug] || categorySlug;
-  const pairs = await getRawDirectoryPairs();
+  const pairs = buildRawDirectoryPairs(await readDirectoryListings(false, canonicalCategorySlug));
   const requested = pairs.find(
     (pair) => pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
   );
@@ -304,7 +334,9 @@ function sortListings(listings: PublicServiceListing[]) {
   });
 }
 
-export function getHelperSlug(listingOrProfile: PublicServiceListing | PublicHelperProfile) {
+export function getHelperSlug(
+  listingOrProfile: Pick<PublicServiceListing, "helper_id" | "helper_display_name"> | PublicHelperProfile,
+) {
   const helperId =
     "helperId" in listingOrProfile ? listingOrProfile.helperId : listingOrProfile.helper_id;
   const helperName =
@@ -380,26 +412,64 @@ export function buildPublicHelperProfile(
   return profile;
 }
 
-export async function getPublicHelperProfiles({ limit = 1000 }: { limit?: number } = {}) {
-  const listings = await getPublicServiceListings({ limit });
-  const helperIds = new Set(listings.map((listing) => listing.helper_id).filter(Boolean));
-  const profiles: PublicHelperProfile[] = [];
+async function getIndexableHelperIds(helperIds: string[]) {
+  const indexable = new Set<string>();
+  // Legacy demo accounts live alongside regular profiles. The separate discovery
+  // seed catalog never enters public_service_listings.
+  const testAccount = /(?:^|[+._-])(?:qa|test|demo|seed|review|smoke|e2e|staging)(?:[+._@-]|$)|@example\.(?:com|org|net)$/i;
 
-  for (const helperId of helperIds) {
-    const profile = buildPublicHelperProfile(helperId, listings);
-    if (profile) profiles.push(profile);
+  for (let start = 0; start < helperIds.length; start += 50) {
+    const ids = helperIds.slice(start, start + 50);
+    const helpers = await fetchRest<{ id: string; user_id: string }>(
+      `helpers?select=id,user_id&id=in.(${ids.join(",")})&is_active=eq.true`,
+      true,
+    );
+    if (!helpers.length) continue;
+    const userIds = [...new Set(helpers.map(({ user_id }) => user_id))];
+    const profiles = await fetchRest<{ id: string; email: string | null }>(
+      `profiles?select=id,email&id=in.(${userIds.join(",")})`,
+      true,
+    );
+    const eligibleUsers = new Set(
+      profiles.filter(({ email }) => email?.trim() && !testAccount.test(email.trim())).map(({ id }) => id),
+    );
+    for (const { id, user_id } of helpers) {
+      if (eligibleUsers.has(user_id)) indexable.add(id);
+    }
   }
 
-  return profiles.sort((a, b) => {
-    const ratingCompare = b.ratingAvg - a.ratingAvg;
-    if (ratingCompare) return ratingCompare;
-    return a.displayName.localeCompare(b.displayName);
-  });
+  return indexable;
+}
+
+export async function getSitemapDirectory() {
+  const listings = await readDirectoryListings(true);
+  const indexable = await getIndexableHelperIds([...new Set(listings.map(({ helper_id }) => helper_id))]);
+  const included = listings.filter(({ helper_id }) => indexable.has(helper_id));
+  const includedPairs = new Set(included.map((row) => `${row.category_slug}:${row.market_slug}`));
+  const directoryPairs = mergeDirectoryPairs(buildRawDirectoryPairs(listings)).filter((pair) =>
+    pair.sourceMarketSlugs.some((slug) => includedPairs.has(`${pair.categorySlug}:${slug}`)),
+  );
+  return {
+    directoryPairs,
+    helperSlugs: [...new Set(included.map(getHelperSlug))].sort(),
+  };
+}
+
+export async function isPublicHelperIndexable(helperId: string) {
+  return (await getIndexableHelperIds([helperId])).has(helperId);
 }
 
 export async function getPublicHelperProfileBySlug(helperSlug: string) {
-  const profiles = await getPublicHelperProfiles();
-  return profiles.find((profile) => profile.slug === helperSlug) || null;
+  // The canonical slug ends with the first ten hexadecimal digits of the helper UUID.
+  const prefix = /-([0-9a-f]{8})([0-9a-f]{2})$/.exec(helperSlug);
+  if (!prefix) return null;
+  const uuidPrefix = `${prefix[1]}-${prefix[2]}`;
+  const listings = await readPublicListingPages<PublicServiceListing>(new URLSearchParams({
+    select: "*",
+    and: `(helper_id.gte.${uuidPrefix}00-0000-0000-000000000000,helper_id.lte.${uuidPrefix}ff-ffff-ffff-ffffffffffff)`,
+  }), true);
+  const matching = listings.filter((listing) => getHelperSlug(listing) === helperSlug);
+  return matching.length ? buildPublicHelperProfile(matching[0].helper_id, matching) : null;
 }
 
 /**
@@ -442,7 +512,7 @@ export function getServiceTitle(listing: PublicServiceListing, locale: Locale = 
 }
 
 /** Helper name for slugs and English pages (stable, locale independent). */
-export function getHelperName(listing: PublicServiceListing) {
+export function getHelperName(listing: Pick<PublicServiceListing, "helper_display_name">) {
   return listing.helper_display_name || "Local helper";
 }
 

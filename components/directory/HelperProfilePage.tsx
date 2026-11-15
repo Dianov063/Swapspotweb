@@ -31,6 +31,7 @@ import {
   formatServiceArea,
   formatServicePrice,
   getPublicHelperProfileBySlug,
+  isPublicHelperIndexable,
   getServiceTitle,
   type PublicHelperProfile,
   type PublicServiceListing,
@@ -87,11 +88,13 @@ export async function helperProfileMetadata(locale: Locale, helperSlug: string):
   if (!profile) return {};
   const { t, name, category, market, description } = profileText(profile, locale);
   const path = `/helpers/${profile.slug}`;
+  const indexable = await isPublicHelperIndexable(profile.helperId);
 
   return {
     title: fillTemplate(t.helperMetaTitle, { name, category, market }),
     description,
     alternates: await localeAlternates(path, locale),
+    ...(indexable ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: fillTemplate(t.onSwapSpot, { name }),
       description,
@@ -161,8 +164,8 @@ export default async function HelperProfilePage({ locale, helperSlug }: { locale
     <div lang={languageTag(locale)} dir={textDirection(locale)} className="min-w-0 overflow-x-clip [&_*]:min-w-0">
       <Header locale={locale} dictionary={dictionary} />
       <main>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
 
         <section className="relative overflow-hidden border-b border-line bg-gradient-to-br from-green-soft via-sand to-gold-soft/40">
           <div className="mx-auto grid max-w-wrap gap-8 px-6 py-[clamp(46px,7vw,94px)] lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
