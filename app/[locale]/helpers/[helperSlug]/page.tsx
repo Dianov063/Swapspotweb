@@ -3,7 +3,12 @@ import { notFound } from "next/navigation";
 import HelperProfilePage, { helperProfileMetadata } from "@/components/directory/HelperProfilePage";
 import { routeLocale } from "@/lib/languages";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
+// Cache public pages on demand without rendering every city and language at build time.
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ locale: string; helperSlug: string }> };
 

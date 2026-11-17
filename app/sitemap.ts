@@ -9,8 +9,8 @@ import { nationalMarkets } from "@/lib/nationalMarkets";
 // Short localized notice pages (no hreflang: the legal texts themselves stay English).
 const localizedNoticePaths = ["/trust-safety", "/contact", "/support", "/account-deletion", "/privacy", "/terms"];
 
+// Keep national market activation synchronized with the live registry.
 export const dynamic = "force-dynamic";
-export const revalidate = 3600;
 
 type Entry = MetadataRoute.Sitemap[number];
 
@@ -39,7 +39,6 @@ function englishEntry(path: string, languages: readonly LanguageRoute[], options
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date();
   const [{ directoryPairs, helperSlugs }, languages, markets] = await Promise.all([
     getSitemapDirectory(),
     getSiteLanguages(),
@@ -48,21 +47,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Low-cardinality pages: every site language URL is listed.
   const pages = [
-    ...localizedEntries("/", languages, { lastModified, changeFrequency: "weekly", priority: 1 }),
-    ...localizedEntries("/services", languages, { lastModified, changeFrequency: "weekly", priority: 0.7 }),
-    ...localizedEntries("/helpers", languages, { lastModified, changeFrequency: "weekly", priority: 0.7 }),
+    ...localizedEntries("/", languages, { changeFrequency: "weekly", priority: 1 }),
+    ...localizedEntries("/services", languages, { changeFrequency: "weekly", priority: 0.7 }),
+    ...localizedEntries("/helpers", languages, { changeFrequency: "weekly", priority: 0.7 }),
     ...categories.flatMap((category) =>
-      localizedEntries(`/categories/${category.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+      localizedEntries(`/categories/${category.slug}`, languages, { changeFrequency: "weekly", priority: 0.6 }),
     ),
     ...cities.flatMap((city) =>
-      localizedEntries(`/cities/${city.slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.6 }),
+      localizedEntries(`/cities/${city.slug}`, languages, { changeFrequency: "weekly", priority: 0.6 }),
     ),
   ];
 
   const noticePages = localizedNoticePaths.flatMap((path) =>
     languages.map(({ segment: locale }) => ({
       url: url(localizedPath(locale, path)),
-      lastModified,
       changeFrequency: locale === "en" ? ("weekly" as const) : ("monthly" as const),
       priority: locale === "en" ? 0.7 : 0.55,
     })),
@@ -72,18 +70,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // localized page also declares the same hreflang set in its HTML.
   const serviceMarketRoutes = directoryPairs.map((pair) =>
     englishEntry(`/services/${pair.categorySlug}/${pair.marketSlug}`, languages, {
-      lastModified,
       changeFrequency: "daily",
       priority: 0.72,
     }),
   );
   const helperProfileRoutes = helperSlugs.map((slug) =>
-    englishEntry(`/helpers/${slug}`, languages, { lastModified, changeFrequency: "weekly", priority: 0.62 }),
+    englishEntry(`/helpers/${slug}`, languages, { changeFrequency: "weekly", priority: 0.62 }),
   );
 
   const nationalPages = nationalMarkets
     .filter(({ code }) => isActive(markets.find((market) => market.code === code)))
-    .map(({ path }): Entry => ({ url: url(path), lastModified, changeFrequency: "weekly", priority: 0.7 }));
+    .map(({ path }): Entry => ({ url: url(path), changeFrequency: "weekly", priority: 0.7 }));
 
   return [...pages, ...noticePages, ...nationalPages, ...serviceMarketRoutes, ...helperProfileRoutes];
 }

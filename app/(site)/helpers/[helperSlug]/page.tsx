@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import HelperProfilePage, { helperProfileMetadata } from "@/components/directory/HelperProfilePage";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
+// Cache public pages on demand without rendering every city and language at build time.
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ helperSlug: string }> };
 

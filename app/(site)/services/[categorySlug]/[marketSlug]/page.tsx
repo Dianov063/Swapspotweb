@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import ServiceMarketPage, { serviceMarketMetadata } from "@/components/directory/ServiceMarketPage";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
+// Cache public pages on demand without rendering every city and language at build time.
+export function generateStaticParams() {
+  return [];
+}
 
 type Props = { params: Promise<{ categorySlug: string; marketSlug: string }> };
 

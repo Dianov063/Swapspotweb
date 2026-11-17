@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
 import { categories as fallbackCategories, cities as fallbackCities } from "@/lib/data";
 import { directoryStrings, fillTemplate } from "@/lib/directoryStrings";
@@ -110,12 +111,14 @@ function supabaseHeaders() {
   };
 }
 
+const directoryRevalidateSeconds = 300;
+
 async function fetchRest<T>(path: string, required = false): Promise<T[]> {
   let response: Response;
   if (swapspotBackend() === "appplatform") {
     // Same PostgREST path through the App Platform backend credential.
     try {
-      response = await supabaseAdminFetch(path, { next: { revalidate: 3600 } });
+      response = await supabaseAdminFetch(path, { next: { revalidate: directoryRevalidateSeconds } });
     } catch (error) {
       if (required) throw error;
       console.error("SwapSpot public directory is not configured", error);
@@ -129,7 +132,7 @@ async function fetchRest<T>(path: string, required = false): Promise<T[]> {
     }
     response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, {
       headers,
-      next: { revalidate: 3600 },
+      next: { revalidate: directoryRevalidateSeconds },
     });
   }
 
@@ -270,9 +273,9 @@ export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
   return mergeDirectoryPairs(buildRawDirectoryPairs(await readDirectoryListings()));
 }
 
-export async function getDirectoryPair(categorySlug: string, marketSlug: string) {
+export const getDirectoryPair = cache(async (categorySlug: string, marketSlug: string) => {
   const canonicalCategorySlug = categoryAliases[categorySlug] || categorySlug;
-  const pairs = buildRawDirectoryPairs(await readDirectoryListings(false, canonicalCategorySlug));
+  const pairs = buildRawDirectoryPairs(await readDirectoryListings(true, canonicalCategorySlug));
   const requested = pairs.find(
     (pair) => pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
   );
@@ -280,7 +283,7 @@ export async function getDirectoryPair(categorySlug: string, marketSlug: string)
   return mergeDirectoryPairGroup(
     pairs.filter((pair) => directoryPairGroupKey(pair) === directoryPairGroupKey(requested)),
   );
-}
+});
 
 export async function getDirectoryCategory(slug: string) {
   const categories = await getDirectoryCategories();
@@ -319,7 +322,7 @@ export async function getPublicServiceListings({
     params.set("market_slug", `eq.${marketSlug}`);
   }
 
-  return fetchRest<PublicServiceListing>(`public_service_listings?${params}`);
+  return fetchRest<PublicServiceListing>(`public_service_listings?${params}`, true);
 }
 
 function sortListings(listings: PublicServiceListing[]) {
@@ -459,7 +462,7 @@ export async function isPublicHelperIndexable(helperId: string) {
   return (await getIndexableHelperIds([helperId])).has(helperId);
 }
 
-export async function getPublicHelperProfileBySlug(helperSlug: string) {
+export const getPublicHelperProfileBySlug = cache(async (helperSlug: string) => {
   // The canonical slug ends with the first ten hexadecimal digits of the helper UUID.
   const prefix = /-([0-9a-f]{8})([0-9a-f]{2})$/.exec(helperSlug);
   if (!prefix) return null;
@@ -470,7 +473,7 @@ export async function getPublicHelperProfileBySlug(helperSlug: string) {
   }), true);
   const matching = listings.filter((listing) => getHelperSlug(listing) === helperSlug);
   return matching.length ? buildPublicHelperProfile(matching[0].helper_id, matching) : null;
-}
+});
 
 /**
  * Price label in the page language with the listing's own currency ("Price on request" for
