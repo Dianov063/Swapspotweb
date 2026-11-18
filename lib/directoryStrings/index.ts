@@ -67,12 +67,20 @@ export function t(locale: Locale, key: keyof DirectoryStrings, vars: TemplateVar
   return fillTemplate(directoryStrings(locale)[key], vars);
 }
 
+const languageLabels = new Map<string, string>();
+
 /** Language label in the page language when the value is a language code ("es" -> "Spanish"); other values as entered. */
 export function languageLabel(value: string, locale: Locale) {
   if (!/^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(value)) return value;
+  const languages = [...(extraLocaleTables(locale)?.meta.intl ?? [languageTag(locale)]), "en"];
+  const key = JSON.stringify([languages, value]);
+  const cached = languageLabels.get(key);
+  if (cached !== undefined) return cached;
   try {
-    const name = new Intl.DisplayNames([...(extraLocaleTables(locale)?.meta.intl ?? [languageTag(locale)]), "en"], { type: "language" }).of(value);
-    return name && name !== value ? name : value;
+    const name = new Intl.DisplayNames(languages, { type: "language" }).of(value) || value;
+    if (languageLabels.size >= 512) languageLabels.delete(languageLabels.keys().next().value!);
+    languageLabels.set(key, name);
+    return name;
   } catch {
     return value;
   }

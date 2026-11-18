@@ -49,15 +49,30 @@ export function intlLocales(locale: string): string[] {
   return [locale, "en"];
 }
 
+// Intl instances are immutable and expensive to construct for every service card.
+const numberFormatters = new Map<string, Intl.NumberFormat>();
+
+function numberFormatter(locale: string, options: Intl.NumberFormatOptions) {
+  const languages = intlLocales(locale);
+  const key = JSON.stringify([languages, options]);
+  let formatter = numberFormatters.get(key);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(languages, options);
+    if (numberFormatters.size >= 256) numberFormatters.delete(numberFormatters.keys().next().value!);
+    numberFormatters.set(key, formatter);
+  }
+  return formatter;
+}
+
 function defaultFractionDigits(currency: string) {
-  return new Intl.NumberFormat("en", { style: "currency", currency }).resolvedOptions().maximumFractionDigits ?? 2;
+  return numberFormatter("en", { style: "currency", currency }).resolvedOptions().maximumFractionDigits ?? 2;
 }
 
 export function normalizeCurrency(code: string | null | undefined) {
   const value = String(code ?? "").trim().toUpperCase();
   if (!/^[A-Z]{3}$/.test(value)) return null;
   try {
-    new Intl.NumberFormat("en", { style: "currency", currency: value });
+    numberFormatter("en", { style: "currency", currency: value });
     return value;
   } catch {
     return null;
@@ -79,7 +94,7 @@ export function formatMoney(amount: number, currency: string | null | undefined,
     maximumFractionDigits: fractionDigits,
   };
   if (code) Object.assign(options, { style: "currency", currency: code, currencyDisplay: "code" });
-  return new Intl.NumberFormat(intlLocales(locale), options).format(rounded);
+  return numberFormatter(locale, options).format(rounded);
 }
 
 export type PricedListing = {
@@ -147,7 +162,7 @@ const KM_PER_MILE = 1.609344;
 export function formatRadius(radiusMiles: number, unit: string | null | undefined, locale: string) {
   const kilometers = unit === "km";
   const value = kilometers ? Math.round(radiusMiles * KM_PER_MILE) : Math.round(radiusMiles * 10) / 10;
-  return new Intl.NumberFormat(intlLocales(locale), {
+  return numberFormatter(locale, {
     style: "unit",
     unit: kilometers ? "kilometer" : "mile",
     unitDisplay: "short",

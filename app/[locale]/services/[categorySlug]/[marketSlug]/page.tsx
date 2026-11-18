@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ServiceMarketPage, { serviceMarketMetadata } from "@/components/directory/ServiceMarketPage";
 import { routeLocale } from "@/lib/languages";
 
-export const revalidate = 300;
+export const revalidate = 900;
 
 // Cache public pages on demand without rendering every city and language at build time.
 export function generateStaticParams() {

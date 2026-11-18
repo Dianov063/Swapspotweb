@@ -1,5 +1,6 @@
 import { cache } from "react";
-import { supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
+import { unstable_cache } from "next/cache";
+import { appPlatformAppBase, supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
 import { categories as fallbackCategories, cities as fallbackCities } from "@/lib/data";
 import { directoryStrings, fillTemplate } from "@/lib/directoryStrings";
 import type { Locale } from "@/lib/locales";
@@ -112,13 +113,14 @@ function supabaseHeaders() {
 }
 
 const directoryRevalidateSeconds = 300;
+const serviceMarketRevalidateSeconds = 900;
 
-async function fetchRest<T>(path: string, required = false): Promise<T[]> {
+async function fetchRest<T>(path: string, required = false, revalidate = directoryRevalidateSeconds): Promise<T[]> {
   let response: Response;
   if (swapspotBackend() === "appplatform") {
     // Same PostgREST path through the App Platform backend credential.
     try {
-      response = await supabaseAdminFetch(path, { next: { revalidate: directoryRevalidateSeconds } });
+      response = await supabaseAdminFetch(path, { next: { revalidate } });
     } catch (error) {
       if (required) throw error;
       console.error("SwapSpot public directory is not configured", error);
@@ -132,7 +134,7 @@ async function fetchRest<T>(path: string, required = false): Promise<T[]> {
     }
     response = await fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, {
       headers,
-      next: { revalidate: directoryRevalidateSeconds },
+      next: { revalidate },
     });
   }
 
@@ -147,13 +149,13 @@ async function fetchRest<T>(path: string, required = false): Promise<T[]> {
 
 const directoryPageSize = 500;
 
-async function readPublicListingPages<T>(query: URLSearchParams, required = false): Promise<T[]> {
+async function readPublicListingPages<T>(query: URLSearchParams, required = false, revalidate = directoryRevalidateSeconds): Promise<T[]> {
   query.set("order", "helper_id.asc,service_id.asc,service_area_id.asc");
   query.set("limit", String(directoryPageSize));
   const rows: T[] = [];
   for (let offset = 0; ; ) {
     query.set("offset", String(offset));
-    const page = await fetchRest<T>(`public_service_listings?${query}`, required);
+    const page = await fetchRest<T>(`public_service_listings?${query}`, required, revalidate);
     if (page.length === 0) return rows;
     rows.push(...page);
     offset += page.length;
@@ -201,12 +203,12 @@ type DirectoryListing = Pick<
   "helper_id" | "helper_display_name" | "category_name" | "category_slug" | "market_name" | "market_slug" | "country_code"
 >;
 
-function readDirectoryListings(required = false, categorySlug?: string) {
+function readDirectoryListings(required = false, categorySlug?: string, revalidate = directoryRevalidateSeconds) {
   const query = new URLSearchParams({
     select: "helper_id,helper_display_name,category_name,category_slug,market_name,market_slug,country_code",
   });
   if (categorySlug) query.set("category_slug", `eq.${categorySlug}`);
-  return readPublicListingPages<DirectoryListing>(query, required);
+  return readPublicListingPages<DirectoryListing>(query, required, revalidate);
 }
 
 function buildRawDirectoryPairs(rows: DirectoryListing[]): DirectoryPair[] {
@@ -273,9 +275,17 @@ export async function getDirectoryPairs(): Promise<DirectoryPair[]> {
   return mergeDirectoryPairs(buildRawDirectoryPairs(await readDirectoryListings()));
 }
 
+// Share the small city index across languages instead of parsing every service in
+// the category for each page. The outer cache owns freshness for these reads.
+const getCategoryPairs = unstable_cache(
+  async (categorySlug: string) => buildRawDirectoryPairs(await readDirectoryListings(true, categorySlug, 0)),
+  ["swapspot-directory-category-pairs-v1", swapspotBackend(), appPlatformAppBase() || SUPABASE_URL],
+  { revalidate: serviceMarketRevalidateSeconds },
+);
+
 export const getDirectoryPair = cache(async (categorySlug: string, marketSlug: string) => {
   const canonicalCategorySlug = categoryAliases[categorySlug] || categorySlug;
-  const pairs = buildRawDirectoryPairs(await readDirectoryListings(true, canonicalCategorySlug));
+  const pairs = await getCategoryPairs(canonicalCategorySlug);
   const requested = pairs.find(
     (pair) => pair.categorySlug === canonicalCategorySlug && pair.marketSlug === marketSlug,
   );
@@ -322,7 +332,7 @@ export async function getPublicServiceListings({
     params.set("market_slug", `eq.${marketSlug}`);
   }
 
-  return fetchRest<PublicServiceListing>(`public_service_listings?${params}`, true);
+  return fetchRest<PublicServiceListing>(`public_service_listings?${params}`, true, serviceMarketRevalidateSeconds);
 }
 
 function sortListings(listings: PublicServiceListing[]) {
