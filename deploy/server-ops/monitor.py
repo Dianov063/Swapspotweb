@@ -75,7 +75,9 @@ def read_access(directory, db):
         for line in chunk.splitlines():
             try:
                 row = json.loads(line)
-                project = row.get('project', 'unknown')
+                # Caddy can emit a redirect before log_append executes. Its dedicated
+                # per-project filename still gives a trustworthy project boundary.
+                project = row.get('project') or file.name.split('.')[0].split('-')[0]
                 # Whitelist only operational counters; request/response content is discarded.
                 target = result.setdefault(project, {'requests': 0, 'errors': 0, 'slow': 0, 'response_bytes': 0, 'routes': {}})
                 route = row.get('route_group', 'other')
@@ -222,6 +224,12 @@ def collect(config, db, now):
         if parsed.returncode == 0:
             last_epoch = int(parsed.stdout.strip())
     sample['report_late'] = (today.hour,today.minute) >= (11,30) and (not last_epoch or dt.datetime.fromtimestamp(last_epoch,NY).date()!=today.date())
+    first_seen = get_value(db,'first_seen')
+    if not first_seen:first_seen=now;put_value(db,'first_seen',first_seen)
+    try:
+        external=json.loads(Path('/opt/server-ops/external/latest.json').read_text())
+        sample['external_stale']=now-external['checked_at']>300
+    except Exception:sample['external_stale']=now-first_seen>300
     sample['expected_services'] = dict(previous.get('expected_services', previous['services']) if previous else {}, **sample['services'])
     sample['expected_services'] = {k:v for k,v in sample['expected_services'].items() if k not in config.get('ignore_services',[])}
     return sample, previous

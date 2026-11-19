@@ -32,6 +32,9 @@ It is a separate small service, not a new Next.js build or a database migration.
   DKIM-signed Kumo relay, so total OVH/MailHub outage cannot suppress that warning.
   It posts sanitized status back to the dashboard; no SMTP listener/DNS/routing
   policies are changed. Ambiguous injection timeouts are not blindly retried.
+- Each public project address is also probed; an HTTP failure is detected even
+  when its containers stay running. OVH alerts if the independent monitor stops
+  posting for five minutes. Daily history has 30/90/365-day views and CSV export.
 
 Secrets: shared/auth.json has only admin_key and watch_token (UID 1000, 0600);
 shared/monitor.json has only scoped MailHub key/base, recipient and nonsecret

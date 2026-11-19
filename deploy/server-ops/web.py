@@ -69,7 +69,7 @@ class Handler(BaseHTTPRequestHandler):
                 chart=[{'ts':r['ts'],'cpu':r['host'].get('cpu_pct'),'memory':r['host']['mem_total']-r['host']['mem_available'],
                         'requests':sum(p.get('requests',0) for p in r['projects'].values())} for r in raw[::stride]]
                 incidents=[dict(r) for r in db.execute('SELECT * FROM incidents ORDER BY opened DESC LIMIT 100')]
-                daily=[dict(r) for r in db.execute('SELECT * FROM daily WHERE day>=? ORDER BY day,project',((dt.datetime.now(dt.timezone.utc)-dt.timedelta(days=30)).date().isoformat(),))]
+                daily=[dict(r) for r in db.execute('SELECT * FROM daily WHERE day>=? ORDER BY day,project',((dt.datetime.now(dt.timezone.utc)-dt.timedelta(days=365)).date().isoformat(),))]
                 notifications=[dict(r) for r in db.execute('SELECT key,created,sent,attempts,error FROM outbox ORDER BY created DESC LIMIT 30')]
                 totals={}
                 for sample in raw:
@@ -87,6 +87,7 @@ class Handler(BaseHTTPRequestHandler):
                       for r in db.execute('SELECT * FROM host_daily WHERE day>=? ORDER BY day',((dt.datetime.now(dt.timezone.utc)-dt.timedelta(days=30)).date().isoformat(),))]
                     result['totals']={}
                     for r in daily:
+                        if r['day'] < (dt.datetime.now(dt.timezone.utc)-dt.timedelta(days=30)).date().isoformat():continue
                         agg=result['totals'].setdefault(r['project'],{'cpu_seconds':0,'requests':0,'errors':0,'response_bytes':0,'routes':{}})
                         for key in ['cpu_seconds','requests','errors']:agg[key]+=r[key]
                         agg['response_bytes']+=r['traffic_bytes']
@@ -109,7 +110,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.respond(200,{'ok':True})
             except Exception:return self.respond(400,{'error':'Invalid status'})
         origin=self.headers.get('Origin')
-        if origin and origin!='https://www.swapspot.org':return self.respond(403,{'error':'Forbidden origin'})
+        if origin and origin!=os.environ.get('OPS_PUBLIC_ORIGIN','https://www.swapspot.org'):return self.respond(403,{'error':'Forbidden origin'})
         path=self.path_only()
         if path=='/api/logout':return self.respond(200,{'ok':True},cookie='server_ops_session=; Max-Age=0; Path=/admin/server; Secure; HttpOnly; SameSite=Strict')
         if path!='/api/login':return self.respond(404,{'error':'Not found'})

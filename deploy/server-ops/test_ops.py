@@ -108,6 +108,13 @@ class OpsTest(unittest.TestCase):
         self.assertNotIn('pending',state)
         state=step({},state,None,113);self.assertEqual(state['pending'],'recovery')
 
+    def test_early_redirect_inherits_project_from_dedicated_log_file(self):
+        directory=Path(self.tmp.name)/'redirects';directory.mkdir()
+        (directory/'towhub_web.log').write_text(json.dumps({'status':308,'duration':0})+'\n')
+        result,gap=read_access(directory,self.db)
+        self.assertFalse(gap)
+        self.assertEqual(result['towhub_web']['requests'],1)
+
     def test_external_wire_payload_has_verified_sender_and_only_owner_recipient(self):
         captured=[]
         class Fake:

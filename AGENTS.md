@@ -23,6 +23,19 @@ timer before touching schedules; the Vercel jobs must remain disabled.
 Never print or commit shared/runtime.json or credential values. Use the runtime
 allowlist; keep server secrets out of the image and browser build arguments.
 
+## Server monitoring
+
+Owner dashboard: https://www.swapspot.org/admin/server/ (existing admin login).
+Source and operating notes: deploy/server-ops/README.md. On OVH, the root
+server-ops-collect.timer records all Compose projects every minute; the isolated
+server-ops-web container serves history. Netcup has server-ops-external.timer
+for independent outage detection. Alert and recovery mail goes only to
+dianov063@gmail.com; the server digest is at 11:05 America/New_York.
+Keep the existing SwapSpot product report at 11:00. No automatic remediation.
+Before retiring a service, update monitor.json ignore_services for its exact
+project/service key; do not disable the whole monitor to silence one incident.
+Never mount Docker's socket or complete application secrets into the dashboard.
+
 Log confirmed engineering incidents and recurrence checks in
 C:/Users/diano/.codex/state/engineering-incidents.md. Follow github-actions-budget
 before pushes; run checks locally and batch changes.

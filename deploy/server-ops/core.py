@@ -130,6 +130,8 @@ def evaluate(s, previous, history):
         add("collection_incomplete", "monitor", "warning", "Часть показателей недоступна: " + ", ".join(s["collector_errors"]), 2)
     if s.get("log_gap"):
         add("log_collection_gap", "monitor", "warning", "Объём новых access-логов превысил лимит чтения", 1)
+    if s.get('external_stale'):
+        add('external_watchdog_stale','monitor','critical','Внешний монитор не подтверждал работу более пяти минут',2)
     return found
 
 
