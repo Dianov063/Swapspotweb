@@ -1,5 +1,10 @@
 # Append only after the shared proxy has joined swapspot_web_edge.
 www.swapspot.org {
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
     encode zstd gzip
     header Strict-Transport-Security "max-age=31536000"
     request_body {
@@ -17,5 +22,10 @@ www.swapspot.org {
 }
 
 swapspot.org {
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
     redir https://www.swapspot.org{uri} 308
 }
