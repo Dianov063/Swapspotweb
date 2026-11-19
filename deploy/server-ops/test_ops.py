@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from core import connect,evaluate,transition,deliver,digest,save_sample,signed_session,valid_session
+from core import connect,evaluate,transition,deliver,digest,save_sample,signed_session,valid_session,service_expectations,scheduled_job_status
 from monitor import read_access
 from external import step,notify,flush
 import urllib.error
@@ -56,6 +56,49 @@ class OpsTest(unittest.TestCase):
         self.assertNotIn('http_5xx',{f['code'] for f in evaluate(s,None,[])})
         s['projects']['web'].update(requests=30,errors=12)
         self.assertIn('http_5xx',{f['code'] for f in evaluate(s,None,[])})
+
+    def test_oneoff_job_is_measured_but_not_expected_after_completion(self):
+        job={'Names':['/backup-run-1'],'Labels':{'com.docker.compose.project':'platform',
+            'com.docker.compose.service':'backup','com.docker.compose.oneoff':'True'}}
+        expected,transient=service_expectations([job])
+        self.assertEqual(expected,{})
+        self.assertEqual(transient,['platform/backup'])
+        previous={'expected_services':{'platform/backup':'platform'},'one_shot_services':transient}
+        expected,transient=service_expectations([],previous)
+        s=healthy();s['expected_services']=expected
+        self.assertFalse(any(f['code'].startswith('service_missing:') for f in evaluate(s,previous,[])))
+
+    def test_migration_removes_only_confirmed_job_and_keeps_daemon_failure(self):
+        previous={'expected_services':{'platform/backup':'platform','platform/api':'platform'}}
+        expected,_=service_expectations([],previous,['platform/backup'])
+        s=healthy();s['expected_services']=expected
+        self.assertEqual({f['code'] for f in evaluate(s,previous,[])},{'service_missing:platform/api'})
+
+    def test_regular_service_overrides_historical_oneoff_identity(self):
+        daemon={'Names':['/backup-1'],'Labels':{'com.docker.compose.project':'platform',
+            'com.docker.compose.service':'backup','com.docker.compose.oneoff':'False'}}
+        expected,transient=service_expectations([daemon],{'one_shot_services':['platform/backup']})
+        self.assertEqual(expected,{'platform/backup':'platform'})
+        self.assertEqual(transient,[])
+
+    def test_scheduled_backup_success_and_staleness(self):
+        path=Path(self.tmp.name)/'status.json';now=1800000000
+        path.write_text(json.dumps({'timestamp':dt.datetime.fromtimestamp(now-60,dt.timezone.utc).isoformat(),'status':'ok'}))
+        self.assertTrue(scheduled_job_status(path,now,7*3600)['ok'])
+        self.assertEqual(scheduled_job_status(path,now+8*3600,7*3600)['reason'],'stale')
+
+    def test_backup_failure_missing_invalid_and_future_status(self):
+        path=Path(self.tmp.name)/'status.json';now=1800000000
+        self.assertEqual(scheduled_job_status(path,now,3600)['reason'],'status_unavailable')
+        for stamp,status,reason in [('invalid','ok','status_unavailable'),
+                ('2027-01-15T08:00:00+00:00','failed','failed'),
+                (dt.datetime.fromtimestamp(now+3600,dt.timezone.utc).isoformat(),'ok','invalid_timestamp')]:
+            path.write_text(json.dumps({'timestamp':stamp,'status':status,'secret':'must-not-escape'}))
+            result=scheduled_job_status(path,now,3600)
+            self.assertEqual(result['reason'],reason)
+            self.assertNotIn('secret',json.dumps(result))
+        s=healthy();s['scheduled_jobs']={'backup':{'ok':False,'reason':'stale','project':'platform'}}
+        self.assertEqual({f['code'] for f in evaluate(s,None,[])},{'scheduled_job:backup'})
 
     def test_large_growth_needs_a_real_baseline(self):
         s=healthy();self.assertNotIn('disk_growth',{f['code'] for f in evaluate(s,None,[])})

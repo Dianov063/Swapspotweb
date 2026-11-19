@@ -11,7 +11,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-from core import NY, GIB, connect, get_value, put_value, evaluate, transition, save_sample, deliver, digest
+from core import NY, GIB, connect, get_value, put_value, evaluate, transition, save_sample, deliver, digest, service_expectations, scheduled_job_status
 
 
 class DockerConnection(http.client.HTTPConnection):
@@ -237,8 +237,11 @@ def collect(config, db, now):
         external=json.loads(Path('/opt/server-ops/external/latest.json').read_text())
         sample['external_stale']=now-external['checked_at']>300
     except Exception:sample['external_stale']=now-first_seen>300
-    sample['expected_services'] = dict(previous.get('expected_services', previous['services']) if previous else {}, **sample['services'])
-    sample['expected_services'] = {k:v for k,v in sample['expected_services'].items() if k not in config.get('ignore_services',[])}
+    sample['expected_services'], sample['one_shot_services'] = service_expectations(
+        containers, previous, config.get('one_shot_services', ()), config.get('ignore_services', ()))
+    sample['scheduled_jobs'] = {name: dict(scheduled_job_status(job['status_path'], now,
+        job['max_age_seconds']), project=job['project'])
+        for name, job in config.get('scheduled_jobs', {}).items()}
     return sample, previous
 
 

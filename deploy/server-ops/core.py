@@ -49,6 +49,41 @@ def queue(db, key, subject, text, now):
                (key, now, subject[:180], text[:45000]))
 
 
+def service_expectations(containers, previous=None, one_shot=(), ignored=()):
+    """Remember daemons, but never require a Compose run --rm job to stay alive."""
+    expected = dict((previous or {}).get('expected_services', (previous or {}).get('services', {})))
+    transient = set((previous or {}).get('one_shot_services', ())) | set(one_shot)
+    persistent = {}
+    for container in containers:
+        labels = container.get('Labels') or {}
+        project = labels.get('com.docker.compose.project', 'standalone')
+        service = labels.get('com.docker.compose.service', container['Names'][0].lstrip('/'))
+        name = project + '/' + service
+        if str(labels.get('com.docker.compose.oneoff', '')).lower() == 'true':
+            transient.add(name)
+        else:
+            persistent[name] = project
+    transient.difference_update(persistent)
+    expected.update(persistent)
+    return {k: v for k, v in expected.items() if k not in transient and k not in ignored}, sorted(transient)
+
+
+def scheduled_job_status(path, now, max_age_seconds):
+    """Store only a sanitized result and age, never backup object names or errors."""
+    try:
+        status = json.loads(Path(path).read_text())
+        stamp = dt.datetime.fromisoformat(status['timestamp'].replace('Z', '+00:00'))
+        if stamp.tzinfo is None:
+            raise ValueError('timezone required')
+        age = now - stamp.timestamp()
+        reason = ('failed' if status.get('status') != 'ok' else
+                  'invalid_timestamp' if age < -300 else
+                  'stale' if age > max_age_seconds else None)
+        return {'ok': reason is None, 'reason': reason, 'age_seconds': round(age)}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return {'ok': False, 'reason': 'status_unavailable'}
+
+
 def evaluate(s, previous, history):
     """Return stable reason codes, without comparing changing byte counts for dedupe."""
     found = []
@@ -77,10 +112,15 @@ def evaluate(s, previous, history):
     if s.get("tls_days") is not None and s["tls_days"] < 14:
         add("tls_expiring", "swapspot_web", "critical" if s["tls_days"] < 3 else "warning",
             "Сертификат истекает менее чем через 14 дней", 1)
-    old_services = previous.get("expected_services", previous.get("services", {})) if previous else {}
+    old_services = s.get('expected_services',
+        previous.get("expected_services", previous.get("services", {})) if previous else {})
     for name, project in old_services.items():
         if name not in s["services"]:
             add("service_missing:" + name, project, "critical", "Исчез ранее работавший сервис " + name, 2)
+    for name, job in s.get('scheduled_jobs', {}).items():
+        if not job['ok']:
+            add('scheduled_job:' + name, job['project'], 'critical',
+                'Проблема резервного копирования ' + name + ': ' + job['reason'], 2)
     for p, item in s["projects"].items():
         old_points = [h for h in history if h['ts'] >= s['ts']-900 and p in h['projects']]
         if old_points and item.get('restarts', 0)-old_points[0]['projects'][p].get('restarts',0) >= 3:

@@ -39,6 +39,17 @@ It is a separate small service, not a new Next.js build or a database migration.
 - Each public project address is also probed; an HTTP failure is detected even
   when its containers stay running. OVH alerts if the independent monitor stops
   posting for five minutes. Daily history has 30/90/365-day views and CSV export.
+- Docker Compose `oneoff=True` tasks keep their resource measurements but are
+  excluded from permanent service expectations. Their identity is remembered
+  after `run --rm` removes the container. A normal daemon with the same identity
+  restores the permanent expectation. `one_shot_services` in monitor.json may
+  migrate only jobs independently confirmed from their scheduler/configuration;
+  do not exclude all services with restart=no or names containing backup.
+- The two AppPlatform backup jobs are checked through their existing sanitized
+  status files, with a seven-hour maximum age for the six-hour schedule. A failed,
+  missing, invalid, future-dated or stale status raises `scheduled_job:<name>`.
+  Container completion is not backup failure; status=ok does not constitute a
+  restore drill. Original backup schedules, scripts and stored backups are untouched.
 
 Secrets: shared/auth.json has only admin_key and watch_token (UID 1000, 0600);
 shared/monitor.json has only scoped MailHub key/base, recipient and nonsecret
