@@ -508,6 +508,17 @@
       "wave": 3,
       "status": "machine",
       "public": false
+    },
+    {
+      "code": "it",
+      "english_name": "Italian",
+      "native_name": "italiano",
+      "script": "Latn",
+      "dir": "ltr",
+      "parent": null,
+      "wave": 4,
+      "status": "draft",
+      "public": false
     }
   ]
 }

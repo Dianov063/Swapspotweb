@@ -1,5 +1,17 @@
 export const nationalMarkets = [
   {
+    code: "IT",
+    slug: "italy",
+    path: "/it/markets/italy",
+    locale: "it",
+    footerTagline: "Una piattaforma per trovare aiuto locale in Italia.",
+    title: "Trova aiuto vicino a te in tutta Italia",
+    description: "Cerca aiuto per pulizie, montaggio di mobili, giardinaggio, piccoli traslochi e altri servizi su SwapSpot.",
+    coverage: "Cerca in tutte le regioni italiane, nelle grandi città, nei piccoli centri e nelle zone rurali, comprese Sicilia e Sardegna.",
+    demoNote: "I profili contrassegnati come esempio sono fittizi: mostrano come compilare un profilo. Le foto sono generate con IA e le posizioni sono indicative. Puoi contattare e prenotare solo i professionisti reali.",
+    directory: "Esplora i servizi",
+  },
+  {
     code: "FR",
     slug: "france",
     path: "/fr/markets/france",
