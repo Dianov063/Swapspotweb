@@ -71,6 +71,9 @@ def evaluate(s, previous, history):
         add("site_unavailable", "swapspot_web", "critical", "Публичная проверка SwapSpot не проходит", 2)
     if not s["probes"]["platform"]["ok"]:
         add("api_unavailable", "appplatform_prod", "critical", "Проверка готовности общего API не проходит", 2)
+    for project, result in s.get('project_probes', {}).items():
+        if not result['ok']:
+            add('public_unavailable', project, 'critical', 'Публичный адрес проекта не отвечает успешно', 2)
     if s.get("tls_days") is not None and s["tls_days"] < 14:
         add("tls_expiring", "swapspot_web", "critical" if s["tls_days"] < 3 else "warning",
             "Сертификат истекает менее чем через 14 дней", 1)

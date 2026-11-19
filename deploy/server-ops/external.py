@@ -58,23 +58,32 @@ def run(config_path):
     cfg=json.loads(Path(config_path).read_text());path=Path(cfg['state_file']);path.parent.mkdir(parents=True,exist_ok=True)
     state=json.loads(path.read_text()) if path.exists() else {};now=int(time.time());reason=check(cfg)
     state=step(cfg,state,reason,now)
-    if state.get('pending') and cfg.get('notifications_enabled'):
-        kind=state.pop('pending');key=str(state['opened'])+':'+kind
-        state['last_attempt']=key;path.write_text(json.dumps(state))
-        text=('Восстановлено: ' if kind=='recovery' else 'Сбой: ')+state.get('reason','OVH')
-        try:notify(cfg,key,text);state['accepted_at']=now
-        except Exception as e:
-            state['delivery_error']=type(e).__name__
-            # Retry only a definite refusal, never an ambiguous timed-out submission.
-            if isinstance(e,urllib.error.URLError) and isinstance(e.reason,ConnectionRefusedError):state['pending']=kind
-        if kind=='recovery':state.pop('opened',None)
-    state['checked_at']=now;path.write_text(json.dumps(state))
+    flush(cfg,state,path,now)
+    state['checked_at']=now;persist(path,state)
     try:
         req=urllib.request.Request('https://www.swapspot.org/admin/server/external',data=json.dumps({k:state.get(k) for k in ['checked_at','reason','opened','accepted_at','delivery_error']}).encode(),
           headers={'Authorization':'Bearer '+cfg['watch_token'],'Content-Type':'application/json'},method='POST')
         with urllib.request.urlopen(req,timeout=5) as r:r.read(1024)
     except Exception:pass
     print(json.dumps({'reason':reason,'opened':state.get('opened'),'checked_at':now}))
+
+
+def persist(path,state):
+    tmp=path.with_suffix('.next');tmp.write_text(json.dumps(state));tmp.replace(path)
+
+
+def flush(cfg,state,path,now,send=notify):
+    if state.get('pending') and cfg.get('notifications_enabled'):
+        kind=state.pop('pending');key=str(state['opened'])+':'+kind
+        state['last_attempt']=key;persist(path,state)
+        text=('Восстановлено: ' if kind=='recovery' else 'Сбой: ')+state.get('reason','OVH')
+        try:
+            send(cfg,key,text);state['accepted_at']=now;state.pop('delivery_error',None)
+        except Exception as e:
+            state['delivery_error']=type(e).__name__
+            # Retry only a definite refusal, never an ambiguous timed-out submission.
+            if isinstance(e,urllib.error.URLError) and isinstance(e.reason,ConnectionRefusedError):state['pending']=kind
+        if kind=='recovery' and not state.get('pending'):state.pop('opened',None)
 
 
 if __name__=='__main__':

@@ -1,4 +1,5 @@
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import datetime as dt
 import http.client
 import json
@@ -193,6 +194,11 @@ def collect(config, db, now):
             sample['projects'][name] = {'cpu_seconds': 0, 'cpu_pct': None, 'memory': 0, 'container_count': 0}
         sample['projects'][name].update(counts)
     sample['probes'] = {'site': probe('https://www.swapspot.org/api/health'), 'platform': probe('https://platform.hubmail.vip/ready')}
+    targets = {'ledgerhound': 'https://ledgerhound.vip', 'towhub_web': 'https://towhub.vip',
+      'voicedata_beta': 'https://voicedata.hubmail.vip', 'mailhub': 'https://hubmail.vip',
+      'logihub_prod': 'https://logihub.vip', 'maybachmiami_prod': 'https://maybachmiami.vip'}
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        sample['project_probes'] = dict(zip(targets, pool.map(probe, targets.values())))
     try:
         context = ssl.create_default_context()
         with socket.create_connection(('www.swapspot.org',443), timeout=5) as sock:

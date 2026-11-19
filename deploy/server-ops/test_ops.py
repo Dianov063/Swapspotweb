@@ -8,7 +8,8 @@ from unittest.mock import patch
 
 from core import connect,evaluate,transition,deliver,digest,save_sample,signed_session,valid_session
 from monitor import read_access
-from external import step,notify
+from external import step,notify,flush
+import urllib.error
 
 
 def healthy(ts=1800000000):
@@ -120,6 +121,23 @@ class OpsTest(unittest.TestCase):
         self.assertEqual(payload['envelope_sender'],'ops@bounce.direct.swapspot.org')
         self.assertEqual(payload['recipients'],[{'email':'owner@example.invalid'}])
         self.assertIn('Message-ID:',payload['content'])
+
+    def test_external_refused_recovery_retains_episode_for_safe_retry(self):
+        state={'opened':100,'reason':'monitor_stale','pending':'recovery'}
+        cfg={'notifications_enabled':True};path=Path(self.tmp.name)/'external.json'
+        def refused(*args):raise urllib.error.URLError(ConnectionRefusedError())
+        flush(cfg,state,path,200,refused)
+        self.assertEqual(state['opened'],100)
+        self.assertEqual(state['pending'],'recovery')
+        sent=[];flush(cfg,state,path,260,lambda *args:sent.append(args))
+        self.assertEqual(sent[0][1],'100:recovery')
+        self.assertNotIn('opened',state)
+        self.assertNotIn('delivery_error',state)
+
+    def test_public_project_failure_is_independent_of_container_health(self):
+        sample=healthy();sample['project_probes']={'mailhub':{'ok':False}}
+        for n in range(2):transition(self.db,evaluate(sample,None,[]),100+n)
+        self.assertEqual(self.db.execute('SELECT code,project FROM incidents').fetchone()[:],('public_unavailable','mailhub'))
 
 
 if __name__=='__main__':unittest.main()
