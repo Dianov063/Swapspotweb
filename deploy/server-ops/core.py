@@ -156,9 +156,17 @@ def transition(db, findings, now):
         if key not in active and count >= f["after"]:
             cur = db.execute("INSERT INTO incidents(code,project,opened,severity,message) VALUES (?,?,?,?,?)",
                              (f['code'], f['project'], now, f['severity'], f['message']))
-            queue(db, "incident:" + str(cur.lastrowid), "[OVH] " + f['severity'].upper() + ": " + f['project'],
-                  "Проект: " + f['project'] + "\nВремя: " + dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z') +
-                  "\n" + f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now)
+            traffic_repeat = f['code']=='traffic_spike' and db.execute(
+                "SELECT 1 FROM incidents i JOIN outbox o ON o.key='incident:'||i.id "
+                "WHERE i.code='traffic_spike' AND i.project=? AND o.created>? LIMIT 1",
+                (f['project'],now-1800)).fetchone()
+            if traffic_repeat:
+                db.execute("UPDATE incidents SET message=message||? WHERE id=?",
+                  ('\nПовторное письмо о скачке трафика ограничено: по этому проекту уже было предупреждение за последние 30 минут.',cur.lastrowid))
+            else:
+                queue(db, "incident:" + str(cur.lastrowid), "[OVH] " + f['severity'].upper() + ": " + f['project'],
+                      "Проект: " + f['project'] + "\nВремя: " + dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z') +
+                      "\n" + f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now)
         elif key in active and f['severity'] == 'critical' and active[key]['severity'] != 'critical':
             db.execute("UPDATE incidents SET severity='critical' WHERE id=?", (active[key]['id'],))
             queue(db, "escalation:" + str(active[key]['id']), "[OVH] CRITICAL: " + f['project'], f['message'], now)
@@ -168,8 +176,11 @@ def transition(db, findings, now):
             counters[key] = {"bad": 0, "good": good}
             if good >= 3:
                 db.execute("UPDATE incidents SET closed=? WHERE id=?", (now, row['id']))
-                queue(db, "recovery:" + str(row['id']), "[OVH] Восстановлено: " + row['project'],
-                      row['message'] + "\nПоказатели нормальны три проверки подряд.", now)
+                if db.execute('SELECT 1 FROM outbox WHERE key=?',('incident:'+str(row['id']),)).fetchone():
+                    queue(db, "recovery:" + str(row['id']), "[OVH] Восстановлено: " + row['project'],
+                          'Проект: '+row['project']+'\nПредупреждение закрыто: '+row['code']+
+                          '\nПоказатели нормальны три проверки подряд.\nВремя: '+dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z')+
+                          '\nДашборд: https://www.swapspot.org/admin/server/',now)
     put_value(db, "streaks", {k: v for k, v in counters.items() if k in present or k in active})
 
 

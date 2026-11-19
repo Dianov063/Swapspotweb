@@ -21,6 +21,10 @@ It is a separate small service, not a new Next.js build or a database migration.
   HTTP/API failure 2 samples; 5xx/slow warnings require meaningful traffic.
   Disk growth >1 GiB/hour and Next cache growth >256 MiB/hour require a real
   baseline. Stable reason codes suppress repeated mail; 3 good checks recover.
+  Repeated volume-only traffic episodes are all recorded, with at most one new
+  warning email per project per 30 minutes. Errors and resource alerts retain
+  their immediate independent notification rules. Recovery mail names the closed
+  code instead of repeating the original warning as if it were still happening.
 - Emails to dianov063@gmail.com through the existing scoped MailHub integration
   and admin.daily_report mapping. No API key rotation or provider policy changes.
   Notification retries reuse an incident-scoped Idempotency-Key. API acceptance

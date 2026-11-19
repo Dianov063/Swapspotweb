@@ -169,5 +169,20 @@ class OpsTest(unittest.TestCase):
         self.assertEqual(sent,[])
         self.assertNotIn('opened',state)
 
+    def test_repeated_traffic_is_recorded_without_repeated_mail_but_resources_notify(self):
+        f={'code':'traffic_spike','project':'web','severity':'warning','message':'Volume spike','after':1}
+        transition(self.db,[f],100)
+        for n in [101,102,103]:transition(self.db,[],n)
+        transition(self.db,[f],200)
+        self.assertEqual(self.db.execute('SELECT COUNT(*) FROM incidents').fetchone()[0],2)
+        self.assertIsNone(self.db.execute("SELECT key FROM outbox WHERE key='incident:2'").fetchone())
+        resource=dict(f,code='oom',severity='critical')
+        transition(self.db,[f,resource],201)
+        self.assertIsNotNone(self.db.execute("SELECT key FROM outbox WHERE key='incident:3'").fetchone())
+        for n in [202,203,204]:transition(self.db,[],n)
+        self.assertIsNone(self.db.execute("SELECT key FROM outbox WHERE key='recovery:2'").fetchone())
+        transition(self.db,[f],2001)
+        self.assertIsNotNone(self.db.execute("SELECT key FROM outbox WHERE key='incident:4'").fetchone())
+
 
 if __name__=='__main__':unittest.main()
