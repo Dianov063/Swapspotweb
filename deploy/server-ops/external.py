@@ -46,9 +46,11 @@ def step(config,state,reason,now,send=notify):
         state['good']=0;state['reason']=reason
         if state['bad']>=3 and not state.get('opened'):
             state['opened']=now
+            state['incident_reason']=reason
             # Persist attempted=True before calling a non-idempotent SMTP injection.
             state['pending']='open'
     else:
+        state.pop('reason',None)
         state['bad']=0;state['good']+=1
         if state.get('opened') and state['good']>=3:state['pending']='recovery'
     return state
@@ -75,14 +77,20 @@ def persist(path,state):
 def flush(cfg,state,path,now,send=notify):
     if state.get('pending') and cfg.get('notifications_enabled'):
         kind=state.pop('pending');key=str(state['opened'])+':'+kind
+        if state.get('last_attempt')==key:
+            # A killed process may have submitted successfully. Never repeat an
+            # ambiguous Kumo injection; a definite refusal clears this marker.
+            if kind=='recovery':state.pop('opened',None)
+            persist(path,state);return
         state['last_attempt']=key;persist(path,state)
-        text=('Восстановлено: ' if kind=='recovery' else 'Сбой: ')+state.get('reason','OVH')
+        text=('Восстановлено: ' if kind=='recovery' else 'Сбой: ')+(state.get('incident_reason') or state.get('reason') or 'OVH')
         try:
             send(cfg,key,text);state['accepted_at']=now;state.pop('delivery_error',None)
         except Exception as e:
             state['delivery_error']=type(e).__name__
             # Retry only a definite refusal, never an ambiguous timed-out submission.
-            if isinstance(e,urllib.error.URLError) and isinstance(e.reason,ConnectionRefusedError):state['pending']=kind
+            if isinstance(e,urllib.error.URLError) and isinstance(e.reason,ConnectionRefusedError):
+                state['pending']=kind;state.pop('last_attempt',None)
         if kind=='recovery' and not state.get('pending'):state.pop('opened',None)
 
 

@@ -107,6 +107,7 @@ class OpsTest(unittest.TestCase):
         for n in range(2):state=step({},state,None,110+n)
         self.assertNotIn('pending',state)
         state=step({},state,None,113);self.assertEqual(state['pending'],'recovery')
+        self.assertNotIn('reason',state)
 
     def test_early_redirect_inherits_project_from_dedicated_log_file(self):
         directory=Path(self.tmp.name)/'redirects';directory.mkdir()
@@ -145,6 +146,13 @@ class OpsTest(unittest.TestCase):
         sample=healthy();sample['project_probes']={'mailhub':{'ok':False}}
         for n in range(2):transition(self.db,evaluate(sample,None,[]),100+n)
         self.assertEqual(self.db.execute('SELECT code,project FROM incidents').fetchone()[:],('public_unavailable','mailhub'))
+
+    def test_external_crash_after_injection_does_not_repeat_recovery(self):
+        state={'opened':100,'pending':'recovery','last_attempt':'100:recovery'}
+        path=Path(self.tmp.name)/'crash.json';sent=[]
+        flush({'notifications_enabled':True},state,path,260,lambda *args:sent.append(args))
+        self.assertEqual(sent,[])
+        self.assertNotIn('opened',state)
 
 
 if __name__=='__main__':unittest.main()
