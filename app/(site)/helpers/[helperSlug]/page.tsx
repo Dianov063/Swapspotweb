@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import HelperProfilePage, { helperProfileMetadata } from "@/components/directory/HelperProfilePage";
 
-export const revalidate = 300;
-
-// Cache public pages on demand without rendering every city and language at build time.
-export function generateStaticParams() {
-  return [];
-}
+// Public HTML is cached at the CDN. Helper profiles can contain many services.
+export const revalidate = 0;
 
 type Props = { params: Promise<{ helperSlug: string }> };
 

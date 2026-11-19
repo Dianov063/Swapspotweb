@@ -17,7 +17,7 @@ export default function HeaderClient({
   languages,
 }: {
   locale: Locale;
-  dictionary: Dictionary;
+  dictionary: Pick<Dictionary, "nav">;
   languages: LanguageOption[];
 }) {
   const [open, setOpen] = useState(false);

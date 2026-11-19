@@ -13,5 +13,5 @@ export default async function Header({
   locale?: Locale;
   dictionary?: Dictionary;
 }) {
-  return <HeaderClient locale={locale} dictionary={dictionary} languages={await languageOptions()} />;
+  return <HeaderClient locale={locale} dictionary={{ nav: dictionary.nav }} languages={await languageOptions()} />;
 }

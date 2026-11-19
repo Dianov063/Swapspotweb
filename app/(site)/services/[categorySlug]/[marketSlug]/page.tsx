@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import ServiceMarketPage, { serviceMarketMetadata } from "@/components/directory/ServiceMarketPage";
 
-export const revalidate = 900;
-
-// Cache public pages on demand without rendering every city and language at build time.
-export function generateStaticParams() {
-  return [];
-}
+// Public HTML is cached at the CDN. Avoid a durable ISR copy per city and language.
+export const revalidate = 0;
 
 type Props = { params: Promise<{ categorySlug: string; marketSlug: string }> };
 

@@ -45,6 +45,20 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=()" },
         ],
       },
+      ...[
+        "/services/:categorySlug/:marketSlug",
+        "/:locale/services/:categorySlug/:marketSlug",
+        "/helpers/:helperSlug",
+        "/:locale/helpers/:helperSlug",
+      ].map((source) => ({
+        source,
+        // RSC navigation and prefetch responses depend on router headers. Cache
+        // only public HTML here and leave the framework's RSC handling intact.
+        missing: [{ type: "header", key: "rsc" }],
+        headers: [
+          { key: "Vercel-CDN-Cache-Control", value: "public, s-maxage=900, stale-while-revalidate=3600" },
+        ],
+      })),
     ];
   },
 };
