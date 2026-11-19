@@ -45,6 +45,13 @@ It is a separate small service, not a new Next.js build or a database migration.
   restores the permanent expectation. `one_shot_services` in monitor.json may
   migrate only jobs independently confirmed from their scheduler/configuration;
   do not exclude all services with restart=no or names containing backup.
+- On-demand Buildx workers are identified by both a `buildx_buildkit_` name and
+  the official `moby/buildkit` image, without Compose project ownership. Stopped
+  containers are inventoried for classification and migration of old expectations;
+  CPU/RAM measurements still include only running/paused containers. Stopped
+  ordinary daemons remain missing; historical stopped containers are not learned
+  as new requirements. Build success must be checked through the build/deploy job,
+  not inferred from the worker exiting or a healthy public site.
 - The two AppPlatform backup jobs are checked through their existing sanitized
   status files, with a seven-hour maximum age for the six-hour schedule. A failed,
   missing, invalid, future-dated or stale status raises `scheduled_job:<name>`.

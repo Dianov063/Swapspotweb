@@ -81,6 +81,45 @@ class OpsTest(unittest.TestCase):
         self.assertEqual(expected,{'platform/backup':'platform'})
         self.assertEqual(transient,[])
 
+    def test_stopped_buildx_builder_migrates_old_daemon_expectation(self):
+        name='standalone/buildx_buildkit_blog0'
+        builder={'Names':['/buildx_buildkit_blog0'],'Labels':{},'State':'exited',
+            'Image':'moby/buildkit@sha256:fixture'}
+        previous={'expected_services':{name:'standalone','web/server':'web'}}
+        expected,transient=service_expectations([builder],previous)
+        self.assertEqual(expected,{'web/server':'web'})
+        self.assertEqual(transient,[name])
+        s=healthy();s['expected_services']=expected
+        self.assertFalse(any(f['code'].startswith('service_missing:') for f in evaluate(s,previous,[])))
+        expected,_=service_expectations([],{'expected_services':expected,'one_shot_services':transient})
+        self.assertNotIn(name,expected)
+
+    def test_running_buildx_is_not_required_but_remains_in_inventory(self):
+        builder={'Names':['/buildx_buildkit_blog0'],'Labels':{},'State':'running',
+            'Image':'moby/buildkit:buildx-stable-1'}
+        expected,transient=service_expectations([builder])
+        self.assertEqual(expected,{})
+        self.assertEqual(transient,['standalone/buildx_buildkit_blog0'])
+        self.assertEqual(builder['State'],'running')
+
+    def test_builder_name_or_image_alone_does_not_silence_real_services(self):
+        for container in [
+            {'Names':['/buildx_buildkit_web0'],'Labels':{},'Image':'my-web:latest'},
+            {'Names':['/buildkit-server'],'Labels':{},'Image':'moby/buildkit:latest'},
+            {'Names':['/buildx_buildkit_web0'],'Image':'moby/buildkit:latest',
+             'Labels':{'com.docker.compose.project':'web','com.docker.compose.service':'server'}}]:
+            expected,transient=service_expectations([container])
+            self.assertEqual(len(expected),1)
+            self.assertEqual(transient,[])
+
+    def test_stopped_persistent_service_stays_missing_and_old_stopped_is_not_learned(self):
+        daemon={'Names':['/api'],'Labels':{'com.docker.compose.project':'platform',
+            'com.docker.compose.service':'api','com.docker.compose.oneoff':'False'},'State':'exited'}
+        expected,_=service_expectations([daemon],{'expected_services':{'platform/api':'platform'}})
+        s=healthy();s['expected_services']=expected
+        self.assertIn('service_missing:platform/api',{f['code'] for f in evaluate(s,None,[])})
+        self.assertEqual(service_expectations([daemon])[0],{})
+
     def test_scheduled_backup_success_and_staleness(self):
         path=Path(self.tmp.name)/'status.json';now=1800000000
         path.write_text(json.dumps({'timestamp':dt.datetime.fromtimestamp(now-60,dt.timezone.utc).isoformat(),'status':'ok'}))

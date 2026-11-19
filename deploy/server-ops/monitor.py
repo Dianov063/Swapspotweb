@@ -128,7 +128,8 @@ def collect(config, db, now):
       'mem_available': mem['MemAvailable'], 'mem_total': mem['MemTotal'], 'cores': os.cpu_count(),
       'load': os.getloadavg()[0], 'cpu_pct': host_cpu}, 'projects': {}, 'services': {}, 'collector_errors': []}
     current = {}
-    containers = docker('/containers/json?all=false')
+    inventory = docker('/containers/json?all=true')
+    containers = [c for c in inventory if c.get('State') in ('running', 'paused')]
     cached = get_value(db, 'cache_sizes', {})
     for c in containers:
         cid = c['Id']
@@ -238,7 +239,7 @@ def collect(config, db, now):
         sample['external_stale']=now-external['checked_at']>300
     except Exception:sample['external_stale']=now-first_seen>300
     sample['expected_services'], sample['one_shot_services'] = service_expectations(
-        containers, previous, config.get('one_shot_services', ()), config.get('ignore_services', ()))
+        inventory, previous, config.get('one_shot_services', ()), config.get('ignore_services', ()))
     sample['scheduled_jobs'] = {name: dict(scheduled_job_status(job['status_path'], now,
         job['max_age_seconds']), project=job['project'])
         for name, job in config.get('scheduled_jobs', {}).items()}

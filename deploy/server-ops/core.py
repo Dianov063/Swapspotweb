@@ -50,7 +50,7 @@ def queue(db, key, subject, text, now):
 
 
 def service_expectations(containers, previous=None, one_shot=(), ignored=()):
-    """Remember daemons, but never require a Compose run --rm job to stay alive."""
+    """Remember daemons; inventory stopped jobs too so old expectations can migrate."""
     expected = dict((previous or {}).get('expected_services', (previous or {}).get('services', {})))
     transient = set((previous or {}).get('one_shot_services', ())) | set(one_shot)
     persistent = {}
@@ -59,9 +59,12 @@ def service_expectations(containers, previous=None, one_shot=(), ignored=()):
         project = labels.get('com.docker.compose.project', 'standalone')
         service = labels.get('com.docker.compose.service', container['Names'][0].lstrip('/'))
         name = project + '/' + service
-        if str(labels.get('com.docker.compose.oneoff', '')).lower() == 'true':
+        image = container.get('Image', '').split('@', 1)[0].split(':', 1)[0]
+        buildx = (not labels.get('com.docker.compose.project') and image == 'moby/buildkit'
+                  and any(n.lstrip('/').startswith('buildx_buildkit_') for n in container['Names']))
+        if str(labels.get('com.docker.compose.oneoff', '')).lower() == 'true' or buildx:
             transient.add(name)
-        else:
+        elif container.get('State', 'running') in ('running', 'paused'):
             persistent[name] = project
     transient.difference_update(persistent)
     expected.update(persistent)
