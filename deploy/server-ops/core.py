@@ -97,7 +97,7 @@ def evaluate(s, previous, history):
             add("cache_large", p, "warning", "Кеш Next.js превысил 1 ГиБ")
         if item.get("data_cache_bytes", 0) > 110 * 1024 ** 2:
             add("data_cache_full", p, "warning", "Кеш данных приближается к лимиту tmpfs")
-        recent = [h for h in history if h["ts"] >= s["ts"] - 300] + [s]
+        recent = [h for h in history if h["ts"] > s["ts"] - 300] + [s]
         req = sum(h["projects"].get(p, {}).get("requests", 0) for h in recent)
         err = sum(h["projects"].get(p, {}).get("errors", 0) for h in recent)
         slow = sum(h["projects"].get(p, {}).get("slow", 0) for h in recent)
@@ -105,11 +105,22 @@ def evaluate(s, previous, history):
             add("http_5xx", p, "critical" if err / req >= .2 else "warning", "Рост HTTP 5xx за пять минут", 2)
         if req >= 20 and slow / req >= .2:
             add("http_slow", p, "warning", "Более 20% ответов дольше трёх секунд", 3)
-        baseline = [h for h in history if s["ts"] - 3600 <= h["ts"] < s["ts"] - 300]
+        baseline = [h for h in history if s["ts"] - 3600 <= h["ts"] <= s["ts"] - 300]
         if len(baseline) >= 30:
             baseline_rpm = sum(h["projects"].get(p, {}).get("requests", 0) for h in baseline) / len(baseline)
             if req >= 500 and req / 5 > max(100, baseline_rpm * 5):
-                add("traffic_spike", p, "warning", "Запросов больше обычного минимум в пять раз", 3)
+                redirects = sum(h['projects'].get(p, {}).get('redirects', 0) for h in recent)
+                client_errors = sum(h['projects'].get(p, {}).get('client_errors', 0) for h in recent)
+                classified = sum(h['projects'].get(p, {}).get('classified_statuses', 0) for h in recent)
+                cpu = item.get('cpu_pct')
+                cpu_text = f"{cpu:.1f}% одного ядра" if cpu is not None else 'нет замера'
+                status_text = (f"HTTP 3xx: {redirects}; 4xx: {client_errors} (статусы учтены для {classified}/{req} запросов).\n"
+                               if classified else "Подробная разбивка HTTP-статусов за это окно ещё не накоплена.\n")
+                message = (f"Всплеск трафика: {req} запросов за окно около 5 минут; обычный уровень — около {baseline_rpm:.1f} в минуту.\n"
+                    f"Последний интервал сбора: {item.get('requests', 0)} запросов. HTTP 5xx за окно: {err}; ответов дольше 3 с: {slow}.\n"
+                    + status_text + f"Последний CPU проекта: {cpu_text}.\n"
+                    "Это предупреждение об объёме HTTP-трафика. Само по себе оно не подтверждает перегрузку или атаку.")
+                add("traffic_spike", p, "warning", message, 3)
     older = [h for h in history if 1800 <= s["ts"] - h["ts"] <= 3900]
     if older:
         base = older[0]
@@ -146,7 +157,8 @@ def transition(db, findings, now):
             cur = db.execute("INSERT INTO incidents(code,project,opened,severity,message) VALUES (?,?,?,?,?)",
                              (f['code'], f['project'], now, f['severity'], f['message']))
             queue(db, "incident:" + str(cur.lastrowid), "[OVH] " + f['severity'].upper() + ": " + f['project'],
-                  f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now)
+                  "Проект: " + f['project'] + "\nВремя: " + dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z') +
+                  "\n" + f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now)
         elif key in active and f['severity'] == 'critical' and active[key]['severity'] != 'critical':
             db.execute("UPDATE incidents SET severity='critical' WHERE id=?", (active[key]['id'],))
             queue(db, "escalation:" + str(active[key]['id']), "[OVH] CRITICAL: " + f['project'], f['message'], now)

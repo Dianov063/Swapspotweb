@@ -115,6 +115,21 @@ class OpsTest(unittest.TestCase):
         result,gap=read_access(directory,self.db)
         self.assertFalse(gap)
         self.assertEqual(result['towhub_web']['requests'],1)
+        self.assertEqual(result['towhub_web']['redirects'],1)
+
+    def test_traffic_alert_distinguishes_volume_from_resource_exhaustion(self):
+        sample=healthy(1800000000)
+        sample['projects']['web'].update(requests=180,redirects=100,client_errors=70,classified_statuses=180,cpu_pct=2.0)
+        history=[]
+        for n in range(1,41):
+            item=healthy(sample['ts']-n*60)
+            item['projects']['web'].update(requests=180 if n<=4 else 1)
+            history.append(item)
+        finding=next(f for f in evaluate(sample,None,history) if f['code']=='traffic_spike')
+        self.assertIn('900 запросов',finding['message'])
+        self.assertIn('HTTP 3xx: 100; 4xx: 70',finding['message'])
+        self.assertIn('2.0% одного ядра',finding['message'])
+        self.assertIn('не подтверждает перегрузку',finding['message'])
 
     def test_external_wire_payload_has_verified_sender_and_only_owner_recipient(self):
         captured=[]

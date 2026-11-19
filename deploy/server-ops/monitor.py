@@ -79,12 +79,19 @@ def read_access(directory, db):
                 # per-project filename still gives a trustworthy project boundary.
                 project = row.get('project') or file.name.split('.')[0].split('-')[0]
                 # Whitelist only operational counters; request/response content is discarded.
-                target = result.setdefault(project, {'requests': 0, 'errors': 0, 'slow': 0, 'response_bytes': 0, 'routes': {}})
+                target = result.setdefault(project, {'requests': 0, 'errors': 0, 'successes': 0,
+                    'redirects': 0, 'client_errors': 0, 'classified_statuses': 0,
+                    'slow': 0, 'response_bytes': 0, 'routes': {}})
                 route = row.get('route_group', 'other')
                 if route not in ['city_services', 'helper_profile', 'api', 'assets', 'health', 'admin', 'other']:
                     route = 'other'
                 target['requests'] += 1
-                target['errors'] += int(int(row.get('status', 0)) >= 500)
+                status = int(row.get('status', 0))
+                target['successes'] += int(200 <= status < 300)
+                target['redirects'] += int(300 <= status < 400)
+                target['client_errors'] += int(400 <= status < 500)
+                target['errors'] += int(500 <= status < 600)
+                target['classified_statuses'] += int(200 <= status < 600)
                 target['slow'] += int(float(row.get('duration', 0)) > 3)
                 target['response_bytes'] += max(0, int(row.get('size', 0)))
                 target['routes'][route] = target['routes'].get(route, 0) + 1
