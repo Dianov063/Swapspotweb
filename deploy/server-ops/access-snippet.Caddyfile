@@ -1,0 +1,30 @@
+(server_ops_access) {
+    map {path} {ops_route_group} {
+        ~^/(?:[^/]+/)?services/[^/]+/[^/]+$ city_services
+        ~^/(?:[^/]+/)?helpers/[^/]+$ helper_profile
+        ~^/(?:api/health|health|healthz|ready)$ health
+        ~^/(?:api|v1)/ api
+        ~^/(?:_next|assets|images)/ assets
+        ~^/admin admin
+        default other
+    }
+    log_append project {args[1]}
+    log_append route_group {ops_route_group}
+    log {
+        output file /data/server-ops/{args[0]}.log {
+            mode 0640
+            roll_size 5MiB
+            roll_keep 2
+            roll_keep_for 168h
+            roll_uncompressed
+        }
+        format filter {
+            wrap json
+            fields {
+                request delete
+                resp_headers delete
+                user_id delete
+            }
+        }
+    }
+}

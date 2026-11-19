@@ -1,0 +1,9 @@
+[Unit]
+Description=Measure server and projects every minute
+[Timer]
+OnBootSec=45s
+OnUnitActiveSec=60s
+AccuracySec=2s
+Unit=server-ops-collect.service
+[Install]
+WantedBy=timers.target

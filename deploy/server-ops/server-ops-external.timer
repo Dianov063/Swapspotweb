@@ -1,0 +1,9 @@
+[Unit]
+Description=Check OVH from Netcup every minute
+[Timer]
+OnBootSec=45s
+OnUnitActiveSec=60s
+AccuracySec=2s
+Unit=server-ops-external.service
+[Install]
+WantedBy=timers.target

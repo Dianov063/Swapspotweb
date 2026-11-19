@@ -1,0 +1,19 @@
+[Unit]
+Description=OVH project resource history and anomaly notifications
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/server-ops/current/monitor.py --config /opt/server-ops/shared/monitor.json
+TimeoutStartSec=55
+CPUQuota=15%
+MemoryMax=192M
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/server-ops/state
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+StandardOutput=journal
+StandardError=journal

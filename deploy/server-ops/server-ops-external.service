@@ -1,0 +1,16 @@
+[Unit]
+Description=Independent OVH watchdog on Netcup
+After=network-online.target kumomta.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/server-ops-external/current/external.py --config /opt/server-ops-external/shared/config.json
+TimeoutStartSec=40
+CPUQuota=5%
+MemoryMax=48M
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/server-ops-external/state
+[Install]
+WantedBy=multi-user.target
