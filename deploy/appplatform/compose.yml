@@ -1,0 +1,35 @@
+services:
+  web:
+    image: ${SWAPSPOT_WEB_IMAGE:?Set an immutable image tag}
+    container_name: swapspot-web
+    restart: unless-stopped
+    init: true
+    cpus: "1.0"
+    mem_limit: 768m
+    pids_limit: 128
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    environment:
+      NODE_OPTIONS: --max-old-space-size=512
+    volumes:
+      - /opt/swapspot-web/shared/runtime.json:/run/secrets/swapspot-web.json:ro
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+      - /app/.next/cache:size=128m,uid=1000,gid=1000,mode=0755
+    networks: [edge]
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+networks:
+  edge:
+    external: true
+    name: swapspot_web_edge

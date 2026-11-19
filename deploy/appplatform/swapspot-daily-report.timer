@@ -1,0 +1,11 @@
+[Unit]
+Description=SwapSpot report at 11:00 America/New_York
+
+[Timer]
+OnCalendar=*-*-* 11:00:00 America/New_York
+Persistent=true
+AccuracySec=1min
+Unit=swapspot-daily-report.service
+
+[Install]
+WantedBy=timers.target

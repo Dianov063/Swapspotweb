@@ -1,0 +1,12 @@
+[Unit]
+Description=SwapSpot daily report on the owned production host
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+TimeoutStartSec=180
+ExecStart=/usr/bin/docker exec swapspot-web node /app/report.mjs
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true

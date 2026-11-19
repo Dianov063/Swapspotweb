@@ -1,0 +1,21 @@
+# Append only after the shared proxy has joined swapspot_web_edge.
+www.swapspot.org {
+    encode zstd gzip
+    header Strict-Transport-Security "max-age=31536000"
+    request_body {
+        max_size 12MB
+    }
+    reverse_proxy swapspot-web:3000 {
+        # These location headers were injected by Vercel. Discard spoofed
+        # client values here; an unknown region uses the consent-first fallback.
+        header_up -X-Vercel-IP-Country
+        header_up -X-Vercel-IP-Country-Region
+        header_up -X-Vercel-IP-City
+        header_down -Vercel-CDN-Cache-Control
+        header_down X-SwapSpot-Origin ovh
+    }
+}
+
+swapspot.org {
+    redir https://www.swapspot.org{uri} 308
+}

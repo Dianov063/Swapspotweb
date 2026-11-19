@@ -24,6 +24,7 @@ const resetPageCsp = [
 ].join("; ");
 
 const nextConfig = {
+  output: "standalone",
   turbopack: {
     root: __dirname,
   },
