@@ -1891,6 +1891,166 @@
         "ti": "ደሞክራስያዊት ሪፓብሊክ ኮንጎ",
         "ff": "Ndenndaandi Demokaraasiire Konngo"
       }
+    },
+    {
+      "code": "IT",
+      "status": "preparing",
+      "sort_order": 318,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Rome",
+      "timezones": [
+        "Europe/Rome"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^[0-9]{5}$",
+        "example": "00118"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 42.5,
+        "lng": 12.5,
+        "zoom": 5
+      },
+      "languages": {
+        "default": "it",
+        "recommended": [
+          "it",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Italy",
+        "it": "Italia",
+        "fr": "Italie",
+        "de": "Italien",
+        "es": "Italia",
+        "ru": "Италия",
+        "zh-Hans": "意大利",
+        "ar": "إيطاليا",
+        "pt": "Itália",
+        "ht": "Itali",
+        "fil": "Italy",
+        "hi": "इटली",
+        "bn": "ইতালি",
+        "te": "ఇటలీ",
+        "ta": "இத்தாலி",
+        "vi": "Italy",
+        "th": "อิตาลี",
+        "sw": "Italia",
+        "am": "ጣሊያን",
+        "ar-EG": "إيطاليا",
+        "pt-AO": "Itália",
+        "sw-KE": "Italia",
+        "ha": "Italiya",
+        "yo": "Itáli",
+        "ig": "Italy",
+        "pcm": "Ítáli",
+        "om": "Xaaliyaan",
+        "zu": "i-Italy",
+        "xh": "E-Italy",
+        "ak": "Itali",
+        "ln": "Itali",
+        "kab": "Ṭelyan",
+        "zgh": "ⵉⵟⴰⵍⵢⴰ",
+        "ee": "Italia nutome",
+        "af": "Italië",
+        "rw": "IT",
+        "so": "Talyaani",
+        "wo": "Itali",
+        "mg": "Italia",
+        "lg": "Yitale",
+        "sn": "Italy",
+        "bm": "Itali",
+        "ti": "ኢጣልያ",
+        "ff": "Itali",
+        "nl": "Italië"
+      }
+    },
+    {
+      "code": "NL",
+      "status": "preparing",
+      "sort_order": 319,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Amsterdam",
+      "timezones": [
+        "Europe/Amsterdam"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[1-9][0-9]{3} ?[A-Za-z]{2}$",
+        "example": "1012 AB"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 52.2,
+        "lng": 5.3,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "nl",
+        "recommended": [
+          "nl",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Netherlands",
+        "nl": "Nederland",
+        "fr": "Pays-Bas",
+        "de": "Niederlande",
+        "es": "Países Bajos",
+        "ru": "Нидерланды",
+        "zh-Hans": "荷兰",
+        "ar": "هولندا",
+        "pt": "Países Baixos",
+        "ht": "Peyi Ba",
+        "fil": "Netherlands",
+        "hi": "नीदरलैंड",
+        "bn": "নেদারল্যান্ডস",
+        "te": "నెదర్లాండ్స్",
+        "ta": "நெதர்லாந்து",
+        "vi": "Hà Lan",
+        "th": "เนเธอร์แลนด์",
+        "sw": "Uholanzi",
+        "am": "ኔዘርላንድ",
+        "ar-EG": "هولندا",
+        "pt-AO": "Países Baixos",
+        "sw-KE": "Uholanzi",
+        "ha": "Holan",
+        "yo": "Nedalandi",
+        "ig": "Netherlands",
+        "pcm": "Nẹ́dalands",
+        "om": "Neezerlaand",
+        "zu": "i-Netherlands",
+        "xh": "ENetherlands",
+        "ak": "Nɛdɛland",
+        "ln": "Olandɛ",
+        "kab": "Timura-Yessakesren",
+        "zgh": "ⵀⵓⵍⴰⵏⴷⴰ",
+        "ee": "Netherlands nutome",
+        "af": "Nederland",
+        "rw": "NL",
+        "so": "Nederlaands",
+        "wo": "Peyi Baa",
+        "mg": "Holanda",
+        "lg": "Holandi",
+        "sn": "Netherlands",
+        "bm": "Peyiba",
+        "ti": "ኔዘርላንድ",
+        "ff": "Nederlannda",
+        "it": "Paesi Bassi"
+      }
     }
   ]
 }

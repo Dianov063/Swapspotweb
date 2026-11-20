@@ -1,4 +1,16 @@
 export const nationalMarkets = [
+{
+  "code": "NL",
+  "slug": "netherlands",
+  "path": "/nl/markets/netherlands",
+  "locale": "nl",
+  "footerTagline": "Een marktplaats voor hulp in heel Europees Nederland.",
+  "title": "Vind hulp bij jou in de buurt, in heel Nederland",
+  "description": "Vind hulp voor schoonmaak, meubels monteren, tuinonderhoud, dierenzorg, techniek en bijles op SwapSpot.",
+  "coverage": "Zoek in alle 12 provincies, grote steden, kleine dorpen en op de Waddeneilanden. Caribisch Nederland valt onder een afzonderlijke marktcode.",
+  "demoNote": "Voorbeeldprofielen zijn fictief en laten zien hoe je een profiel invult. Portretten zijn gemaakt met AI en kaartlocaties zijn illustratief. Alleen echte aanbieders kunnen berichten en boekingen ontvangen.",
+  "directory": "Diensten bekijken"
+},
   {
     code: "IT",
     slug: "italy",

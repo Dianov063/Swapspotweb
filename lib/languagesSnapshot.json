@@ -519,6 +519,17 @@
       "wave": 4,
       "status": "draft",
       "public": false
+    },
+    {
+      "code": "nl",
+      "english_name": "Dutch",
+      "native_name": "Nederlands",
+      "script": "Latn",
+      "dir": "ltr",
+      "parent": null,
+      "wave": 4,
+      "status": "draft",
+      "public": false
     }
   ]
 }

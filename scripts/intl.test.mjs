@@ -55,10 +55,10 @@ const market = (overrides = {}) => ({
 const ACTIVE = ["US", "PR", "PH", "IN", "SG", "MY", "TH", "ID", "VN", "DO", "HT", "JM", "TT"];
 const AFRICA = ["ZA", "EG", "NG", "DZ", "MA", "AO", "KE", "GH", "ET", "CD"];
 
-test("the bundled snapshot is format 1: 13 active markets, then the 10 African markets preparing", () => {
+test("the bundled snapshot is format 1: 13 active markets, then African and private European markets preparing", () => {
   const parsed = parseMarketsPayload(snapshot);
   assert.ok(parsed);
-  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA]);
+  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA, "IT", "NL"]);
   for (const item of parsed.markets) {
     assert.equal(item.status, ACTIVE.includes(item.code) ? "active" : "preparing", item.code);
   }
@@ -156,7 +156,7 @@ test("registry response wins; every failure falls back to the bundled snapshot",
   for (const [name, options] of cases) {
     const result = await loadMarkets({ snapshot, onError, ...options });
     assert.equal(result.source, "snapshot", name);
-    assert.equal(result.markets.length, 23, name);
+    assert.equal(result.markets.length, snapshot.markets.length, name);
   }
   assert.equal(errors.length, cases.length - 1);
 });

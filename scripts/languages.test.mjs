@@ -36,9 +36,9 @@ function site(languages, bundled = []) {
 
 // ---------------------------------------------------------------- registry
 
-test("the bundled snapshot: 46 languages, only the 16 shipped ones public", () => {
+test("the bundled snapshot: 48 languages, only the 16 shipped ones public", () => {
   assert.equal(snapshot.format, 1);
-  assert.equal(registry.length, 46);
+  assert.equal(registry.length, 48);
   const publicCodes = registry.filter((language) => language.public).map((language) => language.code).sort();
   assert.deepEqual(publicCodes, locales.map((locale) => (locale === "zh" ? "zh-Hans" : locale)).sort());
   for (const code of ["ar-EG", "pt-AO", "sw-KE"]) assert.ok(registry.find((language) => language.code === code).parent, code);
@@ -87,7 +87,7 @@ test("registry response wins; every failure falls back to the bundled snapshot",
   ]) {
     const result = await loadLanguages({ snapshot, onError: (reason) => errors.push(reason), ...options });
     assert.equal(result.source, "snapshot", name);
-    assert.equal(result.languages.length, 46, name);
+    assert.equal(result.languages.length, 48, name);
   }
   assert.equal(errors.length, 4);
 
