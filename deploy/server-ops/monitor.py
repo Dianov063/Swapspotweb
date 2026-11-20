@@ -12,6 +12,7 @@ import urllib.request
 from pathlib import Path
 
 from core import NY, GIB, connect, get_value, put_value, evaluate, transition, save_sample, deliver, digest, service_expectations, scheduled_job_status
+from ledgerhound import collect as collect_ledgerhound
 
 
 class DockerConnection(http.client.HTTPConnection):
@@ -44,6 +45,18 @@ def probe(url):
             return {'ok': r.status == 200, 'status': r.status, 'ms': round((time.monotonic()-start)*1000)}
     except Exception as e:
         return {'ok': False, 'error': type(e).__name__, 'ms': round((time.monotonic()-start)*1000)}
+
+
+def application_checks(sample, config, previous, now):
+    if (config.get('ledgerhound_monitor') or {}).get('enabled') is True:
+        recipient = (config.get('project_recipients') or {}).get('ledgerhound')
+        if not isinstance(recipient, str) or len(recipient) > 254 or recipient.count('@') != 1 \
+                or any(c.isspace() for c in recipient):
+            raise ValueError('LedgerHound monitoring requires its project recipient')
+        sample['ledgerhound'] = collect_ledgerhound(now)
+    elif previous and 'ledgerhound' in previous:
+        # A removed/disabled sensor cannot silently resolve its previous incidents.
+        sample['ledgerhound'] = None
 
 
 def read_access(directory, db):
@@ -243,6 +256,7 @@ def collect(config, db, now):
     sample['scheduled_jobs'] = {name: dict(scheduled_job_status(job['status_path'], now,
         job['max_age_seconds']), project=job['project'])
         for name, job in config.get('scheduled_jobs', {}).items()}
+    application_checks(sample, config, previous, now)
     return sample, previous
 
 
@@ -255,7 +269,7 @@ def run(config_path):
         now = int(time.time()); db = connect(directory/'history.db')
         history = [json.loads(r[0]) for r in db.execute('SELECT data FROM samples WHERE ts>? ORDER BY ts', (now-3900,))]
         sample, previous = collect(config,db,now)
-        transition(db,evaluate(sample,previous,history),now)
+        transition(db,evaluate(sample,previous,history),now,config.get('project_recipients'))
         save_sample(db,sample)
         digest(db,now)
         db.commit()

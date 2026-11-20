@@ -152,7 +152,7 @@ class OpsTest(unittest.TestCase):
         def failed(r):calls.append(r);raise TimeoutError('do-not-log-token')
         deliver(self.db,cfg,101,failed);deliver(self.db,cfg,102,failed)
         self.assertEqual(len(calls),1)
-        deliver(self.db,cfg,500,lambda r:calls.append(r))
+        deliver(self.db,cfg,500,lambda r:(calls.append(r) or {'status':'resolved','emailId':'fixture-email'}))
         self.assertEqual(calls[0].get_header('Idempotency-key'),calls[1].get_header('Idempotency-key'))
         self.assertEqual(self.db.execute('SELECT error FROM outbox').fetchone()[0],None)
         self.assertEqual(json.loads(calls[1].data)['recipient']['email'],'owner@example.invalid')

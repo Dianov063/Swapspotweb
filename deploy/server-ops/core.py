@@ -32,6 +32,10 @@ def connect(path):
     CREATE TABLE IF NOT EXISTS host_daily(day TEXT PRIMARY KEY, cpu_sum REAL, memory_sum REAL,
       disk_free_min REAL, samples INTEGER);
     """)
+    columns = {row[1] for row in db.execute('PRAGMA table_info(outbox)')}
+    for name in ('recipient', 'payload', 'receipt'):
+        if name not in columns:
+            db.execute('ALTER TABLE outbox ADD COLUMN ' + name + ' TEXT')
     return db
 
 
@@ -44,9 +48,9 @@ def put_value(db, key, value):
     db.execute("INSERT OR REPLACE INTO counters VALUES (?,?)", (key, json.dumps(value)))
 
 
-def queue(db, key, subject, text, now):
-    db.execute("INSERT OR IGNORE INTO outbox(key,created,subject,text) VALUES (?,?,?,?)",
-               (key, now, subject[:180], text[:45000]))
+def queue(db, key, subject, text, now, recipient=None):
+    db.execute("INSERT OR IGNORE INTO outbox(key,created,subject,text,recipient) VALUES (?,?,?,?,?)",
+               (key, now, subject[:180], text[:45000], recipient))
 
 
 def service_expectations(containers, previous=None, one_shot=(), ignored=()):
@@ -186,10 +190,20 @@ def evaluate(s, previous, history):
         add("log_collection_gap", "monitor", "warning", "Объём новых access-логов превысил лимит чтения", 1)
     if s.get('external_stale'):
         add('external_watchdog_stale','monitor','critical','Внешний монитор не подтверждал работу более пяти минут',2)
+    if 'ledgerhound' in s:
+        # web.py imports session helpers from core; the existing dashboard image
+        # does not need the optional host-only collector module.
+        from ledgerhound import assess as ledgerhound_assess
+        business, blocked = ledgerhound_assess(s['ledgerhound'], s['ts'])
+        for finding in business:
+            finding['blocksRecovery'] = sorted(blocked)
+        found.extend(business)
     return found
 
 
-def transition(db, findings, now):
+def transition(db, findings, now, project_recipients=None):
+    project_recipients = project_recipients or {}
+    blocked = {code + '|' + f['project'] for f in findings for code in f.get('blocksRecovery', [])}
     counters = get_value(db, "streaks", {})
     present = {f['code'] + "|" + f['project']: f for f in findings}
     active = {r['code'] + "|" + r['project']: r for r in db.execute("SELECT * FROM incidents WHERE closed IS NULL")}
@@ -209,12 +223,17 @@ def transition(db, findings, now):
             else:
                 queue(db, "incident:" + str(cur.lastrowid), "[OVH] " + f['severity'].upper() + ": " + f['project'],
                       "Проект: " + f['project'] + "\nВремя: " + dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z') +
-                      "\n" + f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now)
+                      "\n" + f['message'] + "\nКод: " + f['code'] + "\nДашборд: https://www.swapspot.org/admin/server/", now,
+                      project_recipients.get(f['project']))
         elif key in active and f['severity'] == 'critical' and active[key]['severity'] != 'critical':
             db.execute("UPDATE incidents SET severity='critical' WHERE id=?", (active[key]['id'],))
-            queue(db, "escalation:" + str(active[key]['id']), "[OVH] CRITICAL: " + f['project'], f['message'], now)
+            queue(db, "escalation:" + str(active[key]['id']), "[OVH] CRITICAL: " + f['project'], f['message'], now,
+                  project_recipients.get(f['project']))
     for key, row in active.items():
         if key not in present:
+            if key in blocked:
+                counters[key] = {"bad": 0, "good": 0}
+                continue
             good = counters.get(key, {}).get("good", 0) + 1
             counters[key] = {"bad": 0, "good": good}
             if good >= 3:
@@ -223,7 +242,8 @@ def transition(db, findings, now):
                     queue(db, "recovery:" + str(row['id']), "[OVH] Восстановлено: " + row['project'],
                           'Проект: '+row['project']+'\nПредупреждение закрыто: '+row['code']+
                           '\nПоказатели нормальны три проверки подряд.\nВремя: '+dt.datetime.fromtimestamp(now,NY).strftime('%Y-%m-%d %H:%M %Z')+
-                          '\nДашборд: https://www.swapspot.org/admin/server/',now)
+                          '\nДашборд: https://www.swapspot.org/admin/server/',now,
+                          project_recipients.get(row['project']))
     put_value(db, "streaks", {k: v for k, v in counters.items() if k in present or k in active})
 
 
@@ -257,24 +277,42 @@ def mail_payload(subject, text, recipient, day):
             "reportText": text, "reportDate": day}}
 
 
-def deliver(db, config, now, transport=None):
+def deliver(db, config, now, transport=None, budget_seconds=20):
     if not config.get('notifications_enabled'):
         return
+    deadline = time.monotonic() + budget_seconds
     pending = list(db.execute("SELECT * FROM outbox WHERE sent IS NULL AND (last_try=0 OR last_try<?) ORDER BY created LIMIT 5", (now - 300,)))
     for row in pending:
-        body = json.dumps(mail_payload(row['subject'], row['text'], config['recipient'],
-                          dt.datetime.fromtimestamp(now, NY).date().isoformat())).encode()
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break  # Keep later messages pending; leave time for the collector's snapshot/heartbeat.
+        payload = row['payload']
+        if payload is None:
+            payload = json.dumps(mail_payload(row['subject'], row['text'], row['recipient'] or config['recipient'],
+                                 dt.datetime.fromtimestamp(row['created'], NY).date().isoformat()))
+            db.execute('UPDATE outbox SET payload=? WHERE key=? AND payload IS NULL', (payload, row['key']))
+            # Durable before the first possible external acceptance, including a lost response.
+            db.commit()
+        body = payload.encode()
         request = urllib.request.Request(config['mailhub_url'].rstrip('/') + '/api/v1/events', data=body,
           headers={'Authorization': 'Bearer ' + config['mailhub_key'], 'Content-Type': 'application/json',
                    'Idempotency-Key': 'server-ops:' + row['key']}, method='POST')
         try:
             if transport:
-                transport(request)
+                receipt = transport(request)
             else:
-                with urllib.request.urlopen(request, timeout=8) as response:
+                with urllib.request.urlopen(request, timeout=min(8, remaining)) as response:
                     if response.status not in (200, 201, 202):
                         raise RuntimeError('MailHub response ' + str(response.status))
-            db.execute("UPDATE outbox SET sent=?,attempts=attempts+1,last_try=?,error=NULL WHERE key=?", (now, now, row['key']))
+                    raw = response.read(16385)
+                    if len(raw) > 16384:
+                        raise ValueError('MailHub receipt too large')
+                    receipt = json.loads(raw)
+            if not isinstance(receipt, dict) or receipt.get('status') != 'resolved' \
+                    or not isinstance(receipt.get('emailId'), str) or not receipt['emailId'].strip():
+                raise ValueError('MailHub admission not confirmed')
+            db.execute("UPDATE outbox SET sent=?,attempts=attempts+1,last_try=?,error=NULL,receipt=? WHERE key=?",
+                       (now, now, receipt['emailId'], row['key']))
         except Exception as exc:
             # Never persist response bodies or request headers containing a credential.
             db.execute("UPDATE outbox SET attempts=attempts+1,last_try=?,error=? WHERE key=?", (now, type(exc).__name__, row['key']))
