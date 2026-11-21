@@ -55,7 +55,7 @@ type FetchOptions = RequestInit & { next?: { revalidate?: number } };
 
 export async function fetchRegistrationClients(start: string, end: string, signal?: AbortSignal) {
   const { appBase, token } = appPlatformEnv();
-  const query = new URLSearchParams({ start, end });
+  const query = new URLSearchParams({ start, end, include_test_personas: "true" });
   const response = await fetch(`${appBase}/admin/registrations?${query}`, {
     headers: { Authorization: `Service ${token}` },
     cache: "no-store",
@@ -65,6 +65,7 @@ export async function fetchRegistrationClients(start: string, end: string, signa
   return await response.json() as Array<{
     id: string; created_at: string; platform: string | null; version: string | null; build: string | null;
     country?: string | null; city?: string | null; location_source?: "device" | "ip" | null;
+    test_persona?: boolean;
   }>;
 }
 

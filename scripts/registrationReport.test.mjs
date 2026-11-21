@@ -21,10 +21,12 @@ test("the owner report uses signup time and build, independently of later device
       assert.equal(options.headers.Authorization, "Service fixture");
       assert.equal(url.searchParams.get("start"), window.start.toISOString());
       assert.equal(url.searchParams.get("end"), window.end.toISOString());
+      assert.equal(url.searchParams.get("include_test_personas"), "true");
       return available ? Response.json([
         { id: "new", created_at: "2026-11-09T21:52:44Z", platform: "android", version: "1.0.31", build: "61" },
         { id: "device", created_at: "2026-11-09T22:10:00Z", country: "FR", city: "Paris", location_source: "device" },
         { id: "ip", created_at: "2026-11-09T22:15:00Z", country: "ES", city: null, location_source: "ip" },
+        { id: "listed", created_at: "2026-11-09T22:20:00Z", test_persona: true },
       ]) : new Response(null, { status: 503 });
     }
     if (url.pathname.endsWith("/profiles")) return Response.json([
@@ -32,6 +34,7 @@ test("the owner report uses signup time and build, independently of later device
       { id: "legacy", email: "legacy@mail.test", full_name: "Legacy", role: "client", created_at: "2026-11-09T21:10:00Z" },
       { id: "device", email: "device@mail.test", full_name: "Device", role: "client", created_at: "2026-11-09T22:10:00Z" },
       { id: "ip", email: "ip@mail.test", full_name: "IP", role: "client", created_at: "2026-11-09T22:15:00Z" },
+      { id: "listed", email: "alex.person@gmail.com", full_name: "Listed", role: "client", created_at: "2026-11-09T22:20:00Z" },
     ]);
     if (url.pathname.endsWith("/user_directory_activity")) return Response.json([
       { user_id: "new", last_platform: "ios", last_country_code: "US", last_city: "Miami" },
@@ -41,6 +44,8 @@ test("the owner report uses signup time and build, independently of later device
     return Response.json([]);
   });
   const report = await buildDailyReport(window);
+  assert.equal(report.summary.registrations, 4);
+  assert.doesNotMatch(report.text, /alex\.person@gmail\.com/);
   assert.match(report.text, /2026-11-09 16:52 \| New \| new@mail\.test \| client \| US \| Miami \| android \| 1\.0\.31 \(61\)/);
   assert.match(report.text, /2026-11-09 16:10 \| Legacy \| legacy@mail\.test \| client \| — \| — \| unknown \| —/);
   assert.match(report.html, /Версия \(сборка\).*1\.0\.31 \(61\)/);
@@ -50,6 +55,6 @@ test("the owner report uses signup time and build, independently of later device
   assert.match(report.html, /href="https:\/\/db-ip\.com">IP Geolocation by DB-IP/);
   available = false;
   const fallback = await buildDailyReport(window);
-  assert.equal(fallback.summary.registrations, 4);
+  assert.equal(fallback.summary.registrations, 5);
   assert.match(fallback.text, /не удалось получить данные о сборках и месте регистрации/);
 });

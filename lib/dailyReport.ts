@@ -168,7 +168,11 @@ async function fetchProductActivity(window: DailyReportWindow, signal: AbortSign
 
   const activityByUser = new Map(activities.map((activity) => [activity.user_id, activity]));
   const helperByUser = new Map(registrationHelpers.map((helper) => [helper.user_id, helper]));
-  const registrationRows = realRegistrations.map((profile) => {
+  // Only the trusted API flag excludes a test account. Legacy profiles without
+  // registration metadata remain in the report.
+  const registrationRows = realRegistrations
+    .filter((profile) => registrationByUser.get(profile.id)?.test_persona !== true)
+    .map((profile) => {
     const registration = registrationByUser.get(profile.id);
     const activity = activityByUser.get(profile.id);
     const helper = helperByUser.get(profile.id);
