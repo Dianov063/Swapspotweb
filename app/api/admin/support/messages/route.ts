@@ -32,14 +32,18 @@ export async function GET(request: Request) {
     const unreadIds = (data as { id: string; is_support: boolean; is_read: boolean }[])
       .filter((message) => !message.is_support && !message.is_read)
       .map((message) => message.id);
-    if (unreadIds.length) await supabaseAdminFetch(
-      `support_messages?thread_id=eq.${encodeURIComponent(threadId)}&id=in.(${unreadIds.map(encodeURIComponent).join(",")})&is_support=eq.false&is_read=eq.false`,
-      {
-        method: "PATCH",
-        headers: { Prefer: "return=minimal" },
-        body: JSON.stringify({ is_read: true }),
-      },
-    );
+    for (let offset = 0; offset < unreadIds.length; offset += 100) {
+      const ids = unreadIds.slice(offset, offset + 100);
+      const marked = await supabaseAdminFetch(
+        `support_messages?thread_id=eq.${encodeURIComponent(threadId)}&id=in.(${ids.map(encodeURIComponent).join(",")})&is_support=eq.false&is_read=eq.false`,
+        {
+          method: "PATCH",
+          headers: { Prefer: "return=minimal" },
+          body: JSON.stringify({ is_read: true }),
+        },
+      );
+      if (!marked.ok) throw new Error("Could not mark support messages read");
+    }
 
     return NextResponse.json({ ok: true, messages: data });
   } catch (error) {
