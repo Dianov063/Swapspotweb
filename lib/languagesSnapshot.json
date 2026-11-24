@@ -530,6 +530,17 @@
       "wave": 4,
       "status": "draft",
       "public": false
+    },
+    {
+      "code": "pl",
+      "english_name": "Polish",
+      "native_name": "Polski",
+      "script": "Latn",
+      "dir": "ltr",
+      "parent": null,
+      "wave": 5,
+      "status": "draft",
+      "public": false
     }
   ]
 }

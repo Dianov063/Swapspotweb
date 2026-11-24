@@ -4,7 +4,7 @@ import { getSiteLanguages } from "@/lib/languages";
 import { absoluteLanguageAlternates, localizedPath, siteUrl, type LanguageRoute } from "@/lib/locales";
 import { getSitemapDirectory } from "@/lib/publicDirectory";
 import { getMarkets, isActive } from "@/lib/markets";
-import { nationalMarkets } from "@/lib/nationalMarkets";
+import { visibleNationalMarkets } from "@/lib/nationalMarkets";
 
 // Short localized notice pages (no hreflang: the legal texts themselves stay English).
 const localizedNoticePaths = ["/trust-safety", "/contact", "/support", "/account-deletion", "/privacy", "/terms"];
@@ -78,8 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     englishEntry(`/helpers/${slug}`, languages, { changeFrequency: "weekly", priority: 0.62 }),
   );
 
-  const nationalPages = nationalMarkets
-    .filter(({ code }) => isActive(markets.find((market) => market.code === code)))
+  const nationalPages = visibleNationalMarkets(new Set(markets.filter(isActive).map(market => market.code)), new Set(languages.map(language => language.segment)))
     .map(({ path }): Entry => ({ url: url(path), changeFrequency: "weekly", priority: 0.7 }));
 
   return [...pages, ...noticePages, ...nationalPages, ...serviceMarketRoutes, ...helperProfileRoutes];

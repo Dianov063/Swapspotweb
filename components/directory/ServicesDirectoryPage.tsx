@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui";
 import { categoryVars, directoryStrings, fillTemplate, localizedCategoryName } from "@/lib/directoryStrings";
 import { getDictionary, languageTag, localizedPath, textDirection, type Locale } from "@/lib/i18n";
-import { localeAlternates } from "@/lib/languages";
+import { getSiteLanguages, localeAlternates } from "@/lib/languages";
 import { getMarkets, isActive, marketName } from "@/lib/markets";
-import { nationalMarkets } from "@/lib/nationalMarkets";
+import { nationalPagesForLocale, visibleNationalMarkets } from "@/lib/nationalMarkets";
 import { getDirectoryPairs, type DirectoryPair } from "@/lib/publicDirectory";
 import { siteUrl } from "@/lib/locales";
 
@@ -41,10 +41,10 @@ function groupByCountry(pairs: DirectoryPair[], locale: Locale, otherMarkets: st
 export default async function ServicesDirectoryPage({ locale }: { locale: Locale }) {
   const t = directoryStrings(locale);
   const dictionary = getDictionary(locale);
-  const [pairs, markets] = await Promise.all([getDirectoryPairs(), getMarkets()]);
-  const activeNationalPages = nationalMarkets.filter(({ code }) =>
-    markets.some((market) => market.code === code && isActive(market)),
-  );
+  const [pairs, markets, languages] = await Promise.all([getDirectoryPairs(), getMarkets(), getSiteLanguages()]);
+  const activeNationalPages = nationalPagesForLocale(visibleNationalMarkets(
+    new Set(markets.filter(isActive).map(market => market.code)), new Set(languages.map(language => language.segment)),
+  ), locale);
   const countries = groupByCountry(pairs, locale, t.otherMarkets, (code) => marketName(code, locale, markets));
   const pairLabel = (pair: DirectoryPair) => ({
     ...categoryVars(localizedCategoryName(pair.categorySlug, pair.categoryName, locale), locale),
@@ -85,7 +85,7 @@ export default async function ServicesDirectoryPage({ locale }: { locale: Locale
             {activeNationalPages.length > 0 && (
               <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                 {activeNationalPages.map(({ path, code }) => (
-                  <li key={code}>
+                  <li key={path}>
                     <Link href={path} className="font-semibold text-green-deep underline">
                       {marketName(code, locale, markets)}
                     </Link>

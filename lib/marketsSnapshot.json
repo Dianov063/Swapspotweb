@@ -2051,6 +2051,171 @@
         "ff": "Nederlannda",
         "it": "Paesi Bassi"
       }
+    },
+    {
+      "code": "BE",
+      "status": "preparing",
+      "sort_order": 320,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Brussels",
+      "timezones": [
+        "Europe/Brussels"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[1-9][0-9]{3}$",
+        "example": "1000"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 50.65,
+        "lng": 4.65,
+        "zoom": 8
+      },
+      "languages": {
+        "default": "nl",
+        "recommended": [
+          "nl",
+          "fr",
+          "de",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Belgium",
+        "es": "Bélgica",
+        "ru": "Бельгия",
+        "zh-Hans": "比利时",
+        "ar": "بلجيكا",
+        "pt": "Bélgica",
+        "fr": "Belgique",
+        "ht": "Belgium",
+        "de": "Belgien",
+        "fil": "Belgium",
+        "hi": "बेल्जियम",
+        "bn": "বেলজিয়াম",
+        "te": "బెల్జియం",
+        "ta": "பெல்ஜியம்",
+        "vi": "Bỉ",
+        "th": "เบลเยียม",
+        "sw": "Ubelgiji",
+        "am": "ቤልጄም",
+        "ar-EG": "بلجيكا",
+        "pt-AO": "Bélgica",
+        "sw-KE": "Ubelgiji",
+        "ha": "Belgiyom",
+        "yo": "Bégíọ́mù",
+        "ig": "Belgium",
+        "pcm": "Bẹ́ljọm",
+        "om": "Beeljiyeem",
+        "zu": "i-Belgium",
+        "xh": "EBelgium",
+        "ak": "Bɛlgyium",
+        "ln": "Beleziki",
+        "kab": "Belǧik",
+        "zgh": "ⴱⵍⵊⵉⴽⴰ",
+        "ary": "بلجيكا",
+        "ee": "Belgium nutome",
+        "af": "België",
+        "so": "Biljam",
+        "wo": "Belsig",
+        "mg": "Belzika",
+        "lg": "Bubirigi",
+        "sn": "Beljium",
+        "bm": "Bɛliziki",
+        "ti": "ቤልጅዩም",
+        "ff": "Beljik",
+        "it": "Belgio",
+        "nl": "België"
+      }
+    },
+    {
+      "code": "PL",
+      "status": "preparing",
+      "sort_order": 330,
+      "currency": {
+        "code": "PLN",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Warsaw",
+      "timezones": [
+        "Europe/Warsaw"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{2}-[0-9]{3}$",
+        "example": "00-001"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 52.22977,
+        "lng": 21.01178,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "pl",
+        "recommended": [
+          "pl",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Poland",
+        "es": "Polonia",
+        "ru": "Польша",
+        "zh-Hans": "波兰",
+        "ar": "بولندا",
+        "pt": "Polônia",
+        "fr": "Pologne",
+        "ht": "Poland",
+        "de": "Polen",
+        "fil": "Poland",
+        "hi": "पोलैंड",
+        "bn": "পোল্যান্ড",
+        "te": "పోలాండ్",
+        "ta": "போலந்து",
+        "vi": "Ba Lan",
+        "th": "โปแลนด์",
+        "sw": "Poland",
+        "am": "ፖላንድ",
+        "ar-EG": "بولندا",
+        "pt-AO": "Polónia",
+        "sw-KE": "Polandi",
+        "ha": "Polan",
+        "yo": "Polandi",
+        "ig": "Poland",
+        "pcm": "Póland",
+        "om": "Poolaand",
+        "zu": "i-Poland",
+        "xh": "EPoland",
+        "ak": "Pɔland",
+        "ln": "Poloni",
+        "kab": "Pulund",
+        "zgh": "ⴱⵓⵍⵓⵏⵢⴰ",
+        "ary": "بولندا",
+        "ee": "Poland nutome",
+        "kg": "Poland",
+        "lua": "Poland",
+        "af": "Pole",
+        "so": "Booland",
+        "wo": "Poloñ",
+        "mg": "Pôlôna",
+        "lg": "Polandi",
+        "sn": "Poland",
+        "bm": "Poloɲi",
+        "ti": "ፖላንድ",
+        "ff": "Poloñ",
+        "it": "Polonia",
+        "nl": "Polen",
+        "pl": "Polska"
+      }
     }
   ]
 }

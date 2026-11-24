@@ -1,5 +1,67 @@
 export const nationalMarkets = [
 {
+  "code": "PL",
+  "slug": "poland",
+  "path": "/pl/markets/poland",
+  "locale": "pl",
+  "footerTagline": "Lokalne usługi w całej Polsce.",
+  "title": "Znajdź pomoc w swojej okolicy w całej Polsce",
+  "description": "Szukaj pomocy przy sprzątaniu, montażu mebli, pracach w ogrodzie, przeprowadzkach, opiece nad zwierzętami, obsłudze komputera i nauce.",
+  "coverage": "Wyszukuj usługi we wszystkich 16 województwach — w dużych miastach, mniejszych miejscowościach i na obszarach wiejskich.",
+  "demoNote": "Profile przykładowe są fikcyjne i pokazują, jak opisać własne usługi. Ewentualne portrety wygenerowano przy użyciu AI, a pozycje na mapie są ilustracyjne. Wiadomości i rezerwacje są dostępne tylko u prawdziwych wykonawców.",
+  "directory": "Przeglądaj usługi"
+},
+
+{
+  "code": "BE",
+  "slug": "belgium",
+  "path": "/nl/markets/belgium",
+  "locale": "nl",
+  "footerTagline": "Lokale hulp vinden in heel België.",
+  "title": "Vind hulp bij jou in de buurt, in heel België",
+  "description": "Zoek schoonmaak, meubelmontage, tuinonderhoud, dierenzorg, computerhulp en bijles.",
+  "coverage": "Zoek in Vlaanderen, Wallonië en Brussel, van kuststeden tot landelijke gemeenten en de Duitstalige regio.",
+  "demoNote": "Voorbeeldprofielen zijn fictief. AI-portretten en kaartposities zijn illustratief; berichten en boekingen zijn alleen mogelijk bij echte aanbieders.",
+  "directory": "Diensten bekijken"
+},
+{
+  "code": "BE",
+  "slug": "belgium",
+  "path": "/fr/markets/belgium",
+  "locale": "fr",
+  "footerTagline": "Trouver de l’aide locale dans toute la Belgique.",
+  "title": "Trouvez un coup de main près de chez vous en Belgique",
+  "description": "Recherchez du ménage, du montage de meubles, du jardinage, de la garde d’animaux, de l’aide informatique et du soutien scolaire.",
+  "coverage": "Recherchez en Wallonie, en Flandre et à Bruxelles, dans les villes, les communes rurales, sur la côte et dans la région germanophone.",
+  "demoNote": "Les profils d’exemple sont fictifs. Portraits créés par IA et positions indicatives; seuls les vrais prestataires peuvent recevoir messages et réservations.",
+  "directory": "Voir les services"
+},
+{
+  "code": "BE",
+  "slug": "belgium",
+  "path": "/de/markets/belgium",
+  "locale": "de",
+  "footerTagline": "Hilfe vor Ort in ganz Belgien finden.",
+  "title": "Finde Hilfe in deiner Nähe in ganz Belgien",
+  "description": "Suche Unterstützung bei Reinigung, Möbelmontage, Gartenpflege, Tierbetreuung, Computerfragen und Nachhilfe.",
+  "coverage": "Suche in der Deutschsprachigen Gemeinschaft, Wallonien, Flandern und Brüssel sowie in Küstenorten und ländlichen Gemeinden.",
+  "demoNote": "Beispielprofile sind frei erfunden. KI-Porträts und Kartenpositionen dienen der Veranschaulichung; nur echte Anbieter erhalten Nachrichten und Buchungen.",
+  "directory": "Dienstleistungen ansehen"
+},
+{
+  "code": "BE",
+  "slug": "belgium",
+  "path": "/markets/belgium",
+  "locale": "en",
+  "footerTagline": "Find local help across Belgium.",
+  "title": "Find local help across Belgium",
+  "description": "Find help with cleaning, furniture assembly, gardening, pets, technology and tutoring.",
+  "coverage": "Search across Flanders, Wallonia and Brussels, including coastal towns, rural communities and the German-speaking area.",
+  "demoNote": "Example profiles are fictional. AI portraits and map positions are illustrative; only real providers can receive messages and bookings.",
+  "directory": "Browse services"
+},
+
+{
   "code": "NL",
   "slug": "netherlands",
   "path": "/nl/markets/netherlands",
@@ -107,3 +169,18 @@ export const nationalMarkets = [
     directory: "Browse services",
   },
 ] as const;
+
+/** A country page requires both an active market and a publicly available language. */
+export function visibleNationalMarkets(activeCountries: ReadonlySet<string>, availableLocales: ReadonlySet<string>) {
+  return nationalMarkets.filter(page => activeCountries.has(page.code) && availableLocales.has(page.locale));
+}
+
+/** One useful link per country; prefer the viewer's language, then English. */
+export function nationalPagesForLocale(pages: readonly (typeof nationalMarkets)[number][], locale: string) {
+  const selected = new Map<string, (typeof nationalMarkets)[number]>();
+  for (const page of pages) {
+    const previous = selected.get(page.code);
+    if (!previous || page.locale === locale || (previous.locale !== locale && page.locale === 'en')) selected.set(page.code, page);
+  }
+  return [...selected.values()];
+}

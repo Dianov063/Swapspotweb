@@ -58,7 +58,7 @@ const AFRICA = ["ZA", "EG", "NG", "DZ", "MA", "AO", "KE", "GH", "ET", "CD"];
 test("the bundled snapshot is format 1: 13 active markets, then African and private European markets preparing", () => {
   const parsed = parseMarketsPayload(snapshot);
   assert.ok(parsed);
-  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA, "IT", "NL"]);
+  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA, "IT", "NL", "BE", "PL"]);
   for (const item of parsed.markets) {
     assert.equal(item.status, ACTIVE.includes(item.code) ? "active" : "preparing", item.code);
   }
