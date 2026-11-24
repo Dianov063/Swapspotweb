@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAnalyticsAccess } from "@/lib/googleServerApis";
 import { invokeSupabaseAdminFunction, supabaseAdminFetch } from "@/lib/supabaseAdmin";
+import { supportMessagesReadTable } from "@/lib/supportReadPolicy";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
       order: "created_at.asc",
     });
 
-    const response = await supabaseAdminFetch(`support_messages?${params}`);
+    const response = await supabaseAdminFetch(`${supportMessagesReadTable()}?${params}`);
     const data = await response.json();
 
     if (!response.ok) {

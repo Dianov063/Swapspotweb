@@ -8,6 +8,7 @@
 // nobody. Threads are looked at over SUPPORT_LOOKBACK_DAYS, the same rule as the app's inbox
 // (server patch 0008 support_thread_state).
 import { siteUrl } from "@/lib/locales";
+import { supportMessagesReadTable } from "@/lib/supportReadPolicy";
 
 export const SUPPORT_LOOKBACK_DAYS = 30;
 export const SUPPORT_INBOX_URL = `${siteUrl}/admin/support`;
@@ -140,8 +141,9 @@ export async function fetchSupportActivity(window: { start: Date; end: Date }, r
   const lookbackStart = new Date(Math.min(window.start.getTime(), window.end.getTime() - SUPPORT_LOOKBACK_DAYS * 24 * 60 * 60 * 1000));
   const from = encodeURIComponent(lookbackStart.toISOString());
   const to = encodeURIComponent(window.end.toISOString());
+  const messageTable = supportMessagesReadTable();
   const userMessages = await readJson<SupportUserMessageRow[]>(
-    `support_messages?select=id,thread_id,content,created_at&is_support=eq.false&created_at=gte.${from}&created_at=lt.${to}&order=created_at.desc&limit=2000`,
+    `${messageTable}?select=id,thread_id,content,created_at&is_support=eq.false&created_at=gte.${from}&created_at=lt.${to}&order=created_at.desc&limit=2000`,
   );
   const threadIds = [...new Set(userMessages.map((message) => message.thread_id).filter(Boolean))];
   const replies: SupportReplyRow[] = [];
@@ -149,7 +151,7 @@ export async function fetchSupportActivity(window: { start: Date; end: Date }, r
   for (const ids of chunks(threadIds)) {
     const filter = encodeURIComponent(`in.(${ids.join(",")})`);
     replies.push(...await readJson<SupportReplyRow[]>(
-      `support_messages?select=thread_id,created_at&is_support=eq.true&notification_kind=eq.support&thread_id=${filter}&created_at=gte.${from}&order=created_at.desc&limit=5000`,
+      `${messageTable}?select=thread_id,created_at&is_support=eq.true&notification_kind=eq.support&thread_id=${filter}&created_at=gte.${from}&order=created_at.desc&limit=5000`,
     ));
     threads.push(...await readJson<SupportThreadRow[]>(
       `support_threads?select=id,user_id,profiles:user_id(email,full_name)&id=${filter}&limit=${ids.length}`,

@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
+import { supportMessagesReadTable } from "../lib/supportReadPolicy.ts";
 
 import {
   SUPPORT_INBOX_URL,
@@ -120,4 +121,26 @@ test("the daily report includes the Support section with the inbox link", () => 
   assert.match(source, /support\.inboxUrl/);
   assert.match(source, /supportAwaiting: support\.awaiting\.length/);
   assert.match(source, /Поддержка: новые сообщения/);
+});
+
+test("App Platform report reads the classified-message view for both user messages and replies", async () => {
+  const previous = process.env.SWAPSPOT_BACKEND;
+  process.env.SWAPSPOT_BACKEND = "appplatform";
+  const paths = [];
+  try {
+    const summary = await fetchSupportActivity({ start: windowStart, end: windowEnd }, async (path) => {
+      paths.push(path);
+      if (path.includes("is_support=eq.false")) return fixture().userMessages.slice(0, 2);
+      if (path.includes("is_support=eq.true")) return [];
+      return threads.slice(0, 1);
+    });
+    assert.equal(summary.newMessages.length, 2);
+    const messageReads = paths.filter((path) => path.includes("is_support="));
+    assert.equal(messageReads.length, 2);
+    assert.ok(messageReads.every((path) => path.startsWith("support_admin_visible_messages?")));
+    assert.equal(supportMessagesReadTable("supabase"), "support_messages");
+  } finally {
+    if (previous === undefined) delete process.env.SWAPSPOT_BACKEND;
+    else process.env.SWAPSPOT_BACKEND = previous;
+  }
 });
