@@ -109,7 +109,8 @@
         "sn": "Amerika",
         "bm": "Ameriki",
         "ti": "ኣመሪካ",
-        "ff": "Dowlaaji Dentuɗi Amerik"
+        "ff": "Dowlaaji Dentuɗi Amerik",
+        "pl": "Stany Zjednoczone"
       }
     },
     {
@@ -189,7 +190,8 @@
         "sn": "Puerto Rico",
         "bm": "Pɔrotoriko",
         "ti": "ፖርቶ ሪኮ",
-        "ff": "Porto Rikoo"
+        "ff": "Porto Rikoo",
+        "pl": "Portoryko"
       }
     },
     {
@@ -269,7 +271,8 @@
         "sn": "Philippines",
         "bm": "Filipini",
         "ti": "ፊሊፒንስ",
-        "ff": "Filipiin"
+        "ff": "Filipiin",
+        "pl": "Filipiny"
       }
     },
     {
@@ -352,7 +355,8 @@
         "sn": "India",
         "bm": "Ɛndujamana",
         "ti": "ህንዲ",
-        "ff": "Enndo"
+        "ff": "Enndo",
+        "pl": "Indie"
       }
     },
     {
@@ -433,7 +437,8 @@
         "sn": "Singapore",
         "bm": "Sɛngapuri",
         "ti": "ሲንጋፖር",
-        "ff": "Sinngapuur"
+        "ff": "Sinngapuur",
+        "pl": "Singapur"
       }
     },
     {
@@ -515,7 +520,8 @@
         "sn": "Malaysia",
         "bm": "Malɛzi",
         "ti": "ማለዥያ",
-        "ff": "Malesii"
+        "ff": "Malesii",
+        "pl": "Malezja"
       }
     },
     {
@@ -595,7 +601,8 @@
         "sn": "Thailand",
         "bm": "Tayilandi",
         "ti": "ታይላንድ",
-        "ff": "Taylannda"
+        "ff": "Taylannda",
+        "pl": "Tajlandia"
       }
     },
     {
@@ -677,7 +684,8 @@
         "sn": "Indonesia",
         "bm": "Ɛndonezi",
         "ti": "ኢንዶነዥያ",
-        "ff": "Enndonesii"
+        "ff": "Enndonesii",
+        "pl": "Indonezja"
       }
     },
     {
@@ -757,7 +765,8 @@
         "sn": "Vietnam",
         "bm": "Wiyɛtinamu",
         "ti": "ቬትናም",
-        "ff": "Wiyetnaam"
+        "ff": "Wiyetnaam",
+        "pl": "Wietnam"
       }
     },
     {
@@ -837,7 +846,8 @@
         "sn": "Dominican Republic",
         "bm": "Dɔmimiki republiki",
         "ti": "ዶሚኒካዊት ሪፓብሊክ",
-        "ff": "Ndenndanndi Dominika"
+        "ff": "Ndenndanndi Dominika",
+        "pl": "Dominikana"
       }
     },
     {
@@ -917,7 +927,8 @@
         "sn": "Haiti",
         "bm": "Ayiti",
         "ti": "ሃይቲ",
-        "ff": "Haytii"
+        "ff": "Haytii",
+        "pl": "Haiti"
       }
     },
     {
@@ -996,7 +1007,8 @@
         "sn": "Jamaica",
         "bm": "Zamayiki",
         "ti": "ጃማይካ",
-        "ff": "Jamayka"
+        "ff": "Jamayka",
+        "pl": "Jamajka"
       }
     },
     {
@@ -1075,7 +1087,8 @@
         "sn": "Trinidad and Tobago",
         "bm": "Trinite-ni-Tobago",
         "ti": "ትሪኒዳድን ቶባጎን",
-        "ff": "Tirnidaad e Tobaago"
+        "ff": "Tirnidaad e Tobaago",
+        "pl": "Trynidad i Tobago"
       }
     },
     {
@@ -1157,7 +1170,8 @@
         "sn": "South Africa",
         "bm": "Worodugu Afriki",
         "ti": "ደቡብ ኣፍሪቃ",
-        "ff": "Afrik bŋ Worgo"
+        "ff": "Afrik bŋ Worgo",
+        "pl": "Republika Południowej Afryki"
       }
     },
     {
@@ -1237,7 +1251,8 @@
         "sn": "Egypt",
         "bm": "Eziputi",
         "ti": "ግብጺ",
-        "ff": "Ejipt"
+        "ff": "Ejipt",
+        "pl": "Egipt"
       }
     },
     {
@@ -1320,7 +1335,8 @@
         "sn": "Nigeria",
         "bm": "Nizeriya",
         "ti": "ናይጀርያ",
-        "ff": "Nijeriyaa"
+        "ff": "Nijeriyaa",
+        "pl": "Nigeria"
       }
     },
     {
@@ -1401,7 +1417,8 @@
         "sn": "Aljeria",
         "bm": "Alizeri",
         "ti": "ኣልጀርያ",
-        "ff": "Alaseri"
+        "ff": "Alaseri",
+        "pl": "Algieria"
       }
     },
     {
@@ -1483,7 +1500,8 @@
         "sn": "Morocco",
         "bm": "Marɔku",
         "ti": "ሞሮኮ",
-        "ff": "Maruk"
+        "ff": "Maruk",
+        "pl": "Maroko"
       }
     },
     {
@@ -1562,7 +1580,8 @@
         "sn": "Angola",
         "bm": "Angola",
         "ti": "ኣንጎላ",
-        "ff": "Anngolaa"
+        "ff": "Anngolaa",
+        "pl": "Angola"
       }
     },
     {
@@ -1642,7 +1661,8 @@
         "sn": "Kenya",
         "bm": "Keniya",
         "ti": "ኬንያ",
-        "ff": "Keñaa"
+        "ff": "Keñaa",
+        "pl": "Kenia"
       }
     },
     {
@@ -1723,7 +1743,8 @@
         "sn": "Ghana",
         "bm": "Gana",
         "ti": "ጋና",
-        "ff": "Ganaa"
+        "ff": "Ganaa",
+        "pl": "Ghana"
       }
     },
     {
@@ -1805,7 +1826,8 @@
         "sn": "Etiopia",
         "bm": "Etiopi",
         "ti": "ኢትዮጵያ",
-        "ff": "Ecoppi"
+        "ff": "Ecoppi",
+        "pl": "Etiopia"
       }
     },
     {
@@ -1889,7 +1911,8 @@
         "sn": "Democratic Republic of the Congo",
         "bm": "Kongo ka republiki demɔkratiki",
         "ti": "ደሞክራስያዊት ሪፓብሊክ ኮንጎ",
-        "ff": "Ndenndaandi Demokaraasiire Konngo"
+        "ff": "Ndenndaandi Demokaraasiire Konngo",
+        "pl": "Demokratyczna Republika Konga"
       }
     },
     {
@@ -1969,7 +1992,8 @@
         "bm": "Itali",
         "ti": "ኢጣልያ",
         "ff": "Itali",
-        "nl": "Italië"
+        "nl": "Italië",
+        "pl": "Włochy"
       }
     },
     {
@@ -2049,7 +2073,8 @@
         "bm": "Peyiba",
         "ti": "ኔዘርላንድ",
         "ff": "Nederlannda",
-        "it": "Paesi Bassi"
+        "it": "Paesi Bassi",
+        "pl": "Holandia"
       }
     },
     {
@@ -2131,7 +2156,8 @@
         "ti": "ቤልጅዩም",
         "ff": "Beljik",
         "it": "Belgio",
-        "nl": "België"
+        "nl": "België",
+        "pl": "Belgia"
       }
     },
     {
