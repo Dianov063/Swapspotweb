@@ -7,14 +7,14 @@ import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/lib/appLinks";
 import { getDictionary, localizedPath } from "@/lib/i18n";
 import { getMarket, isActive } from "@/lib/markets";
 import { nationalMarkets } from "@/lib/nationalMarkets";
-import { pageLocale } from "@/lib/languages";
+import { nationalPageLocale } from "@/lib/languages";
 
 type NationalMarketPage = (typeof nationalMarkets)[number];
 
 export async function activeNationalMarket(country: string, locale: string) {
   const page = nationalMarkets.find((market) => market.slug === country && market.locale === locale);
   if (!page) notFound();
-  const [market, availableLocale] = await Promise.all([getMarket(page.code, { live: true }), pageLocale(locale)]);
+  const [market, availableLocale] = await Promise.all([getMarket(page.code, { live: true }), nationalPageLocale(page)]);
   if (!isActive(market) || !availableLocale) notFound();
   return page;
 }

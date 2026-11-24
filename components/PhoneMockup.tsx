@@ -1,12 +1,14 @@
-import { Search, Star, Users } from "lucide-react";
+import { Search, Users } from "lucide-react";
 import { phoneCopy } from "@/lib/copy/phone";
 import type { Locale } from "@/lib/i18n";
+import { illustrationLabel } from "@/lib/illustrationLabel";
+import { priceWords } from "@/lib/priceFormat";
 
 const helpers = [
-  { initials: "MR", tag: "Maria · $45", bg: "#E6F0E9", color: "#1B6B45", left: "26%", top: "44%", active: true },
-  { initials: "JC", tag: "$50", bg: "#EAEFF6", color: "#3A5A8C", left: "64%", top: "30%" },
-  { initials: "AL", tag: "$28", bg: "#F3E7EE", color: "#8C3A66", left: "46%", top: "62%" },
-  { initials: "DT", tag: "$35", bg: "#F7EAD2", color: "#8A5B12", left: "77%", top: "66%" },
+  { initials: "MR", tag: "Maria", bg: "#E6F0E9", color: "#1B6B45", left: "26%", top: "44%", active: true },
+  { initials: "JC", tag: "JC", bg: "#EAEFF6", color: "#3A5A8C", left: "64%", top: "30%" },
+  { initials: "AL", tag: "AL", bg: "#F3E7EE", color: "#8C3A66", left: "46%", top: "62%" },
+  { initials: "DT", tag: "DT", bg: "#F7EAD2", color: "#8A5B12", left: "77%", top: "66%" },
 ];
 
 /**
@@ -38,10 +40,10 @@ export default function PhoneMockup({ locale }: { locale: Locale }) {
           <span className="ml-auto h-2 w-2 rounded-full bg-gold" />
         </div>
 
-        {/* live count */}
+        {/* Explicitly fictional preview, not a live count. */}
         <div className="absolute left-3.5 top-[90px] z-[6] inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-green px-[11px] py-1.5 text-[11px] font-bold text-white shadow-[0_4px_12px_rgba(20,42,30,.25)]">
           <Users className="h-[13px] w-[13px]" />
-          {copy.nearby}
+          {illustrationLabel(locale)}
         </div>
 
         {/* helper markers */}
@@ -85,12 +87,11 @@ export default function PhoneMockup({ locale }: { locale: Locale }) {
                 {copy.service}
               </div>
               <div className="flex items-center gap-1 text-[12px] font-semibold text-[#7A857E]">
-                <Star className="h-3 w-3 text-gold" fill="currentColor" />
-                4.9 (128) · {copy.distance}
+                {illustrationLabel(locale)}
               </div>
             </div>
-            <div className="text-[15px] font-extrabold text-ink">
-              $45<span className="text-[11px] font-semibold text-[#7A857E]">{copy.hour}</span>
+            <div className="max-w-[94px] text-[11px] font-semibold text-ink">
+              {priceWords(locale).onRequest}
             </div>
           </div>
           <button

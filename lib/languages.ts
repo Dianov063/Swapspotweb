@@ -8,7 +8,8 @@
 // hreflang, no sitemap entry and no switcher option.
 import { cache } from "react";
 import snapshot from "./languagesSnapshot.json";
-import { loadLanguages, siteLanguages, type RegistryLanguage, type SiteLanguage } from "./languagesCore";
+import { fallbackChain, loadLanguages, siteLanguages, type RegistryLanguage, type SiteLanguage } from "./languagesCore";
+import { isPreviouslyPublishedNationalPage } from "./nationalMarkets";
 import { ensureLocaleTables, isLocalePackBundled } from "./localePacks";
 import { defaultLocale, hreflangAlternates, localeNames, locales, type Locale } from "./locales";
 import { appPlatformAppBase } from "./supabaseAdmin";
@@ -64,6 +65,20 @@ export async function routeLocale(segment: string): Promise<Locale | null> {
 /** Same as `routeLocale`, for pages that also accept English (`en` -> `en`). */
 export async function pageLocale(segment: string): Promise<Locale | null> {
   return segment === defaultLocale ? defaultLocale : routeLocale(segment);
+}
+
+/** Preserve two published national URLs; this never publishes a global language route. */
+export async function nationalPageLocale(page: { code: string; locale: string; path: string }): Promise<Locale | null> {
+  const available = await pageLocale(page.locale);
+  if (available || !isPreviouslyPublishedNationalPage(page)) return available;
+  const registry = await getLanguageRegistry();
+  const entry = registry.find(language => language.code === page.locale);
+  if (!entry) return null;
+  const chain = fallbackChain(entry.code, registry);
+  if (!chain.length || chain.some(code => !isLocalePackBundled(code))) return null;
+  ensureLocaleTables({ segment: page.locale, code: entry.code, tag: entry.code, dir: entry.dir,
+    nativeName: entry.nativeName, script: entry.script, shipped: false, chain });
+  return page.locale;
 }
 
 /** Language switcher options: segment and the language's own name. */

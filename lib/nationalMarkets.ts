@@ -170,9 +170,19 @@ export const nationalMarkets = [
   },
 ] as const;
 
-/** A country page requires both an active market and a publicly available language. */
+/** These exact national pages were already public on 23 Nov, independently of the
+ * global language rollout. Preserve those URLs without opening /it or /nl globally.
+ * Verified against the live registry and routes in public-language-gates.json (24 Nov).
+ */
+export function isPreviouslyPublishedNationalPage(page: { code: string; locale: string; path: string }) {
+  return (page.code === 'IT' && page.locale === 'it' && page.path === '/it/markets/italy') ||
+    (page.code === 'NL' && page.locale === 'nl' && page.path === '/nl/markets/netherlands');
+}
+
+/** Active countries only; new country locales also need the public language gate. */
 export function visibleNationalMarkets(activeCountries: ReadonlySet<string>, availableLocales: ReadonlySet<string>) {
-  return nationalMarkets.filter(page => activeCountries.has(page.code) && availableLocales.has(page.locale));
+  return nationalMarkets.filter(page => activeCountries.has(page.code) &&
+    (availableLocales.has(page.locale) || isPreviouslyPublishedNationalPage(page)));
 }
 
 /** One useful link per country; prefer the viewer's language, then English. */

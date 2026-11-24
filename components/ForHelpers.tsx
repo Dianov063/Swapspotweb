@@ -2,6 +2,7 @@ import { ArrowRight, CalendarCheck, TrendingUp } from "lucide-react";
 import { Button, Eyebrow } from "./ui";
 import { perks } from "@/lib/data";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
+import { illustrationLabel } from "@/lib/illustrationLabel";
 
 const bars = [42, 64, 38, 78, 54, 90, 62];
 
@@ -76,11 +77,11 @@ export default function ForHelpers({
               </div>
               <span className="inline-flex items-center gap-[3px] rounded-full bg-green-soft px-[9px] py-1 text-[12px] font-extrabold text-green">
                 <TrendingUp className="h-[13px] w-[13px]" />
-                +18%
+                {illustrationLabel(locale)}
               </span>
             </div>
             <div className="my-[6px] font-head text-[42px] font-extrabold tracking-[-0.02em] text-ink">
-              $480
+              —
             </div>
             <div className="my-[18px] flex h-[74px] items-end gap-[7px]">
               {bars.map((h, i) => (

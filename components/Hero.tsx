@@ -2,6 +2,7 @@ import { Play, Hammer, Star, Check } from "lucide-react";
 import { Button } from "./ui";
 import PhoneMockup from "./PhoneMockup";
 import { localizedPath, type Dictionary, type Locale } from "@/lib/i18n";
+import { illustrationLabel } from "@/lib/illustrationLabel";
 
 const reviewers = [
   { initials: "MR", bg: "#E6F0E9", color: "#1B6B45" },
@@ -72,10 +73,9 @@ export default function Hero({
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-[15px] w-[15px]" fill="currentColor" />
                 ))}
-                <span className="ml-1 text-[14px] font-extrabold text-ink">4.9</span>
               </div>
               <div className="mt-0.5 text-[14px] font-semibold text-ink-soft">
-                {copy.rating}
+                {illustrationLabel(locale)}
               </div>
             </div>
           </div>
@@ -85,6 +85,7 @@ export default function Hero({
           <PhoneMockup locale={locale} />
 
           <div className="absolute -left-1.5 top-[26px] z-10 w-[212px] animate-floaty rounded-[18px] border border-line bg-surface p-4 shadow-card max-[420px]:hidden">
+            <p className="mb-2 text-xs font-semibold text-ink-soft">{illustrationLabel(locale)}</p>
             <div className="mb-[7px] flex items-center gap-1 text-gold">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="h-[13px] w-[13px]" fill="currentColor" />

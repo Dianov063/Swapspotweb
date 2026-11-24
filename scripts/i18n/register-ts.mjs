@@ -17,7 +17,8 @@ registerHooks({
   resolve(specifier, context, nextResolve) {
     let target = null;
     if (specifier.startsWith("@/")) target = new URL(specifier.slice(2), root);
-    else if ((specifier.startsWith("./") || specifier.startsWith("../")) && context.parentURL?.startsWith("file:")) {
+    else if ((specifier.startsWith("./") || specifier.startsWith("../")) && context.parentURL?.startsWith("file:") &&
+      !context.parentURL.includes("/node_modules/")) {
       target = new URL(specifier, context.parentURL);
     }
     if (target) {
@@ -31,7 +32,7 @@ registerHooks({
     return nextResolve(specifier, context);
   },
   load(url, context, nextLoad) {
-    if (url.startsWith("file:") && url.endsWith(".json")) {
+    if (url.startsWith("file:") && url.endsWith(".json") && !url.includes("/node_modules/")) {
       return { format: "module", source: `export default ${readFileSync(fileURLToPath(url), "utf8")};`, shortCircuit: true };
     }
     return nextLoad(url, context);
