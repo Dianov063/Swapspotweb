@@ -8,7 +8,7 @@
 // hreflang, no sitemap entry and no switcher option.
 import { cache } from "react";
 import snapshot from "./languagesSnapshot.json";
-import { fallbackChain, loadLanguages, siteLanguages, type RegistryLanguage, type SiteLanguage } from "./languagesCore";
+import { loadLanguages, siteLanguages, type RegistryLanguage, type SiteLanguage } from "./languagesCore";
 import { isPreviouslyPublishedNationalPage } from "./nationalMarkets";
 import { ensureLocaleTables, isLocalePackBundled } from "./localePacks";
 import { defaultLocale, hreflangAlternates, localeNames, locales, type Locale } from "./locales";
@@ -71,13 +71,8 @@ export async function pageLocale(segment: string): Promise<Locale | null> {
 export async function nationalPageLocale(page: { code: string; locale: string; path: string }): Promise<Locale | null> {
   const available = await pageLocale(page.locale);
   if (available || !isPreviouslyPublishedNationalPage(page)) return available;
-  const registry = await getLanguageRegistry();
-  const entry = registry.find(language => language.code === page.locale);
-  if (!entry) return null;
-  const chain = fallbackChain(entry.code, registry);
-  if (!chain.length || chain.some(code => !isLocalePackBundled(code))) return null;
-  ensureLocaleTables({ segment: page.locale, code: entry.code, tag: entry.code, dir: entry.dir,
-    nativeName: entry.nativeName, script: entry.script, shipped: false, chain });
+  // These pages contain their own published country copy. Do not register a draft
+  // global dictionary; the caller uses public navigation (English until activation).
   return page.locale;
 }
 

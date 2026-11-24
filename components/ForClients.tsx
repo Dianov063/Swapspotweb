@@ -9,6 +9,8 @@ import {
 import { Button, Eyebrow } from "./ui";
 import { forClientsCopy } from "@/lib/copy/forClients";
 import { localizedPath, type Locale } from "@/lib/i18n";
+import { illustrationLabel } from "@/lib/illustrationLabel";
+import { priceWords } from "@/lib/priceFormat";
 
 const icons = [SearchCheck, MapPinned, MessageCircle, ShieldCheck];
 
@@ -51,7 +53,7 @@ export default function ForClients({ locale }: { locale: Locale }) {
                   {t.panelTitle}
                 </div>
                 <div className="mt-1 text-[14px] font-semibold text-ink-soft">
-                  {t.panelMeta}
+                  {illustrationLabel(locale)}
                 </div>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-soft px-3 py-1.5 text-[12px] font-extrabold text-gold-deep">
@@ -60,7 +62,7 @@ export default function ForClients({ locale }: { locale: Locale }) {
               </span>
             </div>
             <div className="flex items-center justify-between rounded-card-sm bg-cream px-4 py-3">
-              <span className="text-[14px] font-bold text-ink-soft">{t.panelTotal}</span>
+              <span className="text-[14px] font-bold text-ink-soft">{priceWords(locale).onRequest}</span>
               <span className="inline-flex items-center gap-2 text-[14px] font-extrabold text-green">
                 <Handshake className="h-4 w-4" />
                 {t.panelSecure}

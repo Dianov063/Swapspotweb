@@ -17,7 +17,10 @@ function pageGate(state){
   '@/components/Footer':{},'@/components/Header':{},'@/components/ui':{},'@/lib/appLinks':{},'@/lib/i18n':{},
   '@/lib/nationalMarkets':{nationalMarkets},
   '@/lib/markets':{getMarket:async code=>({code,status:state.market}),isActive:row=>row?.status==='active'},
-  '@/lib/languages':{nationalPageLocale:async page=>state.publicLocales.includes(page.locale)||isPreviouslyPublishedNationalPage(page)?page.locale:null},
+  '@/lib/languages':{
+   nationalPageLocale:async page=>state.publicLocales.includes(page.locale)||isPreviouslyPublishedNationalPage(page)?page.locale:null,
+   pageLocale:async locale=>state.publicLocales.includes(locale)?locale:null,
+  },
  };
  const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
  vm.runInNewContext(code,{exports,require:name=>{assert(name in modules,name);return modules[name];}});

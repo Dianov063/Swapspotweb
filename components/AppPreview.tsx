@@ -56,7 +56,6 @@ export default function AppPreview({ locale }: { locale: Locale }) {
               <MapPin className="h-4 w-4" />
               {t.mapTitle}
             </div>
-            <div className="mt-1 text-[13.5px] text-ink-soft">{t.mapBody}</div>
           </div>
         </div>
 
@@ -69,7 +68,7 @@ export default function AppPreview({ locale }: { locale: Locale }) {
               <div className="flex items-center gap-1.5 text-[16px] font-extrabold text-ink">
                 James Carter <BadgeCheck className="h-4 w-4 text-green" />
               </div>
-              <div className="text-[13px] font-semibold text-ink-soft">{t.chips.join(' · ')}</div>
+              <div className="text-[13px] font-semibold text-ink-soft">{illustrationLabel(locale)}</div>
             </div>
           </div>
           <div className="my-4 flex flex-wrap gap-[7px]">
