@@ -1,5 +1,9 @@
 # OVH Server Ops
 
+LedgerHound F10 extension: see [LEDGERHOUND.md](LEDGERHOUND.md). It is opt-in;
+configuration/activation is separate from preparing this source. Existing public
+probes and other projects' notifications continue to use their current settings.
+
 Read-only dashboard: https://www.swapspot.org/admin/server/ . Uses the existing
 SwapSpot owner admin password/session; creates no public access to metrics.
 It is a separate small service, not a new Next.js build or a database migration.
