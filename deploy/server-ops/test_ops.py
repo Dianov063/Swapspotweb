@@ -108,6 +108,7 @@ class OpsTest(unittest.TestCase):
             {'Names':['/buildkit-server'],'Labels':{},'Image':'moby/buildkit:latest'},
             {'Names':['/buildx_buildkit_web0'],'Image':'moby/buildkit:latest',
              'Labels':{'com.docker.compose.project':'web','com.docker.compose.service':'server'}}]:
+            container['RestartPolicy']='always'
             expected,transient=service_expectations([container])
             self.assertEqual(len(expected),1)
             self.assertEqual(transient,[])
@@ -119,6 +120,38 @@ class OpsTest(unittest.TestCase):
         s=healthy();s['expected_services']=expected
         self.assertIn('service_missing:platform/api',{f['code'] for f in evaluate(s,None,[])})
         self.assertEqual(service_expectations([daemon])[0],{})
+
+    def test_disappeared_before_stats_is_not_learned_as_daemon(self):
+        ghost={'Names':['/temporary-check'],'Labels':{},'State':'running','Id':'short-task'}
+        self.assertEqual(service_expectations([ghost],observed={})[0],{})
+        managed={**ghost,'Labels':{'com.docker.compose.project':'web','com.docker.compose.service':'api'}}
+        self.assertEqual(service_expectations([managed],observed={})[0],{})
+
+    def test_manual_no_restart_daemon_requires_same_successful_container_twice(self):
+        daemon={'Names':['/manual-api'],'Labels':{},'State':'running','Id':'stable','RestartPolicy':'no'}
+        expected,_=service_expectations([daemon],observed={'standalone/manual-api':'standalone'})
+        self.assertEqual(expected,{})
+        prior={'expected_services':expected,'service_ids':{'standalone/manual-api':'stable'}}
+        expected,_=service_expectations([daemon],prior,observed={'standalone/manual-api':'standalone'})
+        self.assertEqual(expected,{'standalone/manual-api':'standalone'})
+        s=healthy();s['expected_services']=expected;s['services']={}
+        self.assertIn('service_missing:standalone/manual-api',{x['code'] for x in evaluate(s,None,[])})
+
+    def test_repeated_short_jobs_with_same_name_do_not_confirm_a_daemon(self):
+        job={'Names':['/periodic-task'],'Labels':{},'State':'running','Id':'second','RestartPolicy':'no'}
+        prior={'service_ids':{'standalone/periodic-task':'first'},'expected_services':{}}
+        self.assertEqual(service_expectations([job],prior,observed={'standalone/periodic-task':'standalone'})[0],{})
+
+    def test_failed_inspection_does_not_forget_confirmed_daemon(self):
+        old={'expected_services':{'standalone/manual-api':'standalone'}}
+        daemon={'Names':['/manual-api'],'Labels':{},'State':'running','Id':'stable'}
+        expected,_=service_expectations([daemon],old,observed={})
+        self.assertEqual(expected,old['expected_services'])
+
+    def test_restart_managed_manual_daemon_is_learned_after_successful_inspection(self):
+        daemon={'Names':['/manual-api'],'Labels':{},'State':'running','Id':'stable','RestartPolicy':'unless-stopped'}
+        self.assertEqual(service_expectations([daemon],observed={'standalone/manual-api':'standalone'})[0],
+                         {'standalone/manual-api':'standalone'})
 
     def test_scheduled_backup_success_and_staleness(self):
         path=Path(self.tmp.name)/'status.json';now=1800000000

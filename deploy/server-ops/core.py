@@ -49,7 +49,7 @@ def queue(db, key, subject, text, now):
                (key, now, subject[:180], text[:45000]))
 
 
-def service_expectations(containers, previous=None, one_shot=(), ignored=()):
+def service_expectations(containers, previous=None, one_shot=(), ignored=(), observed=None):
     """Remember daemons; inventory stopped jobs too so old expectations can migrate."""
     expected = dict((previous or {}).get('expected_services', (previous or {}).get('services', {})))
     transient = set((previous or {}).get('one_shot_services', ())) | set(one_shot)
@@ -65,7 +65,17 @@ def service_expectations(containers, previous=None, one_shot=(), ignored=()):
         if str(labels.get('com.docker.compose.oneoff', '')).lower() == 'true' or buildx:
             transient.add(name)
         elif container.get('State', 'running') in ('running', 'paused'):
-            persistent[name] = project
+            if observed is not None and name not in observed:
+                continue
+            managed = bool(labels.get('com.docker.compose.project') and labels.get('com.docker.compose.service'))
+            restart = container.get('RestartPolicy') in {'always', 'unless-stopped', 'on-failure'}
+            same_container = bool(container.get('Id') and
+                (previous or {}).get('service_ids', {}).get(name) == container['Id'])
+            # Unmanaged short-lived tasks are not daemon evidence. A real manual
+            # daemon is learned after two successful observations of the same ID,
+            # or immediately when its restart policy expresses persistent intent.
+            if name in expected or managed or restart or same_container:
+                persistent[name] = project
     transient.difference_update(persistent)
     expected.update(persistent)
     return {k: v for k, v in expected.items() if k not in transient and k not in ignored}, sorted(transient)

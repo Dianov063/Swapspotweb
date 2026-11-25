@@ -45,6 +45,11 @@ It is a separate small service, not a new Next.js build or a database migration.
   restores the permanent expectation. `one_shot_services` in monitor.json may
   migrate only jobs independently confirmed from their scheduler/configuration;
   do not exclude all services with restart=no or names containing backup.
+- A container must pass resource inspection before it can create a new service
+  expectation. Unmanaged containers without a restart policy must be observed
+  successfully twice with the same container ID; short tasks and reused random
+  names do not establish a daemon. Existing confirmed expectations survive a
+  failed inspection, so genuine service failures still alert.
 - On-demand Buildx workers are identified by both a `buildx_buildkit_` name and
   the official `moby/buildkit` image, without Compose project ownership. Stopped
   containers are inventoried for classification and migration of old expectations;

@@ -126,7 +126,7 @@ def collect(config, db, now):
     total, free = stat.f_blocks * stat.f_frsize, stat.f_bavail * stat.f_frsize
     sample = {'ts': now, 'host': {'disk_pct': round(100*(1-free/total), 1), 'disk_free': free, 'disk_total': total,
       'mem_available': mem['MemAvailable'], 'mem_total': mem['MemTotal'], 'cores': os.cpu_count(),
-      'load': os.getloadavg()[0], 'cpu_pct': host_cpu}, 'projects': {}, 'services': {}, 'collector_errors': []}
+      'load': os.getloadavg()[0], 'cpu_pct': host_cpu}, 'projects': {}, 'services': {}, 'service_ids': {}, 'collector_errors': []}
     current = {}
     inventory = docker('/containers/json?all=true')
     containers = [c for c in inventory if c.get('State') in ('running', 'paused')]
@@ -135,7 +135,6 @@ def collect(config, db, now):
         cid = c['Id']
         project = c.get('Labels', {}).get('com.docker.compose.project', 'standalone')
         service = c.get('Labels', {}).get('com.docker.compose.service', c['Names'][0].lstrip('/'))
-        sample['services'][project+'/'+service] = project
         p = sample['projects'].setdefault(project, {'cpu_seconds': 0, 'cpu_pct': None, 'memory': 0,
             'memory_limit_pct': 0, 'cpu_limit_pct': 0, 'log_bytes': 0, 'container_count': 0,
             'requests': 0, 'errors': 0, 'slow': 0, 'response_bytes': 0, 'routes': {}})
@@ -166,6 +165,9 @@ def collect(config, db, now):
             if log.is_file():
                 p['log_bytes'] += sum(f.stat().st_size for f in log.parent.glob('*-json.log*') if f.is_file())
             current[cid] = {'usage': usage, 'restarts': info.get('RestartCount', 0)}
+            sample['services'][project+'/'+service] = project
+            sample['service_ids'][project+'/'+service] = cid
+            c['RestartPolicy'] = limits.get('RestartPolicy', {}).get('Name')
             name = c['Names'][0].lstrip('/')
             if name in ['swapspot-web', 'ledgerhound-web', 'logihub-web', 'maybachmiami-web', 'towhub-web']:
                 if now - cached.get(name, {}).get('at', 0) >= 300:
@@ -239,7 +241,8 @@ def collect(config, db, now):
         sample['external_stale']=now-external['checked_at']>300
     except Exception:sample['external_stale']=now-first_seen>300
     sample['expected_services'], sample['one_shot_services'] = service_expectations(
-        inventory, previous, config.get('one_shot_services', ()), config.get('ignore_services', ()))
+        inventory, previous, config.get('one_shot_services', ()), config.get('ignore_services', ()),
+        observed=sample['services'])
     sample['scheduled_jobs'] = {name: dict(scheduled_job_status(job['status_path'], now,
         job['max_age_seconds']), project=job['project'])
         for name, job in config.get('scheduled_jobs', {}).items()}
