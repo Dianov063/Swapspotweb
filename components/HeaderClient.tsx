@@ -50,12 +50,12 @@ export default function HeaderClient({
       >
         <Brand className="mr-auto" href={localizedPath(locale, "/")} />
 
-        <div className="hidden items-center gap-[18px] md:flex">
+        <div className="hidden min-w-0 flex-wrap items-center justify-end gap-x-[18px] gap-y-1.5 md:flex">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-[15px] font-semibold text-ink-soft transition-colors hover:text-green-deep"
+              className="whitespace-nowrap text-[15px] font-semibold text-ink-soft transition-colors hover:text-green-deep"
             >
               {l.label}
             </Link>
