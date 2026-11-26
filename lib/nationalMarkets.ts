@@ -10,7 +10,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "CH",
@@ -22,7 +22,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "CH",
@@ -34,7 +34,7 @@ export const nationalMarkets = [
   "coverage": "Öffentliche Seiten zeigen Viertel, Postleitzahlen, Städte und Einsatzradius, damit Kunden Hilfe in der Nähe finden, ohne dass private Adressen sichtbar werden.",
   "demoNote": "Beispielprofile sind frei erfunden und zeigen, wie eigene Leistungen beschrieben werden können. Eventuelle Porträts sind mit KI erstellt und Kartenpositionen dienen der Veranschaulichung. Nachrichten und Buchungen sind nur bei echten Anbietern möglich.",
   "directory": "Dienstleistungsverzeichnis",
-  "footerTagline": "Der Nachbarschaftsmarktplatz für vertrauenswürdige Hilfe vor Ort. Hergestellt für Gemeinden in den gesamten USA."
+  "footerTagline": "Ein Marktplatz für zuverlässige Hilfe vor Ort."
 },
 {
   "code": "CH",
@@ -46,7 +46,7 @@ export const nationalMarkets = [
   "coverage": "Les pages publiques indiquent quartiers, codes postaux, villes et rayon d'intervention pour trouver de l'aide à proximité sans exposer d'adresses privées.",
   "demoNote": "Les profils d’exemple sont fictifs et montrent comment décrire ses services. Les éventuels portraits sont créés par IA et les positions sur la carte sont illustratives. Seuls les vrais prestataires peuvent recevoir des messages et des réservations.",
   "directory": "Annuaire des services",
-  "footerTagline": "Le marché de quartier pour une aide locale de confiance. Conçu pour les communautés à travers les États-Unis."
+  "footerTagline": "Une plateforme pour trouver des prestataires de confiance près de chez vous."
 },
 {
   "code": "CH",
@@ -58,7 +58,7 @@ export const nationalMarkets = [
   "coverage": "Le pagine pubbliche mostrano quartieri, codici postali, città e raggio di servizio per permettere la ricerca senza esporre indirizzi privati.",
   "demoNote": "I profili di esempio sono fittizi e mostrano come descrivere i propri servizi. Gli eventuali ritratti sono generati con IA e le posizioni sulla mappa sono illustrative. Messaggi e prenotazioni sono disponibili solo con prestatori reali.",
   "directory": "Catalogo dei servizi",
-  "footerTagline": "La piattaforma di quartiere per trovare aiuto locale affidabile. Pensata per le comunità degli Stati Uniti."
+  "footerTagline": "Una piattaforma per trovare aiuto locale affidabile."
 },
 {
   "code": "NO",
@@ -70,7 +70,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "NO",
@@ -94,7 +94,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "IS",
@@ -118,7 +118,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "AL",
@@ -142,7 +142,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "BA",
@@ -154,7 +154,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli otkriti pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primjer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na karti su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorij usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "BA",
@@ -178,7 +178,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli da otkriju pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na mapi su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorijum usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "RS",
@@ -190,7 +190,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "RS",
@@ -202,7 +202,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli da otkriju pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na mapi su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorijum usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "ME",
@@ -214,7 +214,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "ME",
@@ -226,7 +226,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli da otkriju pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na mapi su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorijum usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "ME",
@@ -238,7 +238,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli otkriti pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primjer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na karti su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorij usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "ME",
@@ -274,7 +274,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "MK",
@@ -310,7 +310,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "XK",
@@ -334,7 +334,7 @@ export const nationalMarkets = [
   "coverage": "Javne stranice prikazuju kvartove, poštanske brojeve, gradove i radijus usluge kako bi klijenti mogli da otkriju pomoć u blizini bez otkrivanja privatnih adresa.",
   "demoNote": "Izmišljeni primer profila, ne stvarni pružalac usluga. Pokazuje kako popuniti profil. Položaji na mapi su ilustrativni. Poruke i rezervacije su onemogućene.",
   "directory": "Direktorijum usluga",
-  "footerTagline": "Lokalno tržište za pouzdanu lokalnu pomoć. Napravljeno za zajednice širom SAD-a."
+  "footerTagline": "Platforma za pronalaženje pouzdane lokalne pomoći u vašoj zajednici."
 },
 {
   "code": "MD",
@@ -346,7 +346,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "MD",
@@ -370,7 +370,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "UA",
@@ -382,7 +382,7 @@ export const nationalMarkets = [
   "coverage": "Публічні сторінки показують райони, поштові індекси, міста та радіус обслуговування, щоб клієнти могли знаходити допомогу поруч без розкриття приватних адрес.",
   "demoNote": "Вигаданий зразок профілю, не справжній виконавець. Показує, як заповнити профіль. Позиції на мапі умовні. Повідомлення та бронювання вимкнено.",
   "directory": "Каталог послуг",
-  "footerTagline": "Локальний маркетплейс надійної локальної допомоги. Створено для спільнот по всіх США."
+  "footerTagline": "Платформа для пошуку надійних місцевих послуг."
 },
 {
   "code": "BY",
@@ -394,7 +394,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "BY",
@@ -418,7 +418,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "RU",
@@ -442,7 +442,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "LI",
@@ -454,7 +454,7 @@ export const nationalMarkets = [
   "coverage": "Öffentliche Seiten zeigen Viertel, Postleitzahlen, Städte und Einsatzradius, damit Kunden Hilfe in der Nähe finden, ohne dass private Adressen sichtbar werden.",
   "demoNote": "Beispielprofile sind frei erfunden und zeigen, wie eigene Leistungen beschrieben werden können. Eventuelle Porträts sind mit KI erstellt und Kartenpositionen dienen der Veranschaulichung. Nachrichten und Buchungen sind nur bei echten Anbietern möglich.",
   "directory": "Dienstleistungsverzeichnis",
-  "footerTagline": "Der Nachbarschaftsmarktplatz für vertrauenswürdige Hilfe vor Ort. Hergestellt für Gemeinden in den gesamten USA."
+  "footerTagline": "Ein Marktplatz für zuverlässige Hilfe vor Ort."
 },
 {
   "code": "AD",
@@ -466,7 +466,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "AD",
@@ -490,7 +490,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "MC",
@@ -502,7 +502,7 @@ export const nationalMarkets = [
   "coverage": "Les pages publiques indiquent quartiers, codes postaux, villes et rayon d'intervention pour trouver de l'aide à proximité sans exposer d'adresses privées.",
   "demoNote": "Les profils d’exemple sont fictifs et montrent comment décrire ses services. Les éventuels portraits sont créés par IA et les positions sur la carte sont illustratives. Seuls les vrais prestataires peuvent recevoir des messages et des réservations.",
   "directory": "Annuaire des services",
-  "footerTagline": "Le marché de quartier pour une aide locale de confiance. Conçu pour les communautés à travers les États-Unis."
+  "footerTagline": "Une plateforme pour trouver des prestataires de confiance près de chez vous."
 },
 {
   "code": "SM",
@@ -514,7 +514,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "SM",
@@ -526,7 +526,7 @@ export const nationalMarkets = [
   "coverage": "Le pagine pubbliche mostrano quartieri, codici postali, città e raggio di servizio per permettere la ricerca senza esporre indirizzi privati.",
   "demoNote": "I profili di esempio sono fittizi e mostrano come descrivere i propri servizi. Gli eventuali ritratti sono generati con IA e le posizioni sulla mappa sono illustrative. Messaggi e prenotazioni sono disponibili solo con prestatori reali.",
   "directory": "Catalogo dei servizi",
-  "footerTagline": "La piattaforma di quartiere per trovare aiuto locale affidabile. Pensata per le comunità degli Stati Uniti."
+  "footerTagline": "Una piattaforma per trovare aiuto locale affidabile."
 },
 {
   "code": "TR",
@@ -538,7 +538,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "TR",
@@ -562,7 +562,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "GE",
@@ -586,7 +586,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "AM",
@@ -610,7 +610,7 @@ export const nationalMarkets = [
   "coverage": "Public pages show neighborhoods, postal codes, cities, and service radius so clients can discover nearby help without exposing private addresses.",
   "demoNote": "Example profiles are fictional and show how to describe your own services. Any portraits are AI-generated and map positions are illustrative. Messaging and booking are available only for real providers.",
   "directory": "Service directory",
-  "footerTagline": "The neighborhood marketplace for trusted local help. Made for communities across the US."
+  "footerTagline": "A marketplace to find trusted local help in your community."
 },
 {
   "code": "AZ",
