@@ -52,13 +52,15 @@ const market = (overrides = {}) => ({
 
 // ---------------------------------------------------------------- registry
 
-const ACTIVE = ["US", "PR", "PH", "IN", "SG", "MY", "TH", "ID", "VN", "DO", "HT", "JM", "TT"];
 const AFRICA = ["ZA", "EG", "NG", "DZ", "MA", "AO", "KE", "GH", "ET", "CD"];
+const ACTIVE = ["US", "PR", "PH", "IN", "SG", "MY", "TH", "ID", "VN", "DO", "HT", "JM", "TT", ...AFRICA,
+  "IE", "ES", "FR", "DE", "AT", "PT", "MT", "IT", "NL", "BE", "PL"];
+const PREPARING = ["CZ", "SK", "HU", "RO", "HR", "SI", "BG", "GR", "CY", "DK", "SE", "FI", "EE", "LV", "LT", "LU", "GB", "CH", "NO", "IS", "AL", "BA", "RS", "ME", "MK", "XK", "MD", "UA", "BY", "RU", "LI", "AD", "MC", "SM", "TR", "GE", "AM", "AZ"];
 
-test("the bundled snapshot is format 1: 13 active markets, then African and private European markets preparing", () => {
+test("the bundled snapshot preserves all 34 launched markets and gates38 prepared European countries", () => {
   const parsed = parseMarketsPayload(snapshot);
   assert.ok(parsed);
-  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...AFRICA, "IT", "NL", "BE", "PL"]);
+  assert.deepEqual(parsed.markets.map((item) => item.code), [...ACTIVE, ...PREPARING]);
   for (const item of parsed.markets) {
     assert.equal(item.status, ACTIVE.includes(item.code) ? "active" : "preparing", item.code);
   }
@@ -180,7 +182,7 @@ test("the fetch carries the Next cache hint and a timeout signal", async () => {
 test("unknown country: no market and no US fallback", () => {
   const { markets } = parseMarketsPayload(snapshot);
   assert.equal(findMarket(markets, "us").code, "US");
-  for (const code of ["FR", "XX", "", null, undefined, "USA", "1"]) {
+  for (const code of ["ZZ", "XX", "", null, undefined, "USA", "1"]) {
     assert.equal(findMarket(markets, code), null, String(code));
   }
 });
@@ -192,7 +194,8 @@ test("country names come from the registry in the page language with English fal
   assert.equal(marketDisplayName(markets, "DO", "xx"), "Dominican Republic");
   const custom = [parseMarketsPayload({ format: 1, markets: [market({ names: { en: "United States" } })] }).markets[0]];
   assert.equal(marketDisplayName(custom, "US", "th"), "United States");
-  assert.equal(marketDisplayName(markets, "FR", "en"), "FR");
+  assert.equal(marketDisplayName(markets, "FR", "en"), "France");
+  assert.equal(marketDisplayName(markets, "ZZ", "en"), "ZZ");
 });
 
 test("the snapshot generator converts the seed to the endpoint shape", () => {

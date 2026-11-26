@@ -36,9 +36,15 @@ function site(languages, bundled = []) {
 
 // ---------------------------------------------------------------- registry
 
-test("the bundled snapshot: 49 languages, only the 16 shipped ones public", () => {
+test("the bundled snapshot preserves every registered language, only the 16 shipped ones public", () => {
   assert.equal(snapshot.format, 1);
-  assert.equal(registry.length, 49);
+  assert.equal(registry.length, snapshot.languages.length);
+  for (const code of ["cs", "sk"]) {
+    const language = registry.find((row) => row.code === code);
+    assert.equal(language.status, "draft");
+    assert.equal(language.public, false);
+    assert.equal(language.parent, null);
+  }
   const publicCodes = registry.filter((language) => language.public).map((language) => language.code).sort();
   assert.deepEqual(publicCodes, locales.map((locale) => (locale === "zh" ? "zh-Hans" : locale)).sort());
   for (const code of ["ar-EG", "pt-AO", "sw-KE"]) assert.ok(registry.find((language) => language.code === code).parent, code);
@@ -87,7 +93,7 @@ test("registry response wins; every failure falls back to the bundled snapshot",
   ]) {
     const result = await loadLanguages({ snapshot, onError: (reason) => errors.push(reason), ...options });
     assert.equal(result.source, "snapshot", name);
-    assert.equal(result.languages.length, 49, name);
+    assert.equal(result.languages.length, snapshot.languages.length, name);
   }
   assert.equal(errors.length, 4);
 
@@ -203,6 +209,16 @@ test("browser language: exact, then language part; ar-MA never becomes ary", () 
   assert.equal(matchLanguage(["xx", "de-AT"], segments), "de");
 });
 
+test("browser Serbian Latin region tags use only an offered Latin pack", () => {
+  assert.equal(matchLanguage(["sr-Latn-RS"], ["en", "sr-latn"]), "sr-latn");
+  assert.equal(matchLanguage(["SR_latn_ME"], ["en", "sr-latn"]), "sr-latn");
+  assert.equal(matchLanguage(["sr-Cyrl-RS"], ["en", "sr-latn"]), null);
+  assert.equal(matchLanguage(["sr-RS"], ["en", "sr-latn"]), null);
+  assert.equal(matchLanguage(["sr-Latn-RS"], ["en"]), null);
+  assert.equal(canonicalTag("sr-latn-rs"), "sr-Latn-RS");
+  assert.equal(urlSegment("sr-Latn"), "sr-latn");
+});
+
 test("reset page language: registry languages only when the page received them", async () => {
   const { resetLocale } = await import("../lib/resetStrings.ts");
   assert.equal(resetLocale("?lang=sw-KE", []), "en");
@@ -314,6 +330,17 @@ test("checker: script sanity for Ethiopic, Tifinagh, Arabic and Latin", () => {
   assert.match(check("sw", pack("كيف يعمل"), lang("sw", "Latn")).errors.join(), /Latn script/);
   assert.equal(scriptMatches("SwapSpot · App Store", "Ethi"), true, "brand names alone are not checked");
   assert.equal(isBrandOnly("Client Pro"), true);
+  assert.equal(scriptMatches("Αποθήκευση", "Grek"), true);
+  assert.equal(scriptMatches("Apothikefsi", "Grek"), false);
+  assert.equal(scriptMatches("Запазване", "Cyrl"), true);
+  assert.equal(scriptMatches("Zapazvane", "Cyrl"), false);
+  assert.equal(scriptMatches("Αποθήκευση", "Latn"), false);
+  for (const [script, good, bad] of [["Geor", "შენახვა", "Shenakhva"], ["Armn", "Պահպանել", "Pahpanel"]]) {
+    assert.equal(scriptMatches(`${good} SwapSpot {name}`, script), true);
+    assert.equal(scriptMatches(`${bad} SwapSpot {name}`, script), false);
+    assert.equal(scriptMatches(good, "Latn"), false);
+    assert.equal(scriptMatches("SwapSpot {name}", script), true, "placeholder/brand letters do not make a script judgment");
+  }
   assert.equal(isBrandOnly("Get Client Pro"), false);
 });
 

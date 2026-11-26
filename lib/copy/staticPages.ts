@@ -165,22 +165,22 @@ export const staticPageTitles: Record<ShippedLocale, Record<StaticPageSlug, stri
 };
 
 export const staticPageIntros: Record<ShippedLocale, string> = {
-  en: "This page is available in your selected language. For legal or account-specific questions, contact hello@swapspot.org.",
-  es: "Esta página está disponible en tu idioma seleccionado. Para preguntas legales o de cuenta, escribe a hello@swapspot.org.",
-  zh: "此页面已使用你选择的语言显示。如有法律或账户问题，请联系 hello@swapspot.org。",
-  fr: "Cette page est disponible dans la langue sélectionnée. Pour les questions juridiques ou de compte, contactez hello@swapspot.org.",
-  ru: "Эта страница доступна на выбранном языке. По юридическим вопросам или вопросам аккаунта пишите на hello@swapspot.org.",
-  ar: "هذه الصفحة متاحة باللغة المحددة. للأسئلة القانونية أو أسئلة الحساب، تواصل عبر hello@swapspot.org.",
-  pt: "Esta página está disponível no idioma selecionado. Para dúvidas legais ou de conta, escreva para hello@swapspot.org.",
-  ht: "Paj sa a disponib nan lang ou chwazi a. Pou kesyon legal oswa kont, ekri hello@swapspot.org.",
-  de: "Diese Seite ist in der ausgewählten Sprache verfügbar. Für rechtliche Fragen oder Kontofragen kontaktieren Sie hello@swapspot.org.",
-  fil: "Available ang page na ito sa pinili mong wika. Para sa legal o account questions, mag-email sa hello@swapspot.org.",
-  hi: "यह पेज आपकी चुनी हुई भाषा में उपलब्ध है। कानूनी या खाते से जुड़े सवालों के लिए hello@swapspot.org पर संपर्क करें।",
-  bn: "এই পেজটি আপনার নির্বাচিত ভাষায় উপলব্ধ। আইনি বা অ্যাকাউন্ট সম্পর্কিত প্রশ্নের জন্য hello@swapspot.org এ যোগাযোগ করুন।",
-  te: "ఈ పేజీ మీరు ఎంచుకున్న భాషలో అందుబాటులో ఉంది. చట్టపరమైన లేదా ఖాతా ప్రశ్నలకు hello@swapspot.org కు రాయండి.",
-  ta: "இந்த பக்கம் நீங்கள் தேர்ந்தெடுத்த மொழியில் கிடைக்கிறது. சட்ட அல்லது கணக்கு கேள்விகளுக்கு hello@swapspot.org-க்கு எழுதுங்கள்.",
-  vi: "Trang này có sẵn bằng ngôn ngữ bạn đã chọn. Nếu có câu hỏi pháp lý hoặc về tài khoản, hãy liên hệ hello@swapspot.org.",
-  th: "หน้านี้แสดงเป็นภาษาที่คุณเลือก สำหรับคำถามด้านกฎหมายหรือบัญชี โปรดติดต่อ hello@swapspot.org",
+  en: "Page titles and navigation are localized. Full legal texts are in English. For legal or account-specific questions, contact hello@swapspot.org.",
+  es: "Los títulos de las páginas y la navegación están traducidos. Los textos legales completos están en inglés. Si tienes preguntas legales o sobre tu cuenta, contacta con hello@swapspot.org.",
+  zh: "页面标题和导航已本地化。完整的法律文本以英文提供。如有法律或账户相关问题，请联系 hello@swapspot.org。",
+  fr: "Les titres des pages et la navigation sont traduits. Les textes juridiques complets sont en anglais. Pour toute question juridique ou concernant votre compte, contactez hello@swapspot.org.",
+  ru: "Заголовки страниц и навигация переведены. Полные юридические тексты доступны на английском языке. По юридическим вопросам или вопросам вашего аккаунта пишите на hello@swapspot.org.",
+  ar: "عناوين الصفحات والتنقل مترجمة. النصوص القانونية الكاملة باللغة الإنجليزية. للأسئلة القانونية أو الأسئلة المتعلقة بحسابك، تواصل عبر hello@swapspot.org.",
+  pt: "Os títulos das páginas e a navegação estão traduzidos. Os textos jurídicos completos estão em inglês. Para questões jurídicas ou específicas da sua conta, entre em contato com hello@swapspot.org.",
+  ht: "Tit paj yo ak meni navigasyon yo tradui. Tèks legal konplè yo an anglè. Pou kesyon legal oswa kesyon sou kont ou, kontakte hello@swapspot.org.",
+  de: "Seitentitel und Navigation sind übersetzt. Die vollständigen Rechtstexte sind auf Englisch. Bei rechtlichen Fragen oder Fragen zu Ihrem Konto wenden Sie sich an hello@swapspot.org.",
+  fil: "Isinalin ang mga pamagat ng pahina at mga menu sa pag-navigate. Nasa Ingles ang buong mga legal na teksto. Para sa mga legal na tanong o tanong tungkol sa account mo, makipag-ugnayan sa hello@swapspot.org.",
+  hi: "पेज के शीर्षक और नेविगेशन आपकी भाषा में हैं। कानूनी दस्तावेज़ों का पूरा पाठ अंग्रेज़ी में है। कानूनी या आपके खाते से जुड़े सवालों के लिए hello@swapspot.org पर संपर्क करें।",
+  bn: "পৃষ্ঠার শিরোনাম ও নেভিগেশন অনূদিত হয়েছে। সম্পূর্ণ আইনি পাঠ ইংরেজিতে রয়েছে। আইনি বা আপনার অ্যাকাউন্ট সম্পর্কিত প্রশ্নের জন্য hello@swapspot.org ঠিকানায় যোগাযোগ করুন।",
+  te: "పేజీ శీర్షికలు, నావిగేషన్ అనువదించబడ్డాయి. పూర్తి చట్టపరమైన పాఠాలు ఆంగ్లంలో ఉన్నాయి. చట్టపరమైన లేదా మీ ఖాతాకు సంబంధించిన ప్రశ్నల కోసం hello@swapspot.org ను సంప్రదించండి.",
+  ta: "பக்கத் தலைப்புகளும் வழிசெலுத்தலும் மொழிபெயர்க்கப்பட்டுள்ளன. முழுமையான சட்ட உரைகள் ஆங்கிலத்தில் உள்ளன. சட்டம் அல்லது உங்கள் கணக்கு தொடர்பான கேள்விகளுக்கு hello@swapspot.org என்ற முகவரியைத் தொடர்புகொள்ளுங்கள்.",
+  vi: "Tiêu đề trang và phần điều hướng đã được dịch. Toàn bộ văn bản pháp lý bằng tiếng Anh. Nếu có câu hỏi pháp lý hoặc liên quan đến tài khoản, hãy liên hệ hello@swapspot.org.",
+  th: "ชื่อหน้าและเมนูนำทางได้รับการแปลแล้ว เนื้อหาข้อความทางกฎหมายฉบับเต็มเป็นภาษาอังกฤษ หากมีคำถามด้านกฎหมายหรือเกี่ยวกับบัญชีของคุณ โปรดติดต่อ hello@swapspot.org",
 };
 
 export function staticPagesCopy(locale: Locale): StaticPagesCopy {

@@ -1,0 +1,286 @@
+{
+  "en": {
+    "code": "en",
+    "legacy": true,
+    "pricingComparisonBefore": "Better value after 5 active days",
+    "pricingComparisonAfter": "Compare current Day Pass and monthly prices in your app store",
+    "legalIntroBefore": "This page is available in your selected language. For legal or account-specific questions, contact hello@swapspot.org.",
+    "legalIntroAfter": "Page titles and navigation are localized. Full legal texts are in English. For legal or account-specific questions, contact hello@swapspot.org."
+  },
+  "es": {
+    "code": "es",
+    "legacy": true,
+    "pricingComparisonBefore": "Mejor valor después de 5 días activos",
+    "pricingComparisonAfter": "Compara los precios actuales del «Pase de un día» y del acceso mensual en tu tienda de aplicaciones",
+    "legalIntroBefore": "Esta página está disponible en tu idioma seleccionado. Para preguntas legales o de cuenta, escribe a hello@swapspot.org.",
+    "legalIntroAfter": "Los títulos de las páginas y la navegación están traducidos. Los textos legales completos están en inglés. Si tienes preguntas legales o sobre tu cuenta, contacta con hello@swapspot.org."
+  },
+  "zh": {
+    "code": "zh",
+    "legacy": true,
+    "pricingComparisonBefore": "使用超过 5 天更划算",
+    "pricingComparisonAfter": "请在您的应用商店比较日通行证和月度访问的当前价格",
+    "legalIntroBefore": "此页面已使用你选择的语言显示。如有法律或账户问题，请联系 hello@swapspot.org。",
+    "legalIntroAfter": "页面标题和导航已本地化。完整的法律文本以英文提供。如有法律或账户相关问题，请联系 hello@swapspot.org。"
+  },
+  "fr": {
+    "code": "fr",
+    "legacy": true,
+    "pricingComparisonBefore": "Plus rentable après 5 jours actifs",
+    "pricingComparisonAfter": "Comparez les prix actuels du «Pass journée» et de l’accès mensuel dans votre boutique d’applications",
+    "legalIntroBefore": "Cette page est disponible dans la langue sélectionnée. Pour les questions juridiques ou de compte, contactez hello@swapspot.org.",
+    "legalIntroAfter": "Les titres des pages et la navigation sont traduits. Les textes juridiques complets sont en anglais. Pour toute question juridique ou concernant votre compte, contactez hello@swapspot.org."
+  },
+  "ru": {
+    "code": "ru",
+    "legacy": true,
+    "pricingComparisonBefore": "Выгодно уже после 5 активных дней",
+    "pricingComparisonAfter": "Сравните актуальные цены на «Доступ на день» и доступ на месяц в вашем магазине приложений",
+    "legalIntroBefore": "Эта страница доступна на выбранном языке. По юридическим вопросам или вопросам аккаунта пишите на hello@swapspot.org.",
+    "legalIntroAfter": "Заголовки страниц и навигация переведены. Полные юридические тексты доступны на английском языке. По юридическим вопросам или вопросам вашего аккаунта пишите на hello@swapspot.org."
+  },
+  "vi": {
+    "code": "vi",
+    "legacy": true,
+    "pricingComparisonBefore": "Tiết kiệm hơn sau 5 ngày sử dụng",
+    "pricingComparisonAfter": "So sánh giá hiện tại của «Pass một ngày» và quyền truy cập hàng tháng trong cửa hàng ứng dụng của bạn",
+    "legalIntroBefore": "Trang này có sẵn bằng ngôn ngữ bạn đã chọn. Nếu có câu hỏi pháp lý hoặc về tài khoản, hãy liên hệ hello@swapspot.org.",
+    "legalIntroAfter": "Tiêu đề trang và phần điều hướng đã được dịch. Toàn bộ văn bản pháp lý bằng tiếng Anh. Nếu có câu hỏi pháp lý hoặc liên quan đến tài khoản, hãy liên hệ hello@swapspot.org."
+  },
+  "th": {
+    "code": "th",
+    "legacy": true,
+    "pricingComparisonBefore": "คุ้มขึ้นหลังใช้งาน 5 วัน",
+    "pricingComparisonAfter": "เปรียบเทียบราคาปัจจุบันของ Pass หนึ่งวัน และการเข้าถึงรายเดือนในร้านแอปของคุณ",
+    "legalIntroBefore": "หน้านี้แสดงเป็นภาษาที่คุณเลือก สำหรับคำถามด้านกฎหมายหรือบัญชี โปรดติดต่อ hello@swapspot.org",
+    "legalIntroAfter": "ชื่อหน้าและเมนูนำทางได้รับการแปลแล้ว เนื้อหาข้อความทางกฎหมายฉบับเต็มเป็นภาษาอังกฤษ หากมีคำถามด้านกฎหมายหรือเกี่ยวกับบัญชีของคุณ โปรดติดต่อ hello@swapspot.org"
+  },
+  "ar": {
+    "code": "ar",
+    "legacy": true,
+    "pricingComparisonBefore": "أوفر بعد 5 أيام استخدام",
+    "pricingComparisonAfter": "قارن الأسعار الحالية لاشتراك اليوم والوصول الشهري في متجر التطبيقات لديك",
+    "legalIntroBefore": "هذه الصفحة متاحة باللغة المحددة. للأسئلة القانونية أو أسئلة الحساب، تواصل عبر hello@swapspot.org.",
+    "legalIntroAfter": "عناوين الصفحات والتنقل مترجمة. النصوص القانونية الكاملة باللغة الإنجليزية. للأسئلة القانونية أو الأسئلة المتعلقة بحسابك، تواصل عبر hello@swapspot.org."
+  },
+  "pt": {
+    "code": "pt",
+    "legacy": true,
+    "pricingComparisonBefore": "Vale mais a pena após 5 dias de uso",
+    "pricingComparisonAfter": "Compare os preços atuais do «Passe diário» e do acesso mensal na sua loja de aplicativos",
+    "legalIntroBefore": "Esta página está disponível no idioma selecionado. Para dúvidas legais ou de conta, escreva para hello@swapspot.org.",
+    "legalIntroAfter": "Os títulos das páginas e a navegação estão traduzidos. Os textos jurídicos completos estão em inglês. Para questões jurídicas ou específicas da sua conta, entre em contato com hello@swapspot.org."
+  },
+  "ht": {
+    "code": "ht",
+    "legacy": true,
+    "pricingComparisonBefore": "Pi avantaje apre 5 jou itilizasyon",
+    "pricingComparisonAfter": "Konpare pri aktyèl «Pas pou yon jou» ak aksè chak mwa nan magazen aplikasyon ou a",
+    "legalIntroBefore": "Paj sa a disponib nan lang ou chwazi a. Pou kesyon legal oswa kont, ekri hello@swapspot.org.",
+    "legalIntroAfter": "Tit paj yo ak meni navigasyon yo tradui. Tèks legal konplè yo an anglè. Pou kesyon legal oswa kesyon sou kont ou, kontakte hello@swapspot.org."
+  },
+  "de": {
+    "code": "de",
+    "legacy": true,
+    "pricingComparisonBefore": "Lohnt sich ab 5 aktiven Tagen",
+    "pricingComparisonAfter": "Vergleichen Sie die aktuellen Preise für den Tagespass und den monatlichen Zugang in Ihrem App-Store",
+    "legalIntroBefore": "Diese Seite ist in der ausgewählten Sprache verfügbar. Für rechtliche Fragen oder Kontofragen kontaktieren Sie hello@swapspot.org.",
+    "legalIntroAfter": "Seitentitel und Navigation sind übersetzt. Die vollständigen Rechtstexte sind auf Englisch. Bei rechtlichen Fragen oder Fragen zu Ihrem Konto wenden Sie sich an hello@swapspot.org."
+  },
+  "fil": {
+    "code": "fil",
+    "legacy": true,
+    "pricingComparisonBefore": "Mas sulit pagkalipas ng 5 aktibong araw",
+    "pricingComparisonAfter": "Ihambing ang kasalukuyang presyo ng «Pass para sa isang araw» at buwanang access sa app store mo",
+    "legalIntroBefore": "Available ang page na ito sa pinili mong wika. Para sa legal o account questions, mag-email sa hello@swapspot.org.",
+    "legalIntroAfter": "Isinalin ang mga pamagat ng pahina at mga menu sa pag-navigate. Nasa Ingles ang buong mga legal na teksto. Para sa mga legal na tanong o tanong tungkol sa account mo, makipag-ugnayan sa hello@swapspot.org."
+  },
+  "hi": {
+    "code": "hi",
+    "legacy": true,
+    "pricingComparisonBefore": "5 सक्रिय दिनों के बाद ज़्यादा फ़ायदेमंद",
+    "pricingComparisonAfter": "अपने ऐप स्टोर में डे पास और मासिक ऐक्सेस की मौजूदा कीमतों की तुलना करें",
+    "legalIntroBefore": "यह पेज आपकी चुनी हुई भाषा में उपलब्ध है। कानूनी या खाते से जुड़े सवालों के लिए hello@swapspot.org पर संपर्क करें।",
+    "legalIntroAfter": "पेज के शीर्षक और नेविगेशन आपकी भाषा में हैं। कानूनी दस्तावेज़ों का पूरा पाठ अंग्रेज़ी में है। कानूनी या आपके खाते से जुड़े सवालों के लिए hello@swapspot.org पर संपर्क करें।"
+  },
+  "bn": {
+    "code": "bn",
+    "legacy": true,
+    "pricingComparisonBefore": "৫ দিন সক্রিয় ব্যবহারের পর আরও সাশ্রয়ী",
+    "pricingComparisonAfter": "আপনার অ্যাপ স্টোরে ডে পাস ও মাসিক অ্যাক্সেসের বর্তমান দাম তুলনা করুন",
+    "legalIntroBefore": "এই পেজটি আপনার নির্বাচিত ভাষায় উপলব্ধ। আইনি বা অ্যাকাউন্ট সম্পর্কিত প্রশ্নের জন্য hello@swapspot.org এ যোগাযোগ করুন।",
+    "legalIntroAfter": "পৃষ্ঠার শিরোনাম ও নেভিগেশন অনূদিত হয়েছে। সম্পূর্ণ আইনি পাঠ ইংরেজিতে রয়েছে। আইনি বা আপনার অ্যাকাউন্ট সম্পর্কিত প্রশ্নের জন্য hello@swapspot.org ঠিকানায় যোগাযোগ করুন।"
+  },
+  "te": {
+    "code": "te",
+    "legacy": true,
+    "pricingComparisonBefore": "5 క్రియాశీల రోజుల తర్వాత మరింత లాభం",
+    "pricingComparisonAfter": "మీ యాప్ స్టోర్‌లో డే పాస్ మరియు నెలవారీ యాక్సెస్ ప్రస్తుత ధరలను పోల్చండి",
+    "legalIntroBefore": "ఈ పేజీ మీరు ఎంచుకున్న భాషలో అందుబాటులో ఉంది. చట్టపరమైన లేదా ఖాతా ప్రశ్నలకు hello@swapspot.org కు రాయండి.",
+    "legalIntroAfter": "పేజీ శీర్షికలు, నావిగేషన్ అనువదించబడ్డాయి. పూర్తి చట్టపరమైన పాఠాలు ఆంగ్లంలో ఉన్నాయి. చట్టపరమైన లేదా మీ ఖాతాకు సంబంధించిన ప్రశ్నల కోసం hello@swapspot.org ను సంప్రదించండి."
+  },
+  "ta": {
+    "code": "ta",
+    "legacy": true,
+    "pricingComparisonBefore": "5 செயலில் உள்ள நாட்களுக்குப் பிறகு அதிக லாபம்",
+    "pricingComparisonAfter": "உங்கள் செயலி அங்காடியில் நாள் பாஸ் மற்றும் மாதாந்திர அணுகலுக்கான தற்போதைய விலைகளை ஒப்பிடுங்கள்",
+    "legalIntroBefore": "இந்த பக்கம் நீங்கள் தேர்ந்தெடுத்த மொழியில் கிடைக்கிறது. சட்ட அல்லது கணக்கு கேள்விகளுக்கு hello@swapspot.org-க்கு எழுதுங்கள்.",
+    "legalIntroAfter": "பக்கத் தலைப்புகளும் வழிசெலுத்தலும் மொழிபெயர்க்கப்பட்டுள்ளன. முழுமையான சட்ட உரைகள் ஆங்கிலத்தில் உள்ளன. சட்டம் அல்லது உங்கள் கணக்கு தொடர்பான கேள்விகளுக்கு hello@swapspot.org என்ற முகவரியைத் தொடர்புகொள்ளுங்கள்."
+  },
+  "cs": {
+    "code": "cs",
+    "legacy": false,
+    "legalIntroBefore": "Tato stránka je dostupná ve zvoleném jazyce. V právních záležitostech nebo ve věcech týkajících se účtu napište na hello@swapspot.org.",
+    "legalIntroAfter": "Názvy stránek a navigace jsou přeloženy. Úplné právní texty jsou v angličtině. S právními dotazy nebo dotazy k účtu se obraťte na hello@swapspot.org."
+  },
+  "sk": {
+    "code": "sk",
+    "legacy": false,
+    "legalIntroBefore": "Táto stránka je dostupná vo zvolenom jazyku. V právnych záležitostiach alebo vo veciach týkajúcich sa účtu napíšte na hello@swapspot.org.",
+    "legalIntroAfter": "Názvy stránok a navigácia sú preložené. Úplné právne texty sú v angličtine. S právnymi otázkami alebo otázkami k účtu sa obráťte na hello@swapspot.org."
+  },
+  "hu": {
+    "code": "hu",
+    "legacy": false,
+    "legalIntroBefore": "Ez az oldal a kiválasztott nyelveden érhető el. Jogi vagy fiókkal kapcsolatos kérdésekben írj a hello@swapspot.org címre.",
+    "legalIntroAfter": "Az oldalcímek és a navigáció le vannak fordítva. A teljes jogi szövegek angolul érhetők el. Jogi vagy fiókkal kapcsolatos kérdésekben írj a hello@swapspot.org címre."
+  },
+  "ro": {
+    "code": "ro",
+    "legacy": false,
+    "legalIntroBefore": "Această pagină este disponibilă în limba selectată. Pentru întrebări juridice sau legate de cont, scrie la hello@swapspot.org.",
+    "legalIntroAfter": "Titlurile paginilor și navigarea sunt traduse. Textele juridice integrale sunt în engleză. Pentru întrebări juridice sau despre cont, scrie la hello@swapspot.org."
+  },
+  "bg": {
+    "code": "bg",
+    "legacy": false,
+    "legalIntroBefore": "Тази страница е на избрания от вас език. За правни въпроси или въпроси за акаунта пишете на hello@swapspot.org.",
+    "legalIntroAfter": "Заглавията на страниците и навигацията са преведени. Пълните правни текстове са на английски. За правни въпроси или въпроси за акаунта пишете на hello@swapspot.org."
+  },
+  "el": {
+    "code": "el",
+    "legacy": false,
+    "legalIntroBefore": "Αυτή η σελίδα είναι διαθέσιμη στην επιλεγμένη γλώσσα σας. Για νομικά θέματα ή ερωτήσεις σχετικά με τον λογαριασμό σας, επικοινωνήστε στο hello@swapspot.org.",
+    "legalIntroAfter": "Οι τίτλοι των σελίδων και η πλοήγηση έχουν μεταφραστεί. Τα πλήρη νομικά κείμενα είναι στα αγγλικά. Για νομικές ερωτήσεις ή ερωτήσεις για τον λογαριασμό σας, επικοινωνήστε στο hello@swapspot.org."
+  },
+  "hr": {
+    "code": "hr",
+    "legacy": false,
+    "legalIntroBefore": "Ova je stranica dostupna na odabranom jeziku. Za pravna ili pitanja vezana uz račun obratite se na hello@swapspot.org.",
+    "legalIntroAfter": "Naslovi stranica i navigacija su prevedeni. Cjeloviti pravni tekstovi dostupni su na engleskom. Za pravna pitanja ili pitanja o računu pišite na hello@swapspot.org."
+  },
+  "sl": {
+    "code": "sl",
+    "legacy": false,
+    "legalIntroBefore": "Ta stran je na voljo v izbranem jeziku. Za pravna ali z računom povezana vprašanja se obrnite na hello@swapspot.org.",
+    "legalIntroAfter": "Naslovi strani in navigacija so prevedeni. Celotna pravna besedila so v angleščini. Za pravna vprašanja ali vprašanja o računu pišite na hello@swapspot.org."
+  },
+  "da": {
+    "code": "da",
+    "legacy": false,
+    "legalIntroBefore": "Denne side er tilgængelig på dit valgte sprog. For juridiske eller kontospecifikke spørgsmål kan du kontakte hello@swapspot.org.",
+    "legalIntroAfter": "Sidetitler og navigation er oversat. De fulde juridiske tekster er på engelsk. Ved juridiske spørgsmål eller spørgsmål om din konto kan du skrive til hello@swapspot.org."
+  },
+  "sv": {
+    "code": "sv",
+    "legacy": false,
+    "legalIntroBefore": "Den här sidan är tillgänglig på ditt valda språk. För juridiska eller kontospecifika frågor, kontakta hello@swapspot.org.",
+    "legalIntroAfter": "Sidtitlar och navigering är översatta. De fullständiga juridiska texterna är på engelska. För juridiska frågor eller frågor om ditt konto, kontakta hello@swapspot.org."
+  },
+  "fi": {
+    "code": "fi",
+    "legacy": false,
+    "legalIntroBefore": "Tämä sivu on saatavilla valitsemallasi kielellä. Laki- tai tilikohtaisissa kysymyksissä ota yhteyttä osoitteeseen hello@swapspot.org.",
+    "legalIntroAfter": "Sivujen otsikot ja navigointi on käännetty. Oikeudelliset tekstit ovat kokonaisuudessaan englanniksi. Oikeudellisissa tai tiliä koskevissa kysymyksissä ota yhteyttä osoitteeseen hello@swapspot.org."
+  },
+  "et": {
+    "code": "et",
+    "legacy": false,
+    "legalIntroBefore": "See leht on saadaval sinu valitud keeles. Juriidiliste või kontoga seotud küsimuste korral võta ühendust aadressil hello@swapspot.org.",
+    "legalIntroAfter": "Lehtede pealkirjad ja navigeerimine on tõlgitud. Õigustekstid on täies mahus inglise keeles. Õiguslike või kontoga seotud küsimuste korral kirjuta aadressile hello@swapspot.org."
+  },
+  "lv": {
+    "code": "lv",
+    "legacy": false,
+    "legalIntroBefore": "Šī lapa ir pieejama tavā izvēlētajā valodā. Juridiskos vai ar kontu saistītos jautājumos sazinies ar hello@swapspot.org.",
+    "legalIntroAfter": "Lapu virsraksti un navigācija ir tulkoti. Pilni juridiskie teksti ir angļu valodā. Juridiskos jautājumos vai jautājumos par kontu rakstiet uz hello@swapspot.org."
+  },
+  "lt": {
+    "code": "lt",
+    "legacy": false,
+    "legalIntroBefore": "Šis puslapis pateikiamas jūsų pasirinkta kalba. Teisiniais ar su konkrečia paskyra susijusiais klausimais rašykite hello@swapspot.org.",
+    "legalIntroAfter": "Puslapių pavadinimai ir naršymas išversti. Visas teisinių dokumentų tekstas pateikiamas anglų kalba. Teisiniais ar paskyros klausimais rašykite hello@swapspot.org."
+  },
+  "nb": {
+    "code": "nb",
+    "legacy": false,
+    "legalIntroBefore": "Denne siden er tilgjengelig på det valgte språket. For juridiske spørsmål eller kontospørsmål, skriv til hello@swapspot.org.",
+    "legalIntroAfter": "Sidetitler og navigasjon er oversatt. De fullstendige juridiske tekstene er på engelsk. Ved juridiske spørsmål eller spørsmål om kontoen din, kontakt hello@swapspot.org."
+  },
+  "is": {
+    "code": "is",
+    "legacy": false,
+    "legalIntroBefore": "Þessi síða er fáanleg á völdu tungumáli þínu. Fyrir laga- eða reikningstengdar spurningar skaltu hafa samband við hello@swapspot.org.",
+    "legalIntroAfter": "Titlar síðna og valmyndir eru þýdd. Lagatextarnir í heild eru á ensku. Hafðu samband við hello@swapspot.org vegna lagalegra spurninga eða spurninga um reikninginn þinn."
+  },
+  "sq": {
+    "code": "sq",
+    "legacy": false,
+    "legalIntroBefore": "Kjo faqe është e disponueshme në gjuhën që ke zgjedhur. Për pyetje ligjore ose që lidhen me llogarinë, kontakto hello@swapspot.org.",
+    "legalIntroAfter": "Titujt e faqeve dhe navigimi janë përkthyer. Tekstet e plota ligjore janë në anglisht. Për pyetje ligjore ose për llogarinë tënde, kontakto hello@swapspot.org."
+  },
+  "bs": {
+    "code": "bs",
+    "legacy": false,
+    "legalIntroBefore": "Ova stranica je dostupna na vašem odabranom jeziku. Za pravna pitanja ili pitanja o nalogu kontaktirajte hello@swapspot.org.",
+    "legalIntroAfter": "Naslovi stranica i navigacija su prevedeni. Cjeloviti pravni tekstovi su na engleskom. Za pravna pitanja ili pitanja o nalogu pišite na hello@swapspot.org."
+  },
+  "sr-latn": {
+    "code": "sr-Latn",
+    "legacy": false,
+    "legalIntroBefore": "Ova stranica je dostupna na vašem izabranom jeziku. Za pravna pitanja ili pitanja o nalogu kontaktirajte hello@swapspot.org.",
+    "legalIntroAfter": "Naslovi stranica i navigacija su prevedeni. Celoviti pravni tekstovi su na engleskom. Za pravna pitanja ili pitanja o nalogu pišite na hello@swapspot.org."
+  },
+  "mk": {
+    "code": "mk",
+    "legacy": false,
+    "legalIntroBefore": "Оваа страница е достапна на вашиот избран јазик. За правни прашања или прашања поврзани со сметката, контактирајте на hello@swapspot.org.",
+    "legalIntroAfter": "Насловите на страниците и навигацијата се преведени. Целосните правни текстови се на англиски. За правни прашања или прашања за сметката пишете на hello@swapspot.org."
+  },
+  "uk": {
+    "code": "uk",
+    "legacy": false,
+    "legalIntroBefore": "Ця сторінка доступна вашою обраною мовою. З юридичних питань або питань щодо акаунта звертайтеся на hello@swapspot.org.",
+    "legalIntroAfter": "Заголовки сторінок і навігацію перекладено. Повні юридичні тексти доступні англійською. З юридичними питаннями або питаннями щодо облікового запису звертайтеся на hello@swapspot.org."
+  },
+  "tr": {
+    "code": "tr",
+    "legacy": false,
+    "legalIntroBefore": "Bu sayfa seçtiğiniz dilde mevcuttur. Hukuki veya hesaba özel sorular için hello@swapspot.org ile iletişime geçin.",
+    "legalIntroAfter": "Sayfa başlıkları ve gezinme metinleri çevrilmiştir. Hukuki metinlerin tamamı İngilizcedir. Hukuki sorularınız veya hesabınızla ilgili sorularınız için hello@swapspot.org ile iletişime geçin."
+  },
+  "ka": {
+    "code": "ka",
+    "legacy": false,
+    "legalIntroBefore": "ეს გვერდი ხელმისაწვდომია თქვენს არჩეულ ენაზე. სამართლებრივი ან ანგარიშთან დაკავშირებული კითხვებისთვის დაუკავშირდით hello@swapspot.org-ს.",
+    "legalIntroAfter": "გვერდების სათაურები და ნავიგაცია ნათარგმნია. სრული იურიდიული ტექსტები ინგლისურ ენაზეა. იურიდიულ ან ანგარიშთან დაკავშირებულ კითხვებზე მოგვწერეთ hello@swapspot.org-ზე."
+  },
+  "hy": {
+    "code": "hy",
+    "legacy": false,
+    "legalIntroBefore": "Այս էջը հասանելի է ձեր ընտրած լեզվով։ Իրավական կամ հաշվին առնչվող հարցերի համար գրեք hello@swapspot.org հասցեին։",
+    "legalIntroAfter": "Էջերի վերնագրերն ու նավարկումը թարգմանված են։ Իրավական ամբողջական տեքստերն անգլերեն են։ Իրավական կամ ձեր հաշվին վերաբերող հարցերով գրեք hello@swapspot.org հասցեին։"
+  },
+  "az": {
+    "code": "az",
+    "legacy": false,
+    "legalIntroBefore": "Bu səhifə seçdiyiniz dildə mövcuddur. Hüquqi və ya hesabla bağlı suallar üçün hello@swapspot.org ilə əlaqə saxlayın.",
+    "legalIntroAfter": "Səhifə başlıqları və naviqasiya tərcümə olunub. Hüquqi mətnlərin tam versiyası ingilis dilindədir. Hüquqi və ya hesabınızla bağlı suallar üçün hello@swapspot.org ilə əlaqə saxlayın."
+  },
+  "ca": {
+    "code": "ca",
+    "legacy": false,
+    "legalIntroBefore": "Aquesta pàgina està disponible en l'idioma que has seleccionat. Per a preguntes legals o relacionades amb el compte, contacta amb hello@swapspot.org.",
+    "legalIntroAfter": "Els títols de les pàgines i la navegació estan traduïts. Els textos legals complets són en anglès. Per a consultes legals o sobre el teu compte, contacta amb hello@swapspot.org."
+  }
+}

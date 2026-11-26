@@ -255,6 +255,8 @@ export function matchLanguage(preferences: readonly string[], segments: readonly
     if (!value) continue;
     const exact = aliases[value] ?? value;
     if (available.has(exact)) return exact;
+    const scripted = value.match(/^([a-z]{2,3})-([a-z]{4})(?:-|$)/);
+    if (scripted && available.has(`${scripted[1]}-${scripted[2]}`)) return `${scripted[1]}-${scripted[2]}`;
     const base = value.split("-")[0];
     const fromBase = aliases[base] ?? base;
     if (available.has(fromBase)) return fromBase;

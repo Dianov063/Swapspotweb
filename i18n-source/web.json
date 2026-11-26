@@ -2098,11 +2098,11 @@
     },
     {
       "key": "pricing.plans.1.features.2",
-      "text": "Better value after 5 active days",
+      "text": "Compare current Day Pass and monthly prices in your app store",
       "context": "lib/pricingCopy.ts (home page pricing section) > plans.1.features",
       "placeholders": [],
-      "max_length": 64,
-      "hash": "0794d30e2ca2"
+      "max_length": null,
+      "hash": "dca42adf7300"
     },
     {
       "key": "pricing.plans.1.cta",
@@ -2274,11 +2274,11 @@
     },
     {
       "key": "staticPages.intro",
-      "text": "This page is available in your selected language. For legal or account-specific questions, contact hello@swapspot.org.",
+      "text": "Page titles and navigation are localized. Full legal texts are in English. For legal or account-specific questions, contact hello@swapspot.org.",
       "context": "lib/copy/staticPages.ts (privacy, terms, support, contact, account deletion notice pages) > intro",
       "placeholders": [],
       "max_length": null,
-      "hash": "0f42636c6f41"
+      "hash": "d4f9c2f91b55"
     },
     {
       "key": "appPreview.eyebrow",

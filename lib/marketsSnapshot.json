@@ -2,7 +2,7 @@
   "format": 1,
   "updated_at": null,
   "generated_from": "swapspot_markets_seed.json",
-  "seed_source": "tzdata (pytz 2025.2) + CLDR via Node v24.18.0 Intl.DisplayNames; ht names added manually; African markets 2026-10-19 (preparing); names for new languages from CLDR where available",
+  "seed_source": "tzdata (pytz 2025.2) + CLDR via Node v24.18.0 Intl.DisplayNames; ht names added manually; African markets 2026-10-19 (preparing); names for new languages from CLDR where available; public34 full-field baseline2026-11-25 preserved +38Europe preparing source drafts",
   "markets": [
     {
       "code": "US",
@@ -80,37 +80,7 @@
         "te": "యునైటెడ్ స్టేట్స్",
         "ta": "அமெரிக்கா",
         "vi": "Hoa Kỳ",
-        "th": "สหรัฐอเมริกา",
-        "sw": "Marekani",
-        "am": "ዩናይትድ ስቴትስ",
-        "ar-EG": "الولايات المتحدة",
-        "pt-AO": "Estados Unidos",
-        "sw-KE": "Marekani",
-        "ha": "Amurka",
-        "yo": "Amẹrikà",
-        "ig": "United States",
-        "pcm": "Yunaítẹ́d Stets",
-        "om": "Yiinaayitid Isteet",
-        "zu": "i-United States",
-        "xh": "EMelika",
-        "ak": "Amɛrika",
-        "ln": "Ameriki",
-        "kab": "WDM",
-        "zgh": "ⵉⵡⵓⵏⴰⴽ ⵎⵓⵏⵏⵉⵏ ⵏ ⵎⵉⵔⵉⴽⴰⵏ",
-        "ee": "USA nutome",
-        "kg": "Etazuni ya Amerika",
-        "lua": "Etazuni ya Amerika",
-        "af": "Verenigde State van Amerika",
-        "rw": "Leta Zunze Ubumwe za Amerika",
-        "so": "Maraykanka",
-        "wo": "Etaa Sini",
-        "mg": "Etazonia",
-        "lg": "Amerika",
-        "sn": "Amerika",
-        "bm": "Ameriki",
-        "ti": "ኣመሪካ",
-        "ff": "Dowlaaji Dentuɗi Amerik",
-        "pl": "Stany Zjednoczone"
+        "th": "สหรัฐอเมริกา"
       }
     },
     {
@@ -161,37 +131,7 @@
         "te": "ప్యూర్టో రికో",
         "ta": "பியூர்டோ ரிகோ",
         "vi": "Puerto Rico",
-        "th": "เปอร์โตริโก",
-        "sw": "Puerto Rico",
-        "am": "ፑዌርቶ ሪኮ",
-        "ar-EG": "بورتوريكو",
-        "pt-AO": "Porto Rico",
-        "sw-KE": "Pwetoriko",
-        "ha": "Porto Riko",
-        "yo": "Pọto Riko",
-        "ig": "Puerto Rico",
-        "pcm": "Puẹ́rto Ríkọ",
-        "om": "Poortaar Riikoo",
-        "zu": "i-Puerto Rico",
-        "xh": "EPuerto Rico",
-        "ak": "Puɛto Riko",
-        "ln": "Pɔtoriko",
-        "kab": "Purtu Riku",
-        "zgh": "ⴱⵓⵔⵜⵓ ⵔⵉⴽⵓ",
-        "ee": "Puerto Riko nutome",
-        "kg": "Puerto Rico",
-        "lua": "Puerto Rico",
-        "af": "Puerto Rico",
-        "rw": "Porto Riko",
-        "so": "Bueerto Riiko",
-        "wo": "Porto Riko",
-        "mg": "Pôrtô Rikô",
-        "lg": "Potoriko",
-        "sn": "Puerto Rico",
-        "bm": "Pɔrotoriko",
-        "ti": "ፖርቶ ሪኮ",
-        "ff": "Porto Rikoo",
-        "pl": "Portoryko"
+        "th": "เปอร์โตริโก"
       }
     },
     {
@@ -242,37 +182,7 @@
         "te": "ఫిలిప్పైన్స్",
         "ta": "பிலிப்பைன்ஸ்",
         "vi": "Philippines",
-        "th": "ฟิลิปปินส์",
-        "sw": "Ufilipino",
-        "am": "ፊሊፒንስ",
-        "ar-EG": "الفلبين",
-        "pt-AO": "Filipinas",
-        "sw-KE": "Ufilipino",
-        "ha": "Filipin",
-        "yo": "Filipini",
-        "ig": "Philippines",
-        "pcm": "Fílípins",
-        "om": "Filippiins",
-        "zu": "i-Philippines",
-        "xh": "EPhilippines",
-        "ak": "Filipin",
-        "ln": "Filipinɛ",
-        "kab": "Filipin",
-        "zgh": "ⴼⵉⵍⵉⴱⴱⵉⵏ",
-        "ee": "Filipini nutome",
-        "kg": "Filipine",
-        "lua": "Filipine",
-        "af": "Filippyne",
-        "rw": "Filipine",
-        "so": "Filibiin",
-        "wo": "Filipin",
-        "mg": "Filipina",
-        "lg": "Bizinga bya Firipino",
-        "sn": "Philippines",
-        "bm": "Filipini",
-        "ti": "ፊሊፒንስ",
-        "ff": "Filipiin",
-        "pl": "Filipiny"
+        "th": "ฟิลิปปินส์"
       }
     },
     {
@@ -326,37 +236,7 @@
         "te": "భారతదేశం",
         "ta": "இந்தியா",
         "vi": "Ấn Độ",
-        "th": "อินเดีย",
-        "sw": "India",
-        "am": "ህንድ",
-        "ar-EG": "الهند",
-        "pt-AO": "Índia",
-        "sw-KE": "India",
-        "ha": "Indiya",
-        "yo": "Íńdíà",
-        "ig": "India",
-        "pcm": "Índia",
-        "om": "Hindii",
-        "zu": "i-India",
-        "xh": "E-Indiya",
-        "ak": "India",
-        "ln": "Índɛ",
-        "kab": "Lhend",
-        "zgh": "ⵍⵀⵉⵏⴷ",
-        "ee": "India nutome",
-        "kg": "Indiya",
-        "lua": "India",
-        "af": "Indië",
-        "rw": "Ubuhinde",
-        "so": "Hindiya",
-        "wo": "End",
-        "mg": "Indy",
-        "lg": "Buyindi",
-        "sn": "India",
-        "bm": "Ɛndujamana",
-        "ti": "ህንዲ",
-        "ff": "Enndo",
-        "pl": "Indie"
+        "th": "อินเดีย"
       }
     },
     {
@@ -408,37 +288,7 @@
         "te": "సింగపూర్",
         "ta": "சிங்கப்பூர்",
         "vi": "Singapore",
-        "th": "สิงคโปร์",
-        "sw": "Singapore",
-        "am": "ሲንጋፖር",
-        "ar-EG": "سنغافورة",
-        "pt-AO": "Singapura",
-        "sw-KE": "Singapuri",
-        "ha": "Singapur",
-        "yo": "Singapo",
-        "ig": "Singapore",
-        "pcm": "Singapọ",
-        "om": "Singaapoor",
-        "zu": "i-Singapore",
-        "xh": "ESingapore",
-        "ak": "Singapɔ",
-        "ln": "Singapurɛ",
-        "kab": "Singafur",
-        "zgh": "ⵙⵏⵖⴰⴼⵓⵔⴰ",
-        "ee": "Singapɔr nutome",
-        "kg": "Singapur",
-        "lua": "Singapur",
-        "af": "Singapoer",
-        "rw": "Singapuru",
-        "so": "Singaboor",
-        "wo": "Singapuur",
-        "mg": "Singaporo",
-        "lg": "Singapowa",
-        "sn": "Singapore",
-        "bm": "Sɛngapuri",
-        "ti": "ሲንጋፖር",
-        "ff": "Sinngapuur",
-        "pl": "Singapur"
+        "th": "สิงคโปร์"
       }
     },
     {
@@ -491,37 +341,7 @@
         "te": "మలేషియా",
         "ta": "மலேசியா",
         "vi": "Malaysia",
-        "th": "มาเลเซีย",
-        "sw": "Malesia",
-        "am": "ማሌዢያ",
-        "ar-EG": "ماليزيا",
-        "pt-AO": "Malásia",
-        "sw-KE": "Malesia",
-        "ha": "Malesiya",
-        "yo": "Malasia",
-        "ig": "Malaysia",
-        "pcm": "Maléshia",
-        "om": "Maleeshiyaa",
-        "zu": "i-Malaysia",
-        "xh": "EMalaysia",
-        "ak": "Malehyia",
-        "ln": "Malezi",
-        "kab": "Malizya",
-        "zgh": "ⵎⴰⵍⵉⵣⵢⴰ",
-        "ee": "Malaysia nutome",
-        "kg": "Malezia",
-        "lua": "Malezia",
-        "af": "Maleisië",
-        "rw": "Maleziya",
-        "so": "Malaysiya",
-        "wo": "Malesi",
-        "mg": "Malaizia",
-        "lg": "Malezya",
-        "sn": "Malaysia",
-        "bm": "Malɛzi",
-        "ti": "ማለዥያ",
-        "ff": "Malesii",
-        "pl": "Malezja"
+        "th": "มาเลเซีย"
       }
     },
     {
@@ -572,37 +392,7 @@
         "te": "థాయిలాండ్",
         "ta": "தாய்லாந்து",
         "vi": "Thái Lan",
-        "th": "ไทย",
-        "sw": "Tailandi",
-        "am": "ታይላንድ",
-        "ar-EG": "تايلاند",
-        "pt-AO": "Tailândia",
-        "sw-KE": "Thailandi",
-        "ha": "Tailan",
-        "yo": "Tailandi",
-        "ig": "Thailand",
-        "pcm": "Taíland",
-        "om": "Taayilaand",
-        "zu": "i-Thailand",
-        "xh": "EThailand",
-        "ak": "Taeland",
-        "ln": "Tailandɛ",
-        "kab": "Ṭayland",
-        "zgh": "ⵟⴰⵢⵍⴰⵏⴷ",
-        "ee": "Thailand nutome",
-        "kg": "Tayilandi",
-        "lua": "Tayilandi",
-        "af": "Thailand",
-        "rw": "Tayilande",
-        "so": "Taylaand",
-        "wo": "Taylànd",
-        "mg": "Thailandy",
-        "lg": "Tayirandi",
-        "sn": "Thailand",
-        "bm": "Tayilandi",
-        "ti": "ታይላንድ",
-        "ff": "Taylannda",
-        "pl": "Tajlandia"
+        "th": "ไทย"
       }
     },
     {
@@ -655,37 +445,7 @@
         "te": "ఇండోనేషియా",
         "ta": "இந்தோனேசியா",
         "vi": "Indonesia",
-        "th": "อินโดนีเซีย",
-        "sw": "Indonesia",
-        "am": "ኢንዶኔዢያ",
-        "ar-EG": "إندونيسيا",
-        "pt-AO": "Indonésia",
-        "sw-KE": "Indonesia",
-        "ha": "Indunusiya",
-        "yo": "Indonéṣíà",
-        "ig": "Indonesia",
-        "pcm": "Indoníshia",
-        "om": "Indooneeshiyaa",
-        "zu": "i-Indonesia",
-        "xh": "E-Indonesia",
-        "ak": "Ndoniihyia",
-        "ln": "Indonezi",
-        "kab": "Indunizi",
-        "zgh": "ⴰⵏⴷⵓⵏⵉⵙⵢⴰ",
-        "ee": "Indonesia nutome",
-        "kg": "Indonezia",
-        "lua": "Indonezia",
-        "af": "Indonesië",
-        "rw": "Indoneziya",
-        "so": "Indoneesiya",
-        "wo": "Indonesi",
-        "mg": "Indonezia",
-        "lg": "Yindonezya",
-        "sn": "Indonesia",
-        "bm": "Ɛndonezi",
-        "ti": "ኢንዶነዥያ",
-        "ff": "Enndonesii",
-        "pl": "Indonezja"
+        "th": "อินโดนีเซีย"
       }
     },
     {
@@ -736,37 +496,7 @@
         "te": "వియత్నాం",
         "ta": "வியட்நாம்",
         "vi": "Việt Nam",
-        "th": "เวียดนาม",
-        "sw": "Vietnamu",
-        "am": "ቬትናም",
-        "ar-EG": "فيتنام",
-        "pt-AO": "Vietname",
-        "sw-KE": "Vietnamu",
-        "ha": "Biyetinam",
-        "yo": "Fẹtinami",
-        "ig": "Vietnam",
-        "pcm": "Viẹ́tnam",
-        "om": "Veetinaam",
-        "zu": "i-Vietnam",
-        "xh": "EVietnam",
-        "ak": "Viɛtnam",
-        "ln": "Viyetinamɛ",
-        "kab": "Vyeṭnam",
-        "zgh": "ⴼⵉⵜⵏⴰⵎ",
-        "ee": "Vietnam nutome",
-        "kg": "Viyetnam",
-        "lua": "Viyetnam",
-        "af": "Viëtnam",
-        "rw": "Vietinamu",
-        "so": "Fiyetnaam",
-        "wo": "Wiyetnam",
-        "mg": "Vietnam",
-        "lg": "Vyetinaamu",
-        "sn": "Vietnam",
-        "bm": "Wiyɛtinamu",
-        "ti": "ቬትናም",
-        "ff": "Wiyetnaam",
-        "pl": "Wietnam"
+        "th": "เวียดนาม"
       }
     },
     {
@@ -817,37 +547,7 @@
         "te": "డొమినికన్ రిపబ్లిక్",
         "ta": "டொமினிகன் குடியரசு",
         "vi": "Cộng hòa Dominica",
-        "th": "สาธารณรัฐโดมินิกัน",
-        "sw": "Jamhuri ya Dominika",
-        "am": "ዶመኒካን ሪፑብሊክ",
-        "ar-EG": "جمهورية الدومينيكان",
-        "pt-AO": "República Dominicana",
-        "sw-KE": "Jamhuri ya Dominika",
-        "ha": "Jamhuriyar Dominika",
-        "yo": "Dòmíníkánì",
-        "ig": "Dominican Republik",
-        "pcm": "Dọmíníka Ripọ́blik",
-        "om": "Dominikaa Rippaabilik",
-        "zu": "i-Dominican Republic",
-        "xh": "EDominican Republic",
-        "ak": "Dɔmeneka Man",
-        "ln": "Repibiki ya Domínikɛ",
-        "kab": "Tigduda Taduminikit",
-        "zgh": "ⵜⴰⴳⴷⵓⴷⴰⵏⵜ ⵜⴰⴷⵓⵎⵉⵏⵉⴽⵜ",
-        "ee": "Dominika repɔblik nutome",
-        "kg": "Repubilika Dominikene",
-        "lua": "Repubilika Dominikene",
-        "af": "Dominikaanse Republiek",
-        "rw": "Repubulika ya Dominikani",
-        "so": "Jamhuuriyaddda Dominika",
-        "wo": "Repiblik Dominiken",
-        "mg": "Repoblika Dominikanina",
-        "lg": "Lipubulika ya Dominika",
-        "sn": "Dominican Republic",
-        "bm": "Dɔmimiki republiki",
-        "ti": "ዶሚኒካዊት ሪፓብሊክ",
-        "ff": "Ndenndanndi Dominika",
-        "pl": "Dominikana"
+        "th": "สาธารณรัฐโดมินิกัน"
       }
     },
     {
@@ -898,37 +598,7 @@
         "te": "హైతీ",
         "ta": "ஹைட்டி",
         "vi": "Haiti",
-        "th": "เฮติ",
-        "sw": "Haiti",
-        "am": "ሀይቲ",
-        "ar-EG": "هايتي",
-        "pt-AO": "Haiti",
-        "sw-KE": "Haiti",
-        "ha": "Haiti",
-        "yo": "Haati",
-        "ig": "Haiti",
-        "pcm": "Haíti",
-        "om": "Haayitii",
-        "zu": "i-Haiti",
-        "xh": "EHaiti",
-        "ak": "Heiti",
-        "ln": "Ayiti",
-        "kab": "Hayti",
-        "zgh": "ⵀⴰⵢⵜⵉ",
-        "ee": "Haiti nutome",
-        "kg": "Ayiti",
-        "lua": "Ayiti",
-        "af": "Haïti",
-        "rw": "Hayiti",
-        "so": "Haiti",
-        "wo": "Ayti",
-        "mg": "Haiti",
-        "lg": "Hayiti",
-        "sn": "Haiti",
-        "bm": "Ayiti",
-        "ti": "ሃይቲ",
-        "ff": "Haytii",
-        "pl": "Haiti"
+        "th": "เฮติ"
       }
     },
     {
@@ -978,37 +648,7 @@
         "te": "జమైకా",
         "ta": "ஜமைக்கா",
         "vi": "Jamaica",
-        "th": "จาเมกา",
-        "sw": "Jamaika",
-        "am": "ጃማይካ",
-        "ar-EG": "جامايكا",
-        "pt-AO": "Jamaica",
-        "sw-KE": "Jamaika",
-        "ha": "Jamaika",
-        "yo": "Jamaika",
-        "ig": "Jamaika",
-        "pcm": "Jamaíka",
-        "om": "Jamaayikaa",
-        "zu": "i-Jamaica",
-        "xh": "EJamaica",
-        "ak": "Gyameka",
-        "ln": "Zamaiki",
-        "kab": "Jamyika",
-        "zgh": "ⵊⴰⵎⴰⵢⴽⴰ",
-        "ee": "Dzamaika nutome",
-        "kg": "Jamayika",
-        "lua": "Jamayika",
-        "af": "Jamaika",
-        "rw": "Jamayika",
-        "so": "Jamaaika",
-        "wo": "Samayig",
-        "mg": "Jamaïka",
-        "lg": "Jamayika",
-        "sn": "Jamaica",
-        "bm": "Zamayiki",
-        "ti": "ጃማይካ",
-        "ff": "Jamayka",
-        "pl": "Jamajka"
+        "th": "จาเมกา"
       }
     },
     {
@@ -1058,42 +698,12 @@
         "te": "ట్రినిడాడ్ మరియు టొబాగో",
         "ta": "டிரினிடாட் & டொபாகோ",
         "vi": "Trinidad và Tobago",
-        "th": "ตรินิแดดและโตเบโก",
-        "sw": "Trinidad na Tobago",
-        "am": "ትሪናዳድ እና ቶቤጎ",
-        "ar-EG": "ترينيداد وتوباغو",
-        "pt-AO": "Trindade e Tobago",
-        "sw-KE": "Trinidad na Tobago",
-        "ha": "Tirinidad Da Tobago",
-        "yo": "Tirinida ati Tobaga",
-        "ig": "Trinidad na Tobago",
-        "pcm": "Trínídad & Tobágo",
-        "om": "Tirinidan fi Tobaagoo",
-        "zu": "i-Trinidad ne-Tobago",
-        "xh": "ETrinidad & Tobago",
-        "ak": "Trinidad ne Tobago",
-        "ln": "Tinidadɛ mpé Tobago",
-        "kab": "Ṭrindad d Ṭubagu",
-        "zgh": "ⵜⵔⵉⵏⵉⴷⴰⴷ ⴷ ⵟⵓⴱⴰⴳⵓ",
-        "ee": "Trinidad kple Tobago nutome",
-        "kg": "Trinidad ye Tobago",
-        "lua": "Trinidad ne Tobago",
-        "af": "Trinidad en Tobago",
-        "rw": "Tirinidadi na Tobago",
-        "so": "Tirinidaad & Tobago",
-        "wo": "Tirinite ak Tobago",
-        "mg": "Trinidad sy Tobagô",
-        "lg": "Turindaadi ne Tobago",
-        "sn": "Trinidad and Tobago",
-        "bm": "Trinite-ni-Tobago",
-        "ti": "ትሪኒዳድን ቶባጎን",
-        "ff": "Tirnidaad e Tobaago",
-        "pl": "Trynidad i Tobago"
+        "th": "ตรินิแดดและโตเบโก"
       }
     },
     {
       "code": "ZA",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 140,
       "currency": {
         "code": "ZAR",
@@ -1170,13 +780,12 @@
         "sn": "South Africa",
         "bm": "Worodugu Afriki",
         "ti": "ደቡብ ኣፍሪቃ",
-        "ff": "Afrik bŋ Worgo",
-        "pl": "Republika Południowej Afryki"
+        "ff": "Afrik bŋ Worgo"
       }
     },
     {
       "code": "EG",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 150,
       "currency": {
         "code": "EGP",
@@ -1251,13 +860,12 @@
         "sn": "Egypt",
         "bm": "Eziputi",
         "ti": "ግብጺ",
-        "ff": "Ejipt",
-        "pl": "Egipt"
+        "ff": "Ejipt"
       }
     },
     {
       "code": "NG",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 160,
       "currency": {
         "code": "NGN",
@@ -1335,13 +943,12 @@
         "sn": "Nigeria",
         "bm": "Nizeriya",
         "ti": "ናይጀርያ",
-        "ff": "Nijeriyaa",
-        "pl": "Nigeria"
+        "ff": "Nijeriyaa"
       }
     },
     {
       "code": "DZ",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 170,
       "currency": {
         "code": "DZD",
@@ -1417,13 +1024,12 @@
         "sn": "Aljeria",
         "bm": "Alizeri",
         "ti": "ኣልጀርያ",
-        "ff": "Alaseri",
-        "pl": "Algieria"
+        "ff": "Alaseri"
       }
     },
     {
       "code": "MA",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 180,
       "currency": {
         "code": "MAD",
@@ -1500,13 +1106,12 @@
         "sn": "Morocco",
         "bm": "Marɔku",
         "ti": "ሞሮኮ",
-        "ff": "Maruk",
-        "pl": "Maroko"
+        "ff": "Maruk"
       }
     },
     {
       "code": "AO",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 190,
       "currency": {
         "code": "AOA",
@@ -1580,13 +1185,12 @@
         "sn": "Angola",
         "bm": "Angola",
         "ti": "ኣንጎላ",
-        "ff": "Anngolaa",
-        "pl": "Angola"
+        "ff": "Anngolaa"
       }
     },
     {
       "code": "KE",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 200,
       "currency": {
         "code": "KES",
@@ -1661,13 +1265,12 @@
         "sn": "Kenya",
         "bm": "Keniya",
         "ti": "ኬንያ",
-        "ff": "Keñaa",
-        "pl": "Kenia"
+        "ff": "Keñaa"
       }
     },
     {
       "code": "GH",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 210,
       "currency": {
         "code": "GHS",
@@ -1743,13 +1346,12 @@
         "sn": "Ghana",
         "bm": "Gana",
         "ti": "ጋና",
-        "ff": "Ganaa",
-        "pl": "Ghana"
+        "ff": "Ganaa"
       }
     },
     {
       "code": "ET",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 220,
       "currency": {
         "code": "ETB",
@@ -1826,13 +1428,12 @@
         "sn": "Etiopia",
         "bm": "Etiopi",
         "ti": "ኢትዮጵያ",
-        "ff": "Ecoppi",
-        "pl": "Etiopia"
+        "ff": "Ecoppi"
       }
     },
     {
       "code": "CD",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 230,
       "currency": {
         "code": "USD",
@@ -1911,13 +1512,292 @@
         "sn": "Democratic Republic of the Congo",
         "bm": "Kongo ka republiki demɔkratiki",
         "ti": "ደሞክራስያዊት ሪፓብሊክ ኮንጎ",
-        "ff": "Ndenndaandi Demokaraasiire Konngo",
-        "pl": "Demokratyczna Republika Konga"
+        "ff": "Ndenndaandi Demokaraasiire Konngo"
+      }
+    },
+    {
+      "code": "IE",
+      "status": "active",
+      "sort_order": 240,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Dublin",
+      "timezones": [
+        "Europe/Dublin"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": false,
+        "pattern": "^(?:[A-Z][0-9]{2}|D6W) ?[A-Z0-9]{4}$",
+        "example": "A65 F4E2"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 53.42393,
+        "lng": -7.94069,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "de": "Irland",
+        "en": "Ireland",
+        "es": "Irlanda",
+        "fr": "Irlande",
+        "pt": "Irlanda",
+        "ru": "Ирландия"
+      }
+    },
+    {
+      "code": "ES",
+      "status": "active",
+      "sort_order": 250,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Madrid",
+      "timezones": [
+        "Europe/Madrid",
+        "Atlantic/Canary",
+        "Africa/Ceuta"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^(?:0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$",
+        "example": "28001"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 40.4165,
+        "lng": -3.70256,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "es",
+        "recommended": [
+          "es",
+          "en"
+        ]
+      },
+      "names": {
+        "de": "Spanien",
+        "en": "Spain",
+        "es": "España",
+        "fr": "Espagne",
+        "pt": "Espanha",
+        "ru": "Испания"
+      }
+    },
+    {
+      "code": "FR",
+      "status": "active",
+      "sort_order": 313,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Paris",
+      "timezones": [
+        "Europe/Paris"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^\\d{5}$",
+        "example": "75001"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 46.6,
+        "lng": 2.43,
+        "zoom": 5
+      },
+      "languages": {
+        "default": "fr",
+        "recommended": [
+          "fr",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "France",
+        "fr": "France"
+      }
+    },
+    {
+      "code": "DE",
+      "status": "active",
+      "sort_order": 314,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Berlin",
+      "timezones": [
+        "Europe/Berlin"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^[0-9]{5}$",
+        "example": "10115"
+      },
+      "region_kind": "state",
+      "map_center": {
+        "lat": 51.1657,
+        "lng": 10.4515,
+        "zoom": 5
+      },
+      "languages": {
+        "default": "de",
+        "recommended": [
+          "de",
+          "en"
+        ]
+      },
+      "names": {
+        "de": "Deutschland",
+        "en": "Germany",
+        "es": "Alemania",
+        "fr": "Allemagne",
+        "pt": "Alemanha",
+        "ru": "Германия"
+      }
+    },
+    {
+      "code": "AT",
+      "status": "active",
+      "sort_order": 315,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Vienna",
+      "timezones": [
+        "Europe/Vienna"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1010"
+      },
+      "region_kind": "state",
+      "map_center": {
+        "lat": 47.52,
+        "lng": 14.55,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "de",
+        "recommended": [
+          "de",
+          "en"
+        ]
+      },
+      "names": {
+        "de": "Österreich",
+        "en": "Austria",
+        "es": "Austria",
+        "fr": "Autriche",
+        "pt": "Áustria",
+        "ru": "Австрия"
+      }
+    },
+    {
+      "code": "PT",
+      "status": "active",
+      "sort_order": 316,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Lisbon",
+      "timezones": [
+        "Europe/Lisbon",
+        "Atlantic/Madeira",
+        "Atlantic/Azores"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^[0-9]{4}-[0-9]{3}$",
+        "example": "1000-001"
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 39.55,
+        "lng": -8,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "pt",
+        "recommended": [
+          "pt",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Portugal",
+        "fr": "Portugal",
+        "pt": "Portugal",
+        "ru": "Португалия"
+      }
+    },
+    {
+      "code": "MT",
+      "status": "active",
+      "sort_order": 317,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Malta",
+      "timezones": [
+        "Europe/Malta"
+      ],
+      "postal": {
+        "kind": "postal",
+        "required": true,
+        "pattern": "^[A-Za-z]{3} ?[0-9]{4}$",
+        "example": "VLT 1117"
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 35.93,
+        "lng": 14.4,
+        "zoom": 10
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Malta",
+        "fr": "Malte",
+        "ru": "Мальта"
       }
     },
     {
       "code": "IT",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 318,
       "currency": {
         "code": "EUR",
@@ -1992,13 +1872,12 @@
         "bm": "Itali",
         "ti": "ኢጣልያ",
         "ff": "Itali",
-        "nl": "Italië",
-        "pl": "Włochy"
+        "nl": "Italië"
       }
     },
     {
       "code": "NL",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 319,
       "currency": {
         "code": "EUR",
@@ -2073,13 +1952,12 @@
         "bm": "Peyiba",
         "ti": "ኔዘርላንድ",
         "ff": "Nederlannda",
-        "it": "Paesi Bassi",
-        "pl": "Holandia"
+        "it": "Paesi Bassi"
       }
     },
     {
       "code": "BE",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 320,
       "currency": {
         "code": "EUR",
@@ -2162,7 +2040,7 @@
     },
     {
       "code": "PL",
-      "status": "preparing",
+      "status": "active",
       "sort_order": 330,
       "currency": {
         "code": "PLN",
@@ -2241,6 +2119,1548 @@
         "it": "Polonia",
         "nl": "Polen",
         "pl": "Polska"
+      }
+    },
+    {
+      "code": "CZ",
+      "status": "preparing",
+      "sort_order": 340,
+      "currency": {
+        "code": "CZK",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Prague",
+      "timezones": [
+        "Europe/Prague"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{3} ?[0-9]{2}$",
+        "example": "110 00"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 50.0875,
+        "lng": 14.4214,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "cs",
+        "recommended": [
+          "cs",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Czechia",
+        "cs": "Česko",
+        "de": "Tschechien",
+        "fr": "Tchéquie",
+        "es": "Chequia",
+        "it": "Cechia",
+        "nl": "Tsjechië",
+        "pl": "Czechy",
+        "pt": "Chéquia",
+        "ru": "Чехия",
+        "ar": "التشيك",
+        "zh-Hans": "捷克",
+        "vi": "Séc",
+        "th": "เช็กเกีย",
+        "hi": "चेकिया"
+      }
+    },
+    {
+      "code": "SK",
+      "status": "preparing",
+      "sort_order": 350,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Bratislava",
+      "timezones": [
+        "Europe/Bratislava"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{3} ?[0-9]{2}$",
+        "example": "811 01"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 48.148,
+        "lng": 17.107,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "sk",
+        "recommended": [
+          "sk",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Slovakia",
+        "sk": "Slovensko",
+        "cs": "Slovensko",
+        "de": "Slowakei",
+        "fr": "Slovaquie",
+        "es": "Eslovaquia",
+        "it": "Slovacchia",
+        "nl": "Slowakije",
+        "pl": "Słowacja",
+        "pt": "Eslováquia",
+        "ru": "Словакия",
+        "ar": "سلوفاكيا",
+        "zh-Hans": "斯洛伐克",
+        "vi": "Slovakia",
+        "hi": "स्लोवाकिया"
+      }
+    },
+    {
+      "code": "HU",
+      "status": "preparing",
+      "sort_order": 360,
+      "currency": {
+        "code": "HUF",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Budapest",
+      "timezones": [
+        "Europe/Budapest"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1051"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 47.4979,
+        "lng": 19.0402,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "hu",
+        "recommended": [
+          "hu",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Hungary",
+        "hu": "Magyarország",
+        "de": "Ungarn",
+        "fr": "Hongrie",
+        "es": "Hungría",
+        "it": "Ungheria",
+        "nl": "Hongarije",
+        "pl": "Węgry",
+        "pt": "Hungria",
+        "ru": "Венгрия",
+        "cs": "Maďarsko",
+        "sk": "Maďarsko"
+      }
+    },
+    {
+      "code": "RO",
+      "status": "preparing",
+      "sort_order": 370,
+      "currency": {
+        "code": "RON",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Bucharest",
+      "timezones": [
+        "Europe/Bucharest"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{6}$",
+        "example": "010011"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 44.4268,
+        "lng": 26.1025,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "ro",
+        "recommended": [
+          "ro",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Romania",
+        "ro": "România",
+        "de": "Rumänien",
+        "fr": "Roumanie",
+        "es": "Rumanía",
+        "it": "Romania",
+        "nl": "Roemenië",
+        "pl": "Rumunia",
+        "pt": "Roménia",
+        "ru": "Румыния",
+        "hu": "Románia"
+      }
+    },
+    {
+      "code": "HR",
+      "status": "preparing",
+      "sort_order": 380,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Zagreb",
+      "timezones": [
+        "Europe/Zagreb"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{5}$",
+        "example": "10000"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 45.815,
+        "lng": 15.9819,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "hr",
+        "recommended": [
+          "hr",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Croatia",
+        "hr": "Hrvatska",
+        "de": "Kroatien",
+        "fr": "Croatie",
+        "es": "Croacia",
+        "it": "Croazia",
+        "nl": "Kroatië",
+        "pl": "Chorwacja",
+        "pt": "Croácia",
+        "ru": "Хорватия"
+      }
+    },
+    {
+      "code": "SI",
+      "status": "preparing",
+      "sort_order": 390,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Ljubljana",
+      "timezones": [
+        "Europe/Ljubljana"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1000"
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 46.0569,
+        "lng": 14.5058,
+        "zoom": 8
+      },
+      "languages": {
+        "default": "sl",
+        "recommended": [
+          "sl",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Slovenia",
+        "sl": "Slovenija",
+        "de": "Slowenien",
+        "fr": "Slovénie",
+        "es": "Eslovenia",
+        "it": "Slovenia",
+        "nl": "Slovenië",
+        "pl": "Słowenia",
+        "pt": "Eslovénia",
+        "ru": "Словения",
+        "hr": "Slovenija"
+      }
+    },
+    {
+      "code": "BG",
+      "status": "preparing",
+      "sort_order": 400,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Sofia",
+      "timezones": [
+        "Europe/Sofia"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1000"
+      },
+      "region_kind": "province",
+      "map_center": {
+        "lat": 42.6977,
+        "lng": 23.3219,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "bg",
+        "recommended": [
+          "bg",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Bulgaria",
+        "bg": "България",
+        "de": "Bulgarien",
+        "fr": "Bulgarie",
+        "es": "Bulgaria",
+        "it": "Bulgaria",
+        "nl": "Bulgarije",
+        "pl": "Bułgaria",
+        "pt": "Bulgária",
+        "ru": "Болгария"
+      }
+    },
+    {
+      "code": "GR",
+      "status": "preparing",
+      "sort_order": 410,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Athens",
+      "timezones": [
+        "Europe/Athens"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{3} ?[0-9]{2}$",
+        "example": "104 31"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 37.9838,
+        "lng": 23.7275,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "el",
+        "recommended": [
+          "el",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Greece",
+        "el": "Ελλάδα",
+        "de": "Griechenland",
+        "fr": "Grèce",
+        "es": "Grecia",
+        "it": "Grecia",
+        "nl": "Griekenland",
+        "pl": "Grecja",
+        "pt": "Grécia",
+        "ru": "Греция"
+      }
+    },
+    {
+      "code": "CY",
+      "status": "preparing",
+      "sort_order": 420,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Nicosia",
+      "timezones": [
+        "Asia/Nicosia"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1010"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 35.1856,
+        "lng": 33.3823,
+        "zoom": 9
+      },
+      "languages": {
+        "default": "el",
+        "recommended": [
+          "el",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Cyprus",
+        "el": "Κύπρος",
+        "de": "Zypern",
+        "fr": "Chypre",
+        "es": "Chipre",
+        "it": "Cipro",
+        "nl": "Cyprus",
+        "pl": "Cypr",
+        "pt": "Chipre",
+        "ru": "Кипр"
+      }
+    },
+    {
+      "code": "DK",
+      "status": "preparing",
+      "sort_order": 430,
+      "currency": {
+        "code": "DKK",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Copenhagen",
+      "timezones": [
+        "Europe/Copenhagen"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{4}$",
+        "example": "1050"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 55.6761,
+        "lng": 12.5683,
+        "zoom": 7
+      },
+      "languages": {
+        "default": "da",
+        "recommended": [
+          "da",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Denmark",
+        "da": "Danmark",
+        "de": "Dänemark",
+        "fr": "Danemark",
+        "es": "Dinamarca",
+        "it": "Danimarca",
+        "nl": "Denemarken",
+        "pl": "Dania",
+        "pt": "Dinamarca",
+        "ru": "Дания"
+      }
+    },
+    {
+      "code": "SE",
+      "status": "preparing",
+      "sort_order": 440,
+      "currency": {
+        "code": "SEK",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Stockholm",
+      "timezones": [
+        "Europe/Stockholm"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{3} ?[0-9]{2}$",
+        "example": "111 22"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 59.3293,
+        "lng": 18.0686,
+        "zoom": 5
+      },
+      "languages": {
+        "default": "sv",
+        "recommended": [
+          "sv",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Sweden",
+        "sv": "Sverige",
+        "de": "Schweden",
+        "fr": "Suède",
+        "es": "Suecia",
+        "it": "Svezia",
+        "nl": "Zweden",
+        "pl": "Szwecja",
+        "pt": "Suécia",
+        "ru": "Швеция"
+      }
+    },
+    {
+      "code": "FI",
+      "status": "preparing",
+      "sort_order": 450,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Helsinki",
+      "timezones": [
+        "Europe/Helsinki"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{5}$",
+        "example": "00100"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 60.16952,
+        "lng": 24.93545,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "fi",
+        "recommended": [
+          "fi",
+          "sv",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Finland",
+        "fi": "Suomi"
+      }
+    },
+    {
+      "code": "EE",
+      "status": "preparing",
+      "sort_order": 460,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Tallinn",
+      "timezones": [
+        "Europe/Tallinn"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^[0-9]{5}$",
+        "example": "10111"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 59.43696,
+        "lng": 24.75353,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "et",
+        "recommended": [
+          "et",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Estonia",
+        "et": "Eesti"
+      }
+    },
+    {
+      "code": "LV",
+      "status": "preparing",
+      "sort_order": 470,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Riga",
+      "timezones": [
+        "Europe/Riga"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^(?:LV-)?[0-9]{4}$",
+        "example": "LV-1050"
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 56.946,
+        "lng": 24.10589,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "lv",
+        "recommended": [
+          "lv",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Latvia",
+        "lv": "Latvija"
+      }
+    },
+    {
+      "code": "LT",
+      "status": "preparing",
+      "sort_order": 480,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Vilnius",
+      "timezones": [
+        "Europe/Vilnius"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^(?:LT-)?[0-9]{5}$",
+        "example": "LT-01100"
+      },
+      "region_kind": "county",
+      "map_center": {
+        "lat": 54.68916,
+        "lng": 25.2798,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "lt",
+        "recommended": [
+          "lt",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Lithuania",
+        "lt": "Lietuva"
+      }
+    },
+    {
+      "code": "LU",
+      "status": "preparing",
+      "sort_order": 490,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Luxembourg",
+      "timezones": [
+        "Europe/Luxembourg"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": true,
+        "pattern": "^(?:L-)?[0-9]{4}$",
+        "example": "L-1111"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 49.60982,
+        "lng": 6.13268,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "fr",
+        "recommended": [
+          "fr",
+          "de",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Luxembourg",
+        "fr": "Luxembourg"
+      }
+    },
+    {
+      "code": "GB",
+      "status": "preparing",
+      "sort_order": 600,
+      "currency": {
+        "code": "GBP",
+        "minor_units": 2
+      },
+      "distance_unit": "mi",
+      "default_timezone": "Europe/London",
+      "timezones": [
+        "Europe/London"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^(GIR ?0AA|[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2})$",
+        "example": "EC1Y 8SY"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 51.50853,
+        "lng": -0.12574,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "en",
+        "recommended": [
+          "en"
+        ]
+      },
+      "names": {
+        "en": "United Kingdom"
+      }
+    },
+    {
+      "code": "CH",
+      "status": "preparing",
+      "sort_order": 610,
+      "currency": {
+        "code": "CHF",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Zurich",
+      "timezones": [
+        "Europe/Zurich"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 46.94809,
+        "lng": 7.44744,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "de",
+        "recommended": [
+          "de",
+          "fr",
+          "it",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Switzerland",
+        "de": "Schweiz"
+      }
+    },
+    {
+      "code": "NO",
+      "status": "preparing",
+      "sort_order": 620,
+      "currency": {
+        "code": "NOK",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Oslo",
+      "timezones": [
+        "Europe/Oslo"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 59.91273,
+        "lng": 10.74609,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "nb",
+        "recommended": [
+          "nb",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Norway",
+        "nb": "Norge"
+      }
+    },
+    {
+      "code": "IS",
+      "status": "preparing",
+      "sort_order": 630,
+      "currency": {
+        "code": "ISK",
+        "minor_units": 0
+      },
+      "distance_unit": "km",
+      "default_timezone": "Atlantic/Reykjavik",
+      "timezones": [
+        "Atlantic/Reykjavik"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{3}$",
+        "example": "121"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 64.13548,
+        "lng": -21.89541,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "is",
+        "recommended": [
+          "is",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Iceland",
+        "is": "Ísland"
+      }
+    },
+    {
+      "code": "AL",
+      "status": "preparing",
+      "sort_order": 640,
+      "currency": {
+        "code": "ALL",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Tirane",
+      "timezones": [
+        "Europe/Tirane"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 41.32744,
+        "lng": 19.81866,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "sq",
+        "recommended": [
+          "sq",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Albania",
+        "sq": "Shqipëria"
+      }
+    },
+    {
+      "code": "BA",
+      "status": "preparing",
+      "sort_order": 650,
+      "currency": {
+        "code": "BAM",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Sarajevo",
+      "timezones": [
+        "Europe/Sarajevo"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 43.84864,
+        "lng": 18.35644,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "bs",
+        "recommended": [
+          "bs",
+          "hr",
+          "sr-Latn",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Bosnia and Herzegovina",
+        "bs": "Bosna i Hercegovina"
+      }
+    },
+    {
+      "code": "RS",
+      "status": "preparing",
+      "sort_order": 660,
+      "currency": {
+        "code": "RSD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Belgrade",
+      "timezones": [
+        "Europe/Belgrade"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5,6}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 44.80401,
+        "lng": 20.46513,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "sr-Latn",
+        "recommended": [
+          "sr-Latn",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Serbia",
+        "sr-Latn": "Srbija"
+      }
+    },
+    {
+      "code": "ME",
+      "status": "preparing",
+      "sort_order": 670,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Podgorica",
+      "timezones": [
+        "Europe/Podgorica"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 42.44124,
+        "lng": 19.26309,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "sr-Latn",
+        "recommended": [
+          "sr-Latn",
+          "bs",
+          "sq",
+          "hr",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Montenegro",
+        "sr-Latn": "Crna Gora"
+      }
+    },
+    {
+      "code": "MK",
+      "status": "preparing",
+      "sort_order": 680,
+      "currency": {
+        "code": "MKD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Skopje",
+      "timezones": [
+        "Europe/Skopje"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 41.99646,
+        "lng": 21.43141,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "mk",
+        "recommended": [
+          "mk",
+          "sq",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "North Macedonia",
+        "mk": "Северна Македонија"
+      }
+    },
+    {
+      "code": "XK",
+      "status": "preparing",
+      "sort_order": 690,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Belgrade",
+      "timezones": [
+        "Europe/Belgrade"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 42.67272,
+        "lng": 21.16688,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "sq",
+        "recommended": [
+          "sq",
+          "sr-Latn",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Kosovo",
+        "sq": "Kosovë"
+      }
+    },
+    {
+      "code": "MD",
+      "status": "preparing",
+      "sort_order": 700,
+      "currency": {
+        "code": "MDL",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Chisinau",
+      "timezones": [
+        "Europe/Chisinau"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^(MD-?)?[0-9]{4}$",
+        "example": "MD-2012"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 47.00902,
+        "lng": 28.85938,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "ro",
+        "recommended": [
+          "ro",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Moldova",
+        "ro": "Republica Moldova"
+      }
+    },
+    {
+      "code": "UA",
+      "status": "preparing",
+      "sort_order": 710,
+      "currency": {
+        "code": "UAH",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Kyiv",
+      "timezones": [
+        "Europe/Kyiv"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 50.45466,
+        "lng": 30.5238,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "uk",
+        "recommended": [
+          "uk",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Ukraine",
+        "uk": "Україна"
+      }
+    },
+    {
+      "code": "BY",
+      "status": "preparing",
+      "sort_order": 720,
+      "currency": {
+        "code": "BYN",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Minsk",
+      "timezones": [
+        "Europe/Minsk"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{6}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 53.90019,
+        "lng": 27.56653,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "ru",
+        "recommended": [
+          "ru",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Belarus",
+        "ru": "Беларусь"
+      }
+    },
+    {
+      "code": "RU",
+      "status": "preparing",
+      "sort_order": 730,
+      "currency": {
+        "code": "RUB",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Moscow",
+      "timezones": [
+        "Europe/Kaliningrad",
+        "Europe/Moscow",
+        "Europe/Kirov",
+        "Europe/Volgograd",
+        "Europe/Astrakhan",
+        "Europe/Saratov",
+        "Europe/Ulyanovsk",
+        "Europe/Samara",
+        "Asia/Yekaterinburg",
+        "Asia/Omsk",
+        "Asia/Novosibirsk",
+        "Asia/Barnaul",
+        "Asia/Tomsk",
+        "Asia/Novokuznetsk",
+        "Asia/Krasnoyarsk",
+        "Asia/Irkutsk",
+        "Asia/Chita",
+        "Asia/Yakutsk",
+        "Asia/Khandyga",
+        "Asia/Vladivostok",
+        "Asia/Ust-Nera",
+        "Asia/Magadan",
+        "Asia/Sakhalin",
+        "Asia/Srednekolymsk",
+        "Asia/Kamchatka",
+        "Asia/Anadyr"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{6}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 55.75204,
+        "lng": 37.61781,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "ru",
+        "recommended": [
+          "ru",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Russia",
+        "ru": "Россия"
+      }
+    },
+    {
+      "code": "LI",
+      "status": "preparing",
+      "sort_order": 740,
+      "currency": {
+        "code": "CHF",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Vaduz",
+      "timezones": [
+        "Europe/Vaduz"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 47.14151,
+        "lng": 9.52154,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "de",
+        "recommended": [
+          "de",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Liechtenstein",
+        "de": "Liechtenstein"
+      }
+    },
+    {
+      "code": "AD",
+      "status": "preparing",
+      "sort_order": 750,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Andorra",
+      "timezones": [
+        "Europe/Andorra"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^AD[0-9]{3}$",
+        "example": null
+      },
+      "region_kind": "parish",
+      "map_center": {
+        "lat": 42.50779,
+        "lng": 1.52109,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "ca",
+        "recommended": [
+          "ca",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Andorra",
+        "ca": "Andorra"
+      }
+    },
+    {
+      "code": "MC",
+      "status": "preparing",
+      "sort_order": 760,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Monaco",
+      "timezones": [
+        "Europe/Monaco"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 43.73718,
+        "lng": 7.42145,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "fr",
+        "recommended": [
+          "fr",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Monaco",
+        "fr": "Monaco"
+      }
+    },
+    {
+      "code": "SM",
+      "status": "preparing",
+      "sort_order": 770,
+      "currency": {
+        "code": "EUR",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/San_Marino",
+      "timezones": [
+        "Europe/San_Marino"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "municipality",
+      "map_center": {
+        "lat": 43.93667,
+        "lng": 12.44639,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "it",
+        "recommended": [
+          "it",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "San Marino",
+        "it": "San Marino"
+      }
+    },
+    {
+      "code": "TR",
+      "status": "preparing",
+      "sort_order": 790,
+      "currency": {
+        "code": "TRY",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Europe/Istanbul",
+      "timezones": [
+        "Europe/Istanbul"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{5}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 39.91987,
+        "lng": 32.85427,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "tr",
+        "recommended": [
+          "tr",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Türkiye",
+        "tr": "Türkiye"
+      }
+    },
+    {
+      "code": "GE",
+      "status": "preparing",
+      "sort_order": 800,
+      "currency": {
+        "code": "GEL",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Tbilisi",
+      "timezones": [
+        "Asia/Tbilisi"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 41.69143,
+        "lng": 44.83412,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "ka",
+        "recommended": [
+          "ka",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Georgia",
+        "ka": "საქართველო"
+      }
+    },
+    {
+      "code": "AM",
+      "status": "preparing",
+      "sort_order": 810,
+      "currency": {
+        "code": "AMD",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Yerevan",
+      "timezones": [
+        "Asia/Yerevan"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^[0-9]{4}$",
+        "example": null
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 40.17765,
+        "lng": 44.5126,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "hy",
+        "recommended": [
+          "hy",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Armenia",
+        "hy": "Հայաստան"
+      }
+    },
+    {
+      "code": "AZ",
+      "status": "preparing",
+      "sort_order": 820,
+      "currency": {
+        "code": "AZN",
+        "minor_units": 2
+      },
+      "distance_unit": "km",
+      "default_timezone": "Asia/Baku",
+      "timezones": [
+        "Asia/Baku"
+      ],
+      "postal": {
+        "kind": "postcode",
+        "required": false,
+        "pattern": "^(AZ-?)?[0-9]{4}$",
+        "example": "AZ1010"
+      },
+      "region_kind": "region",
+      "map_center": {
+        "lat": 40.37767,
+        "lng": 49.89201,
+        "zoom": 6
+      },
+      "languages": {
+        "default": "az",
+        "recommended": [
+          "az",
+          "en"
+        ]
+      },
+      "names": {
+        "en": "Azerbaijan",
+        "az": "Azərbaycan"
       }
     }
   ]

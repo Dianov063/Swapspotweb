@@ -14,9 +14,13 @@ const SCRIPT_LETTERS = {
   Tfng: /[ⴰ-⵿]/u,
   Arab: /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/u,
   Latn: /[A-Za-zÀ-ɏḀ-ỿƆƐɔɛɣʋ]/u,
+  Cyrl: /\p{Script=Cyrillic}/u,
+  Grek: /\p{Script=Greek}/u,
+  Geor: /\p{Script=Georgian}/u,
+  Armn: /\p{Script=Armenian}/u,
 };
 // Letters of scripts that must not appear in a Latin-script language.
-const FOREIGN_TO_LATIN = /[Ѐ-ӿ؀-ۿሀ-᎟ⴰ-⵿一-鿿ऀ-෿฀-๿]/u;
+const FOREIGN_TO_LATIN = /[Ѐ-ӿͰ-Ͽἀ-῿؀-ۿሀ-᎟ⴰ-⵿一-鿿ऀ-෿฀-๿]|\p{Script=Georgian}|\p{Script=Armenian}/u;
 
 export function placeholders(text) {
   return [...new Set(String(text).match(PLACEHOLDER) ?? [])].sort();

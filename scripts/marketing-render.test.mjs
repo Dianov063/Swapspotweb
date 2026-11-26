@@ -19,6 +19,9 @@ import * as directory from '../lib/directoryStrings/index.ts';
 import * as localeModule from '../lib/locales.ts';
 import * as languageCore from '../lib/languagesCore.ts';
 import * as packs from '../lib/localePacks.ts';
+import * as pricing from '../lib/pricingCopy.ts';
+import * as storePrices from '../lib/storePrices.ts';
+import * as staticPages from '../lib/copy/staticPages.ts';
 
 const link=({children,href,...rest})=>React.createElement('a',{href,...rest},children);
 const bridge={
@@ -44,16 +47,80 @@ const components=[
 const snapshot=JSON.parse(readFileSync(new URL('../lib/languagesSnapshot.json',import.meta.url),'utf8'));
 const registry=languageCore.parseLanguagesPayload(snapshot).languages;
 const options={registry,shipped:localeModule.locales,shippedNames:localeModule.localeNames,isBundled:packs.isLocalePackBundled};
+const semanticCopy=JSON.parse(readFileSync(new URL('./fixtures/semantic-language-copy.json',import.meta.url),'utf8'));
+const escapedText=text=>renderToStaticMarkup(React.createElement('span',{},text)).replace(/^<span>|<\/span>$/g,'');
+function prepareLanguage(code){
+ const language=languageCore.siteLanguages({...options,registry:registry.map(row=>row.code===code?{...row,status:'machine',public:true}:row)}).find(row=>row.code===code);
+ assert(language,code);packs.ensureLocaleTables(language);return language.segment;
+}
 
 test('five actual marketing components omit fixed prices, ratings and earnings, with visible example labels',()=>{
- const pl=languageCore.siteLanguages({...options,registry:registry.map(r=>r.code==='pl'?{...r,status:'machine',public:true}:r)}).find(r=>r.code==='pl');
- packs.ensureLocaleTables(pl);
- for(const locale of ['pl','en','fr','de']){
+ const candidates=registry.filter(row=>snapshot.languages.find(source=>source.code===row.code)?.wave>=6).map(row=>row.code);
+ for(const code of ['pl',...candidates]){
+  const language=languageCore.siteLanguages({...options,registry:registry.map(r=>r.code===code?{...r,status:'machine',public:true}:r)}).find(r=>r.code===code);
+  assert(language,`${code} complete bundled pack required`);
+  packs.ensureLocaleTables(language);
+ }
+ for(const locale of ['pl',...candidates.map(code=>languageCore.urlSegment(code)),'en','fr','de']){
   for(const Component of components){
    const html=renderToStaticMarkup(React.createElement(Component,{locale,dictionary:i18n.getDictionary(locale)}));
    assert(!/\$|4\.9|\(128\)|\+18%|2,300/.test(html),locale+' '+Component.name);
    assert(html.includes(labels.illustrationLabel(locale)),locale+' missing visible example label');
   }
+ }
+});
+
+test('draft European pricing renders local 24-hour access and store-price comparison without a US fallback',async()=>{
+ const Pricing=compile('../components/ClientPricing.tsx',{
+  ...bridge,'./ui':ui,'@/lib/pricingCopy':pricing,'@/lib/storePrices':storePrices,
+  '@/lib/markets':{getMarket:async()=>null,isActive:()=>false},
+ }).default;
+ for(const row of registry.filter(row=>snapshot.languages.find(source=>source.code===row.code)?.wave>=6)){
+  const language=languageCore.siteLanguages({...options,registry:registry.map(item=>item.code===row.code?{...item,status:'machine',public:true}:item)}).find(item=>item.code===row.code);
+  assert(language,row.code);packs.ensureLocaleTables(language);
+  const html=renderToStaticMarkup(await Pricing({locale:language.segment,marketCountry:null}));
+  const plain=html.replace(/<[^>]+>/g,' ');
+  assert(!/\$|\bUSD\b|\b5\b/.test(plain),`${row.code}: no fixed US price or five-day break-even claim for an unknown market`);
+  assert(/\b24\b|sólarhring/.test(plain),`${row.code}: daily access must clearly describe a 24-hour duration`);
+  const expected=pricing.pricingCopy(language.segment).plans[1].features[2];
+  const escaped=renderToStaticMarkup(React.createElement('span',{},expected)).replace(/^<span>|<\/span>$/g,'');
+  assert(html.includes(escaped),`${row.code}: actual pricing component must use its local comparison copy`);
+ }
+});
+
+test('all sixteen shipped pricing renders replace the unverified five-day claim with reviewed store comparison',async()=>{
+ const Pricing=compile('../components/ClientPricing.tsx',{
+  ...bridge,'./ui':ui,'@/lib/pricingCopy':pricing,'@/lib/storePrices':storePrices,
+  '@/lib/markets':{getMarket:async()=>null,isActive:()=>false},
+ }).default;
+ const shipped=Object.entries(semanticCopy).filter(([,entry])=>entry.legacy);assert.equal(shipped.length,16);
+ for(const [locale,entry] of shipped){
+  const html=renderToStaticMarkup(await Pricing({locale,marketCountry:null}));
+  assert(!html.includes(escapedText(entry.pricingComparisonBefore)),`${locale}: old unverified break-even must not render`);
+  assert(html.includes(escapedText(entry.pricingComparisonAfter)),`${locale}: reviewed actual-store comparison must render`);
+  assert(!/\$|\bUSD\b|\b5\b/.test(html.replace(/<[^>]+>/g,' ')),`${locale}: no US fallback or fixed five-day break-even`);
+ }
+});
+
+test('actual localized legal-page renders and metadata describe translated navigation and English full texts truthfully',async()=>{
+ const passThrough=({children})=>React.createElement('div',{},children);
+ const route=compile('../app/[locale]/[...slug]/page.tsx',{
+  'react/jsx-runtime':jsx,'next/navigation':{notFound:()=>{throw Error('NOT_FOUND');}},
+  '@/components/Header':{__esModule:true,default:passThrough},'@/components/Footer':{__esModule:true,default:passThrough},
+  '@/components/TrustSafety':{__esModule:true,default:passThrough},
+  '@/lib/copy/staticPages':staticPages,'@/lib/i18n':i18n,
+  // Staging-only controlled activation. Production registry remains untouched.
+  '@/lib/languages':{pageLocale:async segment=>segment in semanticCopy?segment:null},
+ });
+ assert.equal(Object.keys(semanticCopy).length,42);
+ for(const [segment,entry] of Object.entries(semanticCopy)){
+  if(!entry.legacy)assert.equal(prepareLanguage(entry.code),segment);
+  const props={params:Promise.resolve({locale:segment,slug:['privacy']})};
+  const html=renderToStaticMarkup(await route.default(props));
+  assert(html.includes(escapedText(entry.legalIntroAfter)),`${segment}: truthful notice must be user-visible`);
+  assert(!html.includes(escapedText(entry.legalIntroBefore)),`${segment}: old whole-page-localization claim must not render`);
+  const metadata=await route.generateMetadata(props);
+  assert.equal(metadata.description,`${staticPages.staticPagesCopy(segment).titles.privacy}. ${entry.legalIntroAfter}`);
  }
 });
 
