@@ -40,6 +40,13 @@ It is a separate small service, not a new Next.js build or a database migration.
   DKIM-signed Kumo relay, so total OVH/MailHub outage cannot suppress that warning.
   It posts sanitized status back to the dashboard; no SMTP listener/DNS/routing
   policies are changed. Ambiguous injection timeouts are not blindly retried.
+  A check has a 32-second monotonic budget inside the unchanged 40-second systemd
+  limit, reserving six seconds for the return heartbeat. Each network operation
+  runs in a child with a wall-clock deadline (including DNS and response reads);
+  a hung child is killed and reaped. Journal events name only the fixed stage,
+  DNS/header progress, duration and safe outcome; no URLs, tokens or bodies.
+  A failed return POST is persisted as heartbeat_delivery_error and exits nonzero,
+  rather than silently reporting success. The OVH stale-heartbeat alarm remains.
 - Each public project address is also probed; an HTTP failure is detected even
   when its containers stay running. OVH alerts if the independent monitor stops
   posting for five minutes. Daily history has 30/90/365-day views and CSV export.
@@ -73,7 +80,7 @@ paths/flags (root, 0600). External shared/config.json has a health-read token an
 the fixed owner recipient. Never commit, print, export to the browser or mount
 the original complete SwapSpot runtime credentials into this dashboard.
 
-Validate: python -m unittest discover -s deploy/server-ops -p test_ops.py;
+Validate: python -m unittest discover -s deploy/server-ops -p 'test*.py';
 node --check deploy/server-ops/app.js; validate full Caddy config before reload.
 Synthetic tests use .invalid addresses and mocked transports. Do not manufacture
 a production outage to test email; an extra real test message needs its own send

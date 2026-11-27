@@ -248,14 +248,11 @@ class OpsTest(unittest.TestCase):
 
     def test_external_wire_payload_has_verified_sender_and_only_owner_recipient(self):
         captured=[]
-        class Fake:
-            status=200
-            def __enter__(self):return self
-            def __exit__(self,*args):pass
-            def read(self,*args):return b'{"success_count":1}'
-        with patch('urllib.request.urlopen',side_effect=lambda r,**kw:(captured.append(r) or Fake())):
+        def transport(*args,**kwargs):
+            captured.append(kwargs['data']);return {'data':{'success_count':1}}
+        with patch('external.bounded_request',side_effect=transport):
             notify({'recipient':'owner@example.invalid'},'event:42','Fixture anomaly')
-        payload=json.loads(captured[0].data)
+        payload=json.loads(captured[0])
         self.assertEqual(payload['envelope_sender'],'ops@bounce.direct.swapspot.org')
         self.assertEqual(payload['recipients'],[{'email':'owner@example.invalid'}])
         self.assertIn('Message-ID:',payload['content'])
