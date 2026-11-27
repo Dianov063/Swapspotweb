@@ -80,6 +80,50 @@ paths/flags (root, 0600). External shared/config.json has a health-read token an
 the fixed owner recipient. Never commit, print, export to the browser or mount
 the original complete SwapSpot runtime credentials into this dashboard.
 
+## Runtime log observations and timing
+
+`runtime_logs: {"enabled": true}` in the root-only monitor config enables fixed
+TowHub and LedgerHound sensors. TowHub uses its deployed count-only CLI contract;
+LedgerHound uses this release's private bounded worker against its exact current
+container ID. Two sensors share an eight-second wall budget, stdout is capped,
+and child process groups are killed/reaped on deadline. Only allowlisted counts,
+collection time and container identity/start/coverage enter `samples.runtime_logs`
+and the existing authenticated latest-snapshot API. No raw logs are saved.
+
+Timeout, invalid/extra/duplicate JSON fields, inconsistent exit codes, byte/line
+saturation, a changed container or less than five minutes of current-container
+coverage mean unknown, never zero. Unknown blocks recovery of runtime incidents.
+Cache-write/other recognized exception lines warn after two observations; three
+complete clean observations recover using the existing incident/outbox dedupe and
+delivery. Moving five-minute windows overlap and must not be summed. Invalid or
+missing Actions and origin rejections remain separate counts, without an automatic
+outage/security verdict. Existing HTTP/slow/traffic alerts are unchanged. Matchers
+cannot recognize every exception wording or recover rotated history.
+
+`upgrade_timing.py` dry-runs a two-field change to the existing access snippet;
+`--apply` requires successful full-config validation and adapted-JSON equivalence
+after removing exactly those log handlers. It takes the shared release lock and
+saves exact rollback bytes. It must first pass the private exact-Caddy-image shadow.
+The existing admin-off/file-based process reloads through SIGUSR1; equality of its
+autosaved active JSON confirms the result without enabling an admin endpoint.
+The existing request/IP/URI/header/body filters and rotation are preserved.
+
+- `upstream_headers_ms` is Caddy's RoundTrip until upstream response headers,
+  including connection/transport work for the last successful attempt. It is
+  server-side upstream header latency, not a browser's DNS/TLS-inclusive TTFB.
+- `proxy_inclusive_ms` includes response body copy to the client. It is **not**
+  isolated upstream execution/body duration. The existing `duration` remains the
+  full access interval. `timing` stores observed/unavailable counts, sums/maxima
+  and slow completion after fast headers, without attributing its cause.
+- Empty, missing, negative, Boolean or nonfinite timings remain unavailable.
+  Historical rows and status-0/no-header cases do not receive invented zeros.
+  Isolated upstream body time versus downstream write time is unavailable in the
+  stock v2.11.4 placeholders; no historical latency cause is inferred.
+
+Primary implementation: [Caddy v2.11.4 reverseproxy.go](https://github.com/caddyserver/caddy/blob/v2.11.4/modules/caddyhttp/reverseproxy/reverseproxy.go),
+RoundTrip/latency assignments and finalizeResponse/body-copy duration. See also
+[log_append](https://caddyserver.com/docs/caddyfile/directives/log_append).
+
 Validate: python -m unittest discover -s deploy/server-ops -p 'test*.py';
 node --check deploy/server-ops/app.js; validate full Caddy config before reload.
 Synthetic tests use .invalid addresses and mocked transports. Do not manufacture
