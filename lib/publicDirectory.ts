@@ -3,6 +3,7 @@ import { unstable_cache } from "next/cache";
 import { appPlatformAppBase, supabaseAdminFetch, swapspotBackend } from "@/lib/supabaseAdmin";
 import { categories as fallbackCategories, cities as fallbackCities } from "@/lib/data";
 import { directoryStrings, fillTemplate } from "@/lib/directoryStrings";
+import { readDirectoryPage } from "@/lib/readDirectoryPage";
 import type { Locale } from "@/lib/locales";
 import { formatRadius, formatServicePrice as formatListingPrice } from "@/lib/priceFormat";
 
@@ -116,6 +117,15 @@ const directoryRevalidateSeconds = 300;
 const serviceMarketRevalidateSeconds = 900;
 
 async function fetchRest<T>(path: string, required = false, revalidate = directoryRevalidateSeconds): Promise<T[]> {
+  if (required && revalidate === 0) {
+    return readDirectoryPage<T>(async (signal) => {
+      const init = { cache: "no-store" as const, signal };
+      if (swapspotBackend() === "appplatform") return supabaseAdminFetch(path, init);
+      const headers = supabaseHeaders();
+      if (!headers) throw new Error("SwapSpot public directory is not configured");
+      return fetch(`${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${path}`, { ...init, headers });
+    });
+  }
   let response: Response;
   if (swapspotBackend() === "appplatform") {
     // Same PostgREST path through the App Platform backend credential.
