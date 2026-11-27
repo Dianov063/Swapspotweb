@@ -10,6 +10,8 @@
     }
     log_append project {args[1]}
     log_append route_group {ops_route_group}
+    log_append upstream_headers_ms {rp.upstream.latency_ms}
+    log_append proxy_inclusive_ms {rp.upstream.duration_ms}
     log {
         output file /data/server-ops/{args[0]}.log {
             mode 0640

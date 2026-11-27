@@ -13,6 +13,8 @@ from pathlib import Path
 
 from core import NY, GIB, connect, get_value, put_value, evaluate, transition, save_sample, deliver, digest, service_expectations, scheduled_job_status
 from ledgerhound import collect as collect_ledgerhound
+from runtime_logs import collect as collect_runtime_logs
+from access_timing import observe as observe_timing
 
 
 class DockerConnection(http.client.HTTPConnection):
@@ -48,6 +50,10 @@ def probe(url):
 
 
 def application_checks(sample, config, previous, now):
+    if (config.get('runtime_logs') or {}).get('enabled') is True:
+        sample['runtime_logs'] = collect_runtime_logs(now)
+    elif previous and 'runtime_logs' in previous:
+        sample['runtime_logs'] = None  # Unknown cannot resolve a previous runtime incident.
     if (config.get('ledgerhound_monitor') or {}).get('enabled') is True:
         recipient = (config.get('project_recipients') or {}).get('ledgerhound')
         if not isinstance(recipient, str) or len(recipient) > 254 or recipient.count('@') != 1 \
@@ -108,6 +114,7 @@ def read_access(directory, db):
                 target['slow'] += int(float(row.get('duration', 0)) > 3)
                 target['response_bytes'] += max(0, int(row.get('size', 0)))
                 target['routes'][route] = target['routes'].get(route, 0) + 1
+                observe_timing(target, row)
             except (ValueError, TypeError):
                 gap = True
     put_value(db, 'log_cursors', cursors)

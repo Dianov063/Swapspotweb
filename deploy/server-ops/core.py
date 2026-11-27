@@ -200,6 +200,9 @@ def evaluate(s, previous, history):
         add("log_collection_gap", "monitor", "warning", "Объём новых access-логов превысил лимит чтения", 1)
     if s.get('external_stale'):
         add('external_watchdog_stale','monitor','critical','Внешний монитор не подтверждал работу более пяти минут',2)
+    if 'runtime_logs' in s:
+        from runtime_logs import assess as runtime_assess
+        found.extend(runtime_assess(s['runtime_logs'], s['ts']))
     if 'ledgerhound' in s:
         # web.py imports session helpers from core; the existing dashboard image
         # does not need the optional host-only collector module.
